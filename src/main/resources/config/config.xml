@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.mealme.dto.AdminDto" alias="adminDto"/>
+        <typeAlias type="com.example.mealme.dto.CancelDto" alias="cancelDto"/>
+        <typeAlias type="com.example.mealme.dto.CartDto" alias="cartDto"/>
+        <typeAlias type="com.example.mealme.dto.CompanyCodeDto" alias="companyCodeDto"/>
+        <typeAlias type="com.example.mealme.dto.CompanyDto" alias="companyDto"/>
+        <typeAlias type="com.example.mealme.dto.CompanyFileDto" alias="companyFileDto"/>
+        <typeAlias type="com.example.mealme.dto.ConsultingDto" alias="consultingDto"/>
+        <typeAlias type="com.example.mealme.dto.ConsultingRequestDto" alias="consultingRequestDto"/>
+        <typeAlias type="com.example.mealme.dto.ConsultingReviewDto" alias="consultingReviewDto"/>
+        <typeAlias type="com.example.mealme.dto.LikeDto" alias="likeDto"/>
+        <typeAlias type="com.example.mealme.dto.MealBoardDto" alias="mealBoardDto"/>
+        <typeAlias type="com.example.mealme.dto.MealCodeDto" alias="mealCodeDto"/>
+        <typeAlias type="com.example.mealme.dto.MealDataDto" alias="mealDataDto"/>
+        <typeAlias type="com.example.mealme.dto.MealFileDto" alias="mealFileDto"/>
+        <typeAlias type="com.example.mealme.dto.OrderConditionDto" alias="orderConditionDto"/>
+        <typeAlias type="com.example.mealme.dto.OrderDto" alias="orderDto"/>
+        <typeAlias type="com.example.mealme.dto.OrderReviewDto" alias="orderReviewDto"/>
+        <typeAlias type="com.example.mealme.dto.ProductCategory1Dto" alias="productCategory1Dto"/>
+        <typeAlias type="com.example.mealme.dto.ProductCategory2Dto" alias="productCategory2Dto"/>
+        <typeAlias type="com.example.mealme.dto.ProductDto" alias="productDto"/>
+        <typeAlias type="com.example.mealme.dto.ProductFileDto" alias="productFileDto"/>
+        <typeAlias type="com.example.mealme.dto.UserDto" alias="userDto"/>
+        <typeAlias type="com.example.mealme.dto.UserFileDto" alias="userFileDto"/>
+        <typeAlias type="com.example.mealme.dto.UserShippingAddressDto" alias="userShippingAddressDto"/>
+    </typeAliases>
+</configuration>
