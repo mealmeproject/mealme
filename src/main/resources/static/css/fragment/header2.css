@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.header-container {
+    justify-content: center;
+}
+
+.login-container {
+    background-color: #f2f2f2;
+}
+
+.login-box {
+    width: 900px;
+    display: flex;
+    justify-content: right;
+}
+
+.login-box li {
+    line-height: 28px;
+    list-style: none;
+    margin-left: 10px;
+    font-size: 11px;
+    float: left;
+    color: #808080;
+}
+
+.login-box a:visited,
+.login-box a:link {
+    text-decoration: none;
+    color: #808080;
+}
+
+.login-box a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.logo-container {
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ff7b00;
+}
+
+/* logo */
+.logo-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.logo-box {
+    display: flex;
+    justify-content: center;
+
+    width: 210px;
+    height: 140px;
+}
+
+.logo-box img {
+    width: 210px;
+    height: 140px;
+    object-fit: cover;
+}

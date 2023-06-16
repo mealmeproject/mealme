@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.select-container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.join-info {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.join-info h1 {
+    margin-bottom: 10px;
+}
+
+.select-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 800px;
+    height: 520px;
+    margin-bottom: 100px;
+}
+
+.select {
+    width: 47%;
+    height: 100%;
+}
+
+.border {
+    border-right: 1px solid rgba(0, 0, 0, 0.287);
+}
+
+.icon {
+    margin: 80px auto;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 40px;
+}
+
+.icon img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.icon {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.text-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text1 {
+    margin-bottom: 10px;
+}
+
+.text2 {
+    margin-bottom: 30px;
+}
+
+.join-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 48px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #ff9326;
+    color: #3a1d1d;
+    cursor: pointer;
+}
+
+.join-btn:hover {
+    background-color: #ff7e00;
+}

@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0 !important;
+}
+
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.individualJoin-container {
+    width: 400px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 96%;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #ececec;
+    border-radius: 6px;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff9326;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#user-id {
+    width: 63%;
+}
+
+.id-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.id-check {
+    display: flex;
+    justify-content: center;
+    background-color: #ff9326;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    width: 120px;
+    border: 1px solid #ff7b00;
+    line-height: 24px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+}
+
+/* 성별 선택  */
+.radio-group {
+    display: flex;
+    justify-content: left;
+    padding: 15px 0px 15px 0px;
+}
+
+.radio-group label {
+    margin-left: 5px;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group input[type="radio"] + label {
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    align-items: center;
+    width: 48%;
+    border: 1px solid #ff7b00 !important;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.radio-group input[type="radio"] + label {
+    background-color: #fff;
+    color: #ff9326;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: #ff9326;
+    color: #fff;
+}
+
+.radio-group label {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* 휴대전화 */
+.phone-number-box {
+    display: flex;
+    align-items: center;
+}
+
+#phone1 {
+    width: 100px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #ececec;
+    border-radius: 6px;
+}
+
+/* 이메일 */
+.email-box {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#mail1,
+#mail2 {
+    width: 49%;
+    background-color: #ececec;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* 주소 */
+.address-btn-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.address-box input {
+    margin-bottom: 10px;
+}
+
+.address-btn {
+    background-color: #ff9326;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    width: 100px;
+    line-height: 24px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+}
+
+#adress-number {
+    width: 60%;
+}
+
+/* 가입하기 버튼 */
+.submit-btn-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* datepicker */
+
+.ui-datepicker-trigger {
+    display: none;
+}
+
+#datepicker {
+    outline: none;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(50, 50, 50, 0.9);
+    position: relative !important;
+}
+
+.ui-datepicker {
+    position: absolute !important;
+    left: 47.5% !important;
+}
+
+.hasDatepicker {
+    width: 96% !important;
+    margin-right: 10px;
+}

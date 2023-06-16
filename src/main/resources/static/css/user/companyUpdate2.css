@@ -1,0 +1,381 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.body-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.sidebar {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+}
+
+.main-container {
+    width: 900px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: pink; */
+}
+
+.update-container {
+    padding-bottom: 50px;
+}
+
+/* 회원정보수정 아래 hr 선 */
+.service-name-hr {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: 1px;
+    background-color: #ff9326;
+    border: 0;
+}
+
+.service-name-box {
+    padding-left: 20px;
+}
+
+/* 프로필 이미지  */
+.update-profilebox {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.profile-img-box {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.profile-img-box img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-text-box {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nickname {
+    margin-top: 40px;
+    font-size: 30px;
+}
+
+.edit-img-box {
+    margin-top: 40px;
+    width: 34.8px;
+    height: 34.8px;
+    margin-left: 10px;
+}
+
+.edit-img-box img {
+    width: 34.8px;
+    height: 34.8px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.edit-img-box {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.update-user-data {
+    padding-top: 40px;
+}
+/* 한줄코멘트 */
+.user-info {
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* 수정데이터 칸 */
+.row {
+    display: flex;
+    padding: 20px;
+    font-size: 20px;
+    border-bottom: 1px dotted rgba(255, 200, 81, 0.863);
+}
+
+.data-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+.data-content {
+    width: 60%;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 70%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: rgba(210, 210, 210, 0.3);
+}
+
+.id-box {
+    width: 70%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: rgba(210, 210, 210, 0.3);
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.file-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-wrap > li {
+    list-style-type: none;
+    width: 90px;
+    height: 90px;
+    margin: 0.5rem;
+    border: 0.0625rem dashed #e1e1e1;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 100, "GRAD" -25, "opsz" 80;
+}
+
+.file-wrap > li:first-child {
+    position: relative;
+    cursor: pointer;
+    background: url("../img/library_add_FILL0_wght100_GRAD-25_opsz48.png") no-repeat 50%;
+    background-color: #ececec;
+}
+
+.img-list {
+    cursor: default;
+    background: url("../img/photo_camera_FILL0_wght100_GRAD-25_opsz48.png") no-repeat 50% #ececec;
+    position: relative;
+}
+
+input[type="file"] {
+    cursor: pointer;
+}
+
+.x-box::after {
+    content: "x";
+    background-color: #ff9326;
+    color: white;
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: -5px;
+    right: -5px;
+    text-align: center;
+    line-height: 13px;
+}
+
+/* 선택 칸 */
+.img-group {
+    margin-bottom: 20px;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: left;
+}
+
+.radio-group label {
+    margin-left: 5px;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group input[type="radio"] + label {
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    align-items: center;
+    width: 20%;
+    border: 1px solid #ff7b00 !important;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.radio-group input[type="radio"] + label {
+    background-color: #fff;
+    color: #ff9326;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: #ff9326;
+    color: #fff;
+}
+
+/* datepicker */
+
+.ui-datepicker-trigger {
+    display: none;
+}
+
+#datepicker {
+    outline: none;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(255, 139, 38);
+
+    position: relative !important;
+}
+
+.ui-datepicker {
+    position: absolute !important;
+    left: 47.5% !important;
+}
+
+.hasDatepicker {
+    width: 70% !important;
+    margin-right: 10px;
+}
+
+/* 휴대전화 */
+
+.phone-number-box {
+    display: flex;
+}
+
+#phone1 {
+    width: 100px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: rgba(210, 210, 210, 0.3);
+    border-radius: 6px;
+}
+
+#phone2,
+#phone3 {
+    width: 18% !important;
+}
+/* 이메일 */
+.email-box {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+#mail1,
+#mail2 {
+    width: 31%;
+    background-color: rgba(210, 210, 210, 0.3);
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+/* 주소 */
+
+.address-btn-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.address-box input {
+    margin-bottom: 10px;
+}
+
+.address-btn {
+    background-color: #ff9326;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    width: 100px;
+    line-height: 24px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+}
+
+#adress-number {
+    width: 50%;
+}
+
+.spec {
+    width: 53%;
+    font-size: 14px;
+}
+
+.submit-btn-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 15px;
+    margin-right: 80px;
+}
+
+#submit-btn,
+#list-btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    background-color: #ff9326;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+#list-btn {
+    background-color: #c9c5c5;
+    color: white;
+}
+
+#list-btn:hover {
+    background-color: #a3a3a3;
+}
+
+#submit-btn:hover,
+.address-btn:hover {
+    background-color: #ff7e00;
+}

@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.login-wrapper {
+    width: 400px;
+    height: 900px;
+    padding: 40px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* logo */
+.logo-container {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.logo-box {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 270px;
+    height: 180px;
+}
+
+.logo-box img {
+    width: 270px;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* 개인/기업 input-radio */
+
+.radio-group {
+    display: flex;
+    justify-content: right;
+    padding: 15px 0px 15px 0px;
+}
+
+.radio-group label {
+    margin-left: 5px;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group input[type="radio"] + label {
+    display: inline-block;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 24px;
+    width: 40px;
+    border: 1px solid #ff7b00;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.radio-group input[type="radio"] + label {
+    background-color: #fff;
+    color: #ff9326;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: #ff9326;
+    color: #fff;
+}
+
+/* input area */
+#login-form > input {
+    width: 100%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #ececec;
+}
+
+#login-form > input::placeholder {
+    color: #727272;
+}
+
+#login-form > input[type="checkbox"] {
+    display: none;
+}
+
+#login-form > label {
+    color: #020202;
+}
+
+#login-form input[type="checkbox"] + label {
+    cursor: pointer;
+    padding-left: 26px;
+    background-image: url("checkbox.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#login-form input[type="checkbox"]:checked + label {
+    background-image: url("checkbox-active.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.find-password {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.find-password a:link,
+.find-password a:visited {
+    text-decoration: none;
+    color: #020202;
+}
+
+.find-password a:hover {
+    text-decoration: underline;
+    color: #ff7e00;
+}
+
+/* 로그인버튼 */
+#login-form > input[type="submit"] {
+    color: #fff;
+    font-size: 16px;
+    background-color: #ff9326;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* 로그인 호버 : 색 설정하기!!! */
+#login-form > input[type="submit"]:hover {
+    background-color: #ff7e00;
+}
+
+/* 회원가입 */
+
+.sign-up {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #ececec;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sign-up a:visited,
+.sign-up a:link {
+    text-decoration: none;
+    color: #5c5c5c;
+}
+
+/* 회원가입 호버 : 색 설정하기!!! */
+.sign-up:hover {
+    /* background-color: #aeaeae; */
+    background-color: #c9c5c5;
+}
+
+/* 또는 */
+
+.line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.line hr {
+    flex-grow: 1;
+    border: none;
+    height: 1px;
+    background-color: #020202;
+}
+
+.line span {
+    margin: 0 10px;
+    font-weight: bold;
+    color: #020202;
+}
+
+/* 카카오 로그인 */
+
+.kakao-loginbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 48px;
+    font-size: 16px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #f7e600;
+    color: #3a1d1d;
+}
+
+.kakao-login-btn {
+    background-color: #f7e600;
+    cursor: pointer;
+}
+
+.kakao-login-inner {
+    display: flex;
+}
+
+.kakao-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.kakao-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.kaka-login-text {
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

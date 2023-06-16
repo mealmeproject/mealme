@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>individualOrCoporate</title>
+    <link rel="stylesheet" href="../css/indvidualOrCoporate.css" />
+  </head>
+  <body>
+    <header id="headers"></header>
+    <div class="select-container">
+      <div class="join-info">
+        <h1>회원가입</h1>
+        <p>
+          회원 종류에 따라 회원가입 절차가 다릅니다. <hr>고객님께서 해당하는 유형을
+          선택하여 회원가입을 진행해 주시기 바랍니다.
+        </p>
+      </div>
+      <div class="select-box">
+        <div class="individual select border">
+          <div class="icon-box">
+            <div class="icon">
+              <img src="../img/free-icon-font-user-3917688.png" alt="" />
+            </div>
+          </div>
+          <div class="text-box">
+            <h1 class="text1">일반회원</h1>
+            <h3 class="text2">14세 이상 개인</h3>
+            <div class="join-btn">가입하기</div>
+          </div>
+        </div>
+        <div class="coporate select">
+          <div class="icon-box">
+            <div class="icon">
+              <img src="../img/free-icon-font-building-3915161.png" alt="" />
+            </div>
+          </div>
+          <div class="text-box">
+            <h1 class="text1">기업회원</h1>
+            <h3 class="text2">사업자 및 기타 단체</h3>
+            <div class="join-btn">가입하기</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer id="footers"></footer>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#headers").load("./header.html");
+        $("#footers").load("./footer.html");
+      });
+    </script>
+  </body>
+</html>
