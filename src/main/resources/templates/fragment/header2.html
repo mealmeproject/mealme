@@ -1,23 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>header</title>
-        <link rel="stylesheet" href="../../../../../../../../Web2/workspace/css/header2.css" />
     </head>
     <body>
+    <header class="header2" th:fragment="header2">
         <div class="header-container">
             <!-- 로그인/회원가입/로그아웃 -->
             <div class="login-container">
-                <div class="login-box">
+                <div class="login-box" th:if="${session.userNumber == null}">
                     <ul>
                         <li>
-                            <a href="">로그인</a>
+                            <a th:href="@{/user/login}">로그인</a>
                         </li>
                         <li>
-                            <a href="">회원가입</a>
+                            <a th:href="@{/user/join}">회원가입</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="login-box" th:unless="${session.userNumber == null}">
+                    <ul>
+                        <li>
+                            <a th:href="@{/user/login}">로그아웃</a>
                         </li>
                     </ul>
                 </div>
@@ -27,10 +34,11 @@
                     <!-- 메인페이지로 이동처리 -->
                     <a href="#">
                         <!-- 로고 img -->
-                        <img src="../../../../../../../../Web2/workspace/img/mealMeLogo.png" alt="" />
+                        <img th:src="@{/img/mealMeLogo.png}" alt="" />
                     </a>
                 </div>
             </div>
         </div>
+    </header>
     </body>
 </html>

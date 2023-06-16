@@ -16,10 +16,13 @@ body {
 
 .login-container {
     background-color: #f2f2f2;
+    width: 1100px;
+    border-radius: 6px;
 }
 
 .login-box {
-    width: 900px;
+    width: 1100px;
+    padding-right: 20px;
     display: flex;
     justify-content: right;
 }
@@ -45,7 +48,7 @@ body {
 }
 
 .logo-container {
-    width: 900px;
+    width: 1100px;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #ff7b00;
