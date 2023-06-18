@@ -179,13 +179,13 @@ input[type="file"] {
 .file-wrap > li:first-child {
     position: relative;
     cursor: pointer;
-    background: url("../img/library_add_FILL0_wght100_GRAD-25_opsz48.png") no-repeat 50%;
+    background: url("../img/library_add.png") no-repeat 50%;
     background-color: #ececec;
 }
 
 .img-list {
     cursor: default;
-    background: url("../img/photo_camera_FILL0_wght100_GRAD-25_opsz48.png") no-repeat 50% #ececec;
+    background: url("../img/photo_camera.png") no-repeat 50% #ececec;
     position: relative;
 }
 

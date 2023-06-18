@@ -21,9 +21,9 @@
 }
 
 /* BASE */
-*,
+* ,
 ::before,
-::after {
+::after{
   box-sizing: border-box;
   font-family: "Nanum Gothic", sans-serif;
 }
@@ -140,7 +140,7 @@ a {
 
 .collapse__link {
   justify-self: flex-end;
-  transition: 0.5;
+  transition: 0.5s;
 }
 
 .collapse__menu {

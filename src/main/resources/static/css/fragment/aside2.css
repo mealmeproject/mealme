@@ -1,35 +1,49 @@
-.menu ::before {
+.quick-menu,
+.quick-menu *,
+.quick-menu::before,
+.quick-menu::after {
+    box-sizing: content-box;
+}
+
+.quick-menu{
+    position: fixed;
+    top: 400px;
+    left: 1300px;
+    right: 0;
+}
+
+.quick-menu ::before {
     font-family: "Material Icons";
     font-size: 1.5em;
     float: left;
     clear: left;
 }
 
-.menu label::before {
+.quick-menu label::before {
     content: "\e5d2";
 }
 
-.menu li:nth-child(1) a::before {
+.quick-menu li:nth-child(1) a::before {
     content: "\e88a";
 }
 
-.menu li:nth-child(2) a::before {
+.quick-menu li:nth-child(2) a::before {
     content: "\f02e";
 }
 
-.menu li:nth-child(3) a::before {
+.quick-menu li:nth-child(3) a::before {
     content: "\e8d6";
 }
 
-.menu li:nth-child(4) a::before {
+.quick-menu li:nth-child(4) a::before {
     content: "\e8cc";
 }
 
-.menu li:nth-child(5) a::before {
+.quick-menu li:nth-child(5) a::before {
     content: "\e87d";
 }
 
-.menu li:nth-child(6) a::before {
+.quick-menu li:nth-child(6) a::before {
     content: "\e8b8";
 }
 
@@ -44,7 +58,7 @@
     height: auto;
 }
 
-.menu {
+.quick-menu {
     display: block;
     width: 60px;
     background-color: #ff9326;
@@ -58,19 +72,19 @@
 
 /*  */
 
-.menu:hover {
+.quick-menu:hover {
     width: 160px; /* Increased width on hover */
 }
 
 /*  */
 
-.menu ul {
+.quick-menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.menu a,
-.menu > label {
+.quick-menu a,
+.quick-menu > label {
     display: block;
     height: 25px;
     padding: 8px;
@@ -79,20 +93,21 @@
     text-decoration: none;
 }
 
-.menu a:hover {
+.quick-menu a:hover {
     color: #ff9326;
 }
-.menu ul li:hover,
-.menu > label:hover {
+.quick-menu ul li:hover,
+.quick-menu > label:hover {
     background-color: #fff;
     color: #ff9326;
     border-radius: 10px;
 }
-.menu div {
+.quick-menu div {
     line-height: 1.5;
+    text-align: center;
     font-size: 1em;
     font-family: "Noto Sans KR";
-    padding: 0 0 0 50px; /* 아이콘과 텍스트 사이 여백 */
+    padding: 0 0 0 10px; /* 아이콘과 텍스트 사이 여백 */
 }
 
 /* @media screen and (max-width: 1023px) {
@@ -102,21 +117,21 @@
 } */
 
 @media screen and (max-width: 560px) {
-    .menu #expand-menu:not(:checked) ~ ul {
+    .quick-menu #expand-menu:not(:checked) ~ ul {
         display: none;
     }
 }
 
-.menu div {
+.quick-menu div {
     position: absolute; /* 절대 위치로 텍스트 고정 */
     left: 50px;
     line-height: 1.5;
     font-size: 1em;
     font-family: "Noto Sans KR";
-    padding: 0 0 0 20px; /* 패딩 20p로 축소 */
+    padding: 0 0 0 10px; /* 패딩 20p로 축소 */
 }
 
-.menu #expand-menu:not(:checked) ~ ul {
+.quick-menu #expand-menu:not(:checked) ~ ul {
     /* 데스크탑 화면에서도 메뉴를 접었더 펼칠 수 있음 */
     display: none;
 }
