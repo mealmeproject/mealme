@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>individualOrCoporate</title>
-    <link rel="stylesheet" href="../css/indvidualOrCoporate.css" />
+    <title>user or company</title>
+    <link rel="stylesheet" th:href="@{/css/fragment/header1.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer1.css}" />
+    <link rel="stylesheet" th:href="@{/css/user/userOrCompany.css}" />
   </head>
   <body>
-    <header id="headers"></header>
-    <div class="select-container">
+  <header class="header1" th:replace="fragment/header1 :: header1"></header>
+  <div class="select-container">
       <div class="join-info">
         <h1>회원가입</h1>
         <p>
@@ -21,36 +23,30 @@
         <div class="individual select border">
           <div class="icon-box">
             <div class="icon">
-              <img src="../img/free-icon-font-user-3917688.png" alt="" />
+              <img th:src="@{/img/user.png}" alt="" />
             </div>
           </div>
           <div class="text-box">
             <h1 class="text1">일반회원</h1>
             <h3 class="text2">14세 이상 개인</h3>
-            <div class="join-btn">가입하기</div>
+            <a th:href="@{/user/userJoin}" class="join-btn">가입하기</a>
           </div>
         </div>
         <div class="coporate select">
           <div class="icon-box">
             <div class="icon">
-              <img src="../img/free-icon-font-building-3915161.png" alt="" />
+              <img th:src="@{/img/building.png}" alt="" />
             </div>
           </div>
           <div class="text-box">
             <h1 class="text1">기업회원</h1>
             <h3 class="text2">사업자 및 기타 단체</h3>
-            <div class="join-btn">가입하기</div>
+            <a th:href="@{/user/companyJoin}" class="join-btn">가입하기</a>
           </div>
         </div>
       </div>
     </div>
-    <footer id="footers"></footer>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $("#headers").load("./header.html");
-        $("#footers").load("./footer.html");
-      });
-    </script>
+  <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   </body>
 </html>

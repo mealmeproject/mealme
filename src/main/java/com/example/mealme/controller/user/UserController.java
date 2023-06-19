@@ -22,14 +22,14 @@ public class UserController {
     @GetMapping("/userJoin")
     public void userJoin(){}
 
-    @GetMapping("/userJoin2")
-    public void userJoin2(){}
+    @GetMapping("/userJoinOk")
+    public void userJoinOk(){}
 
     @GetMapping("/companyJoin")
     public void companyJoin(){}
 
-    @GetMapping("/companyJoin2")
-    public void companyJoin2(){}
+    @GetMapping("/companyJoinOk")
+    public void companyJoinOk(){}
 
     @GetMapping("/findPassword")
     public void findPassword(){}

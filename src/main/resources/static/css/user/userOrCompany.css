@@ -10,6 +10,10 @@ body {
     color: rgba(50, 50, 50, 0.9);
 }
 
+a{
+    text-decoration: none;
+}
+
 .select-container {
     width: 1200px;
     margin: 0 auto;
