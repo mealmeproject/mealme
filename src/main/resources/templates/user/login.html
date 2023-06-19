@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>login</title>
+        <link rel="stylesheet" th:href="@{/css/fragment/footer1.css}" />
+        <link rel="stylesheet" th:href="@{/css/user/login.css}" />
+    </head>
+    <body>
+    <div class="login-wrapper">
+            <div class="logo-container">
+                <div class="logo-box">
+                    <!-- 메인페이지로 이동처리 -->
+                    <a href="#">
+                        <!-- 로고 img -->
+                        <img src="../img/mealMeLogo.png" alt="" />
+                    </a>
+                </div>
+            </div>
+            <form method="post" action="/user/join" id="login-form">
+                <!-- 개인/기업 선택 -->
+                <div class="radio-group">
+                    <input type="radio" id="individual" name="userType" value="individual" checked />
+                    <label for="individual">개인</label>
+                    <input type="radio" id="corporate" name="userType" value="corporate" />
+                    <label for="corporate">기업</label>
+                </div>
+                <!-- id/password 입력 -->
+                <input type="text" name="Id" placeholder="Id" required/>
+                <input type="password" name="Password" placeholder="Password" required/>
+                <label for="remember-check"><input type="checkbox" id="remember-check" /> 아이디 저장하기 </label>
+                <div class="find-password">
+                    <a href="/user/findPassword" class="find-password">비밀번호를 잊으셨나요?</a>
+                </div>
+                <input type="submit" value="로그인" class="submit-btn" />
+                <div class="sign-up">
+                    <a href="/user/userOrCompany">회원가입</a>
+                </div>
+                <!-- 또는의 줄 -->
+                <div class="line">
+                    <hr />
+                    <span>또는</span>
+                    <hr />
+                </div>
+                <!-- 카카오 로그인 -->
+                <div class="kakao-loginbox" onclick="kakaoLogin();">
+                    <a href="javascript:void(0)">
+                        <button type="button" class="kakao-login-btn">
+                            <div class="kakao-login-inner">
+                                <div class="kakao-icon">
+                                    <img src="../img/kakao-icon.png" alt="" />
+                                </div>
+                                <div class="kaka-login-text">카카오톡으로 로그인</div>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+            </form>
+        </div>
+    <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
+    <!-- 카카오 로그인 스크립트 -->
+        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+        <script>
+            Kakao.init("c6110035b5d2280664b9f251329b20e6"); //발급받은 키 중 javascript키를 사용해준다.
+            console.log(Kakao.isInitialized()); // sdk초기화여부판단
+            //카카오로그인
+            function kakaoLogin() {
+                Kakao.Auth.login({
+                    success: function (response) {
+                        Kakao.API.request({
+                            url: "/v2/user/me",
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            fail: function (error) {
+                                console.log(error);
+                            },
+                        });
+                    },
+                    fail: function (error) {
+                        console.log(error);
+                    },
+                });
+            }
+        </script>
+    </body>
+</html>

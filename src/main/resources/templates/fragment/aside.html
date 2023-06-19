@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>aside</title>
+    </head>
+    <body id="body-pd">
+    <aside class="aside" th:fragment="aside">
+        <div class="l-navbar" id="navbar">
+            <nav class="nav">
+                <div>
+                    <div class="nav__brand">
+                        <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
+                        <a href="#" class="nav__logo">manu</a>
+                    </div>
+                    <div class="nav__list">
+                        <a href="#" class="nav__link active">
+                            <ion-icon name="home-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">메인화면</span>
+                        </a>
+
+                        <div href="#" class="nav__link collapse">
+                            <ion-icon name="person-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">마이페이지</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <li><a href="#" class="collapse__sublink">식단작성</a></li>
+                                <li><a href="#" class="collapse__sublink">영양진단</a></li>
+                                <li><a href="#" class="collapse__sublink">식단컨설팅</a></li>
+                            </ul>
+                        </div>
+
+                        <div href="#" class="nav__link collapse">
+                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">통계</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <li><a href="#" class="collapse__sublink">오늘하루</a></li>
+                                <li><a href="#" class="collapse__sublink">통계</a></li>
+                                <li><a href="#" class="collapse__sublink">자가진단</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div href="#" class="nav__link collapse">
+                            <ion-icon name="bag-handle-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">쇼핑</span>
+
+                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
+
+                            <ul class="collapse__menu">
+                                <li><a href="#" class="collapse__sublink">찜목록</a></li>
+                                <li><a href="#" class="collapse__sublink">장바구니</a></li>
+                                <li><a href="#" class="collapse__sublink">구매내역</a></li>
+                            </ul>
+                        </div>
+
+                        <a href="#" class="nav__link">
+                            <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">받은쪽지함</span>
+                        </a>
+
+                        <a href="#" class="nav__link">
+                            <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">개인정보설정</span>
+                        </a>
+                    </div>
+                    <a href="#" class="nav__link">
+                        <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
+                        <span class="nav_name">로그아웃</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </aside>
+        <!-- IONICONS -->
+        <!-- JS -->
+    </body>
+</html>

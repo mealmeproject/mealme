@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Page</title>
+        <link rel="stylesheet" th:href="@{/css/meal/myPage.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/header2.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/aside2.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/aside.css}" />
+        <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
+        <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    </head>
+    <body id="body-pd">
+        <div class="body-container">
+            <!-- 사이드바 추가 공간 -->
+            <aside class="aside" th:replace="fragment/aside :: aside"></aside>
+            <!-- 사이드바 추가 공간 -->
+            <div class="main-container">
+                <!-- 헤더 추가 공간 -->
+                <header class="header2" th:replace="fragment/header2 :: header2"></header>
+                <!-- 헤더 추가 공간 -->
+                <!-- 작업공간 -->
+                <div class="work-container">
+                <div class="service-name-container">
+                    <div class="service-name-box">
+                        <h1>마이페이지</h1>
+                    </div>
+                </div>
+                <hr class="service-name-hr" />
+                <div class="user-info">
+                    <div class="user-profile-img-container">
+                        <div class="user-profile-img-box">
+                            <img th:src="@{/img/profilesampleimg.png}" alt="" />
+                        </div>
+                    </div>
+                    <div class="user-data-container">
+                        <div class="user-data-box">
+                            <div class="user-info1-column">
+                                <div class="user-info1-count"><h3>2</h3></div>
+                                <div class="data-title">게시물</div>
+                            </div>
+                            <div class="user-info1-column">
+                                <div class="user-info1-count"><h3>2</h3></div>
+                                <div class="data-title">구매횟수</div>
+                            </div>
+                            <div class="user-info1-column">
+                                <div class="user-info1-count"><h3>2</h3></div>
+                                <div class="data-title">리뷰</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-info2">
+                    <div class="user-info2-box">
+                        <div class="name"><h2>이름</h2></div>
+                        <div class="nickname"><h2>닉네임</h2></div>
+                        <div class="comment"><h3>유저 한줄 소개 입니다.</h3></div>
+                    </div>
+                </div>
+                <div class="service-name-container">
+                    <div class="service-name-box">
+                        <h1>나의식단</h1>
+                    </div>
+                    <div class="write-img-box">
+                        <a href="">
+                            <img src="../img/edit_FILL0.png">
+                        </a>
+                    </div>
+                </div>
+                <hr class="service-name-hr" />
+                <!-- 식단 리스트 뽑기 -->
+<!--                <div class="meal-list-container-box">-->
+                <ul class="meal-list-container">
+                    <!-- 반복해야하는 구간 -->
+                    <li class="meal-list-oneday">
+                        <div class="meal-list-info">
+                            <div class="eat-date"><h2>6월 15일</h2></div>
+                            <div class="eat-kcal"><h2>1,249kcal</h2></div>
+                            <div class="eat-list-view-btn">
+                                <img th:src="@{/img/chevron_right.png}" alt="" />
+                            </div>
+                        </div>
+                        <!-- 하루 식단 리스트 뽑기 -->
+                        <ul class="meal-img-list">
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) -->
+                            <li class="meal-img-box">
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample1.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) 끝 -->
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample2.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample3.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample4.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample5.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample6.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) -->
+                        </ul>
+                    </li>
+                    <!-- 반복해야하는 구간 -->                    <!-- 반복해야하는 구간 -->
+                    <li class="meal-list-oneday">
+                        <div class="meal-list-info">
+                            <div class="eat-date"><h2>6월 15일</h2></div>
+                            <div class="eat-kcal"><h2>1,249kcal</h2></div>
+                            <div class="eat-list-view-btn">
+                                <img th:src="@{/img/chevron_right.png}" alt="" />
+                            </div>
+                        </div>
+                        <!-- 하루 식단 리스트 뽑기 -->
+                        <ul class="meal-img-list">
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) -->
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample1.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample2.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample3.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample4.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample5.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample6.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) -->
+                        </ul>
+                    </li>
+                    <!-- 반복해야하는 구간 -->                    <!-- 반복해야하는 구간 -->
+                    <li class="meal-list-oneday">
+                        <div class="meal-list-info">
+                            <div class="eat-date"><h2>6월 15일</h2></div>
+                            <div class="eat-kcal"><h2>1,249kcal</h2></div>
+                            <div class="eat-list-view-btn">
+                                <img th:src="@{/img/chevron_right.png}" alt="" />
+                            </div>
+                        </div>
+                        <!-- 하루 식단 리스트 뽑기 -->
+                        <ul class="meal-img-list">
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) -->
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample1.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample2.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample3.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample4.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample5.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="meal-img-box">
+                                <!-- 백그라운드로 주어야함 -->
+                                <div class="meal-img">
+                                    <div class="imgbox">
+                                            <img th:src="@{/img/sample6.jpg}" alt="" />
+                                    </div>
+                                    <div class="meal-info">
+                                        <div class="meal-eat-time"><h2>08:00</h2></div>
+                                        <div class="meal-eat-kcal"><h2>380kcal</h2></div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- 반복해야하는 구간 (하루 먹은 식단) -->
+                        </ul>
+                    </li>
+                    <!-- 반복해야하는 구간 -->
+                </ul>
+                    <!-- 모달창 -->
+                    <div id="myModal" class="modal modal-hidden">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close" id="close-modal">&times;</span>
+                                <h2>6월 15일 아침 8:00</h2>
+                                <hr class="service-name-hr" />
+                            </div>
+                            <div class="modal-main">
+                                <!-- 이미지 -->
+                                <div class="day-img-box slider">
+                                    <input type="radio" name="slide" id="slide1" checked>
+                                    <input type="radio" name="slide" id="slide2">
+                                    <input type="radio" name="slide" id="slide3">
+                                    <input type="radio" name="slide" id="slide4">
+                                    <ul id="imgholder" class="imgs">
+                                        <li><img th:src="@{/img/sample1.jpg}"></li>
+                                        <li><img th:src="@{/img/sample2.jpg}"></li>
+                                        <li><img th:src="@{/img/sample3.jpg}"></li>
+                                        <li><img th:src="@{/img/sample4.jpg}"></li>
+                                    </ul>
+                                    <div class="bullets">
+                                        <label for="slide1">&nbsp;</label>
+                                        <label for="slide2">&nbsp;</label>
+                                        <label for="slide3">&nbsp;</label>
+                                        <label for="slide4">&nbsp;</label>
+                                    </div>
+                                </div>
+                                <!-- 이미지 끝-->
+                                <div class="day-detail">
+                                    <div class="day-detail1">
+                                        <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span ">wb_twilight</span>아침</div>
+                                        <div class="meal-time"><span class="material-symbols-outlined meal-icon-span">sunny</span>점심</div>
+                                        <div class="meal-time"><span class="material-symbols-outlined meal-icon-span">dark_mode</span>저녁</div>
+                                        <div class="meal-time"><span class="material-symbols-outlined meal-icon-span">icecream</span>간식</div>
+                                    </div>
+                                    <div class="day-detail2">
+                                        <div class="day-food-detail">
+                                            <div class="day-food-name">치킨</div>
+                                            <div class="day-food-weight">1220g</div>
+                                            <div class="day-food-kcal">4030kcal</div>
+                                        </div>
+                                        <div class="day-food-detail">
+                                            <div class="day-food-name">치킨무</div>
+                                            <div class="day-food-weight">1260g</div>
+                                            <div class="day-food-kcal">400kcal</div>
+                                        </div>
+                                        <div class="day-food-detail">
+                                            <div class="day-food-name">치킨양념</div>
+                                            <div class="day-food-weight">120g</div>
+                                            <div class="day-food-kcal">400kcal</div>
+                                        </div>
+                                        <div class="day-food-detail">
+                                            <div class="day-food-name">피자</div>
+                                            <div class="day-food-weight">200g</div>
+                                            <div class="day-food-kcal">4200kcal</div>
+                                        </div>
+                                        <div class="day-food-detail">
+                                            <div class="day-food-name">탕수육</div>
+                                            <div class="day-food-weight">320g</div>
+                                            <div class="day-food-kcal">420kcal</div>
+                                        </div>
+                                    </div>
+                                    <div class="day-detail3">
+                                        총 칼로리 : &nbsp<div class="detail3-kcal">3000kcal</div>
+                                    </div>
+                                    <div class="day-detail4">
+                                        <div class="modify-btn">수정</div>
+                                        <div class="delete-btn">삭제</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--                                모달창끝-->
+                </div>
+                <!-- 작업공간 -->
+<!--                </div>-->
+                <!-- 푸터 추가 공간 -->
+                <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
+            </div>
+        </div>
+        <aside class="aside2" th:replace="fragment/aside2 :: aside2">
+            <div class="menu-container"></div>
+        </aside>
+        <!-- 퀵 메뉴 추가 공간 -->
+        <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+        <script th:src="@{/js/fragment/aside.js}"></script>
+        <script th:src="@{/js/meal/myPage.js}"></script>
+        <script>
+            var images = [];
+            var currentImageIndex = 0;
+
+            function openModal(imageList) {
+                // Assign the image list to the global variable
+                images = imageList;
+
+                // Rest of the code...
+                // (Place the JavaScript code mentioned in the previous response here)
+            }
+        </script>
+    </body>
+</html>
