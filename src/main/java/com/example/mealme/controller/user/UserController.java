@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
     private final UserService userService;
 
+    @GetMapping("/index")
+    public void index(){}
+
     @GetMapping("/login")
     public void login(){}
 

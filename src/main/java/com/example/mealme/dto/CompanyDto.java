@@ -19,6 +19,7 @@ public class CompanyDto {
     private String companyAddressNumber;
     private String companyAddress1;
     private String companyAddress2;
+    private String companyAddress3;
     private String companyUrl;
     private String companyEmail;
     private String companyComment;

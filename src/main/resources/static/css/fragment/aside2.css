@@ -103,8 +103,9 @@
     border-radius: 10px;
 }
 .quick-menu div {
+    min-width: 84px;
     line-height: 1.5;
-    text-align: center;
+    text-align: left;
     font-size: 1em;
     font-family: "Noto Sans KR";
     padding: 0 0 0 10px; /* 아이콘과 텍스트 사이 여백 */

@@ -52,7 +52,7 @@ button {
     border-radius: 6px;
 }
 
-#user-id {
+#userId {
     width: 63%;
 }
 
@@ -209,7 +209,7 @@ button {
 
 .ui-datepicker {
     position: absolute !important;
-    left: 47.5% !important;
+    left: 40% !important;
 }
 
 .hasDatepicker {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class MealFileDto {
+public class BoardFileDto {
     private long fileNumber;
     private long boardNumber;
     private String fileName;
