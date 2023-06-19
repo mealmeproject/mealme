@@ -5,9 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" th:href="@{/css/fragment/header1.css}" />
+    <link rel="stylesheet" th:href="@{/css/fragment/footer1.css}" />
+    <link rel="stylesheet" th:href="@{/css/user/index.css}" />
   </head>
   <body>
-    <div class="main-container">aaaaa</div>
+  <header class="header1" th:replace="fragment/header1 :: header1"></header>
+  <div class="main-container">
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/userOrCompany}">회원가입</a>
+      <a th:href="@{/meal/myPage}">마이페이지</a>
+      <a th:href="@{/meal/write}">마이페이지글쓰기</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+      <a th:href="@{/user/login}">로그인</a>
+
+    </div>
+  <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
   </body>
 </html>

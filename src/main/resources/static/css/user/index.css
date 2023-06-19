@@ -1,0 +1,8 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container a{
+    margin: 20px;
+}
