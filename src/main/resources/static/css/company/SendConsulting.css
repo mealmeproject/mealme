@@ -1,0 +1,372 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.work-container,
+.work-container *,
+.work-container::before,
+.work-container::after {
+    box-sizing: content-box;
+}
+
+.body-container {
+    flex-grow: 1;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*margin: 0 auto;*/
+    width: 1200px;
+}
+
+
+.main-container {
+    width: 1100px;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: pink; */
+}
+
+.work-container{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+
+
+
+
+.ConsultReadAll{
+    text-align: center;
+}
+
+.title{
+    font-size: 30px;
+    padding: 0px 7px;
+}
+
+
+
+/* 이름 전체 묶은거*/
+.Name-wrap {
+    display: flex;
+    justify-content: center;
+}
+/* 날짜 전체 묶은거 */
+.date-wrap{
+    display: flex;
+    justify-content: center;
+}
+
+
+.content-writer{
+    padding:  0 10px 0px 10px;
+}
+
+.content-date{
+    padding:  0 10px 0px 10px;
+}
+
+
+.info-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 작성자 글씨 진함 */
+.view-info .writer  {
+    font-weight: bold;
+}
+/* 날짜 글씨 진함 */
+.view-info .date{
+    font-weight: bold;
+}
+/* 버튼 스타일 */
+.List-group {
+    text-align: right;
+    margin-top: 30px;
+
+}
+
+.List-group :hover{
+    background-color:rgba(255, 139,38, 1);
+    border: 1px solid rgba(255, 139,38, 1);
+    color: rgb(255, 255,255);
+}
+
+
+.List-btn  {
+    border-radius: 20px;
+    width: 65px;
+    height: 35px;
+    /* padding: 15px 20px ; 텍스트와 버튼 사이의 여백 조정 */
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    margin: 0 2px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    /* background: rgba(255, 139, 38, 0.8);
+     border: 1px solid rgb(255, 139, 38); */
+    background-color: #fff;
+    color: rgb(255, 139,38);
+    border: 1px solid rgba(255, 139,38, 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 답변 보내기 만의 bottom 줄 표시 */
+.OnlyThisH1{
+    padding: 0 0 10px 0;
+    border-bottom: 3px solid #ff9326;
+    font-size: 30px;
+
+}
+
+/* 제목 css들 */
+.WrapAll h1{
+    height: 46px;
+    padding-top: 36px;
+    font-family: NEXON Lv1 Gothic;
+    font-size: 30px;
+    color: #333;
+    font-weight: 400;
+}
+
+
+.info-title{
+    padding: 15px;
+    border-bottom: 3px solid #ff9326;
+}
+
+/* 답변보내는 칸  */
+.inputTextArea{
+    width: 95%;
+    height: 200px;
+    padding: 12px 19px;
+    font-size: 20px;
+    line-height: 1.65;
+    vertical-align: top;
+    background-color: #fff;
+    border: 5px solid #e5e5e5;
+    resize: none;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+/* 취소와 보내기 전체  */
+.CommentSend-btn{
+    text-align: center;
+    padding-bottom: 30px;
+
+}
+
+
+/* 보내기 */
+.Send-btn{
+    background-color: #fff;
+    color: rgb(255, 139,38);
+    border: 1px solid rgba(255, 139,38, 1);
+
+}
+
+/* 보내기 세부  */
+.Send-btn {
+    border-radius: 25px;
+    width: 90px;
+    height: 45px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px 2px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+
+
+
+.CommentSend-btn :hover{
+    background-color:rgba(255, 139,38, 1);
+    border: 1px solid rgba(255, 139,38, 1);
+    color: rgb(255, 255,255);
+}
+
+
+
+
+
+.GetImg{
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+}
+
+/* 이미지를 width 30퍼만 차지하게함 */
+.GetImg img{
+    width: 30%;
+}
+
+
+
+
+
+/* 내용 왼쪽부터 시작하고 위의 선 3px이고 패딩설정한거임 */
+.get-content{
+    text-align: left;
+    /* border-top: 3px solid  #ff9326; */
+    padding: 15px;
+}
+
+
+
+
+
+
+/* 댓글 스타일 */
+
+/* 보내기 , 작성하는곳 마진 주는거임. */
+.comment-form {
+    margin : 10px 0 50px 0;
+}
+/* 글 작성 크기임. */
+.comment-form textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+/* 답변 보내기 버튼임 */
+.comment-form button {
+    background-color: #fff;
+    color: rgb(255, 139,38);
+    /* border: 1px solid rgba(255, 139,38, 1); */
+    /* margin-top: 10px; */
+}
+
+.comment-form button:hover {
+    background-color:rgba(255, 139,38, 1);
+    border: 1px solid rgba(255, 139,38, 1);
+    color: rgb(255, 255,255);
+
+}
+
+.form-group>label {
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+#comment-list {
+    list-style: none;
+}
+
+.comment-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.comment-writer {
+    font-weight: bold;
+}
+
+.comment-date {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+.comment-content {
+    margin-top: 5px;
+}
+
+.comment-list li {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.comment-info {
+    font-size: 14px;
+    color: #999;
+}
+
+.comment-info .writer {
+    margin-right: 10px;
+}
+
+.comment-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+.comment-content-wrap{
+    display : flex;
+    justify-content: space-between;
+}
+/* 수정 . 삭제 버튼  */
+.comment-btn-group button {
+    border-radius: 20px;
+    width: 65px;
+    height: 35px;
+    /* font-size: 14px; */
+    /* font-weight: 700; */
+    /* text-align: center; */
+    /* text-decoration: none; */
+    margin: 0 2px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    background-color: #fff;
+    color: rgb(255, 139,38);
+    border: 1px solid rgba(255, 139,38, 1);
+}
+
+.comment-btn-group button:hover{
+    background-color:rgba(255, 139,38, 1);
+    border: 1px solid rgba(255, 139,38, 1);
+    color: rgb(255, 255,255);
+}
+
+.none{
+    display : none;
+}
+
+.comment-list textarea {
+    width: 900px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
