@@ -1,17 +1,23 @@
 package com.example.mealme.controller.user;
 
+import com.example.mealme.dto.UserDto;
 import com.example.mealme.service.meal.MealService;
 import com.example.mealme.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/user/*")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+
+    @GetMapping("/index")
+    public void index(){}
 
     @GetMapping("/login")
     public void login(){}
@@ -21,6 +27,12 @@ public class UserController {
 
     @GetMapping("/userJoin")
     public void userJoin(){}
+
+    @PostMapping("/userJoin")
+    public RedirectView join(UserDto userDto){
+        userService.register(userDto);
+        return new RedirectView("/user/login");
+    }
 
     @GetMapping("/userJoinOk")
     public void userJoinOk(){}

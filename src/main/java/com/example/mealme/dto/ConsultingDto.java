@@ -13,6 +13,6 @@ public class ConsultingDto {
     private long consultingNumber;
     private long companyNumber;
     private long userNumber;
-    private Clob consultingContent;
+    private String consultingContent;
     private String consultingDate;
 }
