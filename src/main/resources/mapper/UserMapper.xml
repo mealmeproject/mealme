@@ -5,8 +5,16 @@
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS_NUMBER,
-                              USER_ADDRESS1, USER_ADDRESS2, USER_EMAIL, USER_GRADE)
+        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER,
+                              USER_ADDRESS_NUMBER, USER_ADDRESS1, USER_ADDRESS2, USER_ADDRESS3, USER_EMAIL)
+                VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userPhoneNumber},
+                  #{userAddressNumber}, #{userAddress1}, #{userAddress2}, #{userAddress3}, #{userEmail})
     </insert>
+
+    <select id="selectUserNumber" resultType="Long">
+        SELECT USER_NUMBER FROM TBL_USER
+        WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
+    </select>
+
 
 </mapper>
