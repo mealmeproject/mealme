@@ -1,0 +1,472 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+.body-container {
+    flex-grow: 1;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*margin: 0 auto;*/
+    width: 1200px;
+}
+
+
+.main-container {
+    width: 1100px;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: pink; */
+}
+
+.work-container{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+h1{
+
+    width: 850px;
+}
+
+
+main {
+    width: 850px;
+    background: #ffffff;
+    text-align: right;
+    font-size: 20px;
+}
+
+section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+    width: 850px;
+}
+
+
+
+input {
+    display: none;}
+
+label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+}
+
+label:hover {
+    color: #ff9326;
+    cursor: pointer;}
+
+/*input 클릭시, label 스타일*/
+input:checked + label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid #ff9326;
+    border-bottom: 1px solid #ffffff;}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+    display: block;}
+
+
+
+.order-info-main-container{
+    margin-top: 100px;
+}
+
+
+
+.order-info-container{
+    width: 850px;
+    margin-top: 80px;
+
+}
+
+
+.order-info-container-title{
+
+    font-size: 25px;
+    margin-top: 60px;
+}
+
+table{
+    width: 850px;
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+
+
+.order-details-table {
+    width: 850px;
+    border-collapse: collapse;
+}
+
+.order-details-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.order-details-table td:first-child {
+    font-weight: bold;
+    background-color: #ff9326;
+    width: 150px;
+    font-size: 18px;
+    font-weight: 500;
+    color:white;
+}
+
+.order-details-table td:last-child {
+    text-align: left;
+    width: 700px;
+}
+
+
+.pay-info-container{
+    font-size: 20px;
+    margin-top: 40px;
+}
+
+
+.pay-info-container-title{
+    font-size: 25px;
+    margin-top:80px;
+}
+
+
+.pay-details-table {
+    width: 850px;
+    border-collapse: collapse;
+}
+
+.pay-details-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: bo
+}
+
+.pay-details-table td:first-child {
+    font-weight: bold;
+    background-color: #ff9326;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+}
+
+.pay-details-table td:last-child {
+    text-align: left;
+    width: 700px;
+}
+
+
+
+.pay-details-table2 {
+    width: 850px;
+    border-collapse: collapse;
+}
+
+.pay-details-table2 td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pay-details-table2 td:first-child {
+    font-weight: bold;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+
+.pay-details-table2 td:last-child {
+    text-align: left;
+    width: 700px;
+}
+
+
+.pay-table2-top{
+    background-color: #ff9326;
+    color: white;
+
+}
+
+
+.shopping-info-container-title{
+    margin-top: 80px;
+    font-size:25px;
+}
+
+.shopping-details-table td:last-child {
+    text-align: left;
+    width: 700px;
+}
+
+
+.shopping-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+
+.shopping-details-table th,
+.shopping-details-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.shopping-details-table th {
+    background-color: #ff9326;
+    color: white;
+    font-weight: bold;
+}
+
+.shopping-details-table td{
+    border:none;
+}
+
+.order-info-tbdoy{
+    background-color: #F5F5F5;
+}
+
+
+
+.shopping-details-table td.img img{
+    width: 100px;
+}
+
+.shopping-details-table th.info{
+    width: 600px;
+}
+
+.shopping-details-table td.info{
+    text-align: left;
+}
+
+.shopping-details-table th.number{
+    width: 70px;
+}
+
+.shopping-details-table th.purchase-number{
+    width: 100px;
+}
+
+.shopping-details-table th.delivery-type{
+    width: 150px;
+}
+
+.shopping-details-table td.delivery-type{
+    width: 100px;
+}
+
+
+.shopping-details-table td.delivery-status{
+    width: 250px;
+}
+
+
+.purchase-btn{
+    height: 30px;
+    width: 100px;
+    background-color: #ff9326;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    font-weight: 500;
+    font-size:14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.shopping-details-table2 {
+
+    width: 850px;
+    background-color: #F5F5F5;
+    color:#ff9326;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.left{
+    width: 200px;
+    height: 70px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.left-img{
+    width: 60px;
+}
+
+.right{
+    text-align: right;
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+.refund-info-container-title{
+
+    margin-top:80px;
+    font-size: 25px;
+}
+
+
+.refund-info-site{
+    height: 30px;
+    width: 120px;
+    background-color: #ff9326;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    font-size:15px;
+    cursor: pointer;
+    float: right;
+}
+
+
+
+
+
+.refund-details-table {
+    width: 850px;
+    border-collapse: collapse;
+}
+
+.refund-details-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+}
+
+.refund-details-table td:first-child {
+    font-weight: bold;
+    background-color: #ff9326;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+}
+
+.refund-details-table td:last-child {
+    text-align: left;
+    width: 700px;
+}
+
+
+
+.address-info-container-title{
+
+    margin-top:80px;
+    font-size: 25px;
+}
+
+
+
+.address-details-table {
+    width: 850px;
+    border-collapse: collapse;
+}
+
+.address-details-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: bo
+}
+
+.address-details-table td:first-child {
+    font-weight: bold;
+    background-color: #ff9326;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    color:white;
+}
+
+.address-details-table td:last-child {
+    text-align: left;
+    width: 700px;
+}
+
+
+.address-btn{
+    height: 50px;
+    width: 130px;
+    background-color: #ff9326;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    font-size:16px;
+    cursor: pointer;
+    float: right;
+    margin-top: 20px;
+}
+
+
+
+
+.btn-final1{
+    height: 50px;
+    width: 150px;
+    background-color: #ff9326;
+    border: none;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    font-size:16px;
+    cursor: pointer;
+    margin-top: 20px;
+    position: relative;
+    left: 300px;
+    top:150px;
+}
+
+
+.btn-final2{
+    height: 50px;
+    width: 150px;
+    background-color: white;
+    border: 1px solid #bfb9b9;
+    border-radius: 5px;
+    color:#ff9326;
+    font-weight: bold;
+    font-size:16px;
+    cursor: pointer;
+    margin-top: 20px;
+    position: relative;
+    left: 300px;
+    top:150px;
+}
