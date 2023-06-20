@@ -43,7 +43,6 @@ body {
 
 
 
-
 .ConsultReadAll{
     text-align: center;
 }
@@ -179,6 +178,7 @@ body {
 .CommentSend-btn{
     text-align: center;
     padding-bottom: 30px;
+    padding-top: 15px;
 
 }
 
@@ -200,7 +200,7 @@ body {
     font-weight: 700;
     text-align: center;
     text-decoration: none;
-    margin: 10px 2px;
+    margin: 0 2px;
     font-size: 14px;
     font-weight: 700;
     text-align: center;

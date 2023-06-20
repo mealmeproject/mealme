@@ -14,20 +14,27 @@ public class CompanyController {
     private final CompanyService companyService;
 
 
-
     @GetMapping("/ConsultingList")
-    public void ConsultingList(){
+    public void ConsultingList() {
 
     }
 
     @GetMapping("/ConsultingList2")
-    public void ConsultingList2(){
+    public void ConsultingList2() {
 
     }
 
     @GetMapping("/SendConsulting")
-    public void SendConsulitng(){
+    public void SendConsulitng() {
 
     }
+
+    @GetMapping("/WhyRefund")
+    public void WhyRefund() {
+
     }
 
+    @GetMapping("/SendReadList")
+    public void SendReadList() {
+    }
+}

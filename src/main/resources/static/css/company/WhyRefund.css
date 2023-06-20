@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
+}
+
+.work-container,
+.work-container *,
+.work-container::before,
+.work-container::after {
+    box-sizing: content-box;
+}
+
+.body-container {
+    flex-grow: 1;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*margin: 0 auto;*/
+    width: 1200px;
+}
+
+
+.main-container {
+    width: 1100px;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: pink; */
+}
+
+.work-container{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+
+
+/* 타이틀 */
+.title {
+    margin-bottom: 30px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    font-size: 28px;
+    font-weight: 700;
+    border-bottom: 3px solid #ff9326;
+    padding: 0 0 10px 0;
+}
+
+
+input{
+    width: 100%;
+}
+
+
+.apply-title input,
+[type="text"] {
+    width: 97%;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* title 옆 아이콘 */
+
+
+
+h1{
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #ff9326;
+}
+
+
+
+/* 첨부파일 삭제 버튼 */
+
+.btn-box{
+    position : absolute;
+    bottom : 0;
+    right : 0;
+}
+
+
+.img-cancel-btn{
+    background-color: #009a3e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.img-cancel-btn:hover{
+    background-color: rgb(255, 87, 87);
+    color: #fff;
+}
+
+
+
+/* 등록 취소 버튼 */
+
+.btn-groups {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.cancel-btn,
+.submit-btn {
+    background-color: #fff;
+    color: rgb(255, 139,38);
+    border: 1px solid rgba(255, 139,38, 1);
+    width: 80px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 20px;
+    margin-left: 5px;
+}
+
+.cancel-btn:hover,
+.submit-btn:hover {
+    background-color:rgba(255, 139,38, 0.8);
+    border: 1px solid rgba(255, 139,38, 1);
+    color: rgb(255, 255,255);
+}
+
+
+
