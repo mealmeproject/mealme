@@ -24,4 +24,34 @@ public class CompanyController {
 
     @GetMapping("/settingThePeriod")
     public void settingThePeriod(){}
+
+
+    @GetMapping("/ConsultingList")
+    public void ConsultingList() {
+
+    }
+
+    @GetMapping("/ConsultingList2")
+    public void ConsultingList2() {
+
+    }
+
+    @GetMapping("/SendConsulting")
+    public void SendConsulitng() {
+
+    }
+
+    @GetMapping("/WhyRefund")
+    public void WhyRefund() {
+
+    }
+
+    @GetMapping("/SendReadList")
+    public void SendReadList() {
+    }
+
+    @GetMapping("/SendReadList2")
+    public void SendReadList2() {
+    }
+
 }
