@@ -21,4 +21,7 @@ public class CompanyController {
 
     @GetMapping("/detailedHospital")
     public void detailedHospital(){}
+
+    @GetMapping("/settingThePeriod")
+    public void settingThePeriod(){}
 }
