@@ -1,0 +1,235 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+.body-container {
+    flex-grow: 1;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*margin: 0 auto;*/
+    width: 1200px;
+}
+
+.main-container {
+    width: 1100px;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: pink; */
+}
+
+.work-container{
+    width: 900px;
+    margin: 0 auto;
+}
+
+.main-window{
+    width: 100%;
+    height: 100%;
+    /* background-color: darkgrey; */
+}
+
+.detailed-info-name-section{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    /* background-color: coral; */
+}
+
+.detail-info-name{
+    flex: 1;
+    width: 100%;
+    height: 90%;
+    margin: 5px 5px 10px 5px;
+    /* background-color: bisque; */
+    /* border-bottom: 1px solid #ddd; */
+    display: flex;
+    align-items: center;
+}
+
+.main-section{
+    width: 100%;
+    height: 730px;
+    /* background-color: greenyellow; */
+    margin: 5px  5px 5px 0px;
+}
+
+.main-informaion-section{
+    width: 100%;
+    height: 30px;
+    /* background-color: burlywood; */
+    margin: 5px 5px 5px 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.main-information{
+    width: 50%;
+    height: 30px;
+    /* background-color: indianred; */
+    display: flex;
+    align-items: center;
+}
+
+.information1{
+    position: relative;
+    left: 5%;
+}
+
+.main-request-section-window{
+    width: 100%;
+    height: 690px;
+    /* background-color: lightsalmon; */
+}
+
+.main-request-section-cast{
+    width: 100%;
+    height: 685px;
+    /* background-color: antiquewhite; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-request-section{
+    width: 90%;
+    height: 98%;
+    /* background-color: lightblue; */
+}
+
+.main-choose-date-section{
+    width: 100%;
+    height: 100px;
+    /* background-color: bisque; */
+}
+
+.main-choose-date-section-info{
+    width: 100%;
+    height: 20px;
+    /* background-color: darkgrey; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-bottom: 1px solid #ddd; */
+}
+
+.choosec-date-section{
+    width: 100%;
+    height: 80px;
+    /* background-color: chocolate; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid #ddd */
+}
+
+.choose-date-detailed-section{
+    width: 100%;
+    height: 40px;
+    /* background-color: yellowgreen; */
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd
+}
+
+.choose-date-detailed-section-name{
+    width: 20%;
+    height: 100%;
+    /* background-color: bisque; */
+    border-right: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choose-date-detailed{
+    width: 80%;
+    height: 100%;
+    /* background-color: khaki; */
+    display: flex;
+    align-items: center;
+}
+
+.choose-date{
+    width: 70%;
+    height: 50%;
+    /* background-color: burlywood; */
+    display: flex;
+    justify-content: center;
+}
+
+.choos1,
+.choose2{
+    display: flex;
+}
+
+.additional-explanation-section{
+    width: 100%;
+    height: 475px;
+    /* background-color: dimgrey; */
+}
+
+.additional-explanation-section-info-sec{
+    width: 100%;
+    height: 30px;
+    /* background-color: burlywood; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.additional-explanation-section-info{
+    width: 100%;
+    height: 20px;
+    /* background-color: cornsilk; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.additional-explanation-text{
+    width: 100%;
+    height: 430px;
+    /* background-color: greenyellow; */
+}
+
+.additional-textarea{
+    width: 99.79%;
+    height: 430px;
+}
+
+.pay-button-section{
+    width: 100%;
+    height: 90px;
+    /* background-color: cornflowerblue; */
+    display: flex;
+    align-items: center;
+}
+
+.pay-button-detailed-section{
+    width: 100%;
+    height: 50px;
+    /* background-color: chocolate; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pay-button-detailed{
+    width: 15%;
+    height: 50px;
+    background-color: #ff9326;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+}

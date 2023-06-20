@@ -13,5 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChartController {
     private final ChartService chartService;
 
+<<<<<<< HEAD
+=======
+    @GetMapping("/chartMonthly")
+    public void chartMonthly(){}
+
+    @GetMapping("/chartWeekly")
+    public void chartWeekly(){}
+
+    @GetMapping("/chartDaily")
+    public void chartDaily(){}
+
+    @GetMapping("/today")
+    public void today(){}
+
+    @GetMapping("/recommend")
+    public void recommend(){}
+>>>>>>> mealme/main
 
 }
