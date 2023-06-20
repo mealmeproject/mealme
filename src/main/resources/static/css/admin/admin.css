@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+body {
+  font-family: "Nanum Gothic", sans-serif;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+.body-container {
+  flew-glow: 1;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*margin: 0 auto;*/
+  width: 1200px;
+}
+
+.main-container {
+  width: 1100px;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: pink; */
+}
+
+.work-container{
+  width: 900px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.sidebar {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(255, 111, 15);
+}
+
+
+
+.headingArea{
+  margin: 0 0 16px;
+  position: relative;
+  width: 880px;
+  height: 30px;
+
+}
+
+.dashPannel{
+  margin: 0 0 45px;
+  position: relative;
+}
+
+.dashPannel .header{
+  width: 100%;
+    font-size: 13px;
+    border: 1px solid #bbb;
+    
+    box-sizing: border-box;
+    /* background: #87afe3; */
+}
+
+.admin-title{
+  font-size: 18px;
+  /* color: #fff; */
+}
+
+.title{
+  /* color: #fff; */
+  font-size: 18px;
+}
+
+.chartUnit{
+  /* color: #fff; */
+  font-size: 13px;
+}
+
+.header .title{
+  padding: 10px 10px 8px;
+}
+
+table{
+  table-layout: fixed;
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+col{
+  display: table-column;
+}
+
+
+thead{
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+thead th{
+  padding: 11px 10px 8px;
+}
+
+.right td{
+  padding: 13px 10px;
+
+}
+
+.dashBoard{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* display: flex; */
+  position: relative;
+}
+
+.dashBoard .today{
+  position: absolute;
+    top: 7px;
+    right: 5px;
+}
+
+
+/* 오늘의 할 일 테이블 */
+.title div{
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.mBoard table{
+  /* border-top: 1px solid #474747; */
+  line-height: 16px;
+  font-size: 13px;
+  /* color: white; */
+  /* background-color: #fff; */
+}
+
+.dashBoard .title{
+  margin-bottom: 20px;
+}
+
+.center .total{
+  text-align: center;
+}
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.mBoard tbody .total td{
+  color: #3971FF
+}
+
+.mBoard tbody td{
+  border: 1px solid #bbb;
+}
+
+.mBoard td{
+  padding: 6px 8px;
+    vertical-align: middle;
+    letter-spacing: 0
+}
+
+tbody tr.total td a {
+  color: #3971FF;
+}
+
+a {
+  text-decoration: none;
+}
+
+.chart{
+  width: 434px;
+  margin-right: 10px;
+  height: 218px;
+  
+}
+
+
+
+.mBoard .right{
+  text-align: right;
+}
+
+.dashBoardArea .gReverse{
+  
+  font-size: 13px;
+  margin-left: 25px;
+}
+
+.mallArea{
+  display: flex;
+}
+
+.mallArea .mBoard tbody th {
+  height: 28px;
+  text-align: center;
+  padding: 6px 8px;
+  /* background-color: #fff; */
+}
+
+.mBoard tbody tr.em th, .mBoard tbody tr.em td, .mBoard tbody tr.em td a {
+  color: #3971ff;
+}
+
+.mallArea .mBoard tbody tr.total th, .mallArea .mBoard tbody tr.total td, .mallArea .mBoard tbody tr.total td a {
+  color: #7956de;
+}
