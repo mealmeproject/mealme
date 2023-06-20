@@ -253,7 +253,7 @@ $('.today-food-photo-text').on("click", function () {
   $('.chart-text').css('color', 'rgba(160, 160, 160, 0.5)');
 
   $('.chart-all-wrap').css('display', 'none');
-  $('.photo-all-wrap').css('display', 'block');
+  $('.photo-all-wrap').css('display', 'flex');
 
 
 });
@@ -267,6 +267,6 @@ $('.today-food-chart-text').on("click", function () {
   $('.img-text').css('color', 'rgba(160, 160, 160, 0.5)');
 
   $('.photo-all-wrap').css('display', 'none');
-  $('.chart-all-wrap').css('display', 'block');
+  $('.chart-all-wrap').css('display', 'flex');
 });
 

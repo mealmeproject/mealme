@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>월간</title>
     <link rel="stylesheet" th:href="@{/css/chart/chart_monthly.css}"/>
     <link rel="stylesheet" th:href="@{/css/fragment/header2.css}" />
     <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}" />
@@ -34,9 +34,9 @@
         <p>
           <div class="all-wrap">
             <div class="day-button-wrap">
-              <button type="button" class="daily" onclick="location.href='chart_daily.html'">일간</button>
-              <button type="button" class="weekly" onclick="location.href='chart_weekly.html'">주간</button>
-              <button type="button" class="monthly" onclick="location.href='chart_monthly.html'">월간</button>
+              <button type="button" class="daily" onclick="location.href='./chartDaily'">일간</button>
+              <button type="button" class="weekly" onclick="location.href='./chartWeekly'">주간</button>
+              <button type="button" class="monthly" onclick="location.href='./chartMonthly'">월간</button>
             </div>
 
 
@@ -191,10 +191,11 @@
       </div>
     </div>
 
+    <!-- 퀵 메뉴 추가 공간 -->
   <aside class="aside2" th:replace="fragment/aside2 :: aside2">
     <div class="menu-container"></div>
   </aside>
-    <!-- 퀵 메뉴 추가 공간 -->
+<!-- 연결 링크 -->
   <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
   <script th:src="@{/js/fragment/aside.js}"></script>

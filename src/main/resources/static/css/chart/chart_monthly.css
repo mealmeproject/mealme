@@ -35,13 +35,13 @@
   background-color: beige;
 }
 
-.main-container {
-  /*width: 900px;*/
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  /* background-color: pink; */
-}
+/*.main-container {*/
+/*  width: 900px;*/
+/*  padding: 10px;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*   background-color: pink; */
+/*}*/
 
 /* 개인 작업 부분 */
 
@@ -138,7 +138,8 @@
 .doughnut-chart-wrap{
   display: flex;
   padding: 10px;
-  margin-top: 15%;
+  margin-top: 10%;
+  justify-content: center;
 }
 
 .doughnut-chart{
@@ -209,7 +210,8 @@
 .nutrient-gram{
   display: flex;
   justify-content: space-around;
-  margin: 20px 0px;
+  margin: 20px auto;
+  width: 650px;
 }
 
 .carbohydrate-gram, .protein-gram, .fat-gram{
@@ -226,6 +228,19 @@
 .nutrient-info{
   margin: 20px 0px;
   margin-top: 10%;
+}
+
+#nutrient-chart{
+  height: 463px !important;
+  width: 603px ;
+  margin: 0 auto;
+}
+
+#bar-chart{
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 700px !important;
+  height: 536px !important;
 }
 
 

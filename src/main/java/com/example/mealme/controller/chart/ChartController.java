@@ -25,4 +25,7 @@ public class ChartController {
     @GetMapping("/today")
     public void today(){}
 
+    @GetMapping("/recommend")
+    public void recommend(){}
+
 }
