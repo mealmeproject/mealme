@@ -1,0 +1,384 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Nanum Gothic', sans-serif;
+  /*color: rgba(50, 50, 50, 0.9);*/
+}
+
+.body-container {
+  flex-grow: 1;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*margin: 0 auto;*/
+  width: 1200px;
+}
+
+.main-container {
+  width: 1100px;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: pink; */
+
+}
+
+.work-container{
+  width: 900px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  background-color: beige;
+}
+
+/*.main-container {*/
+/*  width: 900px;*/
+/*  padding: 10px;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*   background-color: pink; */
+/*}*/
+
+/* 개인 작업 부분 */
+
+.all-wrap{
+  margin-top: 50px;
+  /*margin: 0 auto;*/
+}
+
+
+
+.day-button-wrap{
+  /* width: 145px; */
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  margin: 15px 0px;
+}
+
+.daily{
+  background-color: #fff;
+  border-radius: 20px;
+  width: 65px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+  color: rgb(255, 139, 38);
+  border: 1px solid rgb(255, 139, 38);
+  font-weight: 600;
+}
+
+.daily:hover{
+  background: rgba(255, 139, 38, 1);
+  border: 1px solid rgb(255, 139, 38);
+  border-radius: 20px;
+  width: 65px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+  color: rgb(255, 255, 255);
+}
+
+.weekly{
+  background-color: #fff;
+  border-radius: 20px;
+  width: 65px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  /* cursor: pointer; */
+  color: rgb(255, 139, 38);
+  border: 1px solid rgb(255, 139, 38);
+  font-weight: 600;
+}
+
+.weekly:hover{
+  background: rgba(255, 139, 38, 1);
+  border: 1px solid rgb(255, 139, 38);
+  border-radius: 20px;
+  width: 65px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+  color: rgb(255, 255, 255);
+  /* font-weight: 600; */
+}
+
+.monthly{
+  background: rgba(255, 139, 38, 1);
+  border: 1px solid rgb(255, 139, 38);
+  border-radius: 20px;
+  width: 65px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.doughnut-chart-size{
+  width: 450px;
+  height: 400px;
+}
+
+.doughnut-chart-wrap{
+  display: flex;
+  padding: 10px;
+  margin-top: 10%;
+  justify-content: center;
+}
+
+.doughnut-chart{
+  width: 400px;
+  height: 400px;
+}
+
+.nutrient-percent{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 150px;
+  /* padding-bottom: 5%; */
+}
+
+.carbohydrate-percent-wrap, .protein-percent-wrap, .fat-percent-wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carbohydrate-percent-num-wrap, .protein-percent-num-wrap, .fat-percent-num-wrap{
+  display: flex;
+  flex-direction: row;
+}
+
+.carbohydrate-percent-sub, .protein-percent-sub, .fat-percent-sub{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+
+.carbohydrate-percent-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(32, 178, 170, 1);
+  background-color: rgba(32, 178, 170,0.2);
+}
+
+.protein-percent-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 26, 104,1);
+  background-color: rgba(255, 26, 104,0.2);
+}
+
+.fat-percent-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 206, 86, 1);
+  background-color: rgba(255, 206, 86, 0.2);
+}
+
+
+.percent-comment{
+  font-size: 13px;
+    color: rgb(210, 210, 210);
+    width: 150px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+.nutrient-gram{
+  display: flex;
+  justify-content: space-around;
+  margin: 20px auto;
+  width: 650px;
+}
+
+.carbohydrate-gram, .protein-gram, .fat-gram{
+  display: flex;
+}
+
+.nutrient-list-sub{
+  padding-left: 15px;
+  /* margin: 30px 0px; */
+  margin-top: 12%;
+  margin-bottom: 50px;
+}
+
+.nutrient-info{
+  margin: 20px 0px;
+  margin-top: 10%;
+}
+
+#nutrient-chart{
+  height: 463px !important;
+  width: 603px ;
+  margin: 0 auto;
+}
+
+#bar-chart{
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 700px !important;
+  height: 536px !important;
+}
+
+
+.kcal-wrap, .carbohydrate-wrap, .protein-wrap, .fat-wrap, .sugars-wrap, .salt-wrap, 
+.cholesterol-wrap, .fatty-acids-wrap, .trans-fat-wrap{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2% 11%;
+}
+
+.kcal-num, .carbohydrate-num, .protein-num, .fat-num, .sugars-num, .salt-num, 
+.cholesterol-num, .fatty-acids-num, .trans-fat-num{
+  display: flex;
+  width: 70px;
+  justify-content: flex-end;
+}
+
+.unit{
+  margin-left: 3px;
+}
+
+.graph1{
+  height: 12px;
+  background-color: rgba(32, 178, 170,0.2);
+  border-radius: 10px;
+  margin: 0 0  30px;
+  width: 120px;
+}
+
+.graph1 span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 12px;
+  line-height: 12px;
+  text-align: right;
+  background-color: rgba(32, 178, 170, 0.5);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+.graph2{
+  height: 12px;
+  background-color: rgba(255, 26, 104,0.2);
+  border-radius: 10px;
+  margin: 0 0  30px;
+  width: 120px;
+}
+
+.graph2 span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 12px;
+  line-height: 12px;
+  text-align: right;
+  background-color: rgba(255, 26, 104,0.5);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+.graph3{
+  height: 12px;
+  background-color: rgba(255, 206, 86, 0.2);
+  border-radius: 10px;
+  margin: 0 0  30px;
+  width: 120px;
+}
+
+.graph3 span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 12px;
+  line-height: 12px;
+  text-align: right;
+  background-color: rgba(255, 206, 86, 0.5);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+.carbohydrate-gram-bar, .protein-gram-bar, .fat-gram-bar{
+  height: 12px;
+  margin: 10px 0px
+}
+
+.carbohydrate-gram-wrap, .protein-gram-wrap, .fat-gram-wrap{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recommend-wrap{
+  margin-top: 15%;
+  margin-bottom: 30px;
+  display: none;
+}
+
+.recommend{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 10px 10px 25px;
+}
+
+.recommend-comment{
+  font-size: 30px;
+}
+
+.recommend-explanation{
+  margin: 16px 30px;
+}
+
+
+.recommend-button{
+  color: #fff;
+  border-radius: 20px;
+    width: 120px;
+    height: 35px;
+    font-weight: 550;
+    color: rgb(255, 139, 38);
+    border: 1px solid rgb(255, 139, 38);
+    background-color: #fff;
+}
+
+
+.recommend-button:hover{
+  background: rgba(255, 139, 38, 1);
+  border: 1px solid rgb(255, 139, 38);
+  color: #fff;
+  border-radius: 20px;
+    width: 120px;
+    height: 35px;
+    font-weight: 550;
+}
+
