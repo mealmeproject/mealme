@@ -11,7 +11,7 @@ body {
 }
 
 .body-container {
-  flew-glow: 1;
+  flew-glow: 1 !important;
   /*display: flex;*/
   /*justify-content: center;*/
   /*margin: 0 auto;*/
@@ -33,12 +33,12 @@ body {
   margin-bottom: 25px;
 }
 
-.sidebar {
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  background-color: rgb(255, 111, 15);
-}
+/*.sidebar {*/
+/*  width: 200px;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  background-color: rgb(255, 111, 15);*/
+/*}*/
 
 .userProfile{
   margin: 0 0 24px;

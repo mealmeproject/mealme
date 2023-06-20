@@ -13,6 +13,7 @@ $(document).ready(function () {
       ["font", ["bold", "italic", "underline", "clear"]],
       ["fontname", ["fontname"]],
       ["color", ["color"]],
+      ['insert', ['link', 'picture', 'video']],
       ["para", ["ul", "ol", "paragraph"]],
     ],
     placeholder:
@@ -21,12 +22,18 @@ $(document).ready(function () {
 });
 
 
-// 파일 넣었을시 파일 담기 
+// 파일 넣었을시 파일 담기
 let $tmpInput = $('#file-input');
-  
+
 $tmpInput.on('change', function () {
+
+
+  // $('.upload-box').css("display", "none");
+  $('.file-list').css("display", "flex");
+
+
   let files = this.files;
-  inputProce(this);
+  inputProce(files);
 
   $fileList.html('');
 
@@ -38,14 +45,14 @@ $tmpInput.on('change', function () {
     $cnt.text(files.length);
     return;
   }
-  
+
   for(let i=0; i<files.length; i++){
     let src = URL.createObjectURL(files[i]);
-    
+
     $fileList.append(`
         <li>
           <div class="show-img-box">
-            <img src=${src}>
+            <img src=${src} class="preview-image">
           </div>
           <div class="btn-box">
             <button type='button' class='img-cancel-btn' data-name='${files[i].name}'>삭제</button>
@@ -54,15 +61,23 @@ $tmpInput.on('change', function () {
     `);
   }
   $cnt.text(files.length);
+
+  if(files.length == 3){
+    $('.upload-box').css("display", "none");
+  }
+
 });
 
+
+
 function inputProce(target){
-  let files = target.files;
-  console.log('change!!!')
+  let files = target;
+  console.log(files)
 
   let $input = $('.input');
 
   for (let i = 0; i < 3; i++) {
+    console.log($input[i]);
     if (i >= files.length) {
       let dt = new DataTransfer();
 
@@ -78,25 +93,45 @@ function inputProce(target){
 
 
 $('.img-controller-box').on('click','.img-cancel-btn', function() {
-  console.log($tmpInput[0].files)
+  // console.log($tmpInput[0].files)
 
-   // 버튼의 부모의 부모를 삭제
+  // 버튼의 부모의 부모를 삭제
   $(this).parent().parent().remove();
   let files =  $tmpInput[0].files;
   let fileName = $(this).data('name');
   let dt = new DataTransfer();
 
   for(let i=0; i<files.length; i++){
-      if(files[i].name !== fileName)   {
-        dt.items.add(files[i]);
-      }
+    if(files[i].name !== fileName)   {
+      dt.items.add(files[i]);
+    }
   }
-  
-  files = dt.files;
-  $tmpInput[0].files = files;
 
-  inputProce($tmpInput[0]);
+  files = dt.files;
+  $fileInput[0].files = files;
+
+  length = $('.preview-image').length;
+
+  if(length == 0){
+    $('.upload-box').css("display", "block");
+    $('.file-list').css("display", "none");
+  }
+
+  if(length>0 && length<3 ){
+    $('.upload-box').css("display", "block");
+    $('.file-list').css("display", "flex");
+  }
+
+  if(length ==3){
+    $('.upload-box').css("display", "none");
+  }
+
+  console.log('==================================');
+  console.log(files);
+  console.log('==================================');
+  inputProce(files);
   $cnt.text(files.length);
+  checkEnd();
 });
 
 let $uploadBox = $('.upload-box');
