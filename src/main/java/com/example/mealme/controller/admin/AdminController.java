@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
     private final AdminService adminService;
 
-    @GetMapping("/admin")
-    public void admin(){}
+    @GetMapping("/adminMain")
+    public void adminMain(){}
 
-    @GetMapping("/admin2")
-    public void admin2(){}
+    @GetMapping("/userList")
+    public void userList(){}
 
     @GetMapping("/admin3")
     public void admin3(){}

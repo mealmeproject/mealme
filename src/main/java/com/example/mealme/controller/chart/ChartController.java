@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChartController {
     private final ChartService chartService;
 
-<<<<<<< HEAD
-=======
+
+
     @GetMapping("/chartMonthly")
     public void chartMonthly(){}
 
@@ -29,6 +29,6 @@ public class ChartController {
 
     @GetMapping("/recommend")
     public void recommend(){}
->>>>>>> mealme/main
+
 
 }
