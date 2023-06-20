@@ -45,11 +45,11 @@
       <!-- 새로운 컨설팅 , 읽은 컨설팅 메세지 -->
       <div class="tab">
         <ul id="BoxTab">
-          <li id="NoReadTab" class="active-tab">
-            <a href="" >새로 받은 답변</a>
+          <li id="NoReadTab" >
+            <a th:href="@{/company/SendReadList}" >새로 받은 답변</a>
           </li>
-          <li id="YesReadTab" >
-            <a th:href="@{/company/SendReadList2}" >읽은 답변</a>
+          <li id="YesReadTab" class="active-tab">
+            <a href="#">읽은 답변</a>
           </li>
         </ul>
       </div>
@@ -166,56 +166,56 @@
         </div>
       </div>
 
-        <!-- 모달 창 -->
-        <!-- 모달 창 -->
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h1 id="modal-title">수신한 답변</h1>
+      <!-- 모달 창 -->
+      <!-- 모달 창 -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h1 id="modal-title">수신한 답변</h1>
 
 
-            <!-- <div class="ModalInWriter">
-              <label for="writer">안녕?????:</label>
-              <span id="modal-writer"></span>
-            </div> -->
+          <!-- <div class="ModalInWriter">
+            <label for="writer">안녕?????:</label>
+            <span id="modal-writer"></span>
+          </div> -->
 
 
-            <div class="ModalInContent">
-              <label for="contents">내용부분:100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기10</label>
-              <span id="modal-contents"></span>
+          <div class="ModalInContent">
+            <label for="contents">내용부분:100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기100자쓰기10</label>
+            <span id="modal-contents"></span>
+          </div>
+
+          <br>
+          <br>
+          <div class="ReplyText>">
+            <h3>답변에 대한 코멘트 보내기</h3>
+            <div class="ModalTextArea">
+              <div class="summernote-box">
+                <textarea id="summernote" name="applyContent"></textarea>
+              </div>
             </div>
 
-            <br>
-            <br>
-            <div class="ReplyText>">
-              <h3>답변에 대한 코멘트 보내기</h3>
-              <div class="ModalTextArea">
-                <div class="summernote-box">
-                  <textarea id="summernote" name="applyContent"></textarea>
-                </div>
-              </div>
 
 
-
-              <div class="ModalInButton">
-                <button type="submit" id="modalSubmit">답변 보내기</button>
-              </div>
-
+            <div class="ModalInButton">
+              <button type="submit" id="modalSubmit">답변 보내기</button>
             </div>
 
           </div>
+
         </div>
       </div>
     </div>
-    <!-- 퀵 메뉴 추가 공간 -->
-    <!-- 푸터 추가 공간 -->
-
-
-
-
-      </div>
-
   </div>
+  <!-- 퀵 메뉴 추가 공간 -->
+  <!-- 푸터 추가 공간 -->
+
+
+
+
+</div>
+
+</div>
 </div>
 <!-- 작업공간 -->
 <!--                </div>-->

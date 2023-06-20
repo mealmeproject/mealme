@@ -126,6 +126,7 @@ $(document).ready(function () {
             ["font", ["bold", "italic", "underline", "clear"]],
             ["fontname", ["fontname"]],
             ["color", ["color"]],
+            ['insert', ['link', 'picture', 'video']],
             ["para", ["ul", "ol", "paragraph"]],
         ],
     });

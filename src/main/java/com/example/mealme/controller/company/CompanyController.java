@@ -37,4 +37,8 @@ public class CompanyController {
     @GetMapping("/SendReadList")
     public void SendReadList() {
     }
+
+    @GetMapping("/SendReadList2")
+    public void SendReadList2() {
+    }
 }
