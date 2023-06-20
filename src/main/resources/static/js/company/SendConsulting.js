@@ -17,6 +17,6 @@ $(document).ready(function() {
 
 
 
-    function redirectToSendReadList() {
+    function rediectToSendReadList() {
     window.location.href = "http://localhost:10000/company/SendReadList";
 }
