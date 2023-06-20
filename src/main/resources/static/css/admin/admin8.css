@@ -1,0 +1,883 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+body {
+  font-family: "Nanum Gothic", sans-serif;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+.body-container {
+  flew-glow: 1;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*margin: 0 auto;*/
+  width: 1200px;
+}
+
+.main-container {
+  width: 1100px;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: pink; */
+}
+
+.work-container{
+  width: 900px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.userProfile{
+  margin: 0 0 24px;
+  display: flex;
+}
+
+.fSelect {
+  display: inline;
+  height: 38px;
+  margin: 0;
+  padding: 0 24px 0 8px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff url('//img.echosting.cafe24.com/ec/v2/ico_select.png') no-repeat right 7px center;
+  
+}
+
+.search {
+  position: relative;
+  width: 300px;
+}
+
+
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.section th{
+  /* text-align: middle; */
+  width: 5px;
+  padding: 9px 9px 7px;
+    
+    border: 1px solid #bbb;
+}
+
+.section td{
+  width: 120px;
+  padding: 9px 9px 7px;
+    vertical-align: top;
+    /* display: flex; */
+    border: 1px solid #bbb;
+    background-color: white;
+    
+}
+
+.headingArea{
+  position: relative;
+  margin: 0 0 16px;
+}
+
+
+
+input {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-left: 3px;
+}
+
+/* img {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right: 12px;
+  margin: 0;
+
+} */
+
+.userList{
+  margin: 0 0 24px;
+}
+
+.headingArea .mTitle{
+  color: #1b1e26;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.change-status{
+  width: 100%;
+  float: right;
+  text-align: right;
+  padding: 8px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom: 0px;
+}
+
+.status-select {
+  display: inline;
+  height: 25px;
+  width: 120px;
+  margin: 0;
+  padding: 0 24px 0 8px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff url('//img.echosting.cafe24.com/ec/v2/ico_select.png') no-repeat right 7px center;
+}
+
+.status{
+  border-radius: 8px;
+  vertical-align: middle;
+  border: 1px solid rgb(255, 139, 38);
+  background-color: rgb(255, 139, 38);
+  font-size: 13px;
+  padding: 3.5px 10px;
+  color: white;
+}
+
+.status:hover{
+  background-color: rgb(255, 85, 0);
+}
+
+
+.gRight span{
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.mTitle h2 {
+  display: inline-block;
+  padding: 0 5px 0 0;
+  color: #1b1e26;
+  font-size: 18px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+.mState {
+  height: 40px;
+  margin: 8px 0 -1px;
+  padding: 8px;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  background-color: #fff;
+  
+}
+
+.mState .total strong {
+  color: #3971ff;
+
+  
+}
+
+.mState .total{
+  margin: 0;
+  font-size: 13px;
+
+
+}
+
+.mBoard.gScroll {
+  position: relative;
+  overflow: auto;
+  border-right: 1px solid rgb(255, 139, 38);
+  border-left: 1px solid #bbb;
+  background-color: #fff;
+}
+
+table th{
+  font-size: 13px;
+}
+
+table input[type="checkbox"], table .allChk[type="checkbox"] {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  outline: none;
+  background-image: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_form.png');
+  background-repeat: no-repeat;
+  
+  position: relative;
+  opacity: 1;
+  cursor: pointer;
+  background-position: 0 0;
+}
+
+thead {
+  border: 1px solid #bbb;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.checkAll {
+  font-weight: normal;
+  background-color: #FAFAFB;
+  padding: 9px 9px 7px;
+  border: 1px solid #bbb;
+  text-align: center;
+  vertical-align: middle;
+  
+}
+
+.checkAll th{
+  font-size: 13px;
+  height: 25px;
+}
+
+.check tr{
+  height: 25px;
+}
+
+.mBoard table {
+  line-height: 1.5;
+  
+  border-spacing: 0;
+    border-collapse: collapse;
+}
+
+/* tr {
+  display: table-row;
+  vertical-align: inherit;
+} */
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border: 0;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.typeFooter{
+  margin: -1px 0 0 0;
+  height: 46px;
+    padding: 8px;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #fff;
+    text-align: left;
+
+  
+}
+
+.typeFooter .leftSide{
+  float: left;
+    text-align: left;
+}
+
+.empty {
+  margin-top: -1px;
+  border: 1px solid #bbb;
+  padding: 100px 0;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 0;
+
+}
+
+.btnNormal{
+  height: 28px;
+  display: inline-block;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: rgb(255, 139, 38);
+}
+
+
+
+[class^="btn"], [class^="btn"] span {
+  cursor: pointer;
+}
+
+a{
+  color: #1b1e26;
+}
+
+.btnNormal span{
+  padding: 0 8px;
+  border: 1px solid #aeb4c6;
+  font-size: 12px;
+  line-height: 26px;
+  color: #1b1e26;
+  font-weight: normal;
+  background-color: #fff;
+  height: 28px;
+  display: block;
+}
+
+
+.icoDel{
+ 
+  width: 8px;
+  height: 10px;
+ 
+  display: inline-block;
+   
+    padding: 0;
+    vertical-align: -1px;
+    line-height: 0;
+    background: url('//img.echosting.cafe24.com/suio/ko_KR/sfix_icon_button2.png') 0 -150px;
+}
+
+.check{
+  border: 1px solid #bbb;
+  height: 20px;
+  background-color: white;
+}
+
+/* 페이징 */
+.paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.paging > p {
+  display: flex;
+  list-style: none;
+}
+
+
+
+.paging a {
+  color: #888;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+  margin: 0 5px;
+  /* border-radius: 5px;
+  border: 1px solid #888; */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.paging a:hover {
+  /* background-color: #937062; */
+  /* border-color: #937062; */
+  color: #937062;
+}
+
+.paging .active {
+  /* background-color: #333; */
+  /* border-color: #333; */
+  color: #fff;
+}
+
+.category-box .recipe-category a:hover{
+  color:#937062;
+  border-color: #937062;
+}
+
+/* 가입인증 */
+.confirm{
+  margin: 0 0 24px;
+}
+
+/* 날짜 넣기 */
+.date-picker{
+  display: flex;
+  border: 0px;
+}
+
+gSmall .date-picker {
+  border-top: 0px solid;
+}
+ 
+.gSmall table{
+  border: 1px solid #bbb;
+  
+}
+
+/* #datepicker1{
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  font-size: 0;
+  line-height: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  background: url('//img.echosting.cafe24.com/ec/v2/ko_KR/sfix_icon_button2.png') -50px -500px;
+  box-sizing: border-box;
+} */
+
+.gSmall th{
+  width: 15%;
+  text-align: center;
+}
+
+
+#datepicker1{
+  width: 90px;
+  height: 31px;
+  padding: 0 8px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  box-sizing: border-box;
+  line-height: 28px;
+  outline: 0 none;
+  
+}
+
+#datepicker2{
+  width: 90px;
+  height: 31px;
+  padding: 0 8px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  box-sizing: border-box;
+  line-height: 28px;
+  outline: 0 none;
+  
+}
+
+.btnIcon span{
+  display: block;
+    visibility: hidden;
+    height: 100%;
+    font-size: 1px;
+}
+
+.icoCal{
+  position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: 23px;
+    height: 14px;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    background: url('//img.echosting.cafe24.com/ec/v2/ko_KR/sfix_icon_button2.png') -50px -500px;
+    box-sizing: border-box;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+[class^="btn"] {
+  cursor: pointer;
+}
+
+.gSmall td{
+  padding: 9px 9px 7px;
+    vertical-align: middle;
+    width: auto;
+    /* margin-top: -4px; */
+    margin-bottom: 3px;
+     
+    /* display: flex; */
+    border-top: 0px solid;
+    
+}
+
+/* .gSmall td .selector{
+  border: 10px;
+} */
+
+.name{
+  width: 150px;
+  height: 8px;
+  font-size: 13px;
+}
+
+/* 검색 버튼 */
+
+.search_user{
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  
+  white-space: nowrap;
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: 38px;
+  margin: 0 0 0 420px;
+  background-color: rgb(255, 139, 38);
+  cursor: pointer;
+  margin-top: 21px;
+  border: 1px solid rgb(255, 139, 38);
+  top: 50%;
+  width: 72px;
+  color: white;
+}
+
+
+
+
+
+/* .search_user :hover{
+  background: rgb(255, 85, 0) ;
+
+}
+
+.search_user span :hover{
+  background: rgb(255, 85, 0) ;
+}   */
+
+.search_user:hover{
+  background-color: rgb(255, 85, 0) ;
+}
+
+.btnNormal:hover{
+  background-color: rgb(255, 85, 0) ;
+}
+
+/* 상품목록 */
+.mBoard .gGoods {
+  position: relative;
+  text-align: left;
+}
+
+.gGoods .mOpen {
+  float: left;
+}
+
+
+.mOpen {
+  position: relative;
+  display: inline-block;
+}
+
+.gGoods .mOpen .frame {
+  cursor: pointer;
+  display: inline-block;
+    position: relative;
+}
+
+element.style {
+  top: 20%;
+  left: 20%;
+  width: 145px;
+  display: none;
+}
+
+.mOpen .open {
+  display: none;
+  position: absolute;
+  z-index: 110;
+  right: 0;
+  border: 1px solid #d6dae1;
+  border-radius: 4px;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+
+  top: 20%;
+    left: 20%;
+    width: 145px;
+    display: none;
+}
+
+.mOpen .open .wrap {
+  overflow: auto;
+  text-align: left;
+  height: 400px;
+}
+
+.mOpen .open .wrap .default li {
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+
+.mOpen .open .wrap .default a {
+  display: block;
+  padding: 4px 10px 3px;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.mBoard .gGoods.gMedium p, .mBoard .gGoods.gMedium ul {
+  padding: 0 0 0 59px;
+}
+
+/* 서머노트 */
+
+/* 첨부파일 preview */
+.upload-file {
+  border: 1px solid #d9d9d9;
+  background-color: #fafafa;
+  padding: 13px;
+  position: relative;
+  height: 400px;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.upload-text {
+  display: flex;
+  justify-content: center;
+  margin: 4px;
+  font-size: 12px;
+  color: rgb(158, 158, 158);
+}
+
+.upload-count {
+  display: flex;
+  align-items: flex-end;
+}
+
+.upload-text:first-child {
+  color: black;
+  font-weight: bold;
+}
+
+.upload-text:last-child {
+  color: rgb(255, 87, 87);
+  font-weight: bold;
+}
+
+.upload-icon {
+  margin-right: 5px;
+  width: 21px;
+  height: 21px;
+}
+
+/* 첨부시 */
+
+.show-img-box{
+  width : 100%;
+  height : 100%;
+}
+
+.show-img-box > img{
+  width : 200px;
+  height : 200px;
+}
+
+.upload-file input[type='file'] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.file-list {
+  list-style-type : none;
+  margin-top : 15px;
+  display : flex;
+}
+
+.file-list > li {
+  display : flex;
+  position : relative;
+  width : 250px;
+  height : 250px;
+  margin-left : 20px;
+}
+
+/* 첨부파일 삭제 버튼 */
+
+.btn-box{
+  position : absolute;
+  bottom : 0;
+  right : 0;
+}
+
+
+.img-cancel-btn{
+  background-color: rgb(255, 139, 38)
+  ;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 40px;
+  height: 25px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.img-cancel-btn:hover{
+  background-color: rgb(255, 87, 87);
+  color: #fff;
+}
+
+
+
+/* 등록 취소 버튼 */
+
+.btn-groups {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.cancel-btn,
+.submit-btn {
+  width: 80px;
+  color: #fff;
+  font-size: 14px;
+  background-color: rgb(255, 139, 38)
+  ;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.cancel-btn:hover,
+.submit-btn:hover {
+  background-color: rgb(255, 85, 0);
+  color: #fff;
+}
+
+
+.upload-box{
+  cursor: pointer;
+}
+
+/* 선택파일 인풋 숨기기 */
+#input-one{
+  display: none;
+}
+
+#file-input{
+  display: none;
+}
+
+/* 카테고리 설정창 */
+.mBoard.gGuide > table > tbody > tr > th {
+  padding-right: 12px;
+  padding-left:12px ;
+  border: 1px solid #bbb;
+  width:131px
+}
+
+.mBoard.gGuide th {
+  position: relative;
+  border-top: 0;
+  border-left: 0;
+}
+
+.mBoard.gGuide tbody th:before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 1px;
+  background: #d9dadc;
+}
+
+.mBoard.gGuide tbody th:after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background: #d9dadc;
+}
+
+.mSearchSelect .list {
+  overflow: auto;
+  height: 200px;
+  font-size: 13px;
+}
+
+.mSearchSelect .list ul {
+  padding: 8px 8px 7px;
+}
+
+.mSearchSelect.typeCategory .list li {
+  cursor: pointer;
+}
+
+.mSearchSelect .list li {
+  padding: 4px 0 0;
+}
+
+li {
+  list-style: none;
+}
+
+input[type="hidden" i] {
+  appearance: none;
+  background-color: initial;
+  cursor: default;
+  display: none;
+  padding: initial;
+  border: initial;
+}
+
+input:not([type="range"]):not([type="color"]) {
+  writing-mode: horizontal-tb;
+}
+
+.mSearchSelect.typeCategory .list li.selected {
+  color: #3971ff;
+  background: none;
+}
+
+.mSearchSelect.typeCategory .list li {
+  cursor: pointer;
+}
+
+.mBoard.gGuide table {
+  /* border-left: 1px solid #d9dadc; */
+  /* border-collapse: separate; */
+}
+
+.gDouble {
+  display: block;
+  margin-top: 10px;
+}
+
+.icoDot {
+  width: 3px;
+  height: 3px;
+  margin-right: 3px;
+  background-position: 0 -50px;
+}
+
+.icoPrint, .icoNew, .icoFile, .icoUp, .icoDown, .icoShop, .icoDot, .icoDepth, .icoFix, .icoChecked, .icoLock {
+  display: inline-block;
+  overflow: hidden;
+  margin: -3px 0 0 0;
+  font-size: 0;
+  line-height: 0;
+  vertical-align: middle;
+  background: url('//img.echosting.cafe24.com/ec/v2/sfix_icon_image.png') 0 0 no-repeat;
+}
+
+.gWidth {
+  display: inline-block;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+html:lang(ko) .wPrdCategory {
+  width: 90px;
+}
