@@ -1,0 +1,504 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.sidebar {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  background-color: beige;
+}
+
+.body-container {
+  flex-grow: 1;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*margin: 0 auto;*/
+  width: 1200px;
+}
+
+.main-container {
+  width: 1100px;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: pink; */
+}
+
+.work-container{
+  width: 900px;
+  margin: 0 auto;
+}
+
+
+/* 내가 한 곳 */
+
+.title{
+  margin: 30px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  font-weight: 900;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+.goal-wrap{
+  width: 600px;
+  /* height: 100px; */
+  background-color: rgba(210, 210, 210, 0.3);
+  border-radius: 10px;
+  padding-bottom: 15px;
+}
+
+.goal{
+  padding: 10px;
+  height: 20%;
+  font-size: 20px;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+.goal-content{
+  padding: 0px 15px;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+
+
+/* 오늘 칼로리 */
+
+.today-kcal-num-wrap{
+  display: flex;
+  height: 50px;
+}
+
+.today-kcal-wrap{
+  padding: 30px 15px 0px 15px;
+}
+
+.today-kcal-num{
+  font-size: 30px;
+  font-weight: 900;
+  color:  rgb(255, 139, 38);
+}
+
+.today-kcal-wrap-sub{
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  color: rgba(255, 139, 38,0.4);
+}
+
+.today-kcal{
+  margin: 15px 0px 0px 0px;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+.today-date{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  align-items: center;
+}
+
+
+/* 칼로리 차트 가로 바 */
+.kcal-comment{
+  display: flex;
+  align-items: flex-end;
+  /* justify-content: center; */
+  padding: 0px 15px;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+.kcal-comment-percent{
+  font-size: 25px;
+  color: rgb(255, 139, 38);
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.kcal-comment-percent-icon{
+  color: rgb(255, 139, 38);
+  font-size: 25px;
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+
+.kcal-comment-bar{
+  height: 20px;
+  background-color: rgba(255, 139, 38, 0.2);
+  border-radius: 10px;
+  margin: 15px;
+  width: 600px;
+}
+
+.kcal-comment-bar span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 20px;
+  line-height: 20px;
+  text-align: right;
+  background-color: rgba(255, 139, 38, 1);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+
+/* 영양정보 */
+
+.nutrient-list-sub{
+  padding-left: 15px;
+  /* margin: 30px 0px; */
+  margin-top: 12%;
+  margin-bottom: 50px;
+}
+
+.nutrient-info{
+  margin: 20px 0px;
+  /* margin-top: 10%; */
+}
+
+
+.kcal-wrap, .carbohydrate-wrap, .protein-wrap, .fat-wrap, .sugars-wrap, .salt-wrap, 
+.cholesterol-wrap, .fatty-acids-wrap, .trans-fat-wrap{
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2% 11%;
+}
+
+.kcal-num, .carbohydrate-num, .protein-num, .fat-num, .sugars-num, .salt-num, 
+.cholesterol-num, .fatty-acids-num, .trans-fat-num{
+  display: flex;
+  width: 70px;
+  justify-content: flex-end;
+}
+
+.unit{
+  margin-left: 3px;
+}
+
+
+
+
+/* 식사별 칼로리 */
+
+.text-wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-meal-part{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 70px;
+  margin: 30px 0px;
+  color: rgba(50, 50, 50, 0.9);
+  width: 650px;
+}
+
+.meal-icon{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 15px;
+}
+
+.breakfast-wrap, .lunch-wrap, .dinner-wrap, .snack-wrap{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid rgb(210, 210, 210);
+  border-radius: 15px;
+}
+
+.breakfast-wrap-sub, .lunch-wrap-sub, .dinner-wrap-sub, .snack-wrap-sub{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-right: 15px;
+}
+
+.breakfast-num-wrap, .lunch-num-wrap, .dinner-num-wrap, .snack-num-wrap{
+  display: flex;
+  flex-direction: row;
+}
+
+.part-kcal-num{
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.today-food-tab{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.chart{
+  font-size: 50px !important;
+  margin: 50px 10px;
+  color: rgba(50, 50, 50, 0.9);
+  cursor: pointer;
+}
+
+.img{
+  font-size: 50px !important;
+  margin: 50px 10px;
+  color: rgba(160, 160, 160, 0.5);
+  cursor: pointer;
+}
+
+
+.chart-text{
+  font-size: 28px;
+  font-weight: 600;
+  color: rgba(50, 50, 50, 0.9);
+  cursor: pointer;
+}
+
+.img-text{
+  font-size: 28px;
+  font-weight: 600;
+  color: rgba(160, 160, 160, 0.5);
+  cursor: pointer;
+}
+
+.today-food-photo-text, .today-food-chart-text{
+  display: flex;
+  flex-direction: row;
+    align-items: center;
+    margin: 0px 70px;
+}
+
+
+.meal-icon-span{
+  font-size: 37px !important;
+}
+
+.chart-all-wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 도넛 차트 */
+.doughnut-chart-size{
+  width: 450px;
+  height: 400px;
+}
+
+.doughnut-chart-wrap{
+  display: flex;
+    padding: 10px;
+    margin-top: 5%;
+}
+
+.doughnut-chart{
+  width: 400px;
+  height: 400px;
+}
+
+.nutrient-percent{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 150px;
+  /* padding-bottom: 5%; */
+}
+
+.carbohydrate-percent-wrap, .protein-percent-wrap, .fat-percent-wrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carbohydrate-percent-num-wrap, .protein-percent-num-wrap, .fat-percent-num-wrap{
+  display: flex;
+  flex-direction: row;
+}
+
+.carbohydrate-percent-sub, .protein-percent-sub, .fat-percent-sub{
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  color: rgba(50, 50, 50, 0.9);
+}
+
+
+.carbohydrate-percent-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(32, 178, 170, 1);
+  background-color: rgba(32, 178, 170,0.2);
+}
+
+.protein-percent-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 26, 104,1);
+  background-color: rgba(255, 26, 104,0.2);
+}
+
+.fat-percent-color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 206, 86, 1);
+  background-color: rgba(255, 206, 86, 0.2);
+}
+
+.percent-comment{
+  font-size: 13px;
+    color: rgb(210, 210, 210);
+    width: 150px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.nutrient-gram{
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0px;
+  color: rgba(50, 50, 50, 0.9);
+  width: 650px;
+}
+
+.carbohydrate-gram, .protein-gram, .fat-gram{
+  display: flex;
+}
+
+
+.graph1{
+  height: 12px;
+  background-color: rgba(32, 178, 170,0.2);
+  border-radius: 10px;
+  margin: 0 0  30px;
+  width: 120px;
+}
+
+.graph1 span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 12px;
+  line-height: 12px;
+  text-align: right;
+  background-color: rgba(32, 178, 170, 0.5);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+.graph2{
+  height: 12px;
+  background-color: rgba(255, 26, 104,0.2);
+  border-radius: 10px;
+  margin: 0 0  30px;
+  width: 120px;
+}
+
+.graph2 span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 12px;
+  line-height: 12px;
+  text-align: right;
+  background-color: rgba(255, 26, 104,0.5);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+.graph3{
+  height: 12px;
+  background-color: rgba(255, 206, 86, 0.2);
+  border-radius: 10px;
+  margin: 0 0  30px;
+  width: 120px;
+}
+
+.graph3 span{
+  display: block;
+  /* padding: 0 10px; */
+  width: 0%;
+  height: 12px;
+  line-height: 12px;
+  text-align: right;
+  background-color: rgba(255, 206, 86, 0.5);
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  color: #fff;
+}
+
+.carbohydrate-gram-bar, .protein-gram-bar, .fat-gram-bar{
+  height: 12px;
+  margin: 10px 0px
+}
+
+.carbohydrate-gram-wrap, .protein-gram-wrap, .fat-gram-wrap{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#nutrient-chart{
+  height: 463px !important;
+    width: 603px ;
+}
+
+
+/* datepicker */
+.ui-datepicker-trigger{
+  /* display: none; */
+  width: 30px;
+  height: 30px;
+}
+
+#datepicker{
+  outline: none;
+  border: none;
+  text-align:center;
+  font-size: 30px;
+  font-weight: 700;
+  /* color: rgb(255, 139, 38); */
+  color: rgba(50, 50, 50, 0.8);
+  position: relative !important;
+  width: 200px;
+}
+
+.ui-datepicker{
+  position: absolute !important;
+  left: 35% !important;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year{
+  outline: 1px solid rgba(255, 139, 38, 1);
+} 
+
+/*.ui-datepicker-month option, .ui-datepicker-month option{*/
+/*  border: 1px solid var(--border-color) !important;*/
+/*}*/
+
+.ui-datepicker-title{
+  color: #fff !important;
+}
+
+
+/* 탭 이동처리 */
+.photo-all-wrap{
+  display: none;
+  width: 600px;
+  margin: 0 auto;
+}
