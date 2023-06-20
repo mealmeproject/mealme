@@ -13,7 +13,7 @@ public class ConsultingRequestDto {
     private long consultingRequestNumber;
     private long userNumber;
     private long companyNumber;
-    private Clob consultingRequestComment;
+    private String consultingRequestComment;
     private String consultingRequestFirstDate;
     private String consultingRequestLastDate;
     private String consultingRequestDate;
