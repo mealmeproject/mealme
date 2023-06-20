@@ -12,6 +12,6 @@ import java.sql.Clob;
 public class CancelDto {
     private long cancelNumber;
     private long orderNumber;
-    private Clob cancelReason;
+    private String cancelReason;
     private String cancelStatus;
 }
