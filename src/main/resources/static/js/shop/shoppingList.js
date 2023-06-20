@@ -76,13 +76,13 @@ function mouseover2(){
 }
 
 function mouseleave2(){
-    best2.setAttribute("src",../../img/샐러드,과일.png");
+    best2.setAttribute("src","../../img/샐러드,과일.png");
 }
 
 
 let best3 = document.getElementById('best3');
 function mouseover3(){
-    best3.setAttribute("src",../"../img/건강식품오버.png");
+    best3.setAttribute("src","../img/건강식품오버.png");
 }
 
 function mouseleave3(){
@@ -100,3 +100,31 @@ function mouseleave4(){
 }
 
 
+document.querySelectorAll('.button').forEach(button => {
+
+    button.addEventListener('click', e => {
+        button.classList.toggle('liked');
+        if(button.classList.contains('liked')) {
+            gsap.fromTo(button, {
+                '--hand-rotate': 8
+            }, {
+                ease: 'none',
+                keyframes: [{
+                    '--hand-rotate': -45,
+                    duration: .16,
+                    ease: 'none'
+                }, {
+                    '--hand-rotate': 15,
+                    duration: .12,
+                    ease: 'none'
+                }, {
+                    '--hand-rotate': 0,
+                    duration: .2,
+                    ease: 'none',
+                    clearProps: true
+                }]
+            });
+        }
+    })
+
+});

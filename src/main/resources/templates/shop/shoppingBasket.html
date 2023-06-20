@@ -27,136 +27,91 @@
 
       <!-- 작업공간 -->
       <p>
-      <main class="container">
-        <section class="main1">
-          <div class="main1-banner-wrap">
-            <ul class="main1-slide-ul">
-              <li class="banner">
-                <a href="">
-                  <p class="banner1"></p>
-                  <img src="../img/banner1.jpg" alt="">
-                </a></li>
-              <li class="banner">
-                <a href="">
-                  <p class="banner2"></p>
-                  <img src="../img/banner2.jpg" alt="">
-                </a></li>
-              <li class="banner">
-                <a href="">
-                  <p class="banner3"></p>
-                  <img src="../img/banner3.jpg" alt="">
-                </a></li>
-            </ul>
-            <p class="slide-controller">
-              <!-- &lang: 왼쪽 방향 화살표 &rang: 오른쪽 방향 화살표 -->
-              <span class="prev">&lang;</span>
-              <span class="next">&rang;</span>
-            </p>
+      <h2> 장바구니
+        <section class="cart">
+          <table class="cart__list">
+            <form>
+              <thead>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td colspan="2">상품정보</td>
+                <td>옵션</td>
+                <td>상품금액</td>
+                <td>주문수량</td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr class="cart__list__detail">
+                <td><input type="checkbox"></td>
+                <td><img src="../img/장바구니 예시1.jpg" alt="magic keyboard"></td>
+                <td><a href="#"></a><span class="cart__list__smartstore"> </span>
+                  <p>스팀 닭가슴살</p>
+                  <sapn class="price">116,62원</sapn><span
+                          style="text-decoration: line-through; color: lightgray;"></span>
+                </td>
+                <td class="cart__list__option">
+                  <p> 닭가슴살 매운맛</p>
+                  <button class="cart__list__optionbtn">주문조건 추가/변경</button>
+                </td>
+                <td><span class="price1">116,620원</span><br>
+                </td>
+                <td>
+                  1개
+                </td>
+              </tr>
+              <tr class="cart__list__detail">
+                <td style="width: 2%;"><input type="checkbox"></td>
+                <td style="width: 13%;">
+                  <img src="../img/장바구니 예시2.jpg" alt="magic mouse">
+                </td>
+                <td style="width: 27%;"><a href="#"></a><span class="cart__list__smartstore"> </span>
+                  <p>닭가슴살 </p>
+                  <span class=" price1">88,900원</span>
+                </td>
+                <td class="cart__list__option" style="width: 27%;">
+                  <p>닭가슴살 허니콤보 맛</p>
+                  <button class="cart__list__optionbtn">주문조건 추가/변경</button>
+                </td>
+                <td style="width: 15%;"><span class="price">88,900원</span><br>
+                </td>
+                <td style="width: 15%;">
+                  1개
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="3"> <button class="cart__list__optionbtn">선택상품 삭제</button>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              </tfoot>
+            </form>
+          </table>
+          <div class="priceResult">
+            205,651원
+          </div>
+          <div class="cart__mainbtns">
+            <div class="cart_info">배송방법 선택 또는 배송지에 따라 배송비가 달라질 수 있습니다.
+              제품별로 출고지 및 출고일정이 상이하여 합포장 또는 개별발송될 수 있습니다.</div>
+
+            <div class="orderbtn-wrap">
+              <a th:href="@{/shop/shoppingList}">
+              <button class="cart__bigorderbtn left">쇼핑 계속하기</button>
+              </a>
+              <a th:href="@{/shop/shoppingPay}">
+              <button class="cart__bigorderbtn right">주문하기</button>
+              </a>
+            </div>
           </div>
         </section>
-      </main>
-      </p>
-      <h1>상품목록</h1>
-      <hr>
-      <h2 class="index-top">
-
-          <span>
-            <div class="box"  onmouseover="mouseover()"
-                 onmouseleave="mouseleave()">
-            <img src="../../img/닭가슴살.png" id="best">
-           <div class="shoppingName">닭가슴살</div>
-            </div>
-          </span>
-        <span class="vertical-bar"></span>
-        <span>
-            <div class="box"  onmouseover="mouseover2()"
-                 onmouseleave="mouseleave2()">
-            <img src="../img/샐러드,과일.png"  id="best2">
-            <div class="shoppingName">샐러드,과일</div>
-            </div>
-          </span>
-        <span class="vertical-bar"></span>
-        <span>
-            <div class="box"  onmouseover="mouseover3()"
-                 onmouseleave="mouseleave3()">
-            <img src="../img/건강식품.png"  id="best3">
-            <div class="shoppingName">건강식품</div>
-            </div>
-          </span>
-        <span class="vertical-bar"></span>
-        <span>
-          <div class="box"  onmouseover="mouseover4()"
-               onmouseleave="mouseleave4()">
-          <img src="../img/음료,차,프로틴.png" id="best4">
-          <div class="shoppingName">음료,차,프로틴</div>
-          </div>
-         </span>
       </h2>
-      <div class="ShoppingContainer">
-        <div class="Shopping-text">
-          총
-          <a class="ShoppingNumber">
-            <span>10개</span>
-          </a>
-          상품이 있습니다.
-        </div>
-        <select name="selectItem" class="select">
-          <option label="신상품"></option>
-          <option label="높은가격순"></option>
-          <option label="낮은가격순"></option>
-        </select>
-      </div>
-      <hr class="hr-line">
-      <div class="shopping-list">
-        <ul>
-          <li class="shoppingItem">
-            <div class="shoppingItemContainer">
-              <img src="../img/이미지 예시.jpg" class="itemImg">
-              <div class="shoppingDesc">
-                <div class="top">
-                  <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                  <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                  </div>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="page_wrap">
-        <div class="page_nation">
-          <a class="arrow pprev" href="#"></a>
-          <a class="arrow prev" href="#"></a>
-          <a href="#" class="active">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">7</a>
-          <a href="#">8</a>
-          <a href="#">9</a>
-          <a href="#">10</a>
-          <a class="arrow next" href="#"></a>
-          <a class="arrow nnext" href="#"></a>
-        </div>
-      </div>
-
-
-
-
-
-
+      </p>
     </div>
+  </div>
+</div>
     <!-- 작업공간 -->
     <!--                </div>-->
     <!-- 푸터 추가 공간 -->
