@@ -169,7 +169,9 @@
                     <a th:href="@{/shop/shoppingList}">
                     <button class="cart__bigorderbtn left">쇼핑 계속하기</button>
                     </a>
-                    <button class="cart__bigorderbtn right">주문하기</button>
+                    <form method="post" action="/kakaoPay">
+                        <button>카카오페이로 결제하기</button>
+                    </form>
                 </div>
             </section>
         </div>
@@ -214,11 +216,11 @@
         merchant_uid : 'merchant_' + new Date().getTime(),
         name : '결제',
         amount : '1',
-        buyer_email : '구매자 이메일',
-        buyer_name : '구매자 이름',
-        buyer_tel : '구매자 번호',
-        buyer_addr : '구매자 주소',
-        buyer_postcode : '구매자 주소',
+        buyer_email : 'iosghz@naver.com',
+        buyer_name : '최진성',
+        buyer_tel : '1',
+        buyer_addr : '경기도 용인시 기흥구',
+        buyer_postcode : '경기도 용인시 기흥구',
         m_redirect_url : 'redirect url'
     }, function(rsp) {
         if ( rsp.success ) {
