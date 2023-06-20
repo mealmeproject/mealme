@@ -14,7 +14,6 @@ public class ChartController {
     private final ChartService chartService;
 
 
-
     @GetMapping("/chartMonthly")
     public void chartMonthly(){}
 
