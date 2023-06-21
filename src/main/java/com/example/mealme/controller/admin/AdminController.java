@@ -13,28 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
     private final AdminService adminService;
 
-    @GetMapping("/admin")
-    public void admin(){}
+    @GetMapping("/adminMain")
+    public void adminMain(){}
 
-    @GetMapping("/admin2")
-    public void admin2(){}
+    @GetMapping("/userList")
+    public void userList(){}
 
-    @GetMapping("/admin3")
-    public void admin3(){}
+    @GetMapping("/companyList")
+    public void companyList(){}
 
-    @GetMapping("/admin4")
-    public void admin4(){}
+    @GetMapping("/orderList")
+    public void orderList(){}
 
-    @GetMapping("/admin5")
-    public void admin5(){}
+    @GetMapping("/productList")
+    public void productList(){}
 
-    @GetMapping("/admin6")
-    public void admin6(){}
+    @GetMapping("/refundList")
+    public void refundList(){}
 
-    @GetMapping("/admin7")
-    public void admin7(){}
+    @GetMapping("/registProduct")
+    public void registProduct(){}
 
-    @GetMapping("/admin8")
-    public void admin8(){}
+    @GetMapping("/registChange")
+    public void registChange(){}
 
 }
