@@ -5,9 +5,9 @@
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER,
+        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER, USER_BIRTH,
                               USER_ADDRESS_NUMBER, USER_ADDRESS1, USER_ADDRESS2, USER_ADDRESS3, USER_EMAIL)
-                VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userPhoneNumber},
+                VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userPhoneNumber}, #{userBirth},
                   #{userAddressNumber}, #{userAddress1}, #{userAddress2}, #{userAddress3}, #{userEmail})
     </insert>
 

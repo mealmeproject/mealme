@@ -54,23 +54,23 @@
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <li><a href="#" class="collapse__sublink">찜목록</a></li>
-                                <li><a href="#" class="collapse__sublink">장바구니</a></li>
-                                <li><a href="#" class="collapse__sublink">구매내역</a></li>
+                                <li><a th:href="@{/shop/shoppingList}" class="collapse__sublink">찜목록</a></li>
+                                <li><a th:href="@{/shop/shoppingBasket}" class="collapse__sublink">장바구니</a></li>
+                                <li><a th:href="@{/shop/shoppingPayInfo}" class="collapse__sublink">구매내역</a></li>
                             </ul>
                         </div>
 
-                        <a href="#" class="nav__link">
+                        <a <a th:href="@{/company/SendReadList}" class="nav__link">
                             <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
                             <span class="nav_name">받은쪽지함</span>
                         </a>
 
-                        <a href="#" class="nav__link">
+                        <a <a th:href="@{/user/userUpdate}" class="nav__link">
                             <ion-icon name="settings-outline" class="nav__icon"></ion-icon>
                             <span class="nav_name">개인정보설정</span>
                         </a>
                     </div>
-                    <a href="#" class="nav__link">
+                    <a <a th:href="@{/user/logout}" class="nav__link">
                         <ion-icon name="log-out-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">로그아웃</span>
                     </a>

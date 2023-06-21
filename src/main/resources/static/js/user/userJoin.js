@@ -16,7 +16,7 @@ $(function () {
         dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"], //달력의 요일 텍스트
         dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"], //달력의 요일 Tooltip
         minDate: "-100Y", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-        maxDate: "+1D", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+        maxDate: "+0D", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
     });
 
     //초기값을 오늘 날짜로 설정해줘야 합니다.
@@ -64,7 +64,7 @@ function sample6_execDaumPostcode() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("adress-number").value = data.zonecode;
+            document.getElementById("adressNumber").value = data.zonecode;
             document.getElementById("address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("detailAddress").focus();

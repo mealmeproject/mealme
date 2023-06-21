@@ -69,7 +69,6 @@ a{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: white;
 }
 
 .text1 {
@@ -93,6 +92,8 @@ a{
     background-color: #ff9326;
     color: #3a1d1d;
     cursor: pointer;
+    color: white;
+
 }
 
 .join-btn:hover {
