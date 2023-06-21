@@ -203,37 +203,6 @@
         // (Place the JavaScript code mentioned in the previous response here)
     }
 </script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-<script>
-
-
-    var IMP = window.IMP;
-    IMP.init('imp67568217');
-    IMP.request_pay({
-        pg : "kakaopay",
-        pay_method : 'card',
-        merchant_uid : 'merchant_' + new Date().getTime(),
-        name : '결제',
-        amount : '1',
-        buyer_email : 'iosghz@naver.com',
-        buyer_name : '최진성',
-        buyer_tel : '1',
-        buyer_addr : '경기도 용인시 기흥구',
-        buyer_postcode : '경기도 용인시 기흥구',
-        m_redirect_url : 'redirect url'
-    }, function(rsp) {
-        if ( rsp.success ) {
-            var msg = '결제가 완료되었습니다.';
-            location.href='결제완료후 갈 url';
-        } else {
-            var msg = '결제에 실패하였습니다.';
-            rsp.error_msg;
-
-        }
-    });
-
-
-</script>
 </body>
 </html>
