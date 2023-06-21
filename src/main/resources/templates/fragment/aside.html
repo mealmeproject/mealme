@@ -20,15 +20,15 @@
                             <span class="nav_name">메인화면</span>
                         </a>
 
-                        <div th:href="@{/meal/myPage}" class="nav__link collapsed">
+                        <div class="nav__link collapsed">
                             <ion-icon name="person-outline" class="nav__icon"></ion-icon>
                             <span class="nav_name">마이페이지</span>
 
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <li><a th:href="@{/user/login}" class="collapse__sublink">식단작성</a></li>
-                                <li><a th:href="@{/user/login}" class="collapse__sublink">영양진단</a></li>
+                                <li><a th:href="@{/meal/myPage}" class="collapse__sublink">식단리스트</a></li>
+                                <li><a th:href="@{/meal/write}" class="collapse__sublink">식단작성</a></li>
                                 <li><a th:href="@{/user/login}" class="collapse__sublink">식단컨설팅</a></li>
                             </ul>
                         </div>
@@ -40,9 +40,9 @@
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <li><a href="#" class="collapse__sublink">오늘하루</a></li>
-                                <li><a href="#" class="collapse__sublink">통계</a></li>
-                                <li><a href="#" class="collapse__sublink">자가진단</a></li>
+                                <li><a th:href="@{/chart/today}" class="collapse__sublink">오늘하루</a></li>
+                                <li><a th:href="@{/chart/chartMonthly}" class="collapse__sublink">통계</a></li>
+                                <li><a th:href="@{/meal/myPage}" class="collapse__sublink">자가진단</a></li>
                             </ul>
                         </div>
 
