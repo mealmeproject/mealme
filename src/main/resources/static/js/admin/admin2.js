@@ -35,9 +35,29 @@ function userList(map){
 // 검색 조건에 따른 회원 조회
 $('.btn-image').on('click', function (){
 	let searchKeyword = $('#keyword').val();
-	user.searchUserList({keyword : searchKeyword}, userList, showError);
+	let searchType = $('.fSelect').val();
+	user.searchUserList({keyword : searchKeyword, searchType : searchType}, userList, showError);
+
+	$('#keyword').val('');
 
 })
+
+// 검색 input칸 엔터 이벤트
+$('#keyword').on('keydown', function (e){
+	console.log('++++++++++++++++++++++++++++');
+	console.log(e.code);
+	console.log(e.keyCode);
+	if(e.keyCode == 13){
+		console.log('Enter');
+		let searchKeyword = $('#keyword').val();
+		let searchType = $('.fSelect').val();
+
+		$('#keyword').val('');
+
+
+		user.searchUserList({keyword : searchKeyword, searchType: searchType}, userList, showError);
+	}
+});
 
 
 

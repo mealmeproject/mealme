@@ -9,6 +9,7 @@
     <select id="searchUser"  resultType="userDto">
         SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
         FROM TBL_USER where 1 = 1
+        <if test="searchType != ''">
         <if test="searchType eq 'name'">
             and USER_NAME like '%'|| #{keyword}|| '%'
         </if>
@@ -17,6 +18,7 @@
         </if>
         <if test="searchType eq 'email'">
             and USER_EMAIL like '%'|| #{keyword}|| '%'
+        </if>
         </if>
 
     </select>

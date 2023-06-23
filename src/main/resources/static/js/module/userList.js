@@ -15,12 +15,12 @@ export function showUserList(callback, error){
     });
 }
 
-export function searchUserList(keyword, callback, error){
+export function searchUserList(obj, callback, error){
     let searchKeyword = $('#keyword').val()
     $.ajax({
-        url: '/admin/v1/searchUserList',
+        url: '/admins/v1/searchUserList',
         type: 'get',
-        data: { keyword: searchKeyword},
+        data: obj,
         dataType: 'json',
         success: function (map){
             if(callback){

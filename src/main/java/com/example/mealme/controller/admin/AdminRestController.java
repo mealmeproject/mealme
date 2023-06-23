@@ -4,10 +4,7 @@ import com.example.mealme.dto.UserDto;
 import com.example.mealme.service.admin.AdminService;
 import com.example.mealme.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,10 @@ public class AdminRestController {
     }
 
     @GetMapping("/searchUserList")
-    public List<UserDto> searchUserList(SearchVo searchVo){
+    public List<UserDto> searchUserList(String keyword, String searchType){
+        SearchVo searchVo = new SearchVo();
+        searchVo.setKeyword(keyword);
+        searchVo.setSearchType(searchType);
         return adminService.searchUserList(searchVo);
     }
 }
