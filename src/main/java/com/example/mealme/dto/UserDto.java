@@ -25,4 +25,5 @@ public class UserDto {
     private double userHeight;
     private double userWeight;
     private int userGrade;
+    private String userBirth;
 }
