@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -31,5 +33,18 @@ public class AdminService {
 //    검색 조회
     public List<UserDto> searchUserList(SearchVo searchVo){
         return adminMapper.searchUser(searchVo);
+    }
+
+//    유저 삭제
+    public void deleteUserList(List<String> checkBoxArr){
+        if(checkBoxArr == null){
+            throw new IllegalArgumentException("회원을 선택하세요.");
+        }
+
+        for(int i=0; i<checkBoxArr.size(); i++){
+            adminMapper.delete(checkBoxArr.get(i));
+        }
+
+
     }
 }

@@ -4,7 +4,6 @@ import com.example.mealme.dto.UserDto;
 import com.example.mealme.vo.Criteria;
 import com.example.mealme.vo.SearchVo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +17,7 @@ public interface AdminMapper {
     public void insert(UserDto userDto);
 
     List<UserDto> selectListPage(Criteria criteria);
+
+//    회원 삭제
+    Long delete(String userNumber);
 }

@@ -30,3 +30,27 @@ export function searchUserList(obj, callback, error){
         error: error
     });
 }
+
+export function deleteUserList(checkBoxArr,confirmAlert,error) {
+    console.log(JSON.stringify(checkBoxArr))
+    // if(comfirmAlert) {
+    $.ajax({
+        url: '/admins/v1/deleteUserList',
+        data: JSON.stringify(checkBoxArr),
+        type: 'post',
+        traditional: true,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+
+            console.log(result);
+            alert("해당글이 정상적으로 삭제되었습니다.")
+            location.reload();
+        },
+        error: error
+
+    });
+
+}
+
+

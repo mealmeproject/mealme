@@ -14,7 +14,7 @@ function userList(map){
 		list += `
 		   <tr class="user-num" data-num="${u.userNumber}">
                   <th>
-                    <input type="checkbox" name="chk" value="${u.userNumber}">
+                    <input type="checkbox" name="chk" value="${u.userNumber}" data-idx="">
                   </th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userJoinDate}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userName}</th>
@@ -76,6 +76,48 @@ $(document).ready(function() {
 		else $("#cbx_chkAll").prop("checked", true);
 	});
 });
+
+
+//체크박스 삭제
+// $(document).ready(function (){
+// 	$(".deleteBtn").click(function (){
+// 		let checkBoxArr = userDelete();
+// 		user.deleteUserList({checkBoxArr: checkBoxArr });
+// 	})
+//
+// })
+
+$(".deleteBtn").on('click',function (){
+	let checkBoxArr = userDelete();
+	console.log(checkBoxArr);
+	var confirmAlert = confirm("정말로 삭제하시겠습니까?");
+	user.deleteUserList({checkBoxArr: checkBoxArr},confirmAlert ,showError);
+
+	user.findUserList(userList ,showError);
+});
+
+
+
+function userDelete(){
+	var checkBoxArr = [];
+	$("input:checkbox[name=chk]:checked").each(function (){
+		checkBoxArr.push($(this).val());
+		console.log("================================");
+		console.log(checkBoxArr);
+		console.log("================================");
+
+	});
+	console.log(checkBoxArr)
+
+	if(checkBoxArr==""){
+		alert("삭제할 회원을 선택해주세요.");
+		return false;
+	}
+
+	// var confirmAlert = confirm("정말로 삭제하시겠습니까?");
+	// user.deleteUserList({checkBoxArr: checkBoxArr ,confirmAlert, showError});
+	return checkBoxArr;
+}
 
 
 

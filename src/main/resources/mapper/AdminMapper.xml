@@ -32,4 +32,10 @@
         VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userPhoneNumber},
         #{userAddressNumber}, #{userAddress1}, #{userAddress2}, #{userAddress3}, #{userEmail}, #{userBirth})
     </insert>
+
+    <delete id="delete">
+        DELETE FROM TBL_USER
+        WHERE USER_NUMBER = #{userNumber}
+
+    </delete>
 </mapper>
