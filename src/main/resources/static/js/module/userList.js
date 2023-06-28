@@ -15,18 +15,21 @@ export function showUserList(callback, error){
     });
 }
 
-export function searchUserList(obj, callback, error){
-    let searchKeyword = $('#keyword').val()
+export function searchUserList(obj, callback, pageCallback, error){
+    // let searchKeyword = $('#keyword').val()
     $.ajax({
-        url: '/admins/v1/searchUserList',
+        url: `/admins/v1/searchUserList/${obj.page}`,
         type: 'get',
-        data: obj,
+        data: {keyword : obj.keyword, searchType : obj.searchType},
         dataType: 'json',
         success: function (map){
             if(callback){
-                callback(map)
+                callback(map.userList);
+                pageCallback(map.pageVo);
             }
+
         },
+
         error: error
     });
 }
@@ -52,5 +55,11 @@ export function deleteUserList(checkBoxArr,confirmAlert,error) {
     });
 
 }
+
+// export function getListPage(pageInfo, callback, error){
+//     $.ajax({
+//         url:``
+//     })
+// }
 
 

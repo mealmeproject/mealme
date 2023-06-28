@@ -29,6 +29,8 @@
         <typeAlias type="com.example.mealme.dto.UserShippingAddressDto" alias="userShippingAddressDto"/>
 
         <typeAlias type="com.example.mealme.vo.SearchVo" alias="searchVo"/>
+        <typeAlias type="com.example.mealme.vo.Criteria" alias="criteria"/>
+        <typeAlias type="com.example.mealme.vo.PageVo" alias="pageVo"/>
 
     </typeAliases>
 </configuration>

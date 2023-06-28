@@ -84,8 +84,8 @@ public class AdminMapperTest {
        searchVo.setSearchType("id");
        searchVo.setId("ddd");
        searchVo.setKeyword("d");
-       List<UserDto> list = adminMapper.searchUser(searchVo);
-       System.out.println(list);
+//       List<UserDto> list = adminMapper.searchUser(searchVo);
+//       System.out.println(list);
 //       searchVo.setSearchType("id");
 //       searchVo.setKeyword("d");
 //       adminMapper.searchUser(searchVo);

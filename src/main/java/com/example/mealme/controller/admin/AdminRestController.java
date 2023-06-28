@@ -2,14 +2,13 @@ package com.example.mealme.controller.admin;
 
 import com.example.mealme.dto.UserDto;
 import com.example.mealme.service.admin.AdminService;
+import com.example.mealme.vo.Criteria;
+import com.example.mealme.vo.PageVo;
 import com.example.mealme.vo.SearchVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,13 +21,13 @@ public class AdminRestController {
         return adminService.findAll();
     }
 
-    @GetMapping("/searchUserList")
-    public List<UserDto> searchUserList(String keyword, String searchType){
-        SearchVo searchVo = new SearchVo();
-        searchVo.setKeyword(keyword);
-        searchVo.setSearchType(searchType);
-        return adminService.searchUserList(searchVo);
-    }
+//    @GetMapping("/searchUserList")
+//    public List<UserDto> searchUserList(String keyword, String searchType){
+//        SearchVo searchVo = new SearchVo();
+//        searchVo.setKeyword(keyword);
+//        searchVo.setSearchType(searchType);
+//        return adminService.searchUserList(searchVo);
+//    }
 
 
     @PostMapping(value = "/deleteUserList")
@@ -47,8 +46,22 @@ public class AdminRestController {
         return checkBoxArr;
     }
 
-    @GetMapping("/findUserList")
-    public List<UserDto> findUserList(){
-        return adminService.findAll();
+    @GetMapping("/searchUserList/{page}")
+    public Map<String, Object> findUserList(@PathVariable("page") int page, SearchVo searchVo){
+        Criteria criteria = new Criteria(page, 10);
+
+        System.out.println("====================================================================================");
+        System.out.println(searchVo);
+        System.out.println("====================================================================================");
+
+        PageVo pageVo = new PageVo(criteria, adminService.getTotal(searchVo));
+        List<UserDto> searchUser = adminService.searchUserList(searchVo, criteria);
+
+//        List<UserDto> userList = adminService.findAll(criteria);
+        Map<String, Object> findUser = new HashMap<>();
+        findUser.put("pageVo",pageVo);
+//        findUser.put("userList", userList);
+        findUser.put("userList", searchUser);
+        return findUser;
     }
 }

@@ -1,7 +1,9 @@
 import * as user from '../module/userList.js';
 // const userNumber = $('.user-num').val();
-user.showUserList(userList, showError);
+// user.showUserList(userList, showError);
 // const searchKeyword = $('#keyword').val();
+let page = 1;
+user.searchUserList({searchType:'', keyword:'', page : page}, userList, paging, showError);
 
 
 // 전체 회원 리스트
@@ -32,13 +34,57 @@ function userList(map){
 	$('.check').html(list);
 }
 
+//페이징 처리
+function paging(pageInfo){
+	console.log("===========================");
+	console.log(pageInfo);
+	let page ='';
+	if(pageInfo.prev){
+	page += `
+		
+		 
+		 	<a href="" data-page=${pageInfo.startPage-1} class="arrow prev"></a>
+		`}
+	for(let i = pageInfo.startPage; i<=pageInfo.endPage; i++){
+		if(i == pageInfo.criteria.page){
+			page += `
+				<a href="#" data-page="${i}" class="active">${i}</a>
+			`
+		}else{
+			page += `
+				<a href="#" data-page="${i}">${i}</a>
+			`
+		}
+	}
+		if(pageInfo.next) {
+			page += `
+			<a href="" data-page=${pageInfo.endPage + 1} class="arrow next""></a>
+		`
+		}
+
+	$(".page_nation").html(page);
+}
+
+//페이징 클릭 이벤트
+$('.page_nation').on('click','a', function (e){
+	e.preventDefault();
+	let searchKeyword = $('#keyword').val();
+	let searchType = $('.fSelect').val();
+	let page = $(this).data('page');
+	console.log(page)
+	user.searchUserList({searchType:searchType, keyword:searchKeyword, page : page}, userList, paging, showError);
+});
+			
+				
+
 // 검색 조건에 따른 회원 조회
 $('.btn-image').on('click', function (){
 	let searchKeyword = $('#keyword').val();
 	let searchType = $('.fSelect').val();
-	user.searchUserList({keyword : searchKeyword, searchType : searchType}, userList, showError);
+	let page = 1;
+	user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging, showError);
 
-	$('#keyword').val('');
+	// $('#keyword').val('');
 
 })
 
@@ -51,11 +97,8 @@ $('#keyword').on('keydown', function (e){
 		console.log('Enter');
 		let searchKeyword = $('#keyword').val();
 		let searchType = $('.fSelect').val();
-
-		$('#keyword').val('');
-
-
-		user.searchUserList({keyword : searchKeyword, searchType: searchType}, userList, showError);
+		let page = 1;
+		user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging, showError);
 	}
 });
 
