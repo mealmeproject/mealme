@@ -36,7 +36,8 @@
         <typeAlias type="com.example.mealme.vo.CompanyModifyVo" alias="companyModifyVo"/>
         <typeAlias type="com.example.mealme.vo.Criteria" alias="criteria"/>
         <typeAlias type="com.example.mealme.vo.PageVo" alias="pageVo"/>
-
-
+        <typeAlias type="com.example.mealme.vo.RecommendVo" alias="recommendVo"/>
+        <typeAlias type="com.example.mealme.vo.FoodVo" alias="foodVo"/>
+        <typeAlias type="com.example.mealme.vo.DailyTotalVo" alias="dailyTotalVo"/>
     </typeAliases>
 </configuration>
