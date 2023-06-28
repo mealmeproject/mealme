@@ -47,11 +47,11 @@ class UserServiceTest {
     @Test
     @DisplayName("회원 등록")
     void register() {
-        doNothing().when(userMapper).insert(any(UserDto.class));
+        doNothing().when(userMapper).insertUser(any(UserDto.class));
 
-        userService.register(userDto);
+        userService.registerUser(userDto);
 
-        verify(userMapper, times(1)).insert(any(UserDto.class));
+        verify(userMapper, times(1)).insertUser(any(UserDto.class));
     }
 
     @Test

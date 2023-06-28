@@ -40,7 +40,7 @@ class UserMapperTest {
     @Test
     @DisplayName("유저 회원가입 테스트")
     void insert() {
-        userMapper.insert(userDto);
+        userMapper.insertUser(userDto);
 
         Assertions.assertThat(userMapper.selectUserNumber(userDto.getUserId(), userDto.getUserPassword()))
                 .isEqualTo(userDto.getUserNumber());

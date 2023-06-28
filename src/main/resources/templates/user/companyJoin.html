@@ -19,25 +19,31 @@
             <h1>회원가입</h1>
             <br /><br />
             <div class="join-box">
-                <form action="/user/companyJoin" method="post">
+                <form th:action="@{/user/companyJoin}" method="post" enctype="multipart/form-data">
                     <label for="companyId">아이디</label>
                     <div class="form-group id-box">
-                        <input type="text" id="companyId" name="id" placeholder="아이디" required />
+                        <input type="text" id="companyId" name="companyId" placeholder="아이디" required />
                         <!-- 중복체크처리 처리 -->
                         <input type="button" class="id-check" value="아이디 중복체크" />
                     </div>
-                    <div class="form-group">
+                    <h5 id="duplicateIdError" style="display: none; color: red;">아이디가 이미 사용 중입니다.</h5>
+                    <h5 id="duplicateIdPass" style="display: none; color: green;">사용 가능한 아이디입니다.</h5>
+<!--                    비밀번호 체크-->
+                    <div class="form-group password-box">
                         <label for="companyPassword">비밀번호</label>
-                        <input type="password" id="companyPassword" name="password" placeholder="비밀번호" required />
+                        <input type="password" id="companyPassword" name="companyPassword" placeholder="비밀번호" required />
                     </div>
-                    <div class="form-group">
+                    <h5 id="passwordCheck1" style="display: none; color: red;">8자리 ~ 20자리 이내로 입력해주세요.</h5>
+                    <h5 id="passwordCheck2" style="display: none; color: red;">비밀번호는 공백 없이 입력해주세요.</h5>
+                    <h5 id="passwordCheck3" style="display: none; color: red;">영문,숫자, 특수문자를 혼합하여 입력해주세요.</h5>
+
+                    <div class="form-group password-box2">
                         <label for="confirmPassword">비밀번호 재확인</label>
-                        <input type="password"
-                            id="confirmPassword"
-                            name="confirm-password"
-                            placeholder="비밀번호확인"
-                            required/>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호확인" required />
+
                     </div>
+                    <h5 id="passwordMismatchError" style="display: none; color: red;">비밀번호가 일치하지 않습니다.</h5>
+                    <h5 id="passwordMismatchPass" style="display: none; color: green;">비밀번호가 일치합니다.</h5>
                     <!-- 기업 사업자등록증 사진 -->
                     <div class="img-group">
                         <label for="post-image">사업자등록증</label>
@@ -46,7 +52,7 @@
                                 <input
                                     type="file"
                                     id="post-image"
-                                    name="boardFile"
+                                    name="companyRegistrationFile"
                                     value="library_add"
                                     accept="image/*"
                                     multiple
@@ -57,24 +63,28 @@
                     </div>
                     <div class="form-group">
                         <label for="companyName">기업이름</label>
-                        <input type="text" id="companyName" name="name" placeholder="기업이름" required />
+                        <input type="text" id="companyName" name="companyName" placeholder="기업이름" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="companyCeoName">대표이사이름</label>
+                        <input type="text" id="companyCeoName" name="companyCeoName" placeholder="대표이름" required />
                     </div>
                     <div class="form-group">
                         <label for="companyRegistrationNumber">사업자등록번호</label>
-                        <input type="text" id="companyRegistrationNumber" name="nickname" placeholder="사업자등록번호" />
+                        <input type="text" id="companyRegistrationNumber" name="companyRegistrationNumber" placeholder="사업자등록번호" />
                     </div>
                     <label>직종</label>
                     <div class="radio-group">
-                        <input type="radio" id="hospital" name="coporateType" value="hospital" checked />
+                        <input type="radio" id="hospital" name="companyType" value="hospital" checked />
                         <label for="hospital" >병원</label>
-                        <input type="radio" id="trainer" name="coporateType" value="trainer" />
+                        <input type="radio" id="trainer" name="companyType" value="trainer" />
                         <label for="trainer">트레이너</label>
-                        <input type="radio" id="Dietitian" name="coporateType" value="Dietitian" />
-                        <label for="Dietitian">영양사</label>
+                        <input type="radio" id="dietitian" name="companyType" value="dietitian" />
+                        <label for="dietitian">영양사</label>
                     </div>
                     <div class="form-group">
                         <label>창립일</label>
-                        <input type="text" id="datepicker" />
+                        <input type="text" id="datepicker" name="datepicker" />
                     </div>
                     <label id="phone-text">전화번호</label>
                     <div class="phone-number-box">
@@ -96,8 +106,8 @@
                             <option>064</option>
                         </select>
                         &nbsp&nbsp-&nbsp&nbsp
-                        <input type="text" id="phone2" name="phone" maxlength="4" required />&nbsp&nbsp-&nbsp&nbsp
-                        <input type="text" id="phone3" name="phone" maxlength="4" required />
+                        <input type="text" id="phone2" name="phone2" maxlength="4" required />&nbsp&nbsp-&nbsp&nbsp
+                        <input type="text" id="phone3" name="phone3" maxlength="4" required />
                     </div>
                     <label >이메일</label>
                     <div class="email-box">
@@ -112,16 +122,16 @@
                     </div>
                     <div class="address-box">
                         <label for="address">주소</label>
-                        <input type="text" id="adress-number" placeholder="우편번호" />
+                        <input type="text" id="adressNumber" name="addressNumber" placeholder="우편번호" />
                         <input
                             type="button"
                             class="address-btn"
                             onclick="sample6_execDaumPostcode()"
                             value="우편번호 찾기"
                         />
-                        <input type="text" id="address" placeholder="주소" /><br />
-                        <input type="text" id="detailAddress" placeholder="상세주소" />
-                        <input type="text" id="extraAddress" placeholder="참고항목" />
+                        <input type="text" id="address" name="address" placeholder="주소" /><br />
+                        <input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소" />
+                        <input type="text" id="extraAddress" name="extraAddress"  placeholder="참고항목" />
                     </div>
                     <div class="submit-btn-box">
                         <button type="submit" id="submit-btn">가입</button>

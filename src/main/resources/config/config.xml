@@ -9,8 +9,10 @@
         <typeAlias type="com.example.mealme.dto.CompanyCodeDto" alias="companyCodeDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyDto" alias="companyDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyFileDto" alias="companyFileDto"/>
+        <typeAlias type="com.example.mealme.dto.CompanyRegistrationFileDto" alias="companyRegistrationFileDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingDto" alias="consultingDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingRequestDto" alias="consultingRequestDto"/>
+        <typeAlias type="com.example.mealme.dto.ConsultingReplyDto" alias="consultingReplyDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReviewDto" alias="consultingReviewDto"/>
         <typeAlias type="com.example.mealme.dto.LikeDto" alias="likeDto"/>
         <typeAlias type="com.example.mealme.dto.BoardDto" alias="mealBoardDto"/>
@@ -27,8 +29,12 @@
         <typeAlias type="com.example.mealme.dto.UserDto" alias="userDto"/>
         <typeAlias type="com.example.mealme.dto.UserFileDto" alias="userFileDto"/>
         <typeAlias type="com.example.mealme.dto.UserShippingAddressDto" alias="userShippingAddressDto"/>
-
         <typeAlias type="com.example.mealme.vo.SearchVo" alias="searchVo"/>
+        <typeAlias type="com.example.mealme.vo.UserVo" alias="userVo"/>
+        <typeAlias type="com.example.mealme.vo.UserModifyVo" alias="userModifyVo"/>
+        <typeAlias type="com.example.mealme.vo.CompanyVo" alias="companyVo"/>
+        <typeAlias type="com.example.mealme.vo.CompanyModifyVo" alias="companyModifyVo"/>
+
 
     </typeAliases>
 </configuration>

@@ -1,3 +1,6 @@
+var datepicker = document.getElementById('datepicker');
+var dateValue = datepicker.value;
+
 $(function () {
     //input을 datepicker로 선언
     $("#datepicker").datepicker({
@@ -20,7 +23,7 @@ $(function () {
     });
 
     //초기값을 오늘 날짜로 설정해줘야 합니다.
-    $("#datepicker").datepicker("setDate", "today"); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    $("#datepicker").datepicker("setDate", dateValue); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 });
 
 function sample6_execDaumPostcode() {
@@ -64,7 +67,7 @@ function sample6_execDaumPostcode() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("adressNumber").value = data.zonecode;
+            document.getElementById("addressNumber").value = data.zonecode;
             document.getElementById("address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("detailAddress").focus();
@@ -73,40 +76,111 @@ function sample6_execDaumPostcode() {
 }
 
 
-var companyIdInput = document.getElementById("companyId");
-$('.id-check').on("click", function() {
-    var companyId = companyIdInput.value;
-    if (companyId.trim() !== "") {
-        checkDuplicateId(companyId);
-    }
-});
+// 닉네임 인풋칸 길이 조절
+function adjustInputLength() {
+    const input = document.getElementById("userNickName");
+    const initialValue = input.getAttribute("value") || input.placeholder;
+    const enteredText = input.value || initialValue;
+    const value = enteredText.trim();
 
-// 아이디 중복체크
-function checkDuplicateId(companyId) {
-    $.ajax({
-        url: "/user/checkCompanyId",
-        type: "GET",
-        data: { companyId: companyId },
-        success: function(response) {
-            if (response.checkId) {
-                console.log("중복된 아이디 입니다.");
-                document.getElementById("duplicateIdError").style.display = "block";
-                alert("중복된 아이디입니다. ");
-            } else {
-                console.log("아이디가 이미 사용 중입니다.");
-                document.getElementById("duplicateIdError").style.display = "none";
-                document.getElementById("duplicateIdPass").style.display = "block";
-                alert("사용 가능한 아이디입니다.");
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log("아이디 중복검사 에러");
-        }
-    });
+    const span = document.createElement("span");
+    span.style.visibility = "hidden";
+    span.style.position = "absolute";
+    span.style.whiteSpace = "pre";
+    span.textContent = value;
+    document.body.appendChild(span);
+
+    // Get the width of the text with the current font size
+    const fontSize = window.getComputedStyle(input).fontSize;
+    span.style.fontSize = fontSize;
+
+    const width = span.offsetWidth;
+
+    input.style.width = width + 20 + "px";
+
+    document.body.removeChild(span);
 }
 
+window.addEventListener("load", adjustInputLength);
+
+
+
+
+
+// 닉네임의 읽기 전용 해제
+function toggleNicknameEdit() {
+    var nicknameInput = document.getElementById('userNickName');
+    nicknameInput.readOnly = !nicknameInput.readOnly;
+    nicknameInput.focus();
+}
+// 클릭시 폼태그 action
+const submitButton = document.getElementById("doneImage");
+const form = document.getElementById("nicknameForm");
+
+submitButton.addEventListener("click", function() {
+    form.submit();
+});
+
+// 닉네임 변경 아이콘 클릭 이벤트
+const editImage = document.getElementById("editImage");
+const doneImage = document.getElementById("doneImage");
+
+editImage.addEventListener("click", function() {
+    editImage.style.display = "none";
+    doneImage.style.display = "inline";
+});
+
+
+// 코멘트의 읽기 전용 해제
+function toggleCommentEdit() {
+    var commentInput = document.getElementById('userComment');
+    commentInput.readOnly = !commentInput.readOnly;
+    commentInput.focus();
+};
+
+// 코멘트 변경 아이콘 클릭 이벤트
+const commentEditImage = document.getElementById("comment-edit-img");
+const commentDoneImage = document.getElementById("comment-done-img");
+
+commentEditImage.addEventListener("click", function() {
+    commentEditImage.style.display = "none";
+    commentDoneImage.style.display = "inline";
+});
+
+// 클릭시 폼태그 action
+const commentSubmitButton = document.getElementById("comment-done-img");
+const commentForm = document.getElementById("commentForm");
+
+commentSubmitButton.addEventListener("click", function(){
+    commentForm.submit();
+});
+
+// 코멘트 칸의 input 길이 설정
+function adCommentInputWidth() {
+    var input = document.getElementById("userComment");
+    var inputLength = input.value.length;
+    var minWidth = 100; // Minimum width of the input field
+    var maxWidth = 300; // Maximum width of the input field
+    var width = minWidth + (inputLength * 10); // Adjust the width based on input length
+
+    // Limit the width within the specified range
+    width = Math.min(Math.max(width, minWidth), maxWidth);
+
+    input.style.width = width + "px"; // Set the adjusted width
+}
+
+// Call the adjustInputWidth() function when the page loads
+window.addEventListener("load", adCommentInputWidth);
+
+// Call the adjustInputWidth() function whenever the input value changes
+document.getElementById("userComment").addEventListener("input", adCommentInputWidth);
+
+
+
+
+
 // 비밀번호 일치
-var passwordInput = document.getElementById("companyPassword");
+var passwordInput = document.getElementById("userPassword");
 var confirmPasswordInput = document.getElementById("confirmPassword");
 var passwordMismatchError = document.getElementById("passwordMismatchError");
 var passwordMismatchPass = document.getElementById("passwordMismatchPass");
@@ -122,7 +196,7 @@ function checkPasswordMatch() {
     var password = passwordInput.value;
     var confirmPassword = confirmPasswordInput.value;
 
-    var pw = $("#companyPassword").val();
+    var pw = $("#userPassword").val();
     var num = pw.search(/[0-9]/g);
     var eng = pw.search(/[a-z]/ig);
     var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
@@ -150,80 +224,44 @@ function checkPasswordMatch() {
         console.log("통과");
         return true;
     }
-}
 
+    // 유저 정보 수정 폼태그 action
+    const userForm = document.getElementById("userForm");
+    const submitButton = document.getElementById("submit-btn");
 
+    submitButton.addEventListener("click", function(event) {
 
-
-let $input = $("#post-image");
-let $imgList = $(".img-list");
-// console.log($input);
-
-// file change이벤트로 미리보기 갱신하기
-$input.on("change", function () {
-    let files = this.files;
-    //   console.log(files);
-
-    // 길이 체크함수 (files, 원하는 길이)
-    let newFiles = checkLength(files, 1);
-
-    appendImg(newFiles);
-});
-
-// 클릭 이벤트로 이미지 지우고 미리보기 갱신하기
-$imgList.on("click", function (e) {
-    let name = $(e.target).data("name");
-    removeImg(name);
-    appendImg($input[0].files);
-});
-
-//미리보기 삭제 함수
-function removeImg(name) {
-    let dt = new DataTransfer();
-
-    let files = $input[0].files;
-
-    for (let i = 0; i < files.length; i++) {
-        if (files[i].name !== name) {
-            dt.items.add(files[i]);
+        if (passwordInput.value === "" || confirmPasswordInput.value === ""){
+            console.log("비밀번호 입력 하지 않음");
+            alert("비밀번호를 입력하세요");
+            event.preventDefault();
+        }else {
+            console.log("유저 회원정보 수정 서브밋 버튼 실행 !");
+            userForm.submit();
         }
-    }
-    $input[0].files = dt.files;
+    });
+
+    // 유저 프로필 사진
+    // function readURL(input) {
+    //     console.log("readURL 실행 !");
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             document.getElementById('preview').src = e.target.result;
+    //         };
+    //         reader.readAsDataURL(input.files[0]);
+    //     } else {
+    //         document.getElementById('preview').src = "";
+    //     }
+    // }
+
 }
 
-//파일 길이 체크 함수(체크할 files객체, 제한할 길이)
-function checkLength(files, num) {
-    if (files.length > num) {
-        alert(`파일은 최대 ${num}개까지만 첨부 가능합니다.`);
-        // 최대 수를 넘으면 비어있는 files객체 반환
-        return new DataTransfer().files;
-    }
-    return files;
-}
+// 유저 프로필 사진 수정 폼태그 action
+const profileForm = document.getElementById("profileForm");
+const profileSubmitButton = document.getElementById("photo-done-img");
 
-// 이미지 미리보기 처리 함수
-// 이미지 수가 4개보다 적으면 기본이미지로 대체함
-function appendImg(files) {
-    for (let i = 0; i < 1; i++) {
-        if (i < files.length) {
-            let src = URL.createObjectURL(files[i]);
-
-            $imgList
-                .eq(i)
-                .css("background-image", `url(${src})`)
-                .css("background-size", "cover")
-                .data("name", `${files[i].name}`);
-
-            $imgList.eq(i).addClass("x-box");
-        } else {
-            $imgList
-                .eq(i)
-                .css(
-                    "background",
-                    "url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBzdHJva2U9IiNCNUI1QjUiIHN0cm9rZS13aWR0aD0iMS41IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0IDQpIj48cmVjdCB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHJ4PSIzLjUiLz48Y2lyY2xlIGN4PSI4LjU1NiIgY3k9IjguNTU2IiByPSIyLjMzMyIvPjxwYXRoIGQ9Ik0yOCAxOC42NjdsLTcuNzc3LTcuNzc4TDMuMTExIDI4Ii8+PC9nPjxwYXRoIGQ9Ik0wIDBoMzZ2MzZIMHoiLz48L2c+PC9zdmc+) no-repeat 50% #f2f2f2"
-                )
-                .data("name", null);
-            $imgList.eq(i).removeClass("x-box");
-        }
-    }
-}
+profileSubmitButton.addEventListener("click", function(event) {
+    console.log("유저 프로필 사진 수정 서브밋 버튼 실행 !");
+    profileForm.submit();
+});
