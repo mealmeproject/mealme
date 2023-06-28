@@ -194,11 +194,50 @@ hr {
 }
 
 
+
+
+.category-list {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.star-ratings {
+    color: #ff9326;
+    position: relative;
+    unicode-bidi: bidi-override;
+    width: max-content;
+
+}
+
+/*.star-ratings-fill {*/
+/*    color:  #ff9326;*/
+/*    padding: 0;*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    display: flex;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    overflow: hidden;*/
+/*}*/
+
+.star-ratings-base {
+    z-index: 0;
+    padding: 0;
+}
+
+
+
+
+
 .itemImg{
 
     height: 250px;
     border-radius: 10px;
 }
+
 
 
 .on{
@@ -480,10 +519,33 @@ p{
 }
 
 
+.rating {
+    display: flex;
+    font-size: 24px;
+    color: #ff9326;
+}
+
+.rating .star {
+    transition: color 0.3s;
+}
+
+.rating .star:hover {
+    color: orange;
+}
+
+.rating .selected {
+    color: orange;
+}
 
 
 
 
 
 
+.star {
+    color: gray;
+}
 
+.filled {
+    color: gold;
+}
