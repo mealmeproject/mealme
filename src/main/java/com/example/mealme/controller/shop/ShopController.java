@@ -23,18 +23,31 @@ public class ShopController {
         this.shopService = shopService;
     }
 
-    @GetMapping("/shoppingList")
-    public List<ProductVo> shoppingList(@RequestParam("orderBy") String orderBy, @RequestParam("ascending") boolean ascending) {
-        // orderBy와 ascending 값을 사용하여 Criteria 객체 생성 및 쿼리 수행
-        Criteria criteria = new Criteria();
-        criteria.setOrderBy(orderBy);
-        criteria.setAscending(ascending);
+    @GetMapping("/shoppingList{products}")
+    public List<ProductDto> shoppingList() {
+        List<ProductDto> foodCategory = shopService.foodCategory("음식");
+        List<ProductDto> supplementCategory = shopService.foodCategory("보충제");
+        List<ProductDto> nutrientsCategory = shopService.foodCategory("영양제");
+        List<ProductVo> products = shopService.selectAll();
+        List<ProductVo> selectAllPrice = shopService.selectAllPrice();
+        List<ProductVo> selectLowPrice = shopService.selectLowPrice();
+        List<ProductVo> selectReviewPrice = shopService.selectReviewPrice();
 
-        List<ProductVo> products = shopService.getProductsByCriteria(criteria);
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (ProductVo product : products) {
+            ProductDto productDto = new ProductDto();
+            productDto.setProductNumber(product.getProductNumber());
+            productDto.setProductName(product.getProductName());
+            productDto.setProductPrice(product.getProductPrice());
+            productDto.setProductSeller(product.getProductSeller());
 
-        return products;
-    }
 
+            productDtoList.add(productDto);
+        }
+
+
+        return productDtoList;
+}
 
 
     @GetMapping("/shoppingDetail")
@@ -76,7 +89,4 @@ public class ShopController {
 
     @GetMapping("/shoppingPayInfoDetail")
     public void shoppingPayInfoDetail(){}
-
-    private class Criteria {
-    }
 }
