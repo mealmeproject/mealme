@@ -23,7 +23,7 @@ public class ShopController {
         this.shopService = shopService;
     }
 
-    @GetMapping("/shoppingList{products}")
+    @GetMapping("/shoppingList{p}")
     public List<ProductDto> shoppingList() {
         List<ProductDto> foodCategory = shopService.foodCategory("음식");
         List<ProductDto> supplementCategory = shopService.foodCategory("보충제");
