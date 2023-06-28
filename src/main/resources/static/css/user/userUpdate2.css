@@ -11,26 +11,23 @@ body {
 }
 
 .body-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: 1200px;
-}
-
-.sidebar {
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    background-color: beige;
+    flex-grow: 1;
+    /*width: 1200px;*/
 }
 
 .main-container {
-    width: 900px;
-    padding: 20px;
+    width: 1100px;
+    margin: 0 20px 20px 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     /* background-color: pink; */
+}
+
+.work-container{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 300px;
 }
 
 .service-name-box {
@@ -57,15 +54,15 @@ body {
 }
 
 .profile-img-box {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 0 auto;
     border-radius: 50%;
 }
 
-.profile-img-box img {
-    width: 300px;
-    height: 300px;
+#preview {
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -77,28 +74,118 @@ body {
     justify-content: center;
 }
 
+#nicknameContainer{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
 .nickname {
-    margin-top: 40px;
-    font-size: 30px;
+    text-align: right;
 }
 
-.edit-img-box {
-    margin-top: 40px;
-    width: 34.8px;
-    height: 34.8px;
-    margin-left: 10px;
+#userNickName{
+    background-color: white;
+    font-size: 25px;
 }
 
-.edit-img-box img {
-    width: 34.8px;
-    height: 34.8px;
-    object-fit: cover;
-    cursor: pointer;
+#userComment{
+    background-color: white;
+    text-align: center;
 }
 
-.edit-img-box {
+/* 추가 css */
+#doneImage {
+    display: none;
+}
+.edit-img-box,
+.done-img-box {
+    display: inline-block;
+    vertical-align: middle;
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+
+}
+
+
+#nickname-input {
+    vertical-align: middle;
+}
+
+/*코멘트쪽*/
+#comment-done-img {
+    display: none;
+}
+
+.comment-edit-img-box,
+.comment-done-img-box {
+    display: inline-block;
+    vertical-align: middle;
     filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
 }
+
+.comment-edit-img,
+.comment-done-img {
+    width: 10px;
+    height: 10px;
+}
+
+h5{
+    margin-top: 10px;
+}
+
+.profile-img-box {
+    position: relative;
+
+}
+
+.photo-call {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(210, 210, 210, 0.3);
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.photo-call img{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    object-fit: cover;
+}
+
+input[type="file"] {
+    display: block;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.photo-done-img-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: solid 1px grey;
+    background-color: rgba(210, 210, 210, 0.3);
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.photo-done-img-box img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+/* 추가 css */
+
 
 .update-user-data {
     padding-top: 40px;
@@ -106,12 +193,29 @@ body {
 
 /* 한줄코멘트 */
 .user-info {
-    margin: 20px 0 0 0;
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 20px;
+}
+
+.edit-comment-box {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.edit-comment-box img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.edit-comment-box {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
 }
 
 .row {
@@ -216,6 +320,7 @@ input[type="password"] {
 
 .phone-number-box {
     display: flex;
+    align-items: center;
 }
 
 #phone1 {
@@ -272,12 +377,12 @@ input[type="password"] {
     color: #fff;
 }
 
-#adress-number {
+#addressNumber {
     width: 50%;
 }
 
 .spec {
-    width: 53%;
+    width: 60%;
     font-size: 14px;
 }
 
