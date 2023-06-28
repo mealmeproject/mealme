@@ -287,6 +287,34 @@ body {
     justify-content: center;
 }
 
+.infoException-section{
+    width: 100%;
+    height: 30px;
+    /* background-color: plum; */
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #ddd;
+}
+
+.infoException-second-section{
+    width: 20%;
+    height: 30px;
+    /* background-color: darkorange; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+}
+
+.infoException-third-section{
+    width: 80%;
+    height: 30px;
+    /* background-color: slateblue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .info6-section{
     width: 100%;
     height: 30px;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.CompanyMapper">
+    <select id="selectAll" resultType="companyListVo">
+        SELECT c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER, c.COMPANY_ADDRESS1,
+               cc.COMPANY_CODE_NUMBER, cc.COMPANY_CODE_NAME, AVG(r.REVIEW_GRADE) AS AVERAGE_GRADE,
+               f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+        FROM TBL_COMPANY c
+                 JOIN TBL_COMPANY_CODE cc ON c.COMPANY_CODE_NUMBER = cc.COMPANY_CODE_NUMBER
+                 JOIN TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
+                 LEFT JOIN TBL_COMPANY_FILE f ON c.COMPANY_NUMBER = f.COMPANY_NUMBER
+        WHERE cc.COMPANY_CODE_NUMBER = #{companyCodeNumber}
+        GROUP BY c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER,
+                 c.COMPANY_ADDRESS1, cc.COMPANY_CODE_NUMBER, cc.COMPANY_CODE_NAME, f.FILE_NUMBER,
+                 f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+    </select>
+
+    <select id="selectDetail" resultType="companyListVo">
+        SELECT c.COMPANY_NAME, c.COMPANY_NUMBER, c.COMPANY_CEO_NAME, c.COMPANY_REGISTRATION_NUMBER, r.COMPANY_NUMBER, c.COMPANY_CALL_NUMBER,
+               c.COMPANY_URL, c.COMPANY_ADDRESS1, c.COMPANY_COMMENT, c.COMPANY_EMAIL, AVG(r.REVIEW_GRADE) AS AVERAGE_GRADE,
+               f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+        FROM TBL_COMPANY c
+                 JOIN TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
+                 LEFT JOIN TBL_COMPANY_FILE f ON c.COMPANY_NUMBER = f.COMPANY_NUMBER
+        WHERE c.COMPANY_NUMBER = #{companyNumber}
+        GROUP BY c.COMPANY_NAME, c.COMPANY_NUMBER, c.COMPANY_CEO_NAME, c.COMPANY_REGISTRATION_NUMBER, r.COMPANY_NUMBER,
+                 c.COMPANY_CALL_NUMBER, c.COMPANY_URL, c.COMPANY_ADDRESS1, c.COMPANY_COMMENT, c.COMPANY_EMAIL,
+                 f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+    </select>
+
+    <select id="selectReview" resultType="companyReviewVo">
+        SELECT tc.REVIEW_NUMBER, tc.USER_NUMBER, tc.COMPANY_NUMBER, tc.REVIEW_DATE, tc.REVIEW_CONTENT, tc.REVIEW_GRADE, u.USER_NICKNAME,
+               uf.FILE_UPLOAD_PATH, uf.FILE_UUID, uf.FILE_NAME, uf.FILE_NUMBER
+        FROM TBL_CONSULTING_REVIEW tc
+                 JOIN TBL_COMPANY c ON tc.COMPANY_NUMBER = c.COMPANY_NUMBER
+                 JOIN TBL_USER u ON tc.USER_NUMBER = u.USER_NUMBER
+                 LEFT JOIN TBL_USER_FILE uf ON tc.USER_NUMBER = uF.USER_NUMBER
+        WHERE c.COMPANY_NUMBER = #{companyNumber}
+    </select>
+</mapper>
+
