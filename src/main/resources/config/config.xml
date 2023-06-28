@@ -29,10 +29,13 @@
         <typeAlias type="com.example.mealme.dto.UserDto" alias="userDto"/>
         <typeAlias type="com.example.mealme.dto.UserFileDto" alias="userFileDto"/>
         <typeAlias type="com.example.mealme.dto.UserShippingAddressDto" alias="userShippingAddressDto"/>
+        <typeAlias type="com.example.mealme.vo.SearchVo" alias="searchVo"/>
         <typeAlias type="com.example.mealme.vo.UserVo" alias="userVo"/>
         <typeAlias type="com.example.mealme.vo.UserModifyVo" alias="userModifyVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyVo" alias="companyVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyModifyVo" alias="companyModifyVo"/>
+        <typeAlias type="com.example.mealme.vo.Criteria" alias="criteria"/>
+        <typeAlias type="com.example.mealme.vo.PageVo" alias="pageVo"/>
 
 
     </typeAliases>

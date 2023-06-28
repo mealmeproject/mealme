@@ -28,6 +28,7 @@ public class UserDto {
     private double userWeight;
     private int userGrade;
 
+
     public UserDto(String userId, String userPassword, String userName, String userNickname, String userGender, String userPhoneNumber, String userBirth, int userAddressNumber, String userAddress1, String userAddress2, String userAddress3, String userEmail) {
         this.userId = userId;
         this.userPassword = userPassword;
@@ -42,4 +43,5 @@ public class UserDto {
         this.userAddress3 = userAddress3;
         this.userEmail = userEmail;
     }
+
 }
