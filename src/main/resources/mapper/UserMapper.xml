@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mealme.mapper.UserMapper">
-    <insert id="insert">
+    <insert id="insertUser">
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
@@ -11,10 +11,84 @@
                   #{userAddressNumber}, #{userAddress1}, #{userAddress2}, #{userAddress3}, #{userEmail})
     </insert>
 
+    <select id="checkUserId" resultType="int">
+        SELECT COUNT(USER_NUMBER) FROM TBL_USER
+        WHERE USER_ID = #{userId}
+    </select>
+
     <select id="selectUserNumber" resultType="Long">
         SELECT USER_NUMBER FROM TBL_USER
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
 
+    <insert id="insertCompany">
+        <selectKey keyProperty="companyNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_COMPANY.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_COMPANY (COMPANY_NUMBER, COMPANY_CODE_NUMBER, COMPANY_REGISTRATION_NUMBER, COMPANY_ID, COMPANY_PASSWORD,
+                                 COMPANY_NAME, COMPANY_CEO_NAME, COMPANY_CALL_NUMBER, COMPANY_ADDRESS_NUMBER, COMPANY_ADDRESS1,
+                                 COMPANY_ADDRESS2, COMPANY_ADDRESS3, COMPANY_EMAIL, COMPANY_BIRTH)
+        values (#{companyNumber}, #{companyCodeNumber},#{companyRegistrationNumber}, #{companyId}, #{companyPassword},
+          #{companyName}, #{companyCeoName}, #{companyCallNumber},  #{companyAddressNumber}, #{companyAddress1},
+          #{companyAddress2}, #{companyAddress3}, #{companyEmail}, #{companyBirth})
+    </insert>
+
+    <select id="checkCompanyId" resultType="int">
+        SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY
+        WHERE COMPANY_ID = #{companyId}
+    </select>
+
+    <select id="selectCompanyNumber" resultType="long">
+        SELECT COMPANY_NUMBER FROM TBL_COMPANY
+        WHERE COMPANY_ID = #{companyId} AND COMPANY_PASSWORD = #{companyPassword}
+    </select>
+
+    <select id="checkUser" resultType="String">
+        SELECT USER_ID FROM TBL_USER
+        WHERE USER_NUMBER = #{userNumber} AND USER_PASSWORD = #{userPassword}
+    </select>
+
+    <select id="checkCompany" resultType="String">
+        SELECT COMPANY_ID FROM TBL_COMPANY
+        WHERE COMPANY_NUMBER = #{companyNumber} AND COMPANY_PASSWORD = #{companyPassword}
+    </select>
+
+    <select id="checkUser2" resultType="userModifyVo">
+        select U.USER_NUMBER, U.USER_ID, U.USER_PASSWORD, U.USER_NAME, U.USER_NICKNAME, U.USER_GENDER, TO_CHAR(U.USER_BIRTH, 'YYYY-MM-DD') AS USER_BIRTH, U.USER_PHONE_NUMBER,
+               U.USER_ADDRESS_NUMBER, U.USER_ADDRESS1, U.USER_ADDRESS2, U.USER_ADDRESS3, U.USER_EMAIL, U.USER_JOIN_DATE, U.USER_COMMENT,
+               U.USER_HEIGHT, U.USER_WEIGHT, U.USER_GRADE, UF.FILE_NUMBER, UF.FILE_NAME, UF.FILE_UPLOAD_PATH, UF.FILE_UUID
+        from TBL_USER U
+        left join TBL_USER_FILE UF ON U.USER_NUMBER = UF.USER_NUMBER
+        WHERE U.USER_NUMBER = #{userNumber}
+
+    </select>
+
+    <select id="checkCompany2" resultType="companyModifyVo">
+        select U.*, UF.*
+        from TBL_COMPANY C
+        JOIN TBL_COMPANY_FILE CF
+        ON C.COMPANY_NUMBER = CF.COMPANY_NUMBER
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
+
+    <update id="updateUserNickname">
+        update TBL_USER
+        set USER_NICKNAME = #{userNickname}
+        where USER_NUMBER = #{userNumber}
+    </update>
+
+    <update id="updateUserComment">
+        update TBL_USER
+        set  USER_COMMENT = #{userComment}
+        where USER_NUMBER = #{userNumber}
+    </update>
+
+    <update id="updateUser">
+        update TBL_USER
+        set USER_NAME = #{userName}, USER_PASSWORD = #{userPassword}, USER_GENDER = #{userGender}, USER_BIRTH = #{userBirth}, USER_PHONE_NUMBER = #{userPhoneNumber},
+            USER_EMAIL = #{userEmail}, USER_ADDRESS_NUMBER = #{userAddressNumber}, USER_ADDRESS1 = #{userAddress1}, USER_ADDRESS2 = #{userAddress2}, USER_ADDRESS3 = #{userAddress3},
+            USER_HEIGHT = #{userHeight}, USER_WEIGHT = #{userWeight}
+        where USER_NUMBER = #{userNumber}
+    </update>
 
 </mapper>

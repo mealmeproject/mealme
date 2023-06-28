@@ -71,3 +71,84 @@ function sample6_execDaumPostcode() {
         },
     }).open();
 }
+
+var userIdInput = document.getElementById("userId");
+$('.id-check').on("click", function() {
+    var userId = userIdInput.value;
+    if (userId.trim() !== "") {
+        checkDuplicateId(userId);
+    }
+});
+
+// 아이디 중복체크
+function checkDuplicateId(userId) {
+    $.ajax({
+        url: "/user/checkUserId",
+        type: "GET",
+        data: { userId: userId },
+        success: function(response) {
+            if (response.checkId) {
+                console.log("중복된 아이디 입니다.");
+                document.getElementById("duplicateIdError").style.display = "block";
+                alert("중복된 아이디입니다. ");
+            } else {
+                console.log("사용 가능한 아이디 입니다. ");
+                document.getElementById("duplicateIdError").style.display = "none";
+                document.getElementById("duplicateIdPass").style.display = "block";
+                alert("사용 가능한 아이디입니다. ");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log("아이디 중복검사 에러");
+        }
+    });
+}
+
+// 비밀번호 일치
+var passwordInput = document.getElementById("userPassword");
+var confirmPasswordInput = document.getElementById("confirmPassword");
+var passwordMismatchError = document.getElementById("passwordMismatchError");
+var passwordMismatchPass = document.getElementById("passwordMismatchPass");
+var passwordCheck1 = document.getElementById("passwordCheck1");
+var passwordCheck2 = document.getElementById("passwordCheck2");
+var passwordCheck3 = document.getElementById("passwordCheck3");
+
+passwordInput.addEventListener("input", checkPasswordMatch);
+
+confirmPasswordInput.addEventListener("input", checkPasswordMatch);
+
+function checkPasswordMatch() {
+    var password = passwordInput.value;
+    var confirmPassword = confirmPasswordInput.value;
+
+    var pw = $("#userPassword").val();
+    var num = pw.search(/[0-9]/g);
+    var eng = pw.search(/[a-z]/ig);
+    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    if (password === confirmPassword){
+        passwordMismatchError.style.display = "none";
+        passwordMismatchPass.style.display = "block";
+    } else {
+        passwordMismatchError.style.display = "block";
+        passwordMismatchPass.style.display = "none";
+    }
+    if(pw.length < 8 || pw.length > 20){
+        passwordCheck1.style.display = "block";
+    }else if(pw.search(/\s/) != -1){
+        passwordCheck1.style.display = "none";
+        passwordCheck2.style.display = "block";
+    }else if(num < 0 || eng < 0 || spe < 0 ){
+        passwordCheck2.style.display = "none";
+        passwordCheck1.style.display = "none";
+        passwordCheck3.style.display = "block";
+    }else {
+        passwordCheck2.style.display = "none";
+        passwordCheck1.style.display = "none";
+        passwordCheck3.style.display = "none";
+        console.log("통과");
+        return true;
+    }
+}
+
+

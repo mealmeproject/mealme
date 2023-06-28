@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.UserFileMapper">
+
+    <insert id="registrationInsert">
+        <selectKey keyProperty="fileNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_COMPANY_REGISTRATION_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_COMPANY_REGISTRATION_FILE (FILE_NUMBER, COMPANY_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID)
+        values (#{fileNumber}, #{companyNumber}, #{fileName}, #{fileUploadPath}, #{fileUuid})
+    </insert>
+
+    <select id="registrationSelect" resultType="companyRegistrationFileDto">
+        select FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, COMPANY_NUMBER
+        from TBL_COMPANY_REGISTRATION_FILE
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
+
+    <delete id="registrationDelete">
+        DELETE FROM TBL_COMPANY_REGISTRATION_FILE
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </delete>
+
+    <select id="userCheck" resultType="int">
+        SELECT COUNT(FILE_NUMBER) FROM TBL_USER_FILE
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <delete id="userDelete">
+        DELETE FROM TBL_USER_FILE
+        WHERE USER_NUMBER = #{userNumber}
+    </delete>
+
+    <insert id="userInsert">
+        <selectKey keyProperty="fileNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_USER_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_USER_FILE (FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, USER_NUMBER)
+        values (#{fileNumber}, #{fileName}, #{fileUploadPath}, #{fileUuid}, #{userNumber})
+    </insert>
+
+    <select id="userSelect">
+        SELECT FROM TBL_USER_FILE
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+
+</mapper>

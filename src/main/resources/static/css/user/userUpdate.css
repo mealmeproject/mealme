@@ -11,26 +11,22 @@ body {
 }
 
 .body-container {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    width: 1200px;
+    flex-grow: 1;
+    /*width: 1200px;*/
 }
-
-.sidebar {
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    background-color: beige;
-}
-
 .main-container {
-    width: 900px;
-    padding: 20px;
+    width: 1100px;
+    margin: 0 20px 20px 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     /* background-color: pink; */
+}
+
+.work-container{
+    width: 900px;
+    margin: 0 auto;
+    margin-bottom: 300px;
 }
 
 .service-name-box {

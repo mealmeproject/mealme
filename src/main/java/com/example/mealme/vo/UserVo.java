@@ -31,5 +31,6 @@ public class UserVo {
         String userEmail = mail1 + "@" + mail2;
         UserDto userDto = new UserDto(userId, userPassword, userName, userNickname, userGender, userPhoneNumber, userBirth, addressNumber, address, detailAddress, extraAddress, userEmail);
         return userDto;
-    };
+    }
+
 }
