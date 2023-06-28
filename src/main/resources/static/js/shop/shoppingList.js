@@ -198,7 +198,6 @@ $(document).ready(function() {
             type: 'GET',
             url: '/shop/shoppingList',
             data: { category: category },
-            contentType: 'application/json',
             success: function(data) {
                 $('#product_list').html(data);
             },
@@ -234,5 +233,3 @@ function changeSort(selectedValue) {
         }
     });
 }
-
-function
