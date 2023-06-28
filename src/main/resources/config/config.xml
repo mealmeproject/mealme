@@ -27,5 +27,8 @@
         <typeAlias type="com.example.mealme.dto.UserDto" alias="userDto"/>
         <typeAlias type="com.example.mealme.dto.UserFileDto" alias="userFileDto"/>
         <typeAlias type="com.example.mealme.dto.UserShippingAddressDto" alias="userShippingAddressDto"/>
+        <typeAlias type="com.example.mealme.vo.RecommendVo" alias="recommendVo"/>
+        <typeAlias type="com.example.mealme.vo.FoodVo" alias="foodVo"/>
+        <typeAlias type="com.example.mealme.vo.DailyTotalVo" alias="dailyTotalVo"/>
     </typeAliases>
 </configuration>
