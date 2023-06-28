@@ -43,20 +43,18 @@
 
           <div class="title">오늘 하루</div>
           <div class="goal-wrap">
-            <div class="goal">✨ 나의 목표</div>
-            <div class="goal-content">하루 1700kcal 섭취하루 1700kcal 섭취하루 1700kcal 섭취하루 1700kcal 
-              섭취하루 1700kcal 섭취하루 1700kcal 섭취하루 1700kcal 섭취하루 1700kcal 
-              섭취하루 1700kcal 섭취하루 1700kcal 섭취하루 1700kcal 섭취</div>
+<!--            <div class="goal">✨ 나의 목표</div>-->
+<!--            <div class="goal-content"></div>-->
           </div>
 
           <div class="today-kcal-wrap">
             <div class="today-kcal">섭취/표준 칼로리</div>
             <div class="today-kcal-num-wrap">
-              <div class="today-kcal-num">1500</div>
-              <div class="today-kcal-wrap-sub">
-              <div class="today-kcal-slide">/</div>
-              <div class="today-kcal-total">1700</div>
-              <div class="today-kcal-unit">kcal</div>
+<!--              <div class="today-kcal-num" th:text="${CalcNutrientUtil.kcalSum}"></div>-->
+<!--              <div class="today-kcal-wrap-sub">-->
+<!--              <div class="today-kcal-slide">/</div>-->
+<!--              <div class="today-kcal-total" th:text="${RecommendVo.recommendKcal}"></div>-->
+<!--              <div class="today-kcal-unit">kcal</div>-->
             </div>
           </div>
           </div>
@@ -151,35 +149,7 @@
 
             <div class="today-food-chart-wrap">
               <!-- today-food-photo는 여기에 재우 내용 복붙 -->
-              <!-- <div class="today-food-chart-sub">
-                <div>표준대비 섭취 탄단지</div>
-                <div class="today-food-chart">
 
-                  <div>
-                    <div>종류</div>
-                    <div>섭취/표준량</div>
-                    <div>섭취비율</div>
-                  </div>
-
-                  <div>
-                    <div>탄수화물</div>
-                    <div>192/193g</div>
-                    <div>100%</div>
-                  </div>
-
-                  <div>
-                    <div>단백질</div>
-                    <div>87/129g</div>
-                    <div>68%</div>
-                  </div>
-
-                  <div>
-                    <div>지방</div>
-                    <div>67/48g</div>
-                    <div>141%</div>
-                  </div>
-                </div>
-              </div> -->
 
               
               <div class="today-date">
@@ -228,7 +198,7 @@
                   <div class="carbohydrate-percent-sub">
                   <div class="carbohydrate-percent">탄수화물</div>
                   <div class="carbohydrate-percent-num-wrap">
-                  <div class="carbohydrate-percent-num">50</div>
+                  <div class="carbohydrate-percent-num">0</div>
                   <div class="carbohydrate-percent-num-icon">%</div>
                 </div>
               </div>
@@ -239,7 +209,7 @@
                   <div class="protein-percent-sub">
                   <div class="protein-percent">단백질</div>
                   <div class="protein-percent-num-wrap">
-                  <div class="protein-percent-num">30</div>
+                  <div class="protein-percent-num">0</div>
                   <div class="protein-percent-num-icon">%</div>
                 </div>
                 </div>
@@ -249,7 +219,7 @@
                   <div class="fat-percent-sub">
                   <div class="fat-percent">지방</div>
                   <div class="fat-percent-num-wrap">
-                  <div class="fat-percent-num">20</div>
+                  <div class="fat-percent-num">0</div>
                   <div class="fat-percent-num-icon">%</div>
                 </div>
                 </div>
@@ -261,6 +231,7 @@
               </div>
 
 
+              <!-- 탄단지 그람수 받는 곳 -->
               <div class="nutrient-gram">
                 
                 <div class="carbohydrate-gram-wrap">
@@ -270,10 +241,10 @@
                 </div>
                 
                 <div class="carbohydrate-gram">
-                <div>100</div>
-                <div>/</div>
-                <div>228</div>
-                <div>g</div>
+<!--                <div>100</div>-->
+<!--                <div>/</div>-->
+<!--                <div>228</div>-->
+<!--                <div>g</div>-->
               </div>
               </div>
 
@@ -285,10 +256,10 @@
                 </div>
 
                 <div class="protein-gram">
-                <div>60</div>
-                <div>/</div>
-                <div>137</div>
-                <div>g</div>
+<!--                <div>60</div>-->
+<!--                <div>/</div>-->
+<!--                <div>137</div>-->
+<!--                <div>g</div>-->
               </div>
 
               </div>
@@ -300,10 +271,10 @@
                 </div>
 
                 <div class="fat-gram">
-                <div>10</div>
-                <div>/</div>
-                <div>40</div>
-                <div>g</div>
+<!--                <div>10</div>-->
+<!--                <div>/</div>-->
+<!--                <div>40</div>-->
+<!--                <div>g</div>-->
               </div>
 
               </div>
@@ -397,6 +368,10 @@
     <!-- chart_js 연결 -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    <script th:src="@{/js/chart/today.js}"></script>
+
+    <script th:inline="javascript">
+      let loginNumber = [[${session.userNumber}]];
+    </script>
+    <script type="module" th:src="@{/js/chart/today.js}"></script>
   </body>
 </html>
