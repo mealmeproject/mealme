@@ -62,7 +62,7 @@
               <div class="carbohydrate-percent-sub">
                 <div class="carbohydrate-percent">탄수화물</div>
                 <div class="carbohydrate-percent-num-wrap">
-                  <div class="carbohydrate-percent-num">50</div>
+                  <div class="carbohydrate-percent-num"></div>
                   <div class="carbohydrate-percent-num-icon">%</div>
                 </div>
               </div>
@@ -73,7 +73,7 @@
               <div class="protein-percent-sub">
                 <div class="protein-percent">단백질</div>
                 <div class="protein-percent-num-wrap">
-                  <div class="protein-percent-num">30</div>
+                  <div class="protein-percent-num"></div>
                   <div class="protein-percent-num-icon">%</div>
                 </div>
               </div>
@@ -83,7 +83,7 @@
               <div class="fat-percent-sub">
                 <div class="fat-percent">지방</div>
                 <div class="fat-percent-num-wrap">
-                  <div class="fat-percent-num">20</div>
+                  <div class="fat-percent-num"></div>
                   <div class="fat-percent-num-icon">%</div>
                 </div>
               </div>
@@ -106,11 +106,12 @@
               </div>
 
               <div class="carbohydrate-gram">
-                <div>100</div>
+                <div class="taken-carbohydrate-gram"></div>
                 <div>/</div>
-                <div>228</div>
+                <div th:text="${recommendVo.recommendCarbohydrate}"></div>
                 <div>g</div>
               </div>
+              <input type="hidden" class="recommendCarbohydrate-num" th:value="${recommendVo.recommendCarbohydrate}">
             </div>
 
 
@@ -121,12 +122,12 @@
               </div>
 
               <div class="protein-gram">
-                <div>60</div>
+                <div class="taken-protein-gram">60</div>
                 <div>/</div>
-                <div>137</div>
+                <div th:text="${recommendVo.recommendProtein}"></div>
                 <div>g</div>
               </div>
-
+              <input type="hidden" class="recommendProtein-num" th:value="${recommendVo.recommendProtein}">
             </div>
 
             <div class="fat-gram-wrap">
@@ -136,12 +137,12 @@
               </div>
 
               <div class="fat-gram">
-                <div>10</div>
+                <div class="taken-fat-gram">10</div>
                 <div>/</div>
-                <div>40</div>
+                <div th:text="${recommendVo.recommendFat}"></div>
                 <div>g</div>
               </div>
-
+              <input type="hidden" class="recommendFat-num" th:value="${recommendVo.recommendFat}">
             </div>
 
 
@@ -201,7 +202,10 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script th:src="@{/js/chart/chart_daily.js}"></script>
+<script th:inline="javascript">
+  let loginNumber = [[${session.userNumber}]];
+</script>
+<script type="module" th:src="@{/js/chart/chart_daily.js}"></script>
 <!-- <script src="./doughnut.js"></script> -->
 </body>
 </html>
