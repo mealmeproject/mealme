@@ -24,11 +24,20 @@ public class UserService {
             throw new IllegalArgumentException("회원정보 누락 !");
         }
 
-        String userPassword;
-        userPassword = Util.pwSha256(userDto.getUserPassword());
+        String userPassword = Util.pwSha256(userDto.getUserPassword());
         userDto.setUserPassword(userPassword);
         System.out.println("userPassword ======= " + userPassword);
         userMapper.insertUser(userDto);
+    }
+
+    public void registerKakaoUser(UserDto userDto){
+        if (userDto == null){
+            throw new IllegalArgumentException("회원정보 누락 !");
+        }
+        String userPassword = Util.pwSha256(userDto.getUserPassword());
+        userDto.setUserPassword(userPassword);
+        System.out.println("userPassword ======= " + userPassword);
+        userMapper.insertKakaoUser(userDto);
     }
 
     // 유저 아이디 중복검사
@@ -96,6 +105,24 @@ public class UserService {
         return Optional.ofNullable(userMapper.selectCompanyNumber(companyId, companyPw))
                 .orElseThrow(() -> {throw new IllegalArgumentException("존재하지 않는 기업회원입니다. ");});
     }
+
+    public String getUserName(Long userNumber){
+        if (userNumber == null){
+            throw new IllegalArgumentException("userNumber 없음 !");
+        }
+        return Optional.ofNullable(userMapper.getUserName(userNumber))
+                .orElseThrow(() -> {throw new IllegalArgumentException("존재하지 않는 회원" );});
+    }
+
+    public String getCompanyName(Long companyNumber){
+        if (companyNumber == null){
+            throw new IllegalArgumentException("userNumber 없음 !");
+        }
+        return Optional.ofNullable(userMapper.getCompanyName(companyNumber))
+                .orElseThrow(() -> {throw new IllegalArgumentException("존재하지 않는 회원" );});
+    }
+
+
 
     // 유저 회원정보 수정 체크
     @Transactional(readOnly = true)
@@ -172,5 +199,32 @@ public class UserService {
         String userPassword = Util.pwSha256(userDto.getUserPassword());
         userDto.setUserPassword(userPassword);
         userMapper.updateUser(userDto);
+    }
+
+
+    // 기업 네임 수정하기
+    public void modifyCompanyName(Long companyNumber, String companyName){
+        if (companyNumber == null || companyName == null){
+            throw new IllegalArgumentException("companyNumber, companyName 없음 !");
+        }
+        userMapper.updateCompanyName(companyNumber, companyName);
+    }
+
+    // 기업 코멘트 수정하기
+    public void modifyCompanyComment(Long companyNumber, String companyComment){
+        if (companyNumber == null || companyComment == null){
+            throw new IllegalArgumentException("userNumber, userComment 없음 !");
+        }
+        userMapper.updateCompanyComment(companyNumber, companyComment);
+    }
+
+    // 기업 나머지 수정하기
+    public void modifyCompany(CompanyDto companyDto){
+        if (companyDto == null){
+            throw new IllegalArgumentException("수정할 데이터 없음 !");
+        }
+        String userPassword = Util.pwSha256(companyDto.getCompanyPassword());
+        companyDto.setCompanyPassword(userPassword);
+        userMapper.updateCompany(companyDto);
     }
 }

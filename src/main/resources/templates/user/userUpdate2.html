@@ -13,9 +13,9 @@
         <link rel="stylesheet" th:href="@{/css/fragment/aside2.css}" />
         <link rel="stylesheet" th:href="@{/css/fragment/aside.css}" />
         <link rel="stylesheet" th:href="@{/css/user/userUpdate2.css}" />
+        <link rel="stylesheet" th:href="@{/css/user/jquery-ui.css}" />
         <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
         <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
-        <link rel="stylesheet" href="../css/jquery-ui.css" />
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
@@ -68,7 +68,7 @@
                             <form id="commentForm" th:action="@{/user/userCommentUpdate}" method="post">
                             <div class="user-info">
                                 <input type="text" name="userComment" id="userComment"
-                                       oninput="adCommentInputLength()" onload="adCommentInputLength()" th:value="${user.userComment}" readonly/>
+                                       oninput="adCommentInputWidth()" onload="adCommentInputWidth()" th:value="${user.userComment}" readonly/>
                                     <div class="comment-edit-img-box" onclick="toggleCommentEdit()">
                                         <img id="comment-edit-img" th:src="@{/img/edit_25.png}" alt="Edit" />
                                     </div>
@@ -206,17 +206,16 @@
         </aside>
         <!-- 퀵 메뉴 추가 공간 -->
         <!-- 푸터 추가 공간 -->
+        <script th:src="@{/js/fragment/aside.js}"></script>
         <script th:src="@{/js/user/userUpdate2.js}"></script>
-        <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
-        <script th:src="@{/js/fragment/aside.js}"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script>
             function openFileInput() {
                 document.getElementById('picture-input').click();
             }
-
             function readURL(input) {
                 console.log("readURL 실행 !");
 
@@ -227,7 +226,6 @@
                     };
                     reader.readAsDataURL(input.files[0]);
 
-                    // Show the photo-done-img and hide the photo-call-img
                     document.getElementById('photo-done-img').parentNode.style.display = 'block';
                     document.getElementById('photo-call-img').style.display = 'none';
                 } else {
@@ -236,7 +234,6 @@
                     document.getElementById('photo-call-img').style.display = 'block';
                 }
             }
-
         </script>
     </body>
 </html>

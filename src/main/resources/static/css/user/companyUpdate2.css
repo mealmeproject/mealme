@@ -12,15 +12,14 @@ body {
 
 .body-container {
     flex-grow: 1;
-    /*width: 1200px;*/
 }
+
 .main-container {
     width: 1100px;
     margin: 0 20px 20px 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    /* background-color: pink; */
 }
 
 .work-container{
@@ -29,6 +28,9 @@ body {
     margin-bottom: 300px;
 }
 
+.service-name-box {
+    padding-left: 20px;
+}
 .update-container {
     padding-bottom: 50px;
 }
@@ -41,10 +43,6 @@ body {
     height: 1px;
     background-color: #ff9326;
     border: 0;
-}
-
-.service-name-box {
-    padding-left: 20px;
 }
 
 /* 프로필 이미지  */
@@ -60,7 +58,7 @@ body {
     border-radius: 50%;
 }
 
-.profile-img-box img {
+#preview {
     width: 250px;
     height: 250px;
     border-radius: 50%;
@@ -74,35 +72,126 @@ body {
     justify-content: center;
 }
 
-.nickname {
-    margin-top: 40px;
-    font-size: 30px;
+#nicknameContainer{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
 }
 
-.edit-img-box {
-    margin-top: 40px;
-    width: 34.8px;
-    height: 34.8px;
-    margin-left: 10px;
+.companyName {
+    text-align: right;
 }
 
-.edit-img-box img {
-    width: 34.8px;
-    height: 34.8px;
-    object-fit: cover;
-    cursor: pointer;
+#companyName{
+    background-color: white;
+    font-size: 25px;
 }
 
-.edit-img-box {
+#companyComment{
+    background-color: white;
+    text-align: center;
+}
+
+/* 추가 css */
+#doneImage {
+    display: none;
+}
+.edit-img-box,
+.done-img-box {
+    display: inline-block;
+    vertical-align: middle;
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+
+}
+
+
+#companyName-input {
+    vertical-align: middle;
+}
+
+/*코멘트쪽*/
+#comment-done-img {
+    display: none;
+}
+
+.comment-edit-img-box,
+.comment-done-img-box {
+    display: inline-block;
+    vertical-align: middle;
     filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
 }
+
+.comment-edit-img,
+.comment-done-img {
+    width: 10px;
+    height: 10px;
+}
+
+h5{
+    margin-top: 10px;
+}
+
+.profile-img-box {
+    position: relative;
+
+}
+
+.photo-call {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(210, 210, 210, 0.3);
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.photo-call img{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    object-fit: cover;
+}
+
+input[type="file"] {
+    display: block;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.photo-done-img-box {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: solid 1px grey;
+    background-color: rgba(210, 210, 210, 0.3);
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.photo-done-img-box img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+/* 추가 css */
+
 
 .update-user-data {
     padding-top: 40px;
 }
+
 /* 한줄코멘트 */
 .user-info {
-    margin: 20px 0 0 0;
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,8 +199,24 @@ body {
     font-size: 20px;
 }
 
-/* 수정데이터 칸 */
-.row {
+.edit-comment-box {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.edit-comment-box img {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.edit-comment-box {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.update-row {
     display: flex;
     padding: 20px;
     font-size: 20px;
@@ -143,70 +248,6 @@ input[type="password"] {
     font-size: 14px;
     border-radius: 6px;
     background-color: rgba(210, 210, 210, 0.3);
-}
-
-input[type="file"] {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
-
-.file-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.file-wrap > li {
-    list-style-type: none;
-    width: 90px;
-    height: 90px;
-    margin: 0.5rem;
-    border: 0.0625rem dashed #e1e1e1;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.material-symbols-outlined {
-    font-variation-settings: "FILL" 0, "wght" 100, "GRAD" -25, "opsz" 80;
-}
-
-.file-wrap > li:first-child {
-    position: relative;
-    cursor: pointer;
-    background: url("../img/library_add.png") no-repeat 50%;
-    background-color: #ececec;
-}
-
-.img-list {
-    cursor: default;
-    background: url("../img/photo_camera.png") no-repeat 50% #ececec;
-    position: relative;
-}
-
-input[type="file"] {
-    cursor: pointer;
-}
-
-.x-box::after {
-    content: "x";
-    background-color: #ff9326;
-    color: white;
-    display: block;
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    top: -5px;
-    right: -5px;
-    text-align: center;
-    line-height: 13px;
-}
-
-/* 선택 칸 */
-.img-group {
-    margin-bottom: 20px;
 }
 
 .radio-group {
@@ -259,8 +300,7 @@ input[type="file"] {
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    color: rgb(255, 139, 38);
-
+    color: rgba(50, 50, 50, 0.9);
     position: relative !important;
 }
 
@@ -278,10 +318,11 @@ input[type="file"] {
 
 .phone-number-box {
     display: flex;
+    align-items: center;
 }
 
 #phone1 {
-    width: 100px;
+    width: 95px;
     padding: 10px;
     font-size: 14px;
     background-color: rgba(210, 210, 210, 0.3);
@@ -290,7 +331,7 @@ input[type="file"] {
 
 #phone2,
 #phone3 {
-    width: 18% !important;
+    width: 20% !important;
 }
 /* 이메일 */
 .email-box {
@@ -334,14 +375,16 @@ input[type="file"] {
     color: #fff;
 }
 
-#adress-number {
+#addressNumber {
     width: 50%;
 }
 
 .spec {
-    width: 53%;
+    width: 60%;
     font-size: 14px;
 }
+
+/* 수정완료버튼 */
 
 .submit-btn-box {
     display: flex;
@@ -374,4 +417,15 @@ input[type="file"] {
 #submit-btn:hover,
 .address-btn:hover {
     background-color: #ff7e00;
+}
+
+
+.note-editor.note-frame {
+    width: 100%;
+    float: left;
+    margin-right: 20px;
+}
+
+.note-resizebar {
+    display: none;
 }

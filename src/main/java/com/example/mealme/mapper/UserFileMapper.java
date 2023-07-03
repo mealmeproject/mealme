@@ -1,5 +1,6 @@
 package com.example.mealme.mapper;
 
+import com.example.mealme.dto.CompanyFileDto;
 import com.example.mealme.dto.CompanyRegistrationFileDto;
 import com.example.mealme.dto.UserFileDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,6 +28,20 @@ public interface UserFileMapper {
 
     // 유저 프로필 사진 삭제
     public void userDelete(Long userNumber);
+
+
+    // 기업 회원 수정
+    // 기업 프로필 사진 체크
+    public int companyCheck(long companyNumber);
+
+    // 기업 프로필 사진 입력
+    public void companyInsert(CompanyFileDto companyFileDto);
+
+    // 기업 프로필 사진 검색
+    public CompanyFileDto companySelect(Long companyNumber);
+
+    // 기업 프로필 사진 삭제
+    public void companyDelete(Long companyNumber);
 
 
 
