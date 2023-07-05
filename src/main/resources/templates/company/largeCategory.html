@@ -54,7 +54,7 @@
                     </div>
                     <!-- 첫 번째 선택 창 소개 끝 -->
                     <!-- 첫 번째 선택 창 버튼 -->
-                    <a th:href="@{/company/hospitalCategory}" class="first-category-button">이동하기</a>
+                    <a th:href="@{/company/hospitalCategory(companyCodeNumber=100)}" class="first-category-button">이동하기</a>
                     <!-- <a href="" class="button1">그럼 여기!</a> -->
 
                     <!-- 첫 번째 선택 창 버튼 끝 -->
@@ -78,7 +78,7 @@
                     </div>
                     <!-- 두 번째 선택 창 소개 끝 -->
                     <!-- 두 번째 선택 창 버튼 -->
-                    <a th:href="@{/company/hospitalCategory}" class="second-category-button">이동하기</a>
+                    <a th:href="@{/company/hospitalCategory(companyCodeNumber=200)}" class="second-category-button">이동하기</a>
                     <!-- 두 번째 선택 창 버튼 끝 -->
                 </div>
                 <!-- 두 번째 선택 창 끝 -->
@@ -100,7 +100,8 @@
                     </div>
                     <!-- 세 번째 선택 창 소개 끝 -->
                     <!-- 세 번째 선택 창 버튼 -->
-                    <a th:href="@{/company/hospitalCategory}" class="third-category-button">이동하기</a>
+<!--                                  <a th:href="@{/board/communityRead(boardNumber=${board.boardNumber})-->
+                    <a th:href="@{/company/hospitalCategory(companyCodeNumber=300)}" class="third-category-button">이동하기</a>
                     <!-- 세 번째 선택 창 버튼 끝 -->
                 </div>
                 <!-- 세 번째 선택 창 끝 -->

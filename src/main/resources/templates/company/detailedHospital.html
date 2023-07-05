@@ -55,18 +55,19 @@
             </div>
             <div class="star-wrap">
               <div class="star">★★★★★</div>
-              <div class="star-num">( 4.2 / 5 )</div>
+              <div class="star-num" th:text="${companyinfo.averageGrade} + '/' + '5'">( 4.2 / 5 )</div>
             </div>
             <!-- 상세 정보 이미지 끝 -->
             <!-- 상세 정보 내용 -->
             <div class="main-detailed-info">
-              <div class="detailed-info">
+              <div class="detailed-info" >
+                <span style="display: none" th:text="${companyinfo.companyNumber}"></span>
                 <div class="info1-section">
                   <div class="info1-second-section">
                     <span>병원 명</span>
                   </div>
                   <div class="info1-third-section">
-                    <span>서울나우병원</span>
+                    <span th:text="${companyinfo.companyName}">서울나우병원</span>
                   </div>
                 </div>
                 <div class="info2-section">
@@ -74,7 +75,7 @@
                     <span>대표자 명</span>
                   </div>
                   <div class="info2-third-section">
-                    <span>이동재</span>
+                    <span th:text="${companyinfo.companyCeoName}">이동재</span>
                   </div>
                 </div>
                 <div class="info3-section">
@@ -82,7 +83,7 @@
                     <span>사업자 번호</span>
                   </div>
                   <div class="info3-third-section">
-                    <span>123212312</span>
+                    <span th:text="${companyinfo.companyRegistrationNumber}">123212312</span>
                   </div>
                 </div>
                 <div class="info4-section">
@@ -90,7 +91,7 @@
                     <span>대표전화</span>
                   </div>
                   <div class="info4-third-section">
-                    <span>031-2565-2333</span>
+                    <span th:text="${companyinfo.companyCallNumber}">031-2565-2333</span>
                   </div>
                 </div>
                 <div class="info5-section">
@@ -98,7 +99,15 @@
                     <span>홈페이지</span>
                   </div>
                   <div class="info5-third-section">
-                    <span>http://naver.com</span>
+                    <span th:text="${companyinfo.companyUrl}">http://naver.com</span>
+                  </div>
+                </div>
+                <div class="infoException-section">
+                  <div class="infoException-second-section">
+                    <span>이메일</span>
+                  </div>
+                  <div class="infoException-third-section">
+                    <span th:text="${companyinfo.companyEmail}">illusoin123@naver.com</span>
                   </div>
                 </div>
                 <div class="info6-section">
@@ -106,7 +115,7 @@
                     <span>소개</span>
                   </div>
                   <div class="info6-third-section">
-                    <span>시력 2.0 만들어 드립니다</span>
+                    <span th:text="${companyinfo.companyComment}">시력 2.0 만들어 드립니다</span>
                   </div>
                 </div>
                 <div class="info7-section">
@@ -114,7 +123,7 @@
                     <span>주소</span>
                   </div>
                   <div class="info7-third-section">
-                    <div class="address">경기도 성남시 분당구 서현1동 267-3</div>
+                    <div class="address" th:text="${companyinfo.companyAddress1}">경기도 성남시 분당구 서현1동 267-3</div>
                   </div>
                 </div>
               </div>
@@ -139,7 +148,7 @@
           <!-- 상세 정보 메인 공간 끝 -->
           <!-- 신청 페이지 이동 버튼 -->
           <div class="page-setting-button-section">
-            <a th:href="@{/company/settingThePeriod}" class="page-setting-detailed-button-section">
+            <a th:href="@{/company/settingThePeriod(companyNumber=${companyinfo.companyNumber})}" class="page-setting-detailed-button-section" >
               <span>신청하기</span>
             </a>
           </div>
@@ -155,7 +164,7 @@
           </div>
           <div class="review-list-section">
             <!-- 리뷰 메인 부분 -->
-            <div class="review-list-small-section">
+            <div th:each="company : ${companyReviewList}" class="review-list-small-section">
               <!-- 리뷰 별점과 날짜 -->
               <div class="review-list-asterion-section">
                 <!-- 별점 -->
@@ -173,7 +182,7 @@
                 <!-- 별점 끝 -->
                 <!-- 날짜 -->
                 <div class="review-list-date-section">
-                  <div class="date">2023-06-15</div>
+                  <div class="date" th:text="${company.reviewDate}">2023-06-15</div>
                 </div>
                 <!-- 날짜 끝 -->
               </div>
@@ -188,13 +197,13 @@
               <!-- 리뷰 닉네임 -->
               <div class="review-list-nickname-section">
                 <div class="review-list-nickname">
-                  <div class="review-nickname">굳건이</div>
+                  <div class="review-nickname" th:text="${company.userNickname}">굳건이</div>
                 </div>
               </div>
               <!-- 리뷰 닉네임 끝 -->
               <!-- 리뷰 댓글 부분 -->
               <div class="review-list-content-section">
-                <div class="review-list-content">
+                <div class="review-list-content" th:text="${company.reviewContent}">
                       <span>정말 끝내줘요.동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람
                         대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세
                         동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.
@@ -206,47 +215,55 @@
             </div>
             <!-- 리뷰 메인 부분 끝 -->
             <!-- 리뷰 메인 부분 -->
-            <div class="review-list-small-section1">
-              <!-- 리뷰 별점과 날짜 -->
-              <div class="review-list-asterion-section">
-                <!-- 별점 -->
-                <div class="review-list-asterion">
-                  <div class="asterion"></div>
-                </div>
-                <!-- 별점 끝 -->
-                <!-- 날짜 -->
-                <div class="review-list-date-section">
-                  <div class="date">2023-06-15</div>
-                </div>
-                <!-- 날짜 끝 -->
-              </div>
-              <!-- 리뷰 별점과 날짜 끝 -->
-              <!-- 리뷰 이미지 -->
-              <div class="review-list-image-section">
-                <div class="review-list-image">
-                  <img class="review-image" src="../img/ohdungi.jpg">
-                </div>
-              </div>
-              <!-- 리뷰 이미지 끝 -->
-              <!-- 리뷰 닉네임 -->
-              <div class="review-list-nickname-section">
-                <div class="review-list-nickname">
-                  <div class="review-nickname">굳건이</div>
-                </div>
-              </div>
-              <!-- 리뷰 닉네임 끝 -->
-              <!-- 리뷰 댓글 부분 -->
-              <div class="review-list-content-section">
-                <div class="review-list-content">
-                      <span>정말 끝내줘요.동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람
-                        대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세
-                        동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.
-                        동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.
-                      </span>
-                </div>
-              </div>
-              <!-- 리뷰 댓글 부분 끝 -->
-            </div>
+<!--            <div class="review-list-small-section1">-->
+<!--              &lt;!&ndash; 리뷰 별점과 날짜 &ndash;&gt;-->
+<!--              <div class="review-list-asterion-section">-->
+<!--                &lt;!&ndash; 별점 &ndash;&gt;-->
+<!--                <div class="review-list-asterion">-->
+<!--                  <div class="asterion">-->
+<!--                    <div class="star_rating">-->
+<!--                      <a href="#" class="on">★</a>-->
+<!--                      <a href="#" class="on">★</a>-->
+<!--                      <a href="#" class="on">★</a>-->
+<!--                      <a href="#" class="on">★</a>-->
+<!--                      <a href="#" class="on">★</a>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; 별점 끝 &ndash;&gt;-->
+<!--                &lt;!&ndash; 날짜 &ndash;&gt;-->
+<!--                <div class="review-list-date-section">-->
+<!--                  <div class="date">2023-06-15</div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; 날짜 끝 &ndash;&gt;-->
+<!--              </div>-->
+<!--              &lt;!&ndash; 리뷰 별점과 날짜 끝 &ndash;&gt;-->
+<!--              &lt;!&ndash; 리뷰 이미지 &ndash;&gt;-->
+<!--              <div class="review-list-image-section">-->
+<!--                <div class="review-list-image">-->
+<!--                  <img class="review-image" src="../img/ohdungi.jpg">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; 리뷰 이미지 끝 &ndash;&gt;-->
+<!--              &lt;!&ndash; 리뷰 닉네임 &ndash;&gt;-->
+<!--              <div class="review-list-nickname-section">-->
+<!--                <div class="review-list-nickname">-->
+<!--                  <div class="review-nickname">굳건이</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; 리뷰 닉네임 끝 &ndash;&gt;-->
+<!--              &lt;!&ndash; 리뷰 댓글 부분 &ndash;&gt;-->
+<!--              <div class="review-list-content-section">-->
+<!--                <div class="review-list-content">-->
+<!--                      <span>정말 끝내줘요.동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람-->
+<!--                        대한으로 길이 보전하세. 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세-->
+<!--                        동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.-->
+<!--                        동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세.-->
+<!--                      </span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; 리뷰 댓글 부분 끝 &ndash;&gt;-->
+<!--            </div>-->
             <!-- 리뷰 메인 부분 끝 -->
           </div>
           <!-- 페이지 이동 부분 -->
@@ -281,10 +298,10 @@
   <div class="menu-container"></div>
 </aside>
 <!-- 퀵 메뉴 추가 공간 -->
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f45985609427e5a5bef0935301038914"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f45985609427e5a5bef0935301038914&libraries=services"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
 <script th:src="@{/js/company/detailed.js}"></script>
 <!--<script>-->

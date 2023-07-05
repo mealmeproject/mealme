@@ -31,7 +31,7 @@
         <!-- 리스트 이름 -->
         <div class="list-name-section">
           <div class="list-name">
-            <h2>병원</h2>
+            <div class="list-name1"th:text="${companyCodeName}">병원</div>
           </div>
         </div>
         <!-- 리스트 이름 끝 -->
@@ -47,96 +47,197 @@
           <!-- 리스트 메인 부분 -->
           <div class="list-main-section">
             <!-- 첫 번째 예시 리스트 -->
-            <div class="list-main">
+            <div class="list-main" th:each="company : ${companies}">
               <div class="list-image-section">
                 <div class="list-image">
-                  <img class="image1" src="../img/서울대병원.jpg">
+                  <img th:src="@{/img/서울대병원.jpg}" class="image1">
                 </div>
               </div>
               <div class="list-comment-section">
                 <div class="list-comment">
-                  <a th:href="@{/company/detailedHospital}" class="list-detailed">
+                  <a th:href="@{/company/detailedHospital(companyNumber=${company.companyNumber})}" class="list-detailed">
                     <span class="detailed">더보기</span>
                   </a>
-
-
                   <div class="list-comment-name">
-                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>
+                    <div class="name-list" th:text="${company.companyName} + '에 오신 것을 환영합니다.'">서울나우병원에 오신 것을 환영합니다.</div>
                   </div>
                   <div class="star-wrap">
                     <div class="star">★★★★★</div>
-                    <div class="star-num">( 4.2 / 5 )</div>
+                    <div class="star-num" th:text="${company.averageGrade} + '/' + '5'">( 4.2 / 5 )</div>
                   </div>
                   <div class="minutely-information">
-                    <div class="information1">대표자 : 이동재</div>
-                    <div class="information2">대표전화 : 1234-1234</div>
-                    <div class="information3">위치 : 서울시 강남대로 123번길</div>
+                    <div class="information1" th:text="'대표자 : ' + ${company.companyCeoName}">대표자 : 이동재</div>
+                    <div class="information2" th:text="'대표전화 : ' + ${company.companyCallNumber}">대표전화 : 1234-1234</div>
+                    <div class="information3" th:text="'위치 : ' + ${company.companyAddress1}">위치 : 서울시 강남대로 123번길</div>
                   </div>
-
-
                 </div>
               </div>
             </div>
             <!-- 첫 번째 예시 리스트 끝 -->
             <!-- 여기서 부터는 반복문 돌리면 될듯 -->
             <!-- 두 번째 예시 리스트 -->
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+<!--            <div class="list-main">-->
+<!--              <div class="list-image-section">-->
+<!--                <div class="list-image">-->
+<!--                  <img class="image1" src="../img/서울대병원.jpg">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="list-comment-section">-->
+<!--                <div class="list-comment">-->
+<!--                  <div class="list-detailed">-->
+<!--                    <span class="detailed">더보기</span>-->
+<!--                  </div>-->
+<!--                  <div class="list-comment-name">-->
+<!--                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>-->
+<!--                  </div>-->
+<!--                  <div class="star-wrap">-->
+<!--                    <div class="star">★★★★★</div>-->
+<!--                    <div class="star-num">( 4.2 / 5 )</div>-->
+<!--                  </div>-->
+<!--                  <div class="minutely-information">-->
+<!--                    <div class="information1">대표자 : 이동재</div>-->
+<!--                    <div class="information2">대표전화 : 1234-1234</div>-->
+<!--                    <div class="information3">위치 : 서울시 강남대로 123번길</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <div class="list-main">
-              <div class="list-image-section">
-                <div class="list-image">
-                  <img class="image1" src="../img/서울대병원.jpg">
-                </div>
-              </div>
-              <div class="list-comment-section">
-                <div class="list-comment">
-                  <div class="list-detailed">
-                    <span class="detailed">더보기</span>
-                  </div>
+<!--             <div class="list-main2">-->
+<!--                <div class="list-image-section">-->
+<!--                    <div class="list-image">-->
+<!--                        <img class="image1" src="./jrong.jpg">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="list-comment-section">-->
+<!--                    <div class="list-comment">-->
+<!--                        <div class="list-detailed">-->
+<!--                            <span class="detailed">더보기</span>-->
+<!--                        </div>-->
+<!--                        <div class="list-comment-name">-->
+<!--                            <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>-->
+<!--                        </div>-->
+<!--                        <div class="minutely-information">-->
+<!--                            <div class="information1">대표자 : 이동재</div>-->
+<!--                            <div class="information2">대표전화 : 1234-1234</div>-->
+<!--                            <div class="information3">위치 : 서울시 강남대로 123번길</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="list-main">-->
+<!--              <div class="list-image-section">-->
+<!--                <div class="list-image">-->
+<!--                  <img class="image1" src="../img/서울대병원.jpg">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="list-comment-section">-->
+<!--                <div class="list-comment">-->
+<!--                  <div class="list-detailed">-->
+<!--                    <span class="detailed">더보기</span>-->
+<!--                  </div>-->
+<!--                  <div class="list-comment-name">-->
+<!--                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>-->
+<!--                  </div>-->
+<!--                  <div class="star-wrap">-->
+<!--                    <div class="star">★★★★★</div>-->
+<!--                    <div class="star-num">( 4.2 / 5 )</div>-->
+<!--                  </div>-->
+<!--                  <div class="minutely-information">-->
+<!--                    <div class="information1">대표자 : 이동재</div>-->
+<!--                    <div class="information2">대표전화 : 1234-1234</div>-->
+<!--                    <div class="information3">위치 : 서울시 강남대로 123번길</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="list-main">-->
+<!--              <div class="list-image-section">-->
+<!--                <div class="list-image">-->
+<!--                  <img class="image1" src="../img/서울대병원.jpg">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="list-comment-section">-->
+<!--                <div class="list-comment">-->
+<!--                  <div class="list-detailed">-->
+<!--                    <span class="detailed">더보기</span>-->
+<!--                  </div>-->
+<!--                  <div class="list-comment-name">-->
+<!--                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>-->
+<!--                  </div>-->
+<!--                  <div class="star-wrap">-->
+<!--                    <div class="star">★★★★★</div>-->
+<!--                    <div class="star-num">( 4.2 / 5 )</div>-->
+<!--                  </div>-->
+<!--                  <div class="minutely-information">-->
+<!--                    <div class="information1">대표자 : 이동재</div>-->
+<!--                    <div class="information2">대표전화 : 1234-1234</div>-->
+<!--                    <div class="information3">위치 : 서울시 강남대로 123번길</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="list-main">-->
+<!--              <div class="list-image-section">-->
+<!--                <div class="list-image">-->
+<!--                  <img class="image1" src="../img/서울대병원.jpg">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="list-comment-section">-->
+<!--                <div class="list-comment">-->
+<!--                  <div class="list-detailed">-->
+<!--                    <span class="detailed">더보기</span>-->
+<!--                  </div>-->
+<!--                  <div class="list-comment-name">-->
+<!--                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>-->
+<!--                  </div>-->
+<!--                  <div class="star-wrap">-->
+<!--                    <div class="star">★★★★★</div>-->
+<!--                    <div class="star-num">( 4.2 / 5 )</div>-->
+<!--                  </div>-->
+<!--                  <div class="minutely-information">-->
+<!--                    <div class="information1">대표자 : 이동재</div>-->
+<!--                    <div class="information2">대표전화 : 1234-1234</div>-->
+<!--                    <div class="information3">위치 : 서울시 강남대로 123번길</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="list-main">-->
+<!--              <div class="list-image-section">-->
+<!--                <div class="list-image">-->
+<!--                  <img class="image1" src="../img/서울대병원.jpg">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="list-comment-section">-->
+<!--                <div class="list-comment">-->
+<!--                  <div class="list-detailed">-->
+<!--                    <span class="detailed">더보기</span>-->
+<!--                  </div>-->
+<!--                  <div class="list-comment-name">-->
+<!--                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>-->
+<!--                  </div>-->
+<!--                  <div class="star-wrap">-->
+<!--                    <div class="star">★★★★★</div>-->
+<!--                    <div class="star-num">( 4.2 / 5 )</div>-->
+<!--                  </div>-->
+<!--                  <div class="minutely-information">-->
+<!--                    <div class="information1">대표자 : 이동재</div>-->
+<!--                    <div class="information2">대표전화 : 1234-1234</div>-->
+<!--                    <div class="information3">위치 : 서울시 강남대로 123번길</div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
 
 
-                  <div class="list-comment-name">
-                    <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>
-                  </div>
-                  <div class="star-wrap">
-                    <div class="star">★★★★★</div>
-                    <div class="star-num">( 4.2 / 5 )</div>
-                  </div>
-                  <div class="minutely-information">
-                    <div class="information1">대표자 : 이동재</div>
-                    <div class="information2">대표전화 : 1234-1234</div>
-                    <div class="information3">위치 : 서울시 강남대로 123번길</div>
-                  </div>
 
 
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <!-- <div class="list-main2">
-                <div class="list-image-section">
-                    <div class="list-image">
-                        <img class="image1" src="./jrong.jpg">
-                    </div>
-                </div>
-                <div class="list-comment-section">
-                    <div class="list-comment">
-                        <div class="list-detailed">
-                            <span class="detailed">더보기</span>
-                        </div>
-                        <div class="list-comment-name">
-                            <div class="name-list">서울나우병원에 오신 것을 환영합니다.</div>
-                        </div>
-                        <div class="minutely-information">
-                            <div class="information1">대표자 : 이동재</div>
-                            <div class="information2">대표전화 : 1234-1234</div>
-                            <div class="information3">위치 : 서울시 강남대로 123번길</div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <!--            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 
 
 
