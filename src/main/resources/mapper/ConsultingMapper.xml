@@ -11,13 +11,12 @@
         VALUES (#{consultingNumber}, #{companyNumber}, #{userNumber}, #{consultingComment},SYSDATE)
     </insert>
 
-    <select id="select" parameterType="long" resultType="consultingVo">
+    <select id="select" parameterType="long" resultType="sendConsultingVo">
         SELECT C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT, U.USER_NICKNAME, CO.COMPANY_NAME
         FROM TBL_CONSULTING C
                  JOIN TBL_USER U ON C.USER_NUMBER = U.USER_NUMBER
                  JOIN TBL_COMPANY CO ON C.COMPANY_NUMBER = CO.COMPANY_NUMBER
         WHERE CONSULTING_NUMBER=#{consultingNumber}
-
     </select>
 
 
@@ -29,19 +28,37 @@
         FROM TBL_CONSULTING_REQUEST R
                  JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
                  JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
-
+        WHERE R.COMPANY_NUMBER = ${companyNumber}
     </select>
 
 
 
-    <select id="selectRequestOne"     parameterType="long" resultType="consultingRequestDto">
-        SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,
-               R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,
-               R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME
-        FROM TBL_CONSULTING_REQUEST R
-                 JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
-                 JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
-                WHERE CONSULTING_REQUEST_NUMBER=${consultingRequestNumber};
+    <select id="selectRequestOne" parameterType="long" resultType="consultingRequestVo">
+        SELECT CONSULTING_REQUEST_NUMBER, U.USER_NUMBER, COMPANY_NUMBER, CONSULTING_REQUEST_COMMENT,
+               TO_CHAR(CONSULTING_REQUEST_FIRST_DATE, 'YYYY-MM-DD') AS CONSULTING_REQUEST_FIRST_DATE,
+               TO_CHAR(CONSULTING_REQUEST_LAST_DATE, 'YYYY-MM-DD') AS  CONSULTING_REQUEST_LAST_DATE,
+               CONSULTING_REQUEST_DATE, CONSULTING_CONDITION, U.USER_NICKNAME
+        FROM TBL_CONSULTING_REQUEST CR
+        JOIN TBL_USER U ON CR.USER_NUMBER = U.USER_NUMBER
+                WHERE CONSULTING_REQUEST_NUMBER = ${consultingRequestNumber}
+    </select>
+
+
+<!--    컨설팅 신청 읽기 페이지 식단 가져온느 쿼리-->
+    <select id="getMealList" resultType="mealVo">
+        SELECT B.BOARD_NUMBER, B.USER_NUMBER, TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') AS MEAL_DATE,
+               TO_CHAR(B.MEAL_TIME, 'HH24:MI') AS MEAL_TIME,
+               BF.FILE_NUMBER, BF.FILE_NAME, BF.FILE_UPLOAD_PATH, BF.FILE_UUID,
+               F.MEAL_TOTAL_KCAL
+        FROM TBL_BOARD B
+                 LEFT JOIN TBL_BOARD_FILE BF ON B.BOARD_NUMBER = BF.BOARD_NUMBER
+                 LEFT JOIN (
+            SELECT BOARD_NUMBER, SUM(FOOD_KCAL) AS MEAL_TOTAL_KCAL
+            FROM TBL_FOOD
+            GROUP BY BOARD_NUMBER
+        ) F ON B.BOARD_NUMBER = F.BOARD_NUMBER
+        WHERE B.USER_NUMBER = #{userNumber} AND MEAL_TIME BETWEEN #{consultingRequestFirstDate} AND #{consultingRequestLastDate}
+        ORDER BY MEAL_DATE, MEAL_TIME
     </select>
 
 
@@ -53,8 +70,7 @@
 
 
 
-
-    <select id="selectAll" resultType="consultingVo">
+    <select id="selectAll" resultType="sendConsultingVo">
         SELECT CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
         FROM (
             SELECT ROWNUM AS RNUM, CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
@@ -84,7 +100,7 @@
 
 
 
-    <select id="selectComment" parameterType="long" resultType="consultingVo">
+    <select id="selectComment" parameterType="long" resultType="sendConsultingVo">
         SELECT CONSULTING_COMMENT
             FROM TBL_CONSULTING
             WHERE CONSULTING_NUMBER=#{consultingNumber}

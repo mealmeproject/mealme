@@ -9,7 +9,7 @@ import java.sql.Clob;
 @Component
 @Data
 @NoArgsConstructor
-public class ConsultingVo {
+public class SendConsultingVo {
 
     private long consultingNumber;
     private long companyNumber;

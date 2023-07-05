@@ -1,8 +1,6 @@
 package com.example.mealme.mapper;
 
-import com.example.mealme.dto.ConsultingReplyDto;
 import com.example.mealme.vo.ConsultingReplyVo;
-import com.example.mealme.vo.ConsultingVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -15,7 +15,7 @@
         <typeAlias type="com.example.mealme.dto.ConsultingRequestDto" alias="consultingRequestDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReplyDto" alias="consultingReplyDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReviewDto" alias="consultingReviewDto"/>
-        <typeAlias type="com.example.mealme.vo.ConsultingVo" alias="consultingVo"/>
+        <typeAlias type="com.example.mealme.vo.SendConsultingVo" alias="sendConsultingVo"/>
         <typeAlias type="com.example.mealme.vo.ConsultingReplyVo" alias="consultingReplyVo"/>
         <typeAlias type="com.example.mealme.dto.LikeDto" alias="likeDto"/>
         <typeAlias type="com.example.mealme.dto.BoardDto" alias="BoardDto"/>
@@ -46,5 +46,7 @@
         <typeAlias type="com.example.mealme.vo.MealVo" alias="mealVo"/>
         <typeAlias type="com.example.mealme.vo.DayMealVo" alias="DayMealVo"/>
         <typeAlias type="com.example.mealme.vo.ReadMealVo" alias="readMealVo"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingRequestVo" alias="consultingRequestVo"/>
+
     </typeAliases>
 </configuration>
