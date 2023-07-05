@@ -20,6 +20,17 @@ body {
     margin-bottom: 30px;
 }
 
+.password-box{
+    margin-bottom: 6px !important;
+}
+.password-box2{
+    margin-bottom: 6px !important;
+}
+
+#passwordMismatchPass{
+    margin-bottom: 20px;
+}
+
 label {
     display: block;
     margin-bottom: 10px;
@@ -51,7 +62,7 @@ button {
     border-radius: 6px;
 }
 
-#user-id {
+#companyId {
     width: 63%;
 }
 
@@ -179,7 +190,7 @@ button {
     color: #fff;
 }
 
-#adress-number {
+#adressNumber {
     width: 60%;
 }
 

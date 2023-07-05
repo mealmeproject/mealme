@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -24,7 +25,7 @@ class UserMapperTest {
     @BeforeEach
     void setUp() {
         userDto = new UserDto();
-        userDto.setUserId("aaa");
+        userDto.setUserId("eee");
         userDto.setUserPassword("1234");
         userDto.setUserName("김바보");
         userDto.setUserNickname("바부");
@@ -35,14 +36,15 @@ class UserMapperTest {
         userDto.setUserAddress2("201동 111호");
         userDto.setUserAddress3("삼성아파트");
         userDto.setUserEmail("aaa123@hanmail.net");
+
     }
 
     @Test
     @DisplayName("유저 회원가입 테스트")
     void insert() {
-        userMapper.insert(userDto);
+        userMapper.insertUser(userDto);
 
-        Assertions.assertThat(userMapper.selectUserNumber(userDto.getUserId(), userDto.getUserPassword()))
+        assertThat(userMapper.selectUserNumber(userDto.getUserId(), userDto.getUserPassword()))
                 .isEqualTo(userDto.getUserNumber());
 
     }
@@ -50,6 +52,8 @@ class UserMapperTest {
     @Test
     void selectUserNumber() {
     }
+
+
 
 
 

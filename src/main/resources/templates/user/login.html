@@ -13,30 +13,30 @@
             <div class="logo-container">
                 <div class="logo-box">
                     <!-- 메인페이지로 이동처리 -->
-                    <a href="#">
+                    <a th:href="@{/user/index}">
                         <!-- 로고 img -->
                         <img src="../img/mealMeLogo.png" alt="" />
                     </a>
                 </div>
             </div>
-            <form method="post" action="/user/join" id="login-form">
+            <form method="post" action="/user/login" id="login-form">
                 <!-- 개인/기업 선택 -->
                 <div class="radio-group">
-                    <input type="radio" id="individual" name="userType" value="individual" checked />
-                    <label for="individual">개인</label>
-                    <input type="radio" id="corporate" name="userType" value="corporate" />
-                    <label for="corporate">기업</label>
+                    <input type="radio" id="user" name="userType" value="user" checked />
+                    <label for="user">개인</label>
+                    <input type="radio" id="company" name="userType" value="company" />
+                    <label for="company">기업</label>
                 </div>
                 <!-- id/password 입력 -->
-                <input type="text" name="Id" placeholder="Id" required/>
-                <input type="password" name="Password" placeholder="Password" required/>
+                <input type="text" name="id" placeholder="Id" required/>
+                <input type="password" name="password" placeholder="Password" required/>
                 <label for="remember-check"><input type="checkbox" id="remember-check" /> 아이디 저장하기 </label>
                 <div class="find-password">
                     <a th:href="@{/user/findPassword}" class="find-password">비밀번호를 잊으셨나요?</a>
                 </div>
                 <input type="submit" value="로그인" class="submit-btn" />
-                <div class="sign-up">
-                    <a th:href="@{/user/userOrCompany}">회원가입</a>
+                <div class="join-box">
+                    <a th:href="@{/user/userOrCompany}" class="sign-up">회원가입</a>
                 </div>
                 <!-- 또는의 줄 -->
                 <div class="line">
@@ -61,29 +61,126 @@
         </div>
     <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
     <!-- 카카오 로그인 스크립트 -->
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-        <script>
-            Kakao.init("c6110035b5d2280664b9f251329b20e6"); //발급받은 키 중 javascript키를 사용해준다.
-            console.log(Kakao.isInitialized()); // sdk초기화여부판단
-            //카카오로그인
-            function kakaoLogin() {
-                Kakao.Auth.login({
-                    success: function (response) {
-                        Kakao.API.request({
-                            url: "/v2/user/me",
-                            success: function (response) {
-                                console.log(response);
-                            },
-                            fail: function (error) {
-                                console.log(error);
-                            },
-                        });
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+        Kakao.init('c6110035b5d2280664b9f251329b20e6'); //발급받은 키 중 javascript키를 사용해준다.
+        console.log(Kakao.isInitialized()); // sdk초기화여부판단
+        //카카오로그인
+        function kakaoLogin() {
+            Kakao.Auth.login({
+                success: function (response) {
+                    Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: function (response) {
+                            // 로그인 성공
+                            console.log("로그인 성공!!!(카카오아이디)" + response)
+                            // db 아이디 중복 체크
+                            // 있으면 = 로그인
+                            // 없으면 = 회원가입
+                            if (checkKakaoId(response))  {
+                                // 회원가입
+                                joinKakaoId(response);
+                            } else {
+                                // 로그인
+                                console.log('로그인')
+                                loginKakaoId(response);
+                            }
+                        },
+                        fail: function (error) {
+                            // 에러 발생
+                            console.log(error)
+                        },
+                    })
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+        }
+
+        // //카카오로그아웃
+        // function kakaoLogout() {
+        //     if (Kakao.Auth.getAccessToken()) {
+        //         Kakao.API.request({
+        //             url: '/v1/user/unlink',
+        //             success: function (response) {
+        //                 console.log(response)
+        //             },
+        //             fail: function (error) {
+        //                 console.log(error)
+        //             },
+        //         })
+        //         Kakao.Auth.setAccessToken(undefined)
+        //     }
+        // }
+
+        function checkKakaoId(response){
+            const kakaoId = response.kakao_account.email;
+            console.log("이게 ㅏ카오 아이디" + kakaoId)
+            const kakaoPassword = response.id;
+            let result;
+            $.ajax({
+                type : "post",
+                url : '/user/checkUserId',
+                data :{ userId: kakaoId },
+                dataType : "json",
+                async: false,
+                success : function (response){
+                    if (response.checkId) {
+                        console.log("회원 가입한 아이디 입니다.");
+                        result = false;
+                    } else {
+                        console.log("사용 가능한 아이디 입니다. ");
+                        result = true;
+                    }
+                    console.log("아이디체크 반환" + result);
+
                     },
-                    fail: function (error) {
-                        console.log(error);
+                error: function(xhr, status, error) {
+                    console.log("아이디 중복검사 에러");
+                }
+            });
+            return result;
+        }
+
+        // 회원가입
+        function joinKakaoId(response){
+            $.ajax({
+                type: "post",
+                url : '/user/KakaoUserLogin',
+                data : { "userId" : response.kakao_account.email,
+                         "userPassword" : response.id,
+                         "userBirth" : response.kakao_account.birthday,
+                         "userNickname" : response.properties.nickname,
+                         "userGender" : response.kakao_account.gender,
+                         "userName" : response.properties.nickname,
+                         "userEmail" : response.kakao_account.email },
+                success : function (response) {
+                    window.location.href = `/user/userJoinOk?userName=${response.nickname}`;
+                },
+                    error: function(xhr, status, error) {
+                        console.log("아이디 회원가입 에러");
                     },
-                });
-            }
-        </script>
+            });
+        }
+
+        // 로그인
+        function loginKakaoId(response){
+            $.ajax({
+                type: "post",
+                url : '/user/login',
+                data : { "id" : response.kakao_account.email,
+                    "password" : response.id,
+                    "userType" : "user"},
+                success : function (response) {
+                    window.location.href = `/meal/myPage`;
+                },
+                error: function(xhr, status, error) {
+                    console.log("로그인 에러");
+                },
+            });
+        }
+    </script>
     </body>
 </html>

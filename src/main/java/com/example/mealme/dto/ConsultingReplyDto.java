@@ -13,4 +13,7 @@ public class ConsultingReplyDto {
     private long userNumber;
     private String replyContent;
     private String replyDate;
+    private long companyNumber;
+    private String consultingComment;
+    private String consultingDate;
 }
