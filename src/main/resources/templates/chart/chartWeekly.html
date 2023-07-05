@@ -42,7 +42,7 @@
 
         <div class="bar-chart-wrap">
           <canvas id="bar-chart" width="300" height="230"></canvas>
-
+          <div class="taken-info">한 주동안의 일간 평균 섭취량(g)이 표시됩니다.</div>
         </div>
 
 
@@ -62,7 +62,7 @@
               <div class="carbohydrate-percent-sub">
                 <div class="carbohydrate-percent">탄수화물</div>
                 <div class="carbohydrate-percent-num-wrap">
-                  <div class="carbohydrate-percent-num">50</div>
+                  <div class="carbohydrate-percent-num"></div>
                   <div class="carbohydrate-percent-num-icon">%</div>
                 </div>
               </div>
@@ -73,7 +73,7 @@
               <div class="protein-percent-sub">
                 <div class="protein-percent">단백질</div>
                 <div class="protein-percent-num-wrap">
-                  <div class="protein-percent-num">30</div>
+                  <div class="protein-percent-num"></div>
                   <div class="protein-percent-num-icon">%</div>
                 </div>
               </div>
@@ -83,12 +83,13 @@
               <div class="fat-percent-sub">
                 <div class="fat-percent">지방</div>
                 <div class="fat-percent-num-wrap">
-                  <div class="fat-percent-num">20</div>
+                  <div class="fat-percent-num"></div>
                   <div class="fat-percent-num-icon">%</div>
                 </div>
               </div>
             </div>
-            <div class="percent-comment">칼로리에 따른 탄소화물ㆍ단백질ㆍ지방의 비율</div>
+            <div class="percent-comment">섭취 칼로리에 따른 탄소화물ㆍ단백질ㆍ지방의 비율<br>
+              권장 : 50%:30%:20%</div>
           </div>
 
 
@@ -106,9 +107,9 @@
               </div>
 
               <div class="carbohydrate-gram">
-                <div>100</div>
+                <div class="taken-carbohydrate-gram"></div>
                 <div>/</div>
-                <div>228</div>
+                <div class="recommendCarbohydrate-num" th:text="${recommendVo.recommendCarbohydrate}"></div>
                 <div>g</div>
               </div>
             </div>
@@ -121,9 +122,9 @@
               </div>
 
               <div class="protein-gram">
-                <div>60</div>
+                <div class="taken-protein-gram"></div>
                 <div>/</div>
-                <div>137</div>
+                <div class="recommendProtein-num" th:text="${recommendVo.recommendProtein}"></div>
                 <div>g</div>
               </div>
 
@@ -136,9 +137,9 @@
               </div>
 
               <div class="fat-gram">
-                <div>10</div>
+                <div class="taken-fat-gram"></div>
                 <div>/</div>
-                <div>40</div>
+                <div class="recommendFat-num" th:text="${recommendVo.recommendFat}"></div>
                 <div>g</div>
               </div>
 
@@ -201,7 +202,10 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script th:src="@{/js/chart/chart_weekly.js}"></script>
+<script th:inline="javascript">
+  let loginNumber = [[${session.userNumber}]];
+</script>
+<script type="module" th:src="@{/js/chart/chart_weekly.js}"></script>
 <!-- <script src="./doughnut.js"></script> -->
 </body>
 </html>

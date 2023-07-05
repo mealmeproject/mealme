@@ -28,8 +28,8 @@ public class TodayRestController {
     @GetMapping("/todayChart")
     public Map<String, Object> today(HttpServletRequest req , String mealTime){
 
-//        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber= 1L;
+        Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber= 1L;
 
 //        model에 저장하는 객체의 값을 chartService의 메소드를 통해 저장해줌
         RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
@@ -49,13 +49,34 @@ public class TodayRestController {
 
     @GetMapping("/daily")
     public Map<String, Object> daily(HttpServletRequest req){
-        //        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber= 1L;
+                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber= 1L;
         List<DailyTotalVo> dailyTotalVo = chartService.selectDaily(userNumber);
         Map<String, Object> dailyList = new HashMap<>();
         dailyList.put("dailyTotalVo", dailyTotalVo);
         return dailyList;
     }
+
+    @GetMapping("/weekly")
+    public Map<String, Object> weekly(HttpServletRequest req){
+                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber= 1L;
+        List<DailyTotalVo> dailyTotalVo = chartService.selectWeekly(userNumber);
+        Map<String, Object> weeklyList = new HashMap<>();
+        weeklyList.put("dailyTotalVo", dailyTotalVo);
+        return weeklyList;
+    }
+
+    @GetMapping("/monthly")
+    public Map<String, Object> monthly(HttpServletRequest req){
+                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber= 1L;
+        List<DailyTotalVo> dailyTotalVo = chartService.selectMonthly(userNumber);
+        Map<String, Object> monthlyList = new HashMap<>();
+        monthlyList.put("dailyTotalVo", dailyTotalVo);
+        return monthlyList;
+    }
+
 
 
 
