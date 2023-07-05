@@ -3,12 +3,12 @@
 <mapper namespace="com.example.mealme.mapper.ConsultingMapper">
 
 
-    <insert id="insert">
+    <insert id="insert" parameterType="sendConsultingVo">
         <selectKey keyProperty="consultingNumber" order="BEFORE" resultType="long">
             SELECT SEQ_CONSULTING.NEXTVAL FROM DUAL
         </selectKey>
-        insert into TBL_CONSULTING (CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE)
-        VALUES (#{consultingNumber}, #{companyNumber}, #{userNumber}, #{consultingComment},SYSDATE)
+        insert into TBL_CONSULTING (CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE,CONSULTING_REQUEST_NUMBER)
+        VALUES (#{consultingNumber}, #{companyNumber}, #{userNumber}, #{consultingComment},SYSDATE,#{consultingRequestNumber})
     </insert>
 
     <select id="select" parameterType="long" resultType="sendConsultingVo">
@@ -19,9 +19,31 @@
         WHERE CONSULTING_NUMBER=#{consultingNumber}
     </select>
 
+    <select id="selectAll" parameterType="map" resultType="sendConsultingVo">
+        SELECT CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME, CONSULTING_REQUEST_NUMBER
+        FROM (
+                 SELECT ROWNUM AS RNUM, CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_REQUEST_NUMBER, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
+                 FROM (
+                          SELECT C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT
+                               ,C.CONSULTING_DATE,C.CONSULTING_REQUEST_NUMBER, U.USER_NICKNAME, CO.COMPANY_NAME
+                          FROM TBL_CONSULTING C
+                                   JOIN TBL_USER U ON C.USER_NUMBER = U.USER_NUMBER
+                                   JOIN TBL_COMPANY CO ON C.COMPANY_NUMBER = CO.COMPANY_NUMBER
+                          WHERE C.CONSULTING_REQUEST_NUMBER = #{consultingRequestNumber}
+                          ORDER BY C.CONSULTING_NUMBER DESC
+                      )
+            <![CDATA[
+                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+            ]]>
+            )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
 
 
-    <select id="selectRequestAll"  resultType="consultingRequestDto">
+
+
+
+    <select id="selectRequestAll" parameterType="long"  resultType="consultingRequestVo">
         SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,
                R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,
                R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME
@@ -30,6 +52,55 @@
                  JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
         WHERE R.COMPANY_NUMBER = ${companyNumber}
     </select>
+
+
+    <select id="findConditionOneUser" parameterType="long" resultType="consultingRequestVo">
+    SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,
+    R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,
+    R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME
+    FROM TBL_CONSULTING_REQUEST R
+    JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
+    JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
+    WHERE R.COMPANY_NUMBER = #{companyNumber} AND (R.CONSULTING_CONDITION = 1 OR R.CONSULTING_CONDITION = 2)
+    </select>
+
+
+
+
+
+    <select id="selectAllUser" parameterType="map" resultType="consultingRequestVo">
+        SELECT CONSULTING_REQUEST_NUMBER, USER_NUMBER, COMPANY_NUMBER, CONSULTING_REQUEST_COMMENT,
+               CONSULTING_REQUEST_FIRST_DATE, CONSULTING_REQUEST_LAST_DATE,
+               CONSULTING_REQUEST_DATE, CONSULTING_CONDITION, USER_NICKNAME, COMPANY_NAME
+        FROM (
+                 SELECT ROWNUM AS RNUM, CONSULTING_REQUEST_NUMBER, USER_NUMBER, COMPANY_NUMBER,
+                        CONSULTING_REQUEST_COMMENT, CONSULTING_REQUEST_FIRST_DATE, CONSULTING_REQUEST_LAST_DATE,
+                        CONSULTING_REQUEST_DATE, CONSULTING_CONDITION, USER_NICKNAME, COMPANY_NAME
+                 FROM (
+                          SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,
+                                 R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,
+                                 R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME
+                          FROM TBL_CONSULTING_REQUEST R
+                                   JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
+                                   JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
+                          WHERE R.USER_NUMBER = #{userNumber}
+                      )
+        <![CDATA[
+                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+<!--    <select id="selectAllUser" parameterType="long"  resultType="consultingRequestVo">-->
+<!--        SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,-->
+<!--               R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,-->
+<!--               R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME-->
+<!--        FROM TBL_CONSULTING_REQUEST R-->
+<!--                 JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER-->
+<!--                 JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER-->
+<!--        WHERE R.USER_NUMBER = ${userNumber}-->
+<!--    </select>-->
 
 
 
@@ -44,7 +115,8 @@
     </select>
 
 
-<!--    컨설팅 신청 읽기 페이지 식단 가져온느 쿼리-->
+    <!--    컨설팅 신청 읽기 페이지 식단 가져온느 쿼리-->
+
     <select id="getMealList" resultType="mealVo">
         SELECT B.BOARD_NUMBER, B.USER_NUMBER, TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') AS MEAL_DATE,
                TO_CHAR(B.MEAL_TIME, 'HH24:MI') AS MEAL_TIME,
@@ -70,25 +142,6 @@
 
 
 
-    <select id="selectAll" resultType="sendConsultingVo">
-        SELECT CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
-        FROM (
-            SELECT ROWNUM AS RNUM, CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
-            FROM (
-                SELECT  C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT
-                ,C.CONSULTING_DATE, U.USER_NICKNAME, CO.COMPANY_NAME
-                FROM TBL_CONSULTING C
-                JOIN TBL_USER U ON C.USER_NUMBER = U.USER_NUMBER
-                JOIN TBL_COMPANY CO ON C.COMPANY_NUMBER = CO.COMPANY_NUMBER
-                ORDER BY C.CONSULTING_NUMBER DESC
-            ) J
-            <![CDATA[
-            WHERE ROWNUM <= #{page} * #{amount}
-            ]]>
-        )
-        WHERE RNUM > (#{page} - 1) * #{amount}
-    </select>
-
 
 <!--&#45;&#45;                 <select id="selectAll" resultType="consultingVo">-->
 <!--&#45;&#45;         SELECT C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT,C.CONSULTING_DATE, U.USER_NICKNAME, CO.COMPANY_NAME-->
@@ -107,9 +160,25 @@
     </select>
 
 
+    <update id="updateCondition">
+        UPDATE TBL_CONSULTING_REQUEST
+        SET CONSULTING_CONDITION=#{consultingCondition}
+        WHERE CONSULTING_REQUEST_NUMBER=#{consultingRequestNumber}
+    </update>
+
+
+
+
    <select id="selectTotal" resultType="_int">
-       SELECT COUNT(CONSULTING_NUMBER) FROM TBL_CONSULTING
+       SELECT COUNT(CONSULTING_REQUEST_NUMBER) FROM TBL_CONSULTING_REQUEST
    </select>
+
+    <update id="update">
+        UPDATE TBL_CONSULTING
+        SET CONSULTING_COMMENT = #{consultingComment}
+        WHERE CONSULTING_NUMBER=#{consultingNumber}
+    </update>
+
 
     <delete id="delete" >
         DELETE FROM TBL_CONSULTING

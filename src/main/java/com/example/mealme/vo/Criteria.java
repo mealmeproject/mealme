@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @AllArgsConstructor
-
-
 public class Criteria {
     private int page; //현재페이지
     private int amount; //한 페이지당 게시물 수

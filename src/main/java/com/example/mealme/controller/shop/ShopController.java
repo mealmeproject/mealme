@@ -36,4 +36,7 @@ public class ShopController {
 
     @GetMapping("/shoppingPayInfoDetail")
     public void shoppingPayInfoDetail(){}
+
+    @GetMapping("/shoppingLikeList")
+    public void shoppingLikeList(){}
 }

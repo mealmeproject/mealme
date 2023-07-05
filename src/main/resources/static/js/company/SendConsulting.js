@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function() {
     $('#summernote').summernote({
         height: 300,
@@ -14,17 +17,16 @@ $(document).ready(function() {
 });
 
 
-//
-// new_note_data = '<table><tr><td>test value</td></tr></table>'
-//
-// $('#summernote').summernote('reset');
-// $('#summernote').summernote('destroy');
-// $('#summernote').val(new_note_data);
-//
-// $('#summernote').summernote({
-//     airMode: true
-// });
 
+
+//     function ModifyButton() {
+//         var inputElement = document.getElementsByName('consultingComment')[0];
+//         if (inputElement.style.display === 'none') {
+//             inputElement.style.display = 'block';
+//         } else {
+//             inputElement.style.display = 'none';
+//         }
+// }
 
 // 식단  + 모달
 
