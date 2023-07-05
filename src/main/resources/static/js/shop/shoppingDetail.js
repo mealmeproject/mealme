@@ -1,43 +1,93 @@
-var menuDetails = document.getElementById("menuDetails");
-var summary = menuDetails.querySelector(".summary");
 
-summary.addEventListener("click", function() {
-    if (menuDetails.open) {
-        // 닫을 때이미지를 변경하는 로직
-        summary.style.backgroundImage = "url(../img/close.png')";
-    } else{
-        // 열 때 이미지를 변경하는 로직
-        summary.style.backgroundImage = "url('../img/open.png')";
+
+document.querySelectorAll('.button').forEach(button => {
+
+    button.addEventListener('click', e => {
+        button.classList.toggle('liked');
+        if(button.classList.contains('liked')) {
+            gsap.fromTo(button, {
+                '--hand-rotate': 8
+            }, {
+                ease: 'none',
+                keyframes: [{
+                    '--hand-rotate': -45,
+                    duration: .16,
+                    ease: 'none'
+                }, {
+                    '--hand-rotate': 15,
+                    duration: .12,
+                    ease: 'none'
+                }, {
+                    '--hand-rotate': 0,
+                    duration: .2,
+                    ease: 'none',
+                    clearProps: true
+                }]
+            });
+        }
+    })
+
+});
+
+
+function toggleFoodList() {
+    const foodList = document.getElementById('food-list');
+    foodList.classList.toggle('show');
+}
+
+
+
+// 각 상품 별점에 대한 이벤트 처리
+const ratingElements = document.querySelectorAll('.rating');
+ratingElements.forEach(ratingElement => {
+    const stars = ratingElement.querySelectorAll('.star');
+
+    // 초기 평가 표시
+    const initialRating = ratingElement.dataset.rating;
+    setRating(initialRating);
+
+    // 클릭 이벤트 처리
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const ratingValue = star.dataset.value;
+            setRating(ratingValue);
+        });
+    });
+
+    // 별점 설정 함수
+    function setRating(ratingValue) {
+        stars.forEach(star => {
+            if (star.dataset.value <= ratingValue) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
     }
 });
 
+var countElement = document.getElementById('count');
+var decreaseBtn = document.getElementById('decreaseBtn');
+var increaseBtn = document.getElementById('increaseBtn');
 
+// 초기 개수 값 설정
+var count = parseInt(countElement.textContent);
 
-// 메뉴바 누르면 색상변경
-$(".reviewContainer-menu-list").on("click", function () {
-    // console.log(this);
-    let $tagA = $(this).children();
-    // console.log($tagA);
-    $(".reviewContainer-menu-list>a").removeClass("reviewContainer-active");
-    $tagA.toggleClass("header-active");
-});
+// 개수를 감소시키는 함수
+function decreaseCount() {
+    if (count > 1) {
+        count--;
+        countElement.textContent = count;
+    }
+}
 
+// 개수를 증가시키는 함수
+function increaseCount() {
+    count++;
+    countElement.textContent = count;
+}
 
+// 버튼에 이벤트 리스너 등록
+decreaseBtn.addEventListener('click', decreaseCount);
+increaseBtn.addEventListener('click', increaseCount);
 
-
-
-
-var tabBtn = $("#tab-btn > ul > li");     //각각의 버튼을 변수에 저장
-var tabCont = $("#tab-cont > div");       //각각의 콘텐츠를 변수에 저장
-
-//컨텐츠 내용을 숨겨주세요!
-tabCont.hide().eq(0).show();
-
-tabBtn.click(function(){
-    var target = $(this);         //버튼의 타겟(순서)을 변수에 저장
-    var index = target.index();   //버튼의 순서를 변수에 저장
-    tabBtn.removeClass("active");    //버튼의 클래스를 삭제
-    target.addClass("active");       //타겟의 클래스를 추가
-    tabCont.css("display","none");
-    tabCont.eq(index).css("display","block");
-});

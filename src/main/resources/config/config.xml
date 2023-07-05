@@ -6,6 +6,7 @@
         <typeAlias type="com.example.mealme.dto.AdminDto" alias="adminDto"/>
         <typeAlias type="com.example.mealme.dto.CancelDto" alias="cancelDto"/>
         <typeAlias type="com.example.mealme.dto.CartDto" alias="cartDto"/>
+        <typeAlias type="com.example.mealme.vo.CartVo" alias="cartVo"/>
         <typeAlias type="com.example.mealme.dto.CompanyCodeDto" alias="companyCodeDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyDto" alias="companyDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyFileDto" alias="companyFileDto"/>

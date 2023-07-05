@@ -2,6 +2,7 @@ package com.example.mealme.service.shop;
 
 import com.example.mealme.dto.ProductDto;
 import com.example.mealme.mapper.ProductMapper;
+import com.example.mealme.vo.CartVo;
 import com.example.mealme.vo.ProductVo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,6 @@ public class ShopService {
         return productMapper.selectAll();
     }
 
-    public List<ProductDto> foodCategory(String categoryName) {
-
-        return productMapper.foodCategory(categoryName);
-    }
-
-
     public List<ProductVo> selectAllPrice(){
 
         return productMapper.selectAllPrice();
@@ -43,8 +38,28 @@ public class ShopService {
         return productMapper.selectReviewPrice();
     }
 
+    public ProductVo selectOne(String productNumber) {
+        if (productNumber == null) {
+            return null;
+        }
+
+        return productMapper.selectOne(Long.parseLong(productNumber));
+    }
 
 
+    public List<CartVo> selectCart(String userNumber){
 
+        return productMapper.selectCart(Long.parseLong(userNumber));
+    }
+
+//    장바구니에 상품 추가
+    public void addCart(CartVo cartVo){
+        if(cartVo == null){
+            throw new IllegalArgumentException("장바구니에 담긴 상품이 없습니다.");
+        }
+        productMapper.addCart(cartVo);
+    }
 
 }
+
+

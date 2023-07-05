@@ -19,13 +19,13 @@
   <!-- 사이드바 추가 공간 -->
   <aside class="aside" th:replace="fragment/aside :: aside"></aside>
   <!-- 사이드바 추가 공간 -->
+
   <div class="main-container">
     <!-- 헤더 추가 공간 -->
     <header class="header2" th:replace="fragment/header2 :: header2"></header>
     <!-- 헤더 추가 공간 -->
+    <!-- 작업공간 -->
     <div class="work-container">
-
-      <!-- 작업공간 -->
       <p>
       <h2> 장바구니
         <section class="cart">
@@ -33,50 +33,25 @@
             <form>
               <thead>
               <tr>
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox"
+                           name="basket_product_normal_type_normal"
+                           value="selectall"
+                           onclick="selectAll(this)"></td>
                 <td colspan="2">상품정보</td>
-                <td>옵션</td>
                 <td>상품금액</td>
                 <td>주문수량</td>
               </tr>
               </thead>
               <tbody>
-              <tr class="cart__list__detail">
+              <tr class="cart__list__detail" th:each="cart : ${cartList}">
                 <td><input type="checkbox"></td>
                 <td><img src="../img/장바구니 예시1.jpg" alt="magic keyboard"></td>
-                <td><a href="#"></a><span class="cart__list__smartstore"> </span>
-                  <p>스팀 닭가슴살</p>
-                  <sapn class="price">116,62원</sapn><span
-                          style="text-decoration: line-through; color: lightgray;"></span>
+                <td class="product-name">
+                  <span class="cart__list__smartstore"> </span>
+                  <p th:text="${cart.productName}">스팀 닭가슴살</p>
                 </td>
-                <td class="cart__list__option">
-                  <p> 닭가슴살 매운맛</p>
-                  <button class="cart__list__optionbtn">주문조건 추가/변경</button>
-                </td>
-                <td><span class="price1">116,620원</span><br>
-                </td>
-                <td>
-                  1개
-                </td>
-              </tr>
-              <tr class="cart__list__detail">
-                <td style="width: 2%;"><input type="checkbox"></td>
-                <td style="width: 13%;">
-                  <img src="../img/장바구니 예시2.jpg" alt="magic mouse">
-                </td>
-                <td style="width: 27%;"><a href="#"></a><span class="cart__list__smartstore"> </span>
-                  <p>닭가슴살 </p>
-                  <span class=" price1">88,900원</span>
-                </td>
-                <td class="cart__list__option" style="width: 27%;">
-                  <p>닭가슴살 허니콤보 맛</p>
-                  <button class="cart__list__optionbtn">주문조건 추가/변경</button>
-                </td>
-                <td style="width: 15%;"><span class="price">88,900원</span><br>
-                </td>
-                <td style="width: 15%;">
-                  1개
-                </td>
+                <td class="product-price"><span class="price1" th:text="${cart.productPrice}+'원'">116,620원</span><br></td>
+                <td th:text="${cart.cartCount}+'개'"></td>
               </tr>
               </tbody>
               <tfoot>
@@ -118,25 +93,17 @@
     <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
   </div>
 </div>
+<!-- 퀵 메뉴 추가 공간 -->
 <aside class="aside2" th:replace="fragment/aside2 :: aside2">
   <div class="menu-container"></div>
 </aside>
+<script th:src="@{/js/shop/shoppingBasket.js}"></script>
+<script th:src="@{/js/fragment/aside.js}"></script>
 <!-- 퀵 메뉴 추가 공간 -->
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
-<script th:src="@{/js/fragment/aside.js}"></script>
-<script th:src="@{/js/meal/myPage.js}"></script>
-<script>
-  var images = [];
-  var currentImageIndex = 0;
+<script th:inline="javascript"></script>
 
-  function openModal(imageList) {
-    // Assign the image list to the global variable
-    images = imageList;
-
-    // Rest of the code...
-    // (Place the JavaScript code mentioned in the previous response here)
-  }
-</script>
 </body>
+
 </html>

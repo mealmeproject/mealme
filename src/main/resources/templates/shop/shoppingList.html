@@ -24,10 +24,9 @@
         <!-- 헤더 추가 공간 -->
         <header class="header2" th:replace="fragment/header2 :: header2"></header>
         <!-- 헤더 추가 공간 -->
-        <div class="work-container">
-
         <!-- 작업공간 -->
-        <p>
+        <div class="work-container">
+            <p>
         <main class="container">
             <section class="main1">
                 <div class="main1-banner-wrap">
@@ -60,106 +59,50 @@
         <h1>상품목록</h1>
         <hr>
         <h2 class="index-top">
-            <button id="food-icon" class="category-icon" onclick="toggleFoodList()">
-                <i class="fa fa-cutlery"></i> 음식
-            </button>
+            <div id="menu">
+            <ul>
+                <li><a href="#">MENU1</a>
+                    <ul>
+                        <li><a href="#">SUB_MENU</a></li>
+                        <li><a href="#">SUB_MENU2</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">MENU2</a>
+                    <ul>
+                        <li><a href="#">SUB_MENU</a></li>
+                        <li><a href="#">SUB_MENU2</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">MENU3</a>
+                    <ul>
+                        <li><a href="#">SUB_MENU</a></li>
+                        <li><a href="#">SUB_MENU2</a></li>
+                        <li><a href="#">SUB_MENU3</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-            <div id="food-list" class="category-list">
-                <!-- 음식 카테고리 리스트 -->
-                <ul class="menu-list">
-                    <li><a href="javascript:food();">음식</a></li>
-                    <li><a href="javascript:supplement();">보충제</a></li>
-                    <li><a href="javascript:nutrients()">영양제</a></li>
-                </ul>
-          <span>
-            <div class="box"  onmouseover="mouseover()"
-                 onmouseleave="mouseleave()">
-            <img src="../img/닭가슴살.png" id="best">
-           <div class="shoppingName">닭가슴살</div>
-            </div>
-          </span>
-            <span class="vertical-bar"></span>
-            <span>
-            <div class="box"  onmouseover="mouseover2()"
-                 onmouseleave="mouseleave2()">
-            <img src="../img/샐러드,과일.png"  id="best2">
-            <div class="shoppingName">샐러드,과일</div>
-            </div>
-          </span>
-            <span class="vertical-bar"></span>
-            <span>
-            <div class="box"  onmouseover="mouseover3()"
-                 onmouseleave="mouseleave3()">
-            <img src="../img/건강식품.png"  id="best3">
-            <div class="shoppingName">건강식품</div>
-            </div>
-          </span>
-            <span class="vertical-bar"></span>
-            <span>
-          <div class="box"  onmouseover="mouseover4()"
-               onmouseleave="mouseleave4()">
-          <img src="../img/음료,차,프로틴.png" id="best4">
-          <div class="shoppingName">음료,차,프로틴</div>
-          </div>
-         </span>
-            </div>
+
+
         </h2>
             <div class="ShoppingContainer">
                 <div class="Shopping-text">
                     총
                     <a class="ShoppingNumber">
-                        <span th:text="${products.size()} + '개 상품이 있습니다'"></span>
+                        <span th:text="${productAll.size()} + '개 상품이 있습니다'"></span>
                     </a>
+                    <div class="select-wrap">
+                        <select id="selectItem" class="select">
+                            <option value="allList">전체</option>
+                            <option value="lowPriceList">낮은 가격순</option>
+                            <option value="reviewPriceList">별점 높은 순</option>
+                        </select>
+                    </div>
                 </div>
-
             </div>
-
-            <div class="select-wrap">
-                <select id="selectItem" class="select">
-                    <option value="allPrice">전체</option>
-                    <option value="lowPrice">낮은 가격순</option>
-                    <option value="reviewPrice">별점 높은 순</option>
-                </select>
-            </div>
-
-
             <div id="productList">
                 <ul>
-                    <li th:each="product : ${products}">
-                        <div class="shopping-list">
-                            <ul>
-                                <li class="shoppingItem">
-                                    <div class="shoppingItemContainer">
-                                        <a th:href="@{/shop/shoppingDetail}">
-                                            <img th:src="@{/img/이미지 예시.jpg}" class="itemImg">
-                                            <div class="shoppingDesc">
-                                                <div class="top">
-                                                    <p th:text="${product.productName}" class="title"></p>
-                                                    <div class="price-container">
-                                                        <span th:text="${product.productPrice}+'원'" class="price"></span>
-                                                    </div>
-                                                    <div id="starRating">
-                                                        <div class="product-item">
-                                                            <div class="rating" th:attr="data-rating=${product.averageRating}">
-                                                    <span class="star" th:each="star: ${#numbers.sequence(1, 5)}"
-                                                          th:classappend="${star le product.averageRating ? 'filled' : ''}" th:onclick="return false;">&#9733;</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button class="button dark">
-                                                        <div class="hand">
-                                                            <div class="thumb"></div>
-                                                        </div>
-                                                        <span>찜하기</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -184,6 +127,7 @@
 
         </div>
     </div>
+</p>
         </div>
 
         <!-- 작업공간 -->
@@ -199,6 +143,13 @@
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" th:src="@{/js/shop/shoppingList.js}"></script>
+<script type="module" th:src="@{/js/shop/shoppingList.js}"></script>
+<script th:src="@{/js/fragment/aside.js}"></script>
+<script>
+    function redirectToShoppingDetail(productNumber) {
+        var url = '/shop/shoppingDetail?productNumber=' + productNumber;
+        location.href = url;
+    }
+</script>
 </body>
 </html>

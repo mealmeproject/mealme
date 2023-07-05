@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 @Data
 @NoArgsConstructor
@@ -23,5 +25,10 @@ public class ProductVo {
     private String fileUuid;
     private double averageRating;
     private int totalCount;
+    private int userNumber;
+    private String userName;
+    private String userId;
+    private String reviewContent;
+    private Date reviewDate;
 
 }
