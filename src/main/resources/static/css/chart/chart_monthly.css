@@ -172,6 +172,14 @@
   width: 80%;
 }
 
+.taken-info{
+  width: 350px;
+  margin: 7px auto;
+  color: rgb(210, 210, 210);
+  font-size: 15px;
+  text-align: center;
+}
+
 
 .carbohydrate-percent-color{
   width: 10px;

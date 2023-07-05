@@ -42,7 +42,7 @@
 
         <div class="bar-chart-wrap">
           <canvas id="bar-chart" width="300" height="230"></canvas>
-
+          <div class="taken-info">하루동안의 섭취량(g)이 표시됩니다.</div>
         </div>
 
 
@@ -88,7 +88,8 @@
                 </div>
               </div>
             </div>
-            <div class="percent-comment">칼로리에 따른 탄소화물ㆍ단백질ㆍ지방의 비율</div>
+            <div class="percent-comment">섭취 칼로리에 따른 탄소화물ㆍ단백질ㆍ지방의 비율<br>
+              권장 : 50%:30%:20%</div>
           </div>
 
 
@@ -122,7 +123,7 @@
               </div>
 
               <div class="protein-gram">
-                <div class="taken-protein-gram">60</div>
+                <div class="taken-protein-gram"></div>
                 <div>/</div>
                 <div th:text="${recommendVo.recommendProtein}"></div>
                 <div>g</div>
@@ -137,7 +138,7 @@
               </div>
 
               <div class="fat-gram">
-                <div class="taken-fat-gram">10</div>
+                <div class="taken-fat-gram"></div>
                 <div>/</div>
                 <div th:text="${recommendVo.recommendFat}"></div>
                 <div>g</div>

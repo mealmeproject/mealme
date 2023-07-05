@@ -61,5 +61,17 @@ public class ChartService {
         return dailyTotalVo;
     }
 
+    public List<DailyTotalVo> selectWeekly(long userNumber){
+        List<DailyTotalVo> dailyTotalVo = chartMapper.selectWeekly(userNumber);
+        System.out.println(dailyTotalVo);
+        return dailyTotalVo;
+    }
+
+    public List<DailyTotalVo> selectMonthly(long userNumber){
+        List<DailyTotalVo> dailyTotalVo = chartMapper.selectMonthly(userNumber);
+        System.out.println(dailyTotalVo);
+        return dailyTotalVo;
+    }
+
 
 }

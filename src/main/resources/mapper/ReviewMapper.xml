@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.ReviewMapper">
+    <select id="selectConsultingInfo" resultType="ConsultingReviewVo">
+        SELECT CQ.CONSULTING_REQUEST_NUMBER, CQ.USER_NUMBER, CQ.COMPANY_NUMBER, C.CONSULTING_COMMENT,
+               CF.FILE_NAME, CF.FILE_UPLOAD_PATH
+        FROM TBL_CONSULTING_REQUEST CQ JOIN TBL_CONSULTING C
+        ON CQ.CONSULTING_REQUEST_NUMBER = C.CONSULTING_REQUEST_NUMBER
+        LEFT JOIN TBL_COMPANY_FILE CF
+        ON CQ.COMPANY_NUMBER = CF.COMPANY_NUMBER
+        WHERE C.CONSULTING_REQUEST_NUMBER = #{consultingRequestNumber}
+    </select>
+
+    <insert id="insertConsultingReview">
+        <selectKey keyProperty="reviewNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_CONSULTING_REVIEW.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_CONSULTING_REVIEW (REVIEW_NUMBER, CONSULTING_REQUEST_NUMBER, USER_NUMBER, COMPANY_NUMBER, REVIEW_DATE,
+        REVIEW_CONTENT, REVIEW_GRADE)
+        values (#{reviewNumber}, #{consultingRequestNumber}, #{userNumber}, #{companyNumber}, SYSDATE, #{reviewContent}, #{reviewGrade})
+    </insert>
+
+
+
+</mapper>
