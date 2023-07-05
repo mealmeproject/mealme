@@ -60,13 +60,14 @@
             <!-- 상세 정보 이미지 끝 -->
             <!-- 상세 정보 내용 -->
             <div class="main-detailed-info">
-              <div class="detailed-info" th:each="company : ${companyinfo}">
+              <div class="detailed-info" >
+                <span style="display: none" th:text="${companyinfo.companyNumber}"></span>
                 <div class="info1-section">
                   <div class="info1-second-section">
                     <span>병원 명</span>
                   </div>
                   <div class="info1-third-section">
-                    <span th:text="${company.companyName}">서울나우병원</span>
+                    <span th:text="${companyinfo.companyName}">서울나우병원</span>
                   </div>
                 </div>
                 <div class="info2-section">
@@ -74,7 +75,7 @@
                     <span>대표자 명</span>
                   </div>
                   <div class="info2-third-section">
-                    <span th:text="${company.companyCeoName}">이동재</span>
+                    <span th:text="${companyinfo.companyCeoName}">이동재</span>
                   </div>
                 </div>
                 <div class="info3-section">
@@ -82,7 +83,7 @@
                     <span>사업자 번호</span>
                   </div>
                   <div class="info3-third-section">
-                    <span th:text="${company.companyRegistrationNumber}">123212312</span>
+                    <span th:text="${companyinfo.companyRegistrationNumber}">123212312</span>
                   </div>
                 </div>
                 <div class="info4-section">
@@ -90,7 +91,7 @@
                     <span>대표전화</span>
                   </div>
                   <div class="info4-third-section">
-                    <span th:text="${company.companyCallNumber}">031-2565-2333</span>
+                    <span th:text="${companyinfo.companyCallNumber}">031-2565-2333</span>
                   </div>
                 </div>
                 <div class="info5-section">
@@ -98,7 +99,7 @@
                     <span>홈페이지</span>
                   </div>
                   <div class="info5-third-section">
-                    <span th:text="${company.companyUrl}">http://naver.com</span>
+                    <span th:text="${companyinfo.companyUrl}">http://naver.com</span>
                   </div>
                 </div>
                 <div class="infoException-section">
@@ -106,7 +107,7 @@
                     <span>이메일</span>
                   </div>
                   <div class="infoException-third-section">
-                    <span th:text="${company.companyEmail}">illusoin123@naver.com</span>
+                    <span th:text="${companyinfo.companyEmail}">illusoin123@naver.com</span>
                   </div>
                 </div>
                 <div class="info6-section">
@@ -114,7 +115,7 @@
                     <span>소개</span>
                   </div>
                   <div class="info6-third-section">
-                    <span th:text="${company.companyComment}">시력 2.0 만들어 드립니다</span>
+                    <span th:text="${companyinfo.companyComment}">시력 2.0 만들어 드립니다</span>
                   </div>
                 </div>
                 <div class="info7-section">
@@ -122,7 +123,7 @@
                     <span>주소</span>
                   </div>
                   <div class="info7-third-section">
-                    <div class="address" th:text="${company.companyAddress1}">경기도 성남시 분당구 서현1동 267-3</div>
+                    <div class="address" th:text="${companyinfo.companyAddress1}">경기도 성남시 분당구 서현1동 267-3</div>
                   </div>
                 </div>
               </div>
@@ -147,7 +148,7 @@
           <!-- 상세 정보 메인 공간 끝 -->
           <!-- 신청 페이지 이동 버튼 -->
           <div class="page-setting-button-section">
-            <a th:href="@{/company/settingThePeriod}" class="page-setting-detailed-button-section">
+            <a th:href="@{/company/settingThePeriod(companyNumber=${companyinfo.companyNumber})}" class="page-setting-detailed-button-section" >
               <span>신청하기</span>
             </a>
           </div>

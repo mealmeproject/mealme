@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mealme.mapper.CompanyMapper">
+<!--    이 쿼리 변경-->
     <select id="selectAll" resultType="companyListVo">
         SELECT c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER, c.COMPANY_ADDRESS1,
                cc.COMPANY_CODE_NUMBER, cc.COMPANY_CODE_NAME, AVG(r.REVIEW_GRADE) AS AVERAGE_GRADE,
@@ -28,14 +29,35 @@
                  f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
     </select>
 
+<!--    이 쿼리 변경-->
     <select id="selectReview" resultType="companyReviewVo">
         SELECT tc.REVIEW_NUMBER, tc.USER_NUMBER, tc.COMPANY_NUMBER, tc.REVIEW_DATE, tc.REVIEW_CONTENT, tc.REVIEW_GRADE, u.USER_NICKNAME,
                uf.FILE_UPLOAD_PATH, uf.FILE_UUID, uf.FILE_NAME, uf.FILE_NUMBER
         FROM TBL_CONSULTING_REVIEW tc
                  JOIN TBL_COMPANY c ON tc.COMPANY_NUMBER = c.COMPANY_NUMBER
                  JOIN TBL_USER u ON tc.USER_NUMBER = u.USER_NUMBER
-                 LEFT JOIN TBL_USER_FILE uf ON tc.USER_NUMBER = uF.USER_NUMBER
+                 LEFT JOIN TBL_USER_FILE uf ON tc.USER_NUMBER = uf.USER_NUMBER
         WHERE c.COMPANY_NUMBER = #{companyNumber}
     </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="consultingRequestNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_CONSULTING_REQUEST.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_CONSULTING_REQUEST (COMPANY_NUMBER, CONSULTING_REQUEST_NUMBER, CONSULTING_REQUEST_COMMENT,
+                                            CONSULTING_REQUEST_FIRST_DATE, CONSULTING_REQUEST_LAST_DATE, USER_NUMBER)
+        values (#{companyNumber}, #{consultingRequestNumber}, #{consultingRequestComment}, #{consultingRequestFirstDate},
+                #{consultingRequestLastDate}, #{userNumber})
+    </insert>
 </mapper>
 
+
+
+
+        <!-- <insert id="insert">
+                <selectKey keyProperty="consultingNumber" order="BEFORE" resultType="long">
+                    SELECT SEQ_CONSULTING.NEXTVAL FROM DUAL
+                </selectKey>
+                insert into TBL_CONSULTING (CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT,CONSULTING_DATE)
+                VALUES (#{consultingNumber}, #{companyNumber}, #{userNumber}, #{consultingComment}, #{consultingDate, jdbcType=TIMESTAMP})
+            </insert>-->

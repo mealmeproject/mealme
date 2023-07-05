@@ -4,15 +4,15 @@ import com.example.mealme.service.company.CompanyService;
 import com.example.mealme.service.meal.MealService;
 import com.example.mealme.vo.CompanyListVo;
 import com.example.mealme.vo.CompanyReviewVo;
+import com.example.mealme.vo.ConsultingVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -42,16 +42,37 @@ public class CompanyController {
 
     @GetMapping("/detailedHospital")
     public String detailedHospital(@RequestParam("companyNumber")Long companyNumber, Model model){
+        System.out.println(companyNumber + "==========================================");
         CompanyListVo detailedList = companyService.showDetail(companyNumber);
         List<CompanyReviewVo> selectReviewList = companyService.showReview(companyNumber);
         model.addAttribute("companyinfo", detailedList);
+        System.out.println(detailedList);
         model.addAttribute("companyReviewList", selectReviewList);
-        model.addAttribute("companyNumber", companyNumber);
+        System.out.println(companyNumber);
         return "company/detailedHospital";
     }
 
     @GetMapping("/settingThePeriod")
-    public void settingThePeriod(){}
+    public String settingThePeriod(@RequestParam("companyNumber")Long companyNumber, Model model){
+        System.out.println("작성 페이지 companyNumber" + companyNumber);
+        model.addAttribute("companyNumber", companyNumber);
+        return "company/settingThePeriod";
+    }
+
+    @PostMapping("/settingThePeriod")
+    public RedirectView settingThePeriod(ConsultingVo consultingVo, HttpServletRequest req, Model model){
+        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
+        System.out.println("===============================================================");
+        System.out.println(consultingVo.getCompanyNumber());
+        System.out.println(consultingVo);
+        consultingVo.setUserNumber(userNumber);
+        companyService.register(consultingVo);
+        model.addAttribute("companyNumber", consultingVo.getCompanyNumber());
+        System.out.println(consultingVo + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        String path = "/company/detailedHospital?companyNumber=" + consultingVo.getCompanyNumber();
+        return new RedirectView(path);
+    }
+
 
 
     @GetMapping("/ConsultingList")

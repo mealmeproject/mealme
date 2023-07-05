@@ -36,4 +36,9 @@ class CompanyMapperTest {
     void selectAll() {
         companyMapper.selectAll(100L);
     }
+
+    @Test
+    void insert(){
+
+    }
 }
