@@ -14,9 +14,15 @@ $(document).ready(function() {
 });
 
 
+//
+// new_note_data = '<table><tr><td>test value</td></tr></table>'
+//
+// $('#summernote').summernote('reset');
+// $('#summernote').summernote('destroy');
+// $('#summernote').val(new_note_data);
+//
+// $('#summernote').summernote({
+//     airMode: true
+// });
 
 
-
-    function rediectToSendReadList() {
-    window.location.href = "http://localhost:10000/company/SendReadList";
-}

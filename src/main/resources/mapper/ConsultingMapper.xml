@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.ConsultingMapper">
+
+
+    <insert id="insert">
+        <selectKey keyProperty="consultingNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_CONSULTING.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_CONSULTING (CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE)
+        VALUES (#{consultingNumber}, #{companyNumber}, #{userNumber}, #{consultingComment},SYSDATE)
+    </insert>
+
+    <select id="select" parameterType="long" resultType="consultingVo">
+        SELECT C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT, U.USER_NICKNAME, CO.COMPANY_NAME
+        FROM TBL_CONSULTING C
+                 JOIN TBL_USER U ON C.USER_NUMBER = U.USER_NUMBER
+                 JOIN TBL_COMPANY CO ON C.COMPANY_NUMBER = CO.COMPANY_NUMBER
+        WHERE CONSULTING_NUMBER=#{consultingNumber}
+
+    </select>
+
+
+
+    <select id="selectRequestAll"  resultType="consultingRequestDto">
+        SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,
+               R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,
+               R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME
+        FROM TBL_CONSULTING_REQUEST R
+                 JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
+                 JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
+
+    </select>
+
+
+
+    <select id="selectRequestOne"     parameterType="long" resultType="consultingRequestDto">
+        SELECT R.CONSULTING_REQUEST_NUMBER, R.USER_NUMBER, R.COMPANY_NUMBER, R.CONSULTING_REQUEST_COMMENT,
+               R.CONSULTING_REQUEST_FIRST_DATE, R.CONSULTING_REQUEST_LAST_DATE,
+               R.CONSULTING_REQUEST_DATE, R.CONSULTING_CONDITION, U.USER_NICKNAME, CO.COMPANY_NAME
+        FROM TBL_CONSULTING_REQUEST R
+                 JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
+                 JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
+                WHERE CONSULTING_REQUEST_NUMBER=${consultingRequestNumber};
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+    <select id="selectAll" resultType="consultingVo">
+        SELECT CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
+        FROM (
+            SELECT ROWNUM AS RNUM, CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT, CONSULTING_DATE, USER_NICKNAME, COMPANY_NAME
+            FROM (
+                SELECT  C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT
+                ,C.CONSULTING_DATE, U.USER_NICKNAME, CO.COMPANY_NAME
+                FROM TBL_CONSULTING C
+                JOIN TBL_USER U ON C.USER_NUMBER = U.USER_NUMBER
+                JOIN TBL_COMPANY CO ON C.COMPANY_NUMBER = CO.COMPANY_NUMBER
+                ORDER BY C.CONSULTING_NUMBER DESC
+            ) J
+            <![CDATA[
+            WHERE ROWNUM <= #{page} * #{amount}
+            ]]>
+        )
+        WHERE RNUM > (#{page} - 1) * #{amount}
+    </select>
+
+
+<!--&#45;&#45;                 <select id="selectAll" resultType="consultingVo">-->
+<!--&#45;&#45;         SELECT C.CONSULTING_NUMBER, C.COMPANY_NUMBER, C.USER_NUMBER, C.CONSULTING_COMMENT,C.CONSULTING_DATE, U.USER_NICKNAME, CO.COMPANY_NAME-->
+<!--&#45;&#45;         FROM TBL_CONSULTING C-->
+<!--&#45;&#45;                  JOIN TBL_USER U ON C.USER_NUMBER = U.USER_NUMBER-->
+<!--&#45;&#45;                  JOIN TBL_COMPANY CO ON C.COMPANY_NUMBER = CO.COMPANY_NUMBER-->
+<!--&#45;&#45;         ORDER BY C.CONSULTING_NUMBER DESC-->
+<!--&#45;&#45;             </select>-->
+
+
+
+    <select id="selectComment" parameterType="long" resultType="consultingVo">
+        SELECT CONSULTING_COMMENT
+            FROM TBL_CONSULTING
+            WHERE CONSULTING_NUMBER=#{consultingNumber}
+    </select>
+
+
+   <select id="selectTotal" resultType="_int">
+       SELECT COUNT(CONSULTING_NUMBER) FROM TBL_CONSULTING
+   </select>
+
+    <delete id="delete" >
+        DELETE FROM TBL_CONSULTING
+        WHERE CONSULTING_NUMBER=#{consultingNumber}
+    </delete>
+
+
+
+
+            </mapper>

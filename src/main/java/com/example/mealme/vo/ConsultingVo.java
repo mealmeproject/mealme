@@ -1,4 +1,4 @@
-package com.example.mealme.dto;
+package com.example.mealme.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +9,15 @@ import java.sql.Clob;
 @Component
 @Data
 @NoArgsConstructor
-public class ConsultingDto {
+public class ConsultingVo {
+
     private long consultingNumber;
     private long companyNumber;
     private long userNumber;
     private String consultingComment;
     private String consultingDate;
+    private String companyName;
+    private String userNickname;
+    private long consultingRequestNumber;
+
 }

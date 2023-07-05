@@ -4,15 +4,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.sql.Clob;
-
 @Component
 @Data
 @NoArgsConstructor
-public class ConsultingDto {
+public class ConsultingReplyDto {
+    private long replyNumber;
     private long consultingNumber;
-    private long companyNumber;
     private long userNumber;
-    private String consultingComment;
-    private String consultingDate;
+    private String replyContent;
+    private String replyDate;
 }
