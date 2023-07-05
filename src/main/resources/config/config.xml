@@ -51,6 +51,6 @@
         <typeAlias type="com.example.mealme.vo.DayMealVo" alias="DayMealVo"/>
         <typeAlias type="com.example.mealme.vo.ReadMealVo" alias="readMealVo"/>
         <typeAlias type="com.example.mealme.vo.ConsultingRequestVo" alias="consultingRequestVo"/>
-
+        <typeAlias type="com.example.mealme.vo.ConsultingReviewVo" alias="consultingReviewVo"/>
     </typeAliases>
 </configuration>
