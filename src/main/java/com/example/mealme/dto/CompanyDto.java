@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class CompanyDto {
     private long companyNumber;
     private long companyCodeNumber;
-    private long companyRegistrationNumber;
+    private String companyRegistrationNumber;
     private String companyId;
     private String companyPassword;
     private String companyName;
@@ -23,9 +23,13 @@ public class CompanyDto {
     private String companyAddress3;
     private String companyUrl;
     private String companyEmail;
+    private String companyJoinDate;
     private String companyComment;
+    private int companyStatus;
+    private String companyInformation;
 
-    public CompanyDto(long companyCodeNumber, long companyRegistrationNumber, String companyId, String companyPassword, String companyName, String companyCeoName, String companyCallNumber, String companyBirth, int companyAddressNumber, String companyAddress1, String companyAddress2, String companyAddress3, String companyEmail) {
+
+    public CompanyDto(long companyCodeNumber, String companyRegistrationNumber, String companyId, String companyPassword, String companyName, String companyCeoName, String companyCallNumber, String companyBirth, int companyAddressNumber, String companyAddress1, String companyAddress2, String companyAddress3, String companyEmail) {
         this.companyCodeNumber = companyCodeNumber;
         this.companyRegistrationNumber = companyRegistrationNumber;
         this.companyId = companyId;

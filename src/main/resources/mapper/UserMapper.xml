@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mealme.mapper.UserMapper">
+
     <insert id="insertUser">
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
@@ -9,6 +10,14 @@
                               USER_ADDRESS_NUMBER, USER_ADDRESS1, USER_ADDRESS2, USER_ADDRESS3, USER_EMAIL)
                 VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userPhoneNumber}, #{userBirth},
                   #{userAddressNumber}, #{userAddress1}, #{userAddress2}, #{userAddress3}, #{userEmail})
+    </insert>
+
+    <insert id="insertKakaoUser">
+        <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_USER.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_BIRTH, USER_EMAIL)
+        VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userBirth}, #{userEmail})
     </insert>
 
     <select id="checkUserId" resultType="int">
@@ -20,6 +29,19 @@
         SELECT USER_NUMBER FROM TBL_USER
         WHERE USER_ID = #{userId} AND USER_PASSWORD = #{userPassword}
     </select>
+
+    <select id="getUserName" resultType="String">
+        SELECT USER_NAME FROM TBL_USER
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
+
+    <select id="getCompanyName" resultType="String">
+        SELECT COMPANY_NAME FROM TBL_COMPANY
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
+
+
+
 
     <insert id="insertCompany">
         <selectKey keyProperty="companyNumber" order="BEFORE" resultType="long">
@@ -60,16 +82,18 @@
         from TBL_USER U
         left join TBL_USER_FILE UF ON U.USER_NUMBER = UF.USER_NUMBER
         WHERE U.USER_NUMBER = #{userNumber}
-
     </select>
 
     <select id="checkCompany2" resultType="companyModifyVo">
-        select U.*, UF.*
-        from TBL_COMPANY C
-        JOIN TBL_COMPANY_FILE CF
-        ON C.COMPANY_NUMBER = CF.COMPANY_NUMBER
-        WHERE COMPANY_NUMBER = #{companyNumber}
+        SELECT C.COMPANY_NUMBER, C.COMPANY_CODE_NUMBER, C.COMPANY_REGISTRATION_NUMBER, C.COMPANY_ID, C.COMPANY_PASSWORD, C.COMPANY_NAME,
+               C.COMPANY_CEO_NAME, C.COMPANY_BIRTH, C.COMPANY_CALL_NUMBER, C.COMPANY_ADDRESS_NUMBER, C.COMPANY_ADDRESS1,
+               C.COMPANY_ADDRESS2, C.COMPANY_ADDRESS3, C.COMPANY_URL, C.COMPANY_EMAIL, C.COMPANY_COMMENT, C.COMPANY_STATUS,
+               CF.FILE_NUMBER, CF.FILE_NAME, CF.FILE_UPLOAD_PATH, CF.FILE_UUID
+        FROM TBL_COMPANY C
+        LEFT JOIN TBL_COMPANY_FILE CF ON C.COMPANY_NUMBER = CF.COMPANY_NUMBER
+        WHERE C.COMPANY_NUMBER = #{companyNumber}
     </select>
+
 
     <update id="updateUserNickname">
         update TBL_USER
@@ -89,6 +113,26 @@
             USER_EMAIL = #{userEmail}, USER_ADDRESS_NUMBER = #{userAddressNumber}, USER_ADDRESS1 = #{userAddress1}, USER_ADDRESS2 = #{userAddress2}, USER_ADDRESS3 = #{userAddress3},
             USER_HEIGHT = #{userHeight}, USER_WEIGHT = #{userWeight}
         where USER_NUMBER = #{userNumber}
+    </update>
+
+    <update id="updateCompanyName">
+        update TBL_COMPANY
+        set COMPANY_NAME = #{companyName}
+        where COMPANY_NUMBER = #{companyNumber}
+    </update>
+
+    <update id="updateCompanyComment">
+        update TBL_COMPANY
+        set  COMPANY_COMMENT = #{companyComment}
+        where COMPANY_NUMBER = #{companyNumber}
+    </update>
+
+    <update id="updateCompany">
+        update TBL_COMPANY
+        set COMPANY_PASSWORD = #{userPassword}, COMPANY_REGISTRATION_NUMBER = #{companyRegistrationNumber}, COMPANY_BIRTH = #{companyBirth}, COMPANY_CALL_NUMBER = #{companyCallNumber},
+            COMPANY_EMAIL = #{userEmail}, COMPANY_ADDRESS_NUMBER = #{companyAddressNumber}, COMPANY_ADDRESS1 = #{companyAddress1}, COMPANY_ADDRESS2 = #{companyAddress2}, COMPANY_ADDRESS3 = #{companyAddress3},
+            COMPANY_URL = #{userUrl}, COMPANY_INFORMATION = #{companyInformation}
+        where COMPANY_NUMBER = #{companyNumber}
     </update>
 
 

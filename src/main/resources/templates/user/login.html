@@ -13,7 +13,7 @@
             <div class="logo-container">
                 <div class="logo-box">
                     <!-- 메인페이지로 이동처리 -->
-                    <a href="#">
+                    <a th:href="@{/user/index}">
                         <!-- 로고 img -->
                         <img src="../img/mealMeLogo.png" alt="" />
                     </a>
@@ -61,6 +61,7 @@
         </div>
     <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
     <!-- 카카오 로그인 스크립트 -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
         Kakao.init('c6110035b5d2280664b9f251329b20e6'); //발급받은 키 중 javascript키를 사용해준다.
@@ -72,9 +73,22 @@
                     Kakao.API.request({
                         url: '/v2/user/me',
                         success: function (response) {
-                            console.log(response)
+                            // 로그인 성공
+                            console.log("로그인 성공!!!(카카오아이디)" + response)
+                            // db 아이디 중복 체크
+                            // 있으면 = 로그인
+                            // 없으면 = 회원가입
+                            if (checkKakaoId(response))  {
+                                // 회원가입
+                                joinKakaoId(response);
+                            } else {
+                                // 로그인
+                                console.log('로그인')
+                                loginKakaoId(response);
+                            }
                         },
                         fail: function (error) {
+                            // 에러 발생
                             console.log(error)
                         },
                     })
@@ -84,6 +98,7 @@
                 },
             })
         }
+
         // //카카오로그아웃
         // function kakaoLogout() {
         //     if (Kakao.Auth.getAccessToken()) {
@@ -100,35 +115,72 @@
         //     }
         // }
 
-        //카카오로그인
-        function kakaoLogin() {
+        function checkKakaoId(response){
+            const kakaoId = response.kakao_account.email;
+            console.log("이게 ㅏ카오 아이디" + kakaoId)
+            const kakaoPassword = response.id;
+            let result;
             $.ajax({
-                url: '/login/getKakaoAuthUrl',
-                type: 'get',
+                type : "post",
+                url : '/user/checkUserId',
+                data :{ userId: kakaoId },
+                dataType : "json",
                 async: false,
-                dataType: 'text',
-                success: function (res) {
-                    location.href = res;
+                success : function (response){
+                    if (response.checkId) {
+                        console.log("회원 가입한 아이디 입니다.");
+                        result = false;
+                    } else {
+                        console.log("사용 가능한 아이디 입니다. ");
+                        result = true;
+                    }
+                    console.log("아이디체크 반환" + result);
+
+                    },
+                error: function(xhr, status, error) {
+                    console.log("아이디 중복검사 에러");
                 }
+            });
+            return result;
+        }
+
+        // 회원가입
+        function joinKakaoId(response){
+            $.ajax({
+                type: "post",
+                url : '/user/KakaoUserLogin',
+                data : { "userId" : response.kakao_account.email,
+                         "userPassword" : response.id,
+                         "userBirth" : response.kakao_account.birthday,
+                         "userNickname" : response.properties.nickname,
+                         "userGender" : response.kakao_account.gender,
+                         "userName" : response.properties.nickname,
+                         "userEmail" : response.kakao_account.email },
+                success : function (response) {
+                    window.location.href = `/user/userJoinOk?userName=${response.nickname}`;
+                },
+                    error: function(xhr, status, error) {
+                        console.log("아이디 회원가입 에러");
+                    },
             });
         }
 
-        $(document).ready(function() {
-
-            var kakaoInfo = '${kakaoInfo}';
-
-            if(kakaoInfo != ""){
-                var data = JSON.parse(kakaoInfo);
-
-                alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
-                alert(
-                    "user : \n" + "email : "
-                    + data['email']
-                    + "\n nickname : "
-                    + data['nickname']);
-            }
-        });
-
+        // 로그인
+        function loginKakaoId(response){
+            $.ajax({
+                type: "post",
+                url : '/user/login',
+                data : { "id" : response.kakao_account.email,
+                    "password" : response.id,
+                    "userType" : "user"},
+                success : function (response) {
+                    window.location.href = `/meal/myPage`;
+                },
+                error: function(xhr, status, error) {
+                    console.log("로그인 에러");
+                },
+            });
+        }
     </script>
     </body>
 </html>

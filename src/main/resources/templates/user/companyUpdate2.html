@@ -5,31 +5,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
         <link rel="stylesheet" th:href="@{/css/fragment/header2.css}" />
         <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}" />
         <link rel="stylesheet" th:href="@{/css/fragment/aside2.css}" />
         <link rel="stylesheet" th:href="@{/css/fragment/aside.css}" />
+        <link rel="stylesheet" th:href="@{/css/user/jquery-ui.css}" />
         <link rel="stylesheet" th:href="@{/css/user/companyUpdate2.css}" />
         <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
         <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-        <link rel="stylesheet" href="../css/jquery-ui.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"/>
+
     </head>
-    <body>
-        <!-- 헤더 추가 공간 -->
-        <div class="body-container">
-            <!-- 사이드바 추가 공간 -->
-            <div class="sidebar">
-                <p>사이드바자리</p>
-            </div>
-            <!-- 사이드바 추가 공간 -->
+    <body ID="body-pd">
+<!--    사이드바-->
+<div class="body-container">
+    <aside class="aside" th:replace="fragment/aside :: aside"></aside>
             <div class="main-container">
+                <header class="header2" th:replace="fragment/header2 :: header2"></header>
                 <!-- 작업공간 -->
+                <div class="work-container">
                 <div class="service-name-container">
                     <div class="service-name-box">
                         <h1>기업정보수정</h1>
@@ -39,141 +39,141 @@
                 <div class="update-container">
                     <div class="update-profilebox">
                         <div class="profile-box">
-                            <div class="profile-img-box">
-                                <img th:src="@{/img/sample6.jpg}" alt="" />
-                            </div>
+<!--                            기업 프로필 이미지 수정 폼태그-->
+                            <form id="profileForm" th:action="@{/user/companyProfileUpdate}" method="post" enctype="multipart/form-data">
+                                <input type="file" accept="image/*" name="companyProfileFile" id="picture-input" onchange="readURL(this);" />
+                                <div class="profile-img-box">
+                                    <img id="preview" th:src="@{${company.getFile}}" alt="" >
+                                    <div class="photo-call" onclick="openFileInput()">
+                                        <img id="photo-call-img" th:src="@{/img/add_a_photo.png}" alt="">
+                                    </div>
+                                    <div class="photo-done-img-box" style="display: none;">
+                                        <img id="photo-done-img" th:src="@{/img/done_30.png}" alt="" />
+                                    </div>
+                                </div>
+                            </form>
                             <div class="profile-text-box">
-                                <div class="nickname">닉넴닉넴</div>
-                                <div class="edit-img-box">
-                                    <img src="../img/edit_FILL0_wght400_GRAD0_opsz48.png" alt="" />
-                                </div>
+                                <form id="nameForm" th:action="@{/user/companyNameUpdate}" method="post">
+                                    <span id="companyNameContainer">
+                                        <input type="text" name="companyName" id="companyName" class="companyName"
+                                               oninput="adjustInputLength()" onload="adjustInputLength()" th:value="${company.companyName}" readonly />
+                                        <div class="edit-img-box" onclick="toggleNicknameEdit()">
+                                        <img id="editImage" th:src="@{/img/edit_30.png}" alt="Edit" />
+                                        </div>
+                                        <div class="done-img-box" >
+                                            <img id="doneImage" th:src="@{/img/done_30.png}" alt="" />
+                                        </div>
+                                    </span>
+                                </form>
                             </div>
-                            <div class="user-info">
-                                <div class="user-info-text">
-                                    <p>기업의 한줄 소개를 적는 칸 입니다.</p>
+                            <form id="commentForm" th:action="@{/user/companyCommentUpdate}" method="post">
+                                <div class="user-info">
+                                    <input type="text" name="companyComment" id="companyComment"
+                                           oninput="adCommentInputWidth()" onload="adCommentInputWidth()" th:value="${company.companyComment}" readonly/>
+                                    <div class="comment-edit-img-box" onclick="toggleCommentEdit()">
+                                        <img id="comment-edit-img" th:src="@{/img/edit_25.png}" alt="Edit" />
+                                    </div>
+                                    <div class="comment-done-img-box" >
+                                        <img id="comment-done-img" th:src="@{/img/done_25.png}" alt="" />
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="update-user-data">
-                        <form action="">
-                            <div class="update-name row">
-                                <div class="data-title">기업이름</div>
-                                <div class="data-content">
-                                    <input type="text" name="" id="" />
-                                </div>
-                            </div>
-                            <div class="update-name row">
+                    <div class="update-user-data ">
+                        <form id="companyForm" th:action="@{company/companyUpdate2}" method="post">
+                            <div class="update-name update-row">
                                 <div class="data-title">아이디</div>
                                 <div class="data-content">
-                                    <div class="id-box">id1234</div>
+                                    <div class="id-box" th:text="${company.companyId}"></div>
                                 </div>
                             </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
                                 <div class="data-title">비밀번호</div>
                                 <div class="data-content">
-                                    <input type="password" name="" id="" />
+                                    <input type="password" name="companyPassword" id="companyPassword" required />
+                                    <h5 id="passwordCheck1" style="display: none; color: red;">8자리 ~ 20자리 이내로 입력해주세요.</h5>
+                                    <h5 id="passwordCheck2" style="display: none; color: red;">비밀번호는 공백 없이 입력해주세요.</h5>
+                                    <h5 id="passwordCheck3" style="display: none; color: red;">영문, 숫자, 특수문자를 혼합하여 입력해주세요.</h5>
                                 </div>
                             </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
                                 <div class="data-title">비밀번호 확인</div>
                                 <div class="data-content">
-                                    <input type="password" name="" id="" />
+                                    <input type="password" name="confirmPassword" id="confirmPassword" required />
+                                    <h5 id="passwordMismatchError" style="display: none; color: red;">비밀번호가 일치하지 않습니다.</h5>
+                                    <h5 id="passwordMismatchPass" style="display: none; color: green;">비밀번호가 일치합니다.</h5>
                                 </div>
                             </div>
-                            <!-- 기업 사업자등록증 사진 -->
-                            <div class="update-name row">
-                                <div class="data-title">사업자등록증</div>
-                                <ul class="file-wrap">
-                                    <li>
-                                        <input
-                                            type="file"
-                                            id="post-image"
-                                            name="boardFile"
-                                            value="library_add"
-                                            accept="image/*"
-                                            multiple
-                                        />
-                                    </li>
-                                    <li class="img-list"></li>
-                                </ul>
-                            </div>
-                            <div class="update-name row">
-                                <div class="data-title">사업자등록번호</div>
-                                <div class="data-content">
-                                    <input type="text" name="" id="" />
-                                </div>
-                            </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
                                 <div class="data-title">직종</div>
                                 <div class="data-content">
-                                    <div class="radio-group">
-                                        <input
-                                            type="radio"
-                                            id="hospital"
-                                            name="coporateType"
-                                            value="hospital"
-                                            checked
-                                        /><label for="hospital">병원</label>
-                                        <input type="radio" id="trainer" name="coporateType" value="trainer" /><label
-                                            for="trainer"
-                                            >트레이너</label
-                                        >
-                                        <input
-                                            type="radio"
-                                            id="Dietitian"
-                                            name="coporateType"
-                                            value="Dietitian"
-                                        /><label for="Dietitian">영양사</label>
+                                    <div class="radio-group" th:value="${company.companyCodeNumber}">
+                                        <input type="radio" id="hospital" name="companyCode" value="hospital" checked/>
+                                        <label for="hospital">병원</label>
+                                        <input type="radio" id="trainer" name="companyCode" value="trainer" />
+                                        <label for="trainer">트레이너</label>
+                                        <input type="radio" id="Dietitian" name="companyCode" value="Dietitian"/>
+                                        <label for="Dietitian">영양사</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
                                 <div class="data-title">창립일</div>
                                 <div class="data-content">
-                                    <input type="text" id="datepicker" />
+                                    <input type="text" id="datepicker" name="companyBirth" th:value="${company.companyBirth}"/>
                                 </div>
                             </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
+                                <div class="data-title">창립일</div>
+                                <div class="data-content">
+                                    <input type="text" id="companyCeo" name="companyCeo" th:value="${company.companyCeoName}"/>
+                                </div>
+                            </div>
+                            <div class="update-name update-row">
                                 <div class="data-title">회사번호</div>
                                 <div class="data-content phone-number-box">
                                     <select name="phone1" id="phone1">
-                                        <option>선택</option>
-                                        <option>010</option>
-                                        <option>011</option>
-                                        <option>016</option>
-                                        <option>017</option>
-                                        <option>018</option>
+                                        <option value="선택" th:selected="${company.phone1}">선택</option>
+                                        <option value="02" th:selected="${company.phone1}">02</option>
+                                        <option value="031" th:selected="${company.phone1 == '031'}">031</option>
+                                        <option value="032" th:selected="${company.phone1 == '032'}">032</option>
+                                        <option value="033" th:selected="${company.phone1 == '033'}">033</option>
+                                        <option value="041" th:selected="${company.phone1 == '041'}">041</option>
+                                        <option value="042" th:selected="${company.phone1 == '042'}">042</option>
+                                        <option value="043" th:selected="${company.phone1 == '043'}">043</option>
+                                        <option value="044" th:selected="${company.phone1 == '044'}">044</option>
+                                        <option value="051" th:selected="${company.phone1 == '051'}">051</option>
+                                        <option value="052" th:selected="${company.phone1 == '052'}">052</option>
+                                        <option value="061" th:selected="${company.phone1 == '061'}">061</option>
+                                        <option value="062" th:selected="${company.phone1 == '062'}">062</option>
+                                        <option value="063" th:selected="${company.phone1 == '063'}">063</option>
+                                        <option value="064" th:selected="${company.phone1 == '064'}">064</option>
                                     </select>
                                     &nbsp&nbsp-&nbsp&nbsp
-                                    <input
-                                        type="text"
-                                        id="phone2"
-                                        name="phone2 "
-                                        maxlength="4"
-                                        required
-                                    />&nbsp&nbsp-&nbsp&nbsp
-                                    <input type="text" id="phone3" name="phone3" maxlength="4" required />
+                                    <input type="text" id="phone2" name="phone2 " maxlength="4" th:value="${company.phone2}" required/>
+                                    &nbsp&nbsp-&nbsp&nbsp
+                                    <input type="text" id="phone3" name="phone3" maxlength="4" th:value="${company.phone3}" required />
                                 </div>
                             </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
                                 <div class="data-title">이메일</div>
                                 <div class="data-content email-box">
-                                    <input type="text" name="mail1" id="mail1" maxlength="50" />&nbsp&nbsp@&nbsp&nbsp
+                                    <input type="text" name="mail1" id="mail1" th:value="${company.companyEmail1}" maxlength="50" />&nbsp&nbsp@&nbsp&nbsp
                                     <select name="mail2" id="mail2">
-                                        <option>선택</option>
-                                        <option>naver.com</option>
-                                        <option>daum.net</option>
-                                        <option>gmail.com</option>
-                                        <option>nate.com</option>
+                                        <option value="선택" th:selected="${company.companyEmail2 == '선택'}">선택</option>
+                                        <option value="naver.com" th:selected="${company.companyEmail2 == 'naver.com'}">naver.com</option>
+                                        <option value="daum.net" th:selected="${company.companyEmail2 == 'daum.net'}">daum.net</option>
+                                        <option value="gmail.com" th:selected="${company.companyEmail2 == 'gmail.com'}">gmail.com</option>
+                                        <option value="nate.com" th:selected="${company.companyEmail2 == 'nate.com'}">nate.com</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="update-name row">
+                            <div class="update-name update-row">
                                 <div class="data-title">주소</div>
                                 <div class="data-content address-box">
                                     <div class="address-code">
-                                        <input type="text" id="adress-number" placeholder="우편번호" />
+                                        <input type="text" name="companyAddressNumber" id="addressNumber" th:value="${company.companyAddressNumber}" placeholder="우편번호" />
                                         <input
                                             type="button"
                                             class="address-btn"
@@ -181,25 +181,65 @@
                                             value="우편번호 찾기"
                                         />
                                     </div>
-                                    <input type="text" id="address" placeholder="주소" /><br />
-                                    <input type="text" id="detailAddress" placeholder="상세주소" />
-                                    <input type="text" id="extraAddress" placeholder="참고항목" />
+                                    <input type="text" id="address" name="companyAddress1" placeholder="주소" th:value="${company.companyAddress1}"/><br />
+                                    <input type="text" id="detailAddress" name="companyAddress2" placeholder="상세주소" th:value="${company.companyAddress2}" />
+                                    <input type="text" id="extraAddress" name="companyAddress3" placeholder="참고항목" th:value="${company.companyAddress3}" />
+                                </div>
+                            </div>
+                            <div class="update-name update-row">
+                                <div class="data-title">상세정보</div>
+                                <div class="data-content">
+                                    <div class="summernote-box">
+                                        <textarea id="summernote" name="companyInformation"></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="submit-btn-box">
-                                <button type="button" id="list-btn">수정</button>
-                                <button type="submit" id="submit-btn">목록</button>
+                                <button type="button" id="list-btn">목록</button>
+                                <button type="submit" id="submit-btn">수정</button>
                             </div>
                         </form>
                     </div>
                 </div>
+                </div>
                 <!-- 작업공간 -->
+                <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
             </div>
         </div>
+        <aside class="aside2" th:replace="fragment/aside2 :: aside2">
+            <div class="menu-container"></div>
+        </aside>
         <!-- 퀵 메뉴 추가 공간 -->
         <!-- 푸터 추가 공간 -->
-        <script src="../js/coporateUpdate2.js"></script>
-        <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+        <script th:src="@{/js/fragment/aside.js}"></script>
+        <script th:src="@{/js/user/companyUpdate2.js}"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script>
+            function openFileInput() {
+                document.getElementById('picture-input').click();
+            }
+            function readURL(input) {
+                console.log("readURL 실행 !");
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('preview').src = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+
+                    // Show the photo-done-img and hide the photo-call-img
+                    document.getElementById('photo-done-img').parentNode.style.display = 'block';
+                    document.getElementById('photo-call-img').style.display = 'none';
+                } else {
+                    document.getElementById('preview').src = "";
+                    document.getElementById('photo-done-img').parentNode.style.display = 'none';
+                    document.getElementById('photo-call-img').style.display = 'block';
+                }
+            }
+        </script>
     </body>
 </html>

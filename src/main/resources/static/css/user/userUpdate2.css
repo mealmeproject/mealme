@@ -324,7 +324,7 @@ input[type="password"] {
 }
 
 #phone1 {
-    width: 100px;
+    width: 97px;
     padding: 10px;
     font-size: 14px;
     background-color: rgba(210, 210, 210, 0.3);
@@ -333,7 +333,7 @@ input[type="password"] {
 
 #phone2,
 #phone3 {
-    width: 18% !important;
+    width: 20% !important;
 }
 /* 이메일 */
 .email-box {
