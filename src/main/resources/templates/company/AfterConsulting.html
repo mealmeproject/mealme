@@ -120,70 +120,73 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-          <div class="OnlyThisH1">답변 보내기</div>
+          <div class="OnlyThisH1">기업의 답변</div>
 
           <br>
 
 
-          <!-- 답변(댓글) 보내기 -->
-          <div class="comment-form">
-            <form id="comment-form" th:action="@{/company/SendConsulting1}" method="post">
-              <input type="hidden" name="consultingNumber" th:value="${consulting.consultingNumber}" />
-              <input type="hidden" name="userNumber" th:value="${consulting.userNumber}" />
-              <input type="hidden" name="companyNumber" th:value="${consulting.companyNumber}" />
-              <div class="summernote-box">
-              <textarea id="summernote" name="consultingComment"></textarea>
-              </div>
+          <div class="comment-list"  th:each="consulting : ${consultingList}">
+            <!-- 리스트 예시 -->
+            <ul id="comment-list" >
+              <li>
+                <div class="comment-info">
+                  <span class="writer" th:text="${consulting.companyName}">유정현</span>
 
-
-              <div class="CommentSend-btn">
-                <button type="submit" class="Send-btn" id="Send" >
-                  보내기
-                </button>
-
-              </div>
-
-            </form>
+                  <span class="date" th:text="${consulting.consultingDate}">2023-6-12</span>
+                </div>
+                <div class="comment-content-wrap">
+                  <div class="comment-content" >
+                    <p th:utext="${consulting.consultingComment}"></p>
+                  </div>
+                  <div class="comment-btn-group">
+                    <button type=button class="comment-modify-ready">수정</button>
+                    <button type=button class="comment-delete">삭제</button>
+                  </div>
+                  <div class="comment-btn-group none">
+                    <button type=button class="comment-modify">수정 완료</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <!-- /리스트 예시 -->
           </div>
 
 
 
 
 
-<!--          <div class="comment-list">-->
-<!--            &lt;!&ndash; 리스트 예시 &ndash;&gt;-->
-<!--            <ul id="comment-list" >-->
-<!--              <li>-->
-<!--                <div class="comment-info">-->
-<!--                  <span class="writer">유정현</span> <span-->
-<!--                        class="date">2023-6-12</span>-->
-<!--                </div>-->
-<!--                <div class="comment-content-wrap">-->
-<!--                  <div class="comment-content" >-->
-<!--                    <p>안녕하세요</p>-->
-<!--                  </div>-->
-<!--                  <div class="comment-btn-group">-->
-<!--                    <button type=button class="comment-modify-ready">수정</button>-->
-<!--                    <button type=button class="comment-delete">삭제</button>-->
-<!--                  </div>-->
-<!--                  <div class="comment-btn-group none">-->
-<!--                    <button type=button class="comment-modify">수정 완료</button>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--            &lt;!&ndash; /리스트 예시 &ndash;&gt;-->
-<!--          </div>-->
+
+
+
+          <div class="OnlyThisH1">회원의 답변</div>
+
+          <br>
+
+
+          <div class="comment-list"  th:each="replyNo : ${consultingReplyList}">
+            <!-- 리스트 예시 -->
+            <ul id="comment-list">
+              <li>
+                <div class="comment-info">
+                  <span class="writer" th:text="${replyNo.userNickname}">유정현</span> <span
+                        class="date" th:text="${replyNo.replyDate}">2023-6-12</span>
+                </div>
+                <div class="comment-content-wrap">
+                  <div class="comment-content" th:utext="${replyNo.replyContent}" >
+                    <p>안녕하세요</p>
+                  </div>
+                  <div class="comment-btn-group">
+                    <button type=button class="comment-modify-ready">수정</button>
+                    <button type=button class="comment-delete">삭제</button>
+                  </div>
+                  <div class="comment-btn-group none">
+                    <button type=button class="comment-modify">수정 완료</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <!-- /리스트 예시 -->
+          </div>
 
 
 

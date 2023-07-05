@@ -63,9 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
 // Get the modal
-const modal = document.getElementById("myModal");
+const myModal = document.getElementById("myModal");
 
 // Get the <span> element that closes the modal
 const closeBtn = document.getElementsByClassName("close")[0];
@@ -76,23 +75,38 @@ const modalTriggers = document.getElementsByClassName("modal-trigger");
 // When the user clicks on a modal trigger link, open the modal
 for (let i = 0; i < modalTriggers.length; i++) {
     modalTriggers[i].onclick = function () {
-        const title = modalTriggers[i].getAttribute("data-modal-title");
-        document.getElementById("modal-title").textContent = title;
-        modal.style.display = "block";
+        const content = modalTriggers[i].textContent;
+        console.log(content);
+        document.getElementById("modal-contents").textContent = content;
+        myModal.style.display = "block";
+
+        let contentTh = this.closest('.content');
+        let companyNumberVal = contentTh.querySelector('.companyNumber-h').value;
+        let userNumberVal = contentTh.querySelector('.userNumber-h').value;
+        let consultingNumberVal = contentTh.querySelector('.consultingNumber-h').value;
+
+        document.querySelector('.consultingNumber').value = consultingNumberVal;
+
+        document.querySelector('.companyNumber').value = companyNumberVal;
+        document.querySelector('.userNumber').value = userNumberVal;
     };
+
 }
 
 // When the user clicks on <span> (x), close the modal
 closeBtn.onclick = function () {
-    modal.style.display = "none";
+    myModal.style.display = "none";
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == myModal) {
+        myModal.style.display = "none";
     }
 };
+
+
+
 
 
 
@@ -115,6 +129,8 @@ closeButton.addEventListener("click", function() {
 
 
 
+// When the user clicks on a modal trigger link, open the modal
+
 
 
 $(document).ready(function () {
@@ -131,5 +147,4 @@ $(document).ready(function () {
         ],
     });
 });
-
 

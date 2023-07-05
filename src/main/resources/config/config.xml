@@ -10,8 +10,11 @@
         <typeAlias type="com.example.mealme.dto.CompanyDto" alias="companyDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyFileDto" alias="companyFileDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingDto" alias="consultingDto"/>
+        <typeAlias type="com.example.mealme.dto.ConsultingReplyDto" alias="consultingReplyDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingRequestDto" alias="consultingRequestDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReviewDto" alias="consultingReviewDto"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingVo" alias="consultingVo"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingReplyVo" alias="consultingReplyVo"/>
         <typeAlias type="com.example.mealme.dto.LikeDto" alias="likeDto"/>
         <typeAlias type="com.example.mealme.dto.BoardDto" alias="mealBoardDto"/>
         <typeAlias type="com.example.mealme.dto.MealCodeDto" alias="mealCodeDto"/>
