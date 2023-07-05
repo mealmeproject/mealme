@@ -13,7 +13,7 @@ public class MealUtil {
         for (MealVo meal : mealVoList) {
             String mealDate = meal.getMealDate();
 
-            // mealDate가 이미 맵에 존재하는지 확인합니다.
+            // mealDate가 이미 맵에 존재하는지 확인
             if (map.containsKey(mealDate)) {
                 List<DayMealVo> dayMealVoList = map.get(mealDate);
                 DayMealVo dayMealVo = null;

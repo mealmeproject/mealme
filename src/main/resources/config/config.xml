@@ -15,10 +15,10 @@
         <typeAlias type="com.example.mealme.dto.ConsultingReplyDto" alias="consultingReplyDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReviewDto" alias="consultingReviewDto"/>
         <typeAlias type="com.example.mealme.dto.LikeDto" alias="likeDto"/>
-        <typeAlias type="com.example.mealme.dto.BoardDto" alias="mealBoardDto"/>
+        <typeAlias type="com.example.mealme.dto.BoardDto" alias="BoardDto"/>
         <typeAlias type="com.example.mealme.dto.MealCodeDto" alias="mealCodeDto"/>
-        <typeAlias type="com.example.mealme.dto.FoodDto" alias="mealDataDto"/>
-        <typeAlias type="com.example.mealme.dto.BoardFileDto" alias="mealFileDto"/>
+        <typeAlias type="com.example.mealme.dto.FoodDto" alias="foodDto"/>
+        <typeAlias type="com.example.mealme.dto.BoardFileDto" alias="boardFileDto"/>
         <typeAlias type="com.example.mealme.dto.OrderConditionDto" alias="orderConditionDto"/>
         <typeAlias type="com.example.mealme.dto.OrderDto" alias="orderDto"/>
         <typeAlias type="com.example.mealme.dto.OrderReviewDto" alias="orderReviewDto"/>
@@ -42,5 +42,6 @@
         <typeAlias type="com.example.mealme.vo.UserInfoVo" alias="userInfoVo"/>
         <typeAlias type="com.example.mealme.vo.MealVo" alias="mealVo"/>
         <typeAlias type="com.example.mealme.vo.DayMealVo" alias="DayMealVo"/>
+        <typeAlias type="com.example.mealme.vo.ReadMealVo" alias="readMealVo"/>
     </typeAliases>
 </configuration>

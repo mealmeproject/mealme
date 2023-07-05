@@ -429,3 +429,15 @@ input[type="password"] {
 .note-resizebar {
     display: none;
 }
+
+/* CSS */
+.summernote-editor {
+    /* Add your custom styles for the Summernote editor here */
+    width: 100%;
+    float: left;
+    margin-right: 20px;
+}
+
+.summernote-editor .note-resizebar {
+    display: none;
+}

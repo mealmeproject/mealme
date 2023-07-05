@@ -41,4 +41,6 @@ public class MealController {
 
         return "meal/myPage";
     }
+
+
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class ConsultingReviewDto {
     private long reviewNumber;
-    private long consultingNumber;
+    private long consultingRequestNumber;
     private long userNumber;
     private long companyNumber;
     private String reviewDate;

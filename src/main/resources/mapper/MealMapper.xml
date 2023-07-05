@@ -35,7 +35,7 @@
 
     <select id="getMealList" resultType="mealVo">
         SELECT B.BOARD_NUMBER, B.USER_NUMBER, TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') AS MEAL_DATE,
-               TO_CHAR(B.MEAL_TIME, 'HH24:MI:SS') AS MEAL_TIME,
+               TO_CHAR(B.MEAL_TIME, 'HH24:MI') AS MEAL_TIME,
                BF.FILE_NUMBER, BF.FILE_NAME, BF.FILE_UPLOAD_PATH, BF.FILE_UUID,
                F.MEAL_TOTAL_KCAL
         FROM TBL_BOARD B
@@ -47,6 +47,24 @@
         ) F ON B.BOARD_NUMBER = F.BOARD_NUMBER
         WHERE B.USER_NUMBER = #{userNumber}
         ORDER BY MEAL_DATE, MEAL_TIME
+    </select>
+
+    <select id="getMeal" resultType="readMealVo">
+        SELECT BOARD_NUMBER, MEAL_CODE_NUMBER, USER_NUMBER, BOARD_TITLE,
+               TO_CHAR(MEAL_TIME, 'YY"년 "MM"월 "DD"일 "HH24"시 "MI"분 "') AS MEAL_TIME,
+               BOARD_CONTENT, BOARD_REGISTER_DATE
+        FROM TBL_BOARD
+        WHERE BOARD_NUMBER = #{boardNumber}
+    </select>
+
+    <select id="getFoods" resultType="foodDto">
+        SELECT * FROM TBL_FOOD
+        WHERE BOARD_NUMBER = #{boardNumber}
+    </select>
+
+    <select id="getFiles" resultType="boardFileDto">
+        SELECT * FROM TBL_BOARD_FILE
+        WHERE BOARD_NUMBER = #{boardNumber}
     </select>
 
 </mapper>
