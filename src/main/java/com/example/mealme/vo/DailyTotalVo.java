@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class DailyTotalVo {
     private long userNumber;
-//    날짜 일단 mealDate로 받는데 필요하면 mealTime으로 수정하기
+    private long countMealTime;
     private String mealDate;
     private int totalFoodKcal;
     private int totalFoodCarbohydrate;

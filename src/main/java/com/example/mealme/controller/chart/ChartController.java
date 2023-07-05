@@ -30,17 +30,10 @@ public class ChartController {
 
 
     @GetMapping("/chartMonthly")
-    public void chartMonthly(){
-    }
-
-    @GetMapping("/chartWeekly")
-    public void chartWeekly(){}
-
-    @GetMapping("/chartDaily")
-    public String chartDaily(HttpServletRequest req, Model model){
-//        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber = 1L;
-        List<DailyTotalVo> dailyTotalVo = chartService.selectDaily(userNumber);
+    public String chartMonthly(HttpServletRequest req, Model model){
+                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber = 1L;
+        List<DailyTotalVo> dailyTotalVo = chartService.selectMonthly(userNumber);
         RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
 
         System.out.println("&&&&&&&&&&&&&&&&&&");
@@ -48,6 +41,42 @@ public class ChartController {
         System.out.println("%%%%%%%%%%%%%%%%%%%%");
         System.out.println(recommendVo);
         System.out.println("&&&&&&&&&&&&&&&&&&");
+
+        model.addAttribute("DailyTotalVo", dailyTotalVo);
+        model.addAttribute("recommendVo", recommendVo);
+        return "chart/chartMonthly";
+    }
+
+    @GetMapping("/chartWeekly")
+    public String chartWeekly(HttpServletRequest req, Model model){
+                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber = 1L;
+        List<DailyTotalVo> dailyTotalVo = chartService.selectWeekly(userNumber);
+        RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
+
+//        System.out.println("&&&&&&&&&&&&&&&&&&");
+//        System.out.println(dailyTotalVo);
+//        System.out.println("%%%%%%%%%%%%%%%%%%%%");
+//        System.out.println(recommendVo);
+//        System.out.println("&&&&&&&&&&&&&&&&&&");
+        model.addAttribute("DailyTotalVo", dailyTotalVo);
+        model.addAttribute("recommendVo", recommendVo);
+        return "chart/chartWeekly";
+
+    }
+
+    @GetMapping("/chartDaily")
+    public String chartDaily(HttpServletRequest req, Model model){
+        Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber = 1L;
+        List<DailyTotalVo> dailyTotalVo = chartService.selectDaily(userNumber);
+        RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
+
+//        System.out.println("&&&&&&&&&&&&&&&&&&");
+//        System.out.println(dailyTotalVo);
+//        System.out.println("%%%%%%%%%%%%%%%%%%%%");
+//        System.out.println(recommendVo);
+//        System.out.println("&&&&&&&&&&&&&&&&&&");
         model.addAttribute("DailyTotalVo", dailyTotalVo);
         model.addAttribute("recommendVo", recommendVo);
         return "chart/chartDaily";
@@ -56,18 +85,18 @@ public class ChartController {
     @GetMapping("/today")
     public String today( HttpServletRequest req, Model model){
 
-//        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber= 1L;
+        Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber= 1L;
         String mealTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
 //        model에 저장하는 객체의 값을 chartService의 메소드를 통해 저장해줌
      RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
      CalcNutrientUtil calcNutrientUtil = chartService.selectFoodInfo(userNumber, mealTime);
 
-        System.out.println("==========================================================");
-        System.out.println(recommendVo);
-        System.out.println(calcNutrientUtil);
-        System.out.println("==========================================================");
+//        System.out.println("==========================================================");
+//        System.out.println(recommendVo);
+//        System.out.println(calcNutrientUtil);
+//        System.out.println("==========================================================");
 
 //        model에 RecommendVo, CalcNutrientUtil가 저장
     model.addAttribute("RecommendVo", recommendVo);
