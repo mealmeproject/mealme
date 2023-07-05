@@ -1,5 +1,6 @@
 package com.example.mealme.service.user;
 
+import com.example.mealme.dto.CompanyFileDto;
 import com.example.mealme.dto.CompanyRegistrationFileDto;
 import com.example.mealme.dto.UserFileDto;
 import com.example.mealme.mapper.UserFileMapper;
@@ -200,6 +201,102 @@ public class UserFileService {
             throw new IllegalArgumentException("유저 번호 누락(file)");
         }
         return userFileMapper.userCheck(userNumber) > 0;
+    }
+
+
+
+
+
+
+
+
+
+    // 기업 프로필 사진 처리 *******************************************************************************
+    public void companyFileRegister(CompanyFileDto companyFileDto){
+        if(companyFileDto == null) { throw new IllegalArgumentException("파일 정보 누락"); }
+        userFileMapper.companyInsert(companyFileDto);
+    }
+
+    public CompanyFileDto companyProfileFindFile(Long companyNumber){
+        return userFileMapper.companySelect(companyNumber);
+    }
+
+    public void companyRemove(Long companyNumber){
+        if (companyNumber == null) {
+            throw new IllegalArgumentException("유저 번호 누락(file)");
+        }
+        CompanyFileDto file = companyProfileFindFile(companyNumber);
+
+        File target = new File(fileDir, file.getFileUploadPath() + "/" + file.getFileUuid() + "_" + file.getFileName());
+        File thumbnail = new File(fileDir, file.getFileUploadPath() + "/th_" + file.getFileUuid() + "_" + file.getFileName());
+
+        if (target.exists()){
+            target.delete();
+        }
+        if (thumbnail.exists()){
+            thumbnail.delete();
+        }
+
+        userFileMapper.companyDelete(companyNumber);
+    }
+
+    //    파일 저장 처리
+    public CompanyFileDto companySaveFile(MultipartFile file) throws IOException {
+//        사용자가 올린 파일 이름(확장자를 포함)
+        String originName = file.getOriginalFilename();
+//        파일이름에 공백이 들어오면 처리해준다.(공백 제거)
+        originName = originName.replace("\\s+", "");
+
+//        파일 이름에 붙여줄 uuid 생성(파일이름 중복이 나오지 않게 처리)
+        UUID uuid = UUID.randomUUID();
+
+//        uuid와 파일이름을 합쳐준다.
+        String sysName = uuid.toString() + "_" + originName;
+
+        File uploadPath = new File(fileDir, getUploadPath());
+
+//        경로가 존재하지 않는다면(폴더가 없다면)
+        if(!uploadPath.exists()){
+//            경로에 필요한 폴더를 생성한다.
+            uploadPath.mkdirs();
+        }
+
+//        전체 경로와 파일이름을 연결한다.
+        File uploadFile = new File(uploadPath, sysName);
+
+//        매개변수로 받은 파일을 우리가 만든 경로와 이름으로 저장한다.
+//        transferTo(경로)
+//        MultipartFile객체를 실제로 저장시킨다.
+//        저장시킬 경로와 이름을 매개변수로 넘겨주면 된다.
+        file.transferTo(uploadFile);
+
+//        boardNumber를 제외한 모든 정보를 가진 FileDto를 반환한다.
+        CompanyFileDto companyFileDto = new CompanyFileDto();
+        companyFileDto.setFileUuid(uuid.toString());
+        companyFileDto.setFileName(originName);
+        companyFileDto.setFileUploadPath(getUploadPath());
+
+        return companyFileDto;
+    }
+
+    /**
+     * 파일 리스트를 DB등록 및 저장 처리
+     *
+     * @param companyNumber 파일이 속하는 게시글 번호
+     * @throws IOException
+     */
+    public void companyRegisterAndSaveFiles(MultipartFile file, Long companyNumber) throws IOException{
+        CompanyFileDto companyFileDto = companySaveFile(file);
+        companyFileDto.setCompanyNumber(companyNumber);
+        companyFileRegister(companyFileDto);
+    }
+
+    // 파일 체크
+    public boolean companyProfileFileCheck(Long companyNumber){
+        if (companyNumber == null) {
+            throw new IllegalArgumentException("유저 번호 누락(file)");
+        }
+        return userFileMapper.companyCheck(companyNumber) > 0;
     }
 
 

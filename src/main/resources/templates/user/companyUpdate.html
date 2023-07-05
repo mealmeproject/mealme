@@ -37,11 +37,11 @@
                         </div>
                         <div class="password-check-explain-box">
                             <div class="password-check-explain">
-                                <p>### 기업의 회원 정보를 안전하게 보호하기 위해 비밀번호를 한번 더 확인해 주세요.</p>
+                                <p><b th:text="${companyName}"></b>기업의 회원 정보를 안전하게 보호하기 위해 비밀번호를 한번 더 확인해 주세요.</p>
                             </div>
                             <div class="password-check">
-                                <form th:action="@{user/companyUpdate}" id="check-password-form">
-                                    <input type="password" name="" id="" />
+                                <form th:action="@{/user/companyUpdate}" id="check-password-form" method="post">
+                                    <input type="password" name="companyPassword" id="companyPassword" />
                                     <input type="submit" value="확인" class="submit-btn" />
                                 </form>
                             </div>

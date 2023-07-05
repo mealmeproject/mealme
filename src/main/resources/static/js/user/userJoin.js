@@ -82,14 +82,18 @@ $('.id-check').on("click", function() {
 
 // 아이디 중복체크
 function checkDuplicateId(userId) {
+    // const data = { userId: userId };
+    // alert(userId)
     $.ajax({
         url: "/user/checkUserId",
-        type: "GET",
+        type: "post",
+        // data: JSON.stringify(data),
         data: { userId: userId },
         success: function(response) {
             if (response.checkId) {
                 console.log("중복된 아이디 입니다.");
                 document.getElementById("duplicateIdError").style.display = "block";
+                document.getElementById("duplicateIdPass").style.display = "none";
                 alert("중복된 아이디입니다. ");
             } else {
                 console.log("사용 가능한 아이디 입니다. ");

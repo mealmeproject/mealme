@@ -12,7 +12,7 @@ public class CompanyVo {
     private String companyId;
     private String companyPassword;
     private String companyName;
-    private long companyRegistrationNumber;
+    private String companyRegistrationNumber;
     private String companyCeoName;
     private String companyType;
     private String datepicker;

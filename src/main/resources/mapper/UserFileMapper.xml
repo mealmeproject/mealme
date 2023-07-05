@@ -44,5 +44,28 @@
         WHERE USER_NUMBER = #{userNumber}
     </select>
 
+<!--    기업 회원 수정 프로필 사진 -->
+    <select id="companyCheck" resultType="int">
+        SELECT COUNT(FILE_NUMBER) FROM TBL_COMPANY_FILE
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
+
+    <delete id="companyDelete">
+        DELETE FROM TBL_COMPANY_FILE
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </delete>
+
+    <insert id="companyInsert">
+        <selectKey keyProperty="fileNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_COMPANY_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_COMPANY_FILE (FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, COMPANY_NUMBER)
+        values (#{fileNumber}, #{fileName}, #{fileUploadPath}, #{fileUuid}, #{companyNumber})
+    </insert>
+
+    <select id="companySelect">
+        SELECT FROM TBL_COMPANY_FILE
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
 
 </mapper>

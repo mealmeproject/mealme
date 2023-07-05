@@ -13,22 +13,22 @@
             <input type="checkbox" id="expand-menu" name="expand-menu" />
             <ul>
                 <li>
-                    <a href="#" class="item"><div>메인</div></a>
+                    <a th:href="@{/user/index}" class="item"><div>메인</div></a>
                 </li>
                 <li>
-                    <a href="#" class="item"><div>마이페이지</div></a>
+                    <a th:href="@{/meal/myPage}" class="item"><div>마이페이지</div></a>
                 </li>
                 <li>
-                    <a href="#" class="item"><div>통계</div></a>
+                    <a th:href="@{/chart/chartDaily}" class="item"><div>통계</div></a>
                 </li>
                 <li>
-                    <a href="#" class="item"><div>쇼핑</div></a>
+                    <a th:href="@{/shop/shoppingList}" class="item"><div>쇼핑</div></a>
                 </li>
                 <li>
-                    <a href="#" class="item"><div>받은쪽지함</div></a>
+                    <a th:href="@{/company/ConsultingList}" class="item"><div>받은쪽지함</div></a>
                 </li>
                 <li>
-                    <a href="#" class="item"><div>설정</div></a>
+                    <a th:href="@{/user/userOrCompanyUpdate}" class="item"><div>설정</div></a>
                 </li>
             </ul>
         </div>
