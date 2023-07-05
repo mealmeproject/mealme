@@ -1,17 +1,23 @@
-package com.example.mealme.dto;
+package com.example.mealme.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.sql.Clob;
+
 @Component
 @Data
 @NoArgsConstructor
-public class ConsultingDto {
+public class SendConsultingVo {
+
     private long consultingNumber;
-    private long consultingRequestNumber;
     private long companyNumber;
     private long userNumber;
     private String consultingComment;
     private String consultingDate;
+    private String companyName;
+    private String userNickname;
+    private long consultingRequestNumber;
+
 }

@@ -1,4 +1,4 @@
-package com.example.mealme.dto;
+package com.example.mealme.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,13 +7,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class ConsultingReplyDto {
+public class ConsultingReplyVo {
+
     private long replyNumber;
     private long consultingNumber;
     private long userNumber;
     private String replyContent;
     private String replyDate;
-    private long companyNumber;
-    private String consultingComment;
-    private String consultingDate;
+    private String userNickname;
+
+
 }
