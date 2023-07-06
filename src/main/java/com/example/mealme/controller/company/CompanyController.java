@@ -63,17 +63,6 @@ public class CompanyController {
     public void largeCategory() {
     }
 
-    @GetMapping("/hospitalCategory")
-    public void hospitalCategory() {
-    }
-
-    @GetMapping("/detailedHospital")
-    public void detailedHospital() {
-    }
-
-    @GetMapping("/settingThePeriod")
-    public void settingThePeriod() {
-    }
 
 
     //    ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ아래가 정현
@@ -103,6 +92,8 @@ public class CompanyController {
         model.addAttribute("mealList", mealList);
         return "company/SendConsulting";
     }
+
+    @GetMapping("/hospitalCategory")
     public String hospitalCategory(@RequestParam("companyCodeNumber")Long companyCodeNumber, Model model){
         String companyCodeName = null;
         if(companyCodeNumber == 100){
