@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.ConsultingReplyMapper">
+
+    <insert id="insert">
+        <selectKey keyProperty="replyNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_CONSULTING_REPLY.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_CONSULTING_REPLY
+        (REPLY_NUMBER, CONSULTING_NUMBER, USER_NUMBER, REPLY_CONTENT, REPLY_DATE)
+        values (#{replyNumber}, #{consultingNumber}, #{userNumber},
+        #{replyContent,jdbcType=VARCHAR} , SYSDATE)
+    </insert>
+
+    <select id="select" parameterType="Long" resultType="ConsultingReplyVo">
+        SELECT  REPLY_NUMBER, CONSULTING_NUMBER, USER_NUMBER,
+                REPLY_CONTENT
+        FROM TBL_CONSULTING_REPLY
+        WHERE REPLY_NUMBER=#{replyNumber}
+    </select>
+
+
+
+    <select id="selectAll" resultType="ConsultingReplyVo">
+        SELECT R.REPLY_NUMBER, R.CONSULTING_NUMBER, R.USER_NUMBER, R.REPLY_CONTENT, U.USER_NICKNAME
+        FROM TBL_CONSULTING_REPLY R
+                 JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
+        ORDER BY R.REPLY_NUMBER DESC
+    </select>
+
+
+    <delete id="delete">
+        DELETE FROM TBL_CONSULTING_REPLY
+        WHERE REPLY_NUMBER=#{replyNumber}
+    </delete>
+
+    <update id="update">
+        UPDATE TBL_CONSULTING_REPLY
+        SET REPLY_CONTENT = #{replyContent}
+        WHERE REPLY_NUMBER=#{replyNumber}
+    </update>
+
+
+
+
+</mapper>

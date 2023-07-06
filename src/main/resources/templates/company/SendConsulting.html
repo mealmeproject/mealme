@@ -48,60 +48,67 @@
           <!-- 받은 컨설팅 메세지 읽는부분 한번에 묶는법 -->
           <div class="ConsultReadAll">
 
-            <div class="view-info">
+            <div class="view-info" >
 
               <!-- 작성자 ,  -->
               <div class="info-title">
                 <div class="Name-wrap">
                   <span class="writer">작성자</span>
                   <!-- 임시 작성자 -->
-                  <div class="content-writer">김아무개</div>
+                  <div class="content-writer" th:text="${consultingRequest.userNickname}">이름한개나오게</div>
                 </div>
                 <div class="date-wrap">
-                  <span class="date">작성일</span>
+                  <span class="date">식단 신청 기간</span>
                   <!-- 임시 작성일 -->
-                  <div class="content-date">2023-6-12</div>
+                  <div class="content-date" id="REQUEST_FIRST_DATE" th:text="${consultingRequest.consultingRequestFirstDate}">2023-6-12</div>
+                  <div class="content-date" id="REQUEST_LAST_DATE" th:text="${consultingRequest.consultingRequestLastDate}">2023-6-12</div>
                 </div>
               </div>
-              <!-- <div class="info-content">
-                <span class="content-writer">작성자</span>
-                <span class="content-date">작성일</span>
-                <span class="content-hit">조회수</span>
-              </div> -->
             </div>
-
             <br>
             <!-- 임시 내용 -->
 
             <!-- 임시 첨부 파일 -->
             <div class="GetImg">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-              <img src="../img/SendConsultingPic.png" alt="">
-
-
+              <ul class="meal-list-container">
+                <li class="meal-list-oneday" th:each="day : ${mealList}">
+                  <div class="meal-list-info">
+                    <div class="eat-date">
+                      <h2 th:text="${day.key}">6월 15일</h2>
+                    </div>
+                    <div class="eat-kcal">
+                      <h2 th:text="${day.value[0].dayTotalKcal}"></h2>
+                    </div>
+                    <div class="eat-list-view-btn">
+                      <img th:src="@{/img/chevron_right.png}" alt="" />
+                    </div>
+                  </div>
+                  <ul class="meal-img-list">
+                    <li class="meal-img-box" th:each="meal : ${day.value[0].dayMealList}" th:data-board-number="${meal.boardNumber}">
+                      <div class="meal-img">
+                        <div class="imgbox" >
+                          <img th:src="@{/img/sample1.jpg}"  alt="" />
+                        </div>
+                        <div class="meal-info">
+                          <div class="meal-eat-time">
+                            <h2 th:text="${meal.mealTime}">08:00</h2>
+                          </div>
+                          <div class="meal-eat-kcal">
+                            <h2 th:text="${meal.mealTotalKcal}">380kcal</h2>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
 
 
             </div>
 
             <br>
 
-            <div class="get-content"> 안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
-              안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
+            <div class="get-content" th:text="${consultingRequest.consultingRequestComment}">
             </div>
 
 
@@ -117,8 +124,14 @@
 
 
 
-
-
+          <!-- 모달창 -->
+          <div id="myModal" class="modal modal-hidden">
+            <div class="modal-content">
+              <span class="close" id="close-modal">&times;</span>
+              <div class="modal-container">
+              </div>
+            </div>
+          </div>
 
 
 
@@ -135,17 +148,17 @@
 
           <!-- 답변(댓글) 보내기 -->
           <div class="comment-form">
-            <form id="comment-form">
+            <form id="comment-form" th:action="@{/company/SendConsulting1}" method="post">
+              <input type="hidden" name="consultingNumber" th:value="${consulting.consultingNumber}" />
+              <input type="hidden" name="userNumber" th:value="${consulting.userNumber}" />
+              <input type="hidden" name="companyNumber" th:value="${consulting.companyNumber}" />
               <div class="summernote-box">
-                <textarea id="summernote" name="applyContent"></textarea>
+              <textarea id="summernote" name="consultingComment"></textarea>
               </div>
 
 
-
-
-
               <div class="CommentSend-btn">
-                <button type="submit" class="Send-btn" id="Send" onclick="location.href='./SendReadList'">
+                <button type="submit" class="Send-btn" id="Send" >
                   보내기
                 </button>
 
@@ -158,30 +171,30 @@
 
 
 
-          <div class="comment-list">
-            <!-- 리스트 예시 -->
-            <ul id="comment-list">
-              <li>
-                <div class="comment-info">
-                  <span class="writer">유정현</span> <span
-                        class="date">2023-6-12</span>
-                </div>
-                <div class="comment-content-wrap">
-                  <div class="comment-content">
-                    <p>안녕하세요</p>
-                  </div>
-                  <div class="comment-btn-group">
-                    <button type=button class="comment-modify-ready">수정</button>
-                    <button type=button class="comment-delete">삭제</button>
-                  </div>
-                  <div class="comment-btn-group none">
-                    <button type=button class="comment-modify">수정 완료</button>
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <!-- /리스트 예시 -->
-          </div>
+<!--          <div class="comment-list">-->
+<!--            &lt;!&ndash; 리스트 예시 &ndash;&gt;-->
+<!--            <ul id="comment-list" >-->
+<!--              <li>-->
+<!--                <div class="comment-info">-->
+<!--                  <span class="writer">유정현</span> <span-->
+<!--                        class="date">2023-6-12</span>-->
+<!--                </div>-->
+<!--                <div class="comment-content-wrap">-->
+<!--                  <div class="comment-content" >-->
+<!--                    <p>안녕하세요</p>-->
+<!--                  </div>-->
+<!--                  <div class="comment-btn-group">-->
+<!--                    <button type=button class="comment-modify-ready">수정</button>-->
+<!--                    <button type=button class="comment-delete">삭제</button>-->
+<!--                  </div>-->
+<!--                  <div class="comment-btn-group none">-->
+<!--                    <button type=button class="comment-modify">수정 완료</button>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--            &lt;!&ndash; /리스트 예시 &ndash;&gt;-->
+<!--          </div>-->
 
 
 
@@ -247,21 +260,18 @@
 <script th:src="@{/js/company/SendConsulting.js}"></script>
 
 
+
+
+
+
+
+
+
+
+
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
 <script th:src="@{/js/meal/myPage.js}"></script>
-<script>
-  var images = [];
-  var currentImageIndex = 0;
-
-  function openModal(imageList) {
-    // Assign the image list to the global variable
-    images = imageList;
-
-    // Rest of the code...
-    // (Place the JavaScript code mentioned in the previous response here)
-  }
-</script>
 </body>
 </html>

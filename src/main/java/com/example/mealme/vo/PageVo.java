@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
+
 public class PageVo {
     //    페이지 세트당 표시될 수
     private int pageCount;
@@ -51,3 +52,4 @@ public class PageVo {
         this.next = endPage < realEnd;
     }
 }
+

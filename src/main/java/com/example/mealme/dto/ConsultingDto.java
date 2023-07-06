@@ -12,6 +12,6 @@ public class ConsultingDto {
     private long consultingRequestNumber;
     private long companyNumber;
     private long userNumber;
-    private String consultingContent;
+    private String consultingComment;
     private String consultingDate;
 }

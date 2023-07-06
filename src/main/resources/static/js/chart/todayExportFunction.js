@@ -27,3 +27,31 @@ export function getDailyList(callback, error){
         error : error
     });
 }
+
+export function getWeeklyList(callback, error){
+    $.ajax({
+        url : `/charts/weekly`,
+        type : 'get',
+        dataType : 'json',
+        success : function (weeklyList){
+            if(callback){
+                callback(weeklyList);
+            }
+        },
+        error : error
+    });
+}
+
+export function getMonthlyList(callback, error){
+    $.ajax({
+        url : `/charts/monthly`,
+        type : 'get',
+        dataType : 'json',
+        success : function (monthlyList){
+            if(callback){
+                callback(monthlyList);
+            }
+        },
+        error : error
+    });
+}

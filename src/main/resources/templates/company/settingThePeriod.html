@@ -38,12 +38,15 @@
         </div>
         <!-- 컨설팅 신청 페이지 이름 끝 -->
         <!-- 컨설팅 신청 표기 공간 -->
+        <div class="send-form">
+          <form id="send-form" th:action="@{/company/settingThePeriod}" method="post" enctype="multipart/form-data">
         <div class="main-section">
           <!-- 컨설팅 신청 표기 공간 멘트 -->
           <div class="main-informaion-section">
             <div class="main-information">
               <div class="information1">당신의 식단을 컨설팅 해 보세요!</div>
             </div>
+            <input type="hidden" name="companyNumber" th:value="${companyNumber}">
           </div>
           <!-- 컨설팅 신청 표기 공간 멘트 끝 -->
           <!-- 컨설팅 신청 메인 -->
@@ -63,12 +66,12 @@
                       <div class="choose-date-detailed">
                         <div class="choose-date">
                           <div class="choos1">
-                            <input type="text" id="datepicker1">
+                            <input type="text" id="datepicker1" name="consultingRequestFirstDate">
                             <!-- <img src="../img/ui-icons_ffffff_256x240.png"> -->
                           </div>
                           <div>~</div>
                           <div class="choose2">
-                            <input type="text" id="datepicker2">
+                            <input type="text" id="datepicker2" name="consultingRequestLastDate">
                             <!-- <img src="../img/ui-icons_ffffff_256x240.png"> -->
                           </div>
                         </div>
@@ -86,7 +89,7 @@
                   </div>
                   <div class="additional-explanation-text">
                     <div class="summernote-box">
-                      <textarea id="summernote" name="applyContent" class="additional-textarea" style="resize: none;"></textarea>
+                      <textarea id="summernote" name="consultingRequestComment" class="additional-textarea" style="resize: none;"></textarea>
                     </div>
                   </div>
                 </div>
@@ -94,9 +97,9 @@
                 <!-- 신청 버튼 -->
                 <div class="pay-button-section">
                   <div class="pay-button-detailed-section">
-                    <div class="pay-button-detailed">
+                    <button type="submit" class="pay-button-detailed">
                       <span>결제하기</span>
-                    </div>
+                    </button>
                   </div>
                 </div>
                 <!-- 신청 버튼 끝 -->
@@ -104,6 +107,8 @@
             </div>
           </div>
           <!-- 컨설팅 신청 메인 끝 -->
+        </div>
+          </form>
         </div>
         <!-- 컨설팅 신청 표기 공간 끝 -->
       </div>

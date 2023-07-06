@@ -8,9 +8,12 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ConsultingReplyDto {
+    private long replyNumber;
     private long consultingNumber;
-    private long companyNumber;
     private long userNumber;
+    private String replyContent;
+    private String replyDate;
+    private long companyNumber;
     private String consultingComment;
     private String consultingDate;
 }

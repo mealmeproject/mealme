@@ -14,4 +14,6 @@ public interface ChartMapper {
     public UserDto selectUserInfo(Long userNumber);
     public List<FoodVo> selectFoodInfo(@Param("userNumber") Long userNumber, @Param("mealTime") String mealTime);
     public List<DailyTotalVo> selectDaily(Long userNumber);
+    public List<DailyTotalVo> selectWeekly(Long userNumber);
+    public List<DailyTotalVo> selectMonthly(Long userNumber);
 }

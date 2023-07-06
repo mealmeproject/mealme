@@ -12,9 +12,12 @@
         <typeAlias type="com.example.mealme.dto.CompanyFileDto" alias="companyFileDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyRegistrationFileDto" alias="companyRegistrationFileDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingDto" alias="consultingDto"/>
+        <typeAlias type="com.example.mealme.dto.ConsultingReplyDto" alias="consultingReplyDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingRequestDto" alias="consultingRequestDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReplyDto" alias="consultingReplyDto"/>
         <typeAlias type="com.example.mealme.dto.ConsultingReviewDto" alias="consultingReviewDto"/>
+        <typeAlias type="com.example.mealme.vo.SendConsultingVo" alias="sendConsultingVo"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingReplyVo" alias="consultingReplyVo"/>
         <typeAlias type="com.example.mealme.dto.LikeDto" alias="likeDto"/>
         <typeAlias type="com.example.mealme.dto.BoardDto" alias="BoardDto"/>
         <typeAlias type="com.example.mealme.dto.MealCodeDto" alias="mealCodeDto"/>
@@ -37,7 +40,11 @@
         <typeAlias type="com.example.mealme.vo.CompanyVo" alias="companyVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyModifyVo" alias="companyModifyVo"/>
         <typeAlias type="com.example.mealme.vo.Criteria" alias="criteria"/>
+        <typeAlias type="com.example.mealme.vo.CriteriaCompany" alias="criteriaCompany"/>
         <typeAlias type="com.example.mealme.vo.PageVo" alias="pageVo"/>
+        <typeAlias type="com.example.mealme.vo.CompanyListVo" alias="companyListVo"/>
+        <typeAlias type="com.example.mealme.vo.CompanyReviewVo" alias="companyReviewVo"/>
+        <typeAlias type="com.example.mealme.dto.CompanyDto" alias="companyDto"/>
         <typeAlias type="com.example.mealme.vo.RecommendVo" alias="recommendVo"/>
         <typeAlias type="com.example.mealme.vo.FoodVo" alias="foodVo"/>
         <typeAlias type="com.example.mealme.vo.DailyTotalVo" alias="dailyTotalVo"/>
@@ -45,5 +52,7 @@
         <typeAlias type="com.example.mealme.vo.MealVo" alias="mealVo"/>
         <typeAlias type="com.example.mealme.vo.DayMealVo" alias="DayMealVo"/>
         <typeAlias type="com.example.mealme.vo.ReadMealVo" alias="readMealVo"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingRequestVo" alias="consultingRequestVo"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingReviewVo" alias="consultingReviewVo"/>
     </typeAliases>
 </configuration>

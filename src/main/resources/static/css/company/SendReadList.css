@@ -213,6 +213,28 @@ col.date{
     width: 126px;
 }
 
+
+
+/*제목 글자수 너무 많으면 ... 으로 보이게 만드는 css */
+.content p {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px; /* 이 값을 원하는 너비로 설정하십시오. */
+}
+
+.ModalInContent #modal-contents {
+    display: inline-block;
+    white-space: normal; /* normal은 자동 줄바꿈을 허용합니다 */
+    /* overflow: hidden; */ /* 이 줄을 제거하거나 주석 처리 */
+    /* text-overflow: ellipsis; */ /* 이 줄을 제거하거나 주석 처리 */
+    max-width: 90%;
+    word-wrap: break-word; /* 단어를 강제로 줄바꿈할 수 있게 해줍니다 */
+}
+
+
+
 /*
 
 .inputCheck input:checked+label {
@@ -319,6 +341,7 @@ tbody a{
     text-decoration:none;
     border-radius: 10px;
 }
+
 
 .page_nation .arrow {
     border:1px solid #ccc;
