@@ -381,6 +381,26 @@
         WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
 
-
+    <select id="selectOrderTotal" resultType="_int">
+        SELECT COUNT(O.ORDER_NUMBER) FROM TBL_ORDER O
+        JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        JOIN TBL_USER U ON O.USER_NUMBER = U.USER_NUMBER
+        JOIN TBL_ORDER_CONDITION OC ON O.ORDER_CONDITION_CODE = OC.ORDER_CONDITION_CODE
+        <where>
+            TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and
+            #{searchProductVo.endDate} >= TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd')
+            <if test="!''.equals(searchProductVo.keyword)">
+                <if test="searchProductVo.searchType.equals('name')">
+                    AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+                <if test="searchProductVo.searchType.equals('number')">
+                    AND P.PRODUCT_NUMBER = #{searchProductVo.keyword2}
+                </if>
+                <if test="searchProductVo.searchType.equals('seller')">
+                    AND PRODUCT_SELLER like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+            </if>
+        </where>
+    </select>
 
 </mapper>

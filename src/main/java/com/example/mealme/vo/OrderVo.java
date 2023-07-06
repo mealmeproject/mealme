@@ -1,2 +1,4 @@
-package com.example.mealme.vo;public class OrderVo {
+package com.example.mealme.vo;
+
+public class OrderVo {
 }

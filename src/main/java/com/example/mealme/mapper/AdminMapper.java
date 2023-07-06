@@ -66,4 +66,7 @@ List<ProductVo> selectProduct(Long productNumber);
     //    전체 기업 수 조회
     public int selectCompanyTotal(@Param("searchVo")SearchVo searchVo);
 
+    //    주문 검색 조회
+    List<CompanyDto> searchCompany(@Param("searchVo") SearchVo searchVo , @Param("criteria") Criteria criteria);
+
 }
