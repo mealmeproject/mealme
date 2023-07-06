@@ -49,15 +49,15 @@
                   <tr>
                     <th scope="row" style="background-color: rgb(255, 139, 38); color:white ;">검색분류</th>
                     <td class="selector" style="border: 0;">
-                    <select name="search_type" class="fSelect">
+                    <select name="searchType" class="fSelect">
                       <option value="name">상품명</option>
-                      <option value="member_id" selected="">상품번호</option>
-                      <option value="email">판매자</option>
+                      <option value="number" selected="">상품번호</option>
+                      <option value="seller">판매자</option>
                       
                     </select>
 
                     <div class="search">
-                      <input type="text" placeholder="검색어 입력">
+                      <input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                       
                     </div>
                   </td>
@@ -65,24 +65,31 @@
                   <tr>
                     <th scope="row" style="background-color: rgb(255, 139, 38); color:white ">상품분류</th>
                     <td class="selector" style="border: 0;border-top: 1px solid #bbb;">
-                    <select name="search_type" class="fSelect" style="margin-right: 2.5px; width: 150px;">
-                      <option value="name" selected="">- 대분류 선택 -</option>
-                      <option value="member_id" >상품번호</option>
-                      <option value="email">판매자</option>
-                      
+                    <select id="productType" name="productType" class="fSelect" style="margin-right: 2.5px; width: 150px;">
+                      <option value="cate" selected="">- 상품분류 선택 -</option>
+                      <option value="단백질">단백질</option>
+                      <option value="저칼로리">저칼로리</option>
+                      <option value="프로틴 쉐이크">프로틴 쉐이크</option>
+                      <option value="프로틴 바">프로틴 바</option>
+                      <option value="비타민">비타민</option>
+                      <option value="유산균">유산균</option>
+                      <option value="마그네슘">마그네슘</option>
+
+
+
                     </select>
-                    <select name="search_type" class="fSelect" style="margin-right: 2.5px; width: 150px;">
-                      <option value="name" selected="">- 중분류 선택 -</option>
-                      <option value="member_id" >상품번호</option>
-                      <option value="email">판매자</option>
-                      
-                    </select>
-                    <select name="search_type" class="fSelect" style="width: 150px;">
-                      <option value="name" selected="">- 소분류 선택 -</option>
-                      <option value="member_id" >상품번호</option>
-                      <option value="email">판매자</option>
-                      
-                    </select>
+<!--                    <select name="search_type" class="fSelect" style="margin-right: 2.5px; width: 150px;">-->
+<!--                      <option value="name" selected="">- 중분류 선택 -</option>-->
+<!--                      <option value="member_id" >상품번호</option>-->
+<!--                      <option value="email">판매자</option>-->
+<!--                      -->
+<!--                    </select>-->
+<!--                    <select name="search_type" class="fSelect" style="width: 150px;">-->
+<!--                      <option value="name" selected="">- 소분류 선택 -</option>-->
+<!--                      <option value="member_id" >상품번호</option>-->
+<!--                      <option value="email">판매자</option>-->
+<!--                      -->
+<!--                    </select>-->
 
                   </td>
                   </tr>
@@ -90,10 +97,10 @@
                     <th scope="row" style="background-color: rgb(255, 139, 38); color:white ">상품등록일</th>
                     <td class="date-picker" style="border-top: 1px solid #bbb;">
                      
-                      <input type="text" id="datepicker1">
+                      <input type="text" id="datepicker1" >
                  
                       ~
-                      <input type="text" id="datepicker2">
+                      <input type="text" id="datepicker2" >
                      
                     </td>
                   </tr>
@@ -127,6 +134,7 @@
                 <col class="chk" style="width: 40px;">
                 <col class="date">
                 <col style="width:150px">
+                <col style="width:150px">
                 <col style="width:150px;">
                 <col style="width:400px;">                                                                                                
                 <col style="width:100px">
@@ -140,40 +148,44 @@
                   </th>
                   <th scope="col" style="font-size:13px">등록일</th>
                   <th scope="col" style="font-size:13px">상품번호</th>
+                  <th scope="col" style="font-size:13px">판매자</th>
+
                   <th scope="col" style="font-size:13px">상품구분</th>
                   <th scope="col" style="font-size:13px">상품명</th>
                   <th scope="col" style="font-size:13px">판매가</th>
                 </tr>
               </thead>
               <tbody class="check">
-                <tr>
-                  <th scope="col">
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size:15px"></th>
-                  <th scope="col" style="font-size:15px"></th>
-                  <th scope="col" style="font-size:15px"></th>
-                  <th scope="col" style="font-size:15px; padding: 8px; " >
-                    <div class="gGoods gMedium" style="z-index: 0;">
-                      <div class="mOpen">
-                          <span class="frame eOpenOver" find="gGoods">
-                            <img src="//img.echosting.cafe24.com/thumb/44x44.gif" width="44" height="44" alt="">
-                          </span>
-                          <div class="open" style="top: 20%; left: 20%; width: 145px; display: none;">
-                              <div class="wrap">
-                                  <ul class="default">
-                                      <li><a href="" class="eProductDetail" product_no="10">상품 상세보기</a></li>
-                                   </ul>   
-                              </div>
-                          </div>
-                      </div>
-                      <p style="text-align: left; margin-left: 55px;"><a href="" target="_blank" title="새창 열림" class="txtLink eProductDetail" product_no="10">샘플상품 2</a>
-                      </p>
-                      
-                                                      </div>
-                  </th>
-                  <th scope="col" style="font-size:15px"></th>
-                </tr>
+<!--                <tr>-->
+<!--                  <th scope="col">-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size:15px"></th>-->
+<!--                  <th scope="col" style="font-size:15px"></th>-->
+
+<!--                  <th scope="col" style="font-size:15px"></th>-->
+<!--                  <th scope="col" style="font-size:15px"></th>-->
+<!--                  <th scope="col" style="font-size:15px; padding: 8px; " >-->
+<!--                    <div class="gGoods gMedium" style="z-index: 0;">-->
+<!--                      <div class="mOpen">-->
+<!--                          <span class="frame eOpenOver" find="gGoods">-->
+<!--                            <img src="//img.echosting.cafe24.com/thumb/44x44.gif" width="44" height="44" alt="">-->
+<!--                          </span>-->
+<!--                          <div class="open" style="top: 20%; left: 20%; width: 145px; display: none;">-->
+<!--                              <div class="wrap">-->
+<!--                                  <ul class="default">-->
+<!--                                      <li><a href="" class="eProductDetail" product_no="10">상품 상세보기</a></li>-->
+<!--                                   </ul>   -->
+<!--                              </div>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!--                      <p style="text-align: left; margin-left: 55px;"><a href="" target="_blank" title="새창 열림" class="txtLink eProductDetail" product_no="10">샘플상품 2</a>-->
+<!--                      </p>-->
+<!--                      -->
+<!--                                                      </div>-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size:15px"></th>-->
+<!--                </tr>-->
                
               </tbody>
             </table>
@@ -183,39 +195,40 @@
           <div class="typeFooter">
             <div class="leftSide">
             <div class="btnNormal">
+              <button type="button" class="changeBtn">
               <span>
                 <em class="icoDel"></em>
                 수정
               </span>
+              </button>
             </div>
           </div>
           </div>
           </div>
-          <div class="paging">
-            <p class="paging-btn">
-              <a href="">
-              <img src="https://2bob.co.kr/skin/nodskin_argio/images/paging_prev.jpg" alt="" class="direction">
-            </a>
-            </p>
-            <p class="paging-num">
-              
-              <a href="">1</a>
-              <a href="">2</a>
-              <a href="">3</a>
-              <a href="">4</a>
-              <a href="">5</a>
+          <div class="page_wrap">
+            <div class="page_nation">
+              <!--&lt;!&ndash;              <a class="arrow pprev" href="#"></a>&ndash;&gt;-->
+              <!--              <a th:href="@{/admin/list(page=${pageInfo.startPage - 1})}" class="arrow prev" th:if="${pageInfo.prev}">-->
 
-            </p>
-            <p class="paging-btn">
-              <a href="">
-                <img src="https://2bob.co.kr/skin/nodskin_argio/images/paging_next.jpg" alt="다음으로">
-              </a>
-            </p>
-            <p class="paging-btn" id="paging-last">
-              <a href="">
-                <img src="https://2bob.co.kr/skin/nodskin_argio/images/paging_d_next.jpg" alt="마지막으로">
-              </a>
-            </p>
+              <!--              </a>-->
+              <!--              <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">-->
+              <!--              <a th:href="@{/admin/list(page=${i})} class="active">-->
+              <!--                <li class="active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></li>-->
+              <!--                <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></li>-->
+              <!--                </a>-->
+              <!--              </th:block>-->
+              <!--&lt;!&ndash;              <a href="#">2</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">3</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">4</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">5</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">6</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">7</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">8</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">9</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">10</a>&ndash;&gt;-->
+              <!--              <a th:href="@{/admin/list(page=${pageInfo.endPage + 1})}" class="arrow next" th:if="${pageInfo.next}"></a>-->
+              <!--&lt;!&ndash;              <a class="arrow nnext" href="#"></a>&ndash;&gt;-->
+            </div>
           </div>
         </p>
         </div>
@@ -230,7 +243,7 @@
       <div class="menu-container"></div>
     </aside>
 
-    <script th:src="@{/js/admin/admin6.js}"></script>
+    <script type="module" th:src="@{/js/admin/admin6.js}"></script>
     <script th:src="@{/js/fragment/aside.js}"></script>
     <!-- 퀵 메뉴 추가 공간 -->
     <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
