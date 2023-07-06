@@ -10,4 +10,5 @@ import org.springframework.stereotype.Component;
 public class ProductCategory2Dto {
     private long categoryCode2;
     private String categoryName;
+    private long categoryCode1;
 }

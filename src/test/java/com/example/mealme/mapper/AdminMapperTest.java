@@ -1,6 +1,11 @@
 package com.example.mealme.mapper;
 
+import com.example.mealme.dto.ProductCategory1Dto;
+import com.example.mealme.dto.ProductCategory2Dto;
 import com.example.mealme.dto.UserDto;
+import com.example.mealme.vo.Criteria;
+import com.example.mealme.vo.ProductVo;
+import com.example.mealme.vo.SearchProductVo;
 import com.example.mealme.vo.SearchVo;
 import lombok.extern.slf4j.Slf4j;
 import static org.assertj.core.api.Assertions.*;
@@ -24,6 +29,12 @@ public class AdminMapperTest {
     private UserDto userDto2;
 
     private SearchVo searchVo;
+
+    private ProductCategory2Dto productCategory2Dto;
+    private ProductCategory1Dto productCategory1Dto;
+
+    private ProductVo productVo;
+    private SearchProductVo searchProductVo;
 
     @BeforeEach
     void setUp(){
@@ -99,4 +110,65 @@ public class AdminMapperTest {
         adminMapper.delete("56");
         assertThat(adminMapper.selectAll().size()).isEqualTo(3);
     }
+
+    @Test
+    void selectCategory2(){
+      productCategory1Dto = new ProductCategory1Dto();
+      productCategory2Dto = new ProductCategory2Dto();
+
+        productCategory1Dto.setCategoryCode1(4);
+        productCategory2Dto.setCategoryCode1(4);
+        productCategory2Dto.setCategoryCode2(8);
+        productCategory2Dto.setCategoryName("치킨");
+
+
+
+    }
+     @Test
+     void productListSelect(){
+        productVo = new ProductVo();
+        searchProductVo = new SearchProductVo();
+         Criteria criteria = new Criteria();
+       ProductVo productVo2 = new ProductVo();
+
+        productVo.setProductName("닭가슴살");
+        productVo.setProductPrice(12340);
+        productVo.setProductSeller("하림");
+        productVo.setCategoryName("단백질");
+
+        productVo.setProductRegisterDate("2023-05-02");
+
+        productVo2.setProductName("저칼로리");
+        productVo2.setProductPrice(12340);
+        productVo2.setProductSeller("한끼통살");
+        productVo2.setProductRegisterDate("2023-06-02");
+
+
+        adminMapper.registProduct(productVo);
+         adminMapper.registProduct(productVo2);
+
+//        searchProductVo.setProductType("");
+//        searchProductVo.setKeyword("");
+//        searchProductVo.setProductType("");
+        searchProductVo.setStartDate("2023-04-02");
+        searchProductVo.setEndDate("2023-07-02");
+
+        searchProductVo.setProductType("단백질");
+        searchProductVo.setSearchType("name");
+         searchProductVo.setKeyword("");
+
+         System.out.println(productVo2);
+         System.out.println(searchProductVo);
+         System.out.println(criteria);
+
+         System.out.println(adminMapper.productListSelect(searchProductVo,criteria));
+//        assertThat(adminMapper.productListSelect(searchProductVo,criteria)).hasSize(1);
+        log.info(String.valueOf(adminMapper.productListSelect(searchProductVo,criteria)));
+
+     }
+
+
 }
+
+
+

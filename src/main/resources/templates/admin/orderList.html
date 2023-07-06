@@ -64,15 +64,15 @@
                   <tr>
                     <th scope="row"  style="background-color: rgb(255, 139, 38); color:white ;">검색어</th>
                     <td class="selector" style="border: 0;border-top: 1px solid #bbb;">
-                    <select name="search_type" class="fSelect">
-                      <option value="name">주문번호</option>
-                      <option value="member_id" selected="">상품번호</option>
-                      <option value="email">판매자</option>
+                    <select name="searchType" class="fSelect">
+                      <option value="userName" selected="">주문자</option>
+                      <option value="productName" >상품명</option>
+                      <option value="condition">상태</option>
                       
                     </select>
 
-                    <div class="search">
-                      <input type="text" placeholder="검색어 입력">
+                    <div class="search" >
+                      <input type="text" placeholder="검색어 입력" name="keyword" id="keyword">
                       
                     </div>
                   </td>
@@ -103,17 +103,22 @@
         <div class="change-status">
           <div class="gRight">
             <span>상태 변경</span>
-            <select name="search_type" class="status-select" id="changeStatus" onchange="selectBoxChange(this.value);">
+            <select name="searchType" class="status-select"
+                 id="changeStatus" onchange="selectBoxChange(this.value);">
               
               <option value="결제완료" selected="">결제완료</option>
               <option value="결제확인">결제확인</option>
+              <option value="결제확인">취소신청</option>
+              <option value="결제확인">취소완료</option>
               <option value="배송출발">배송출발</option>
-              <option value="배송완료">배송완료</option>
               <option value="구매확정">구매확정</option>
-              <option value="환불/반품신청">환불/반품신청</option>
+              <option value="환불/반품신청">환불신청</option>
+              <option value="결제확인">반품신청</option>
               <option value="수거중">수거중</option>
-              <option value="환불/반품완료">환불/반품완료</option>
-              
+              <option value="환불/반품완료">환불완료</option>
+              <option value="결제확인">반품완료</option>
+
+
             </select>
             <button type="button" class="status">
               확인
