@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Page</title>
+        <link rel="stylesheet" th:href="@{/css/meal/mealWrite.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/header2.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/aside2.css}" />
+        <link rel="stylesheet" th:href="@{/css/fragment/aside.css}" />
+        <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
+        <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    </head>
+    <body id="body-pd">
+        <div class="body-container">
+            <aside class="aside" th:replace="fragment/aside :: aside"></aside>
+            <div class="main-container">
+                <header class="header2" th:replace="fragment/header2 :: header2"></header>
+                <div class="work-container">
+                    <div class="service-name-container">
+                        <div class="service-name-box">
+                            <h1>식단입력하기</h1>
+                        </div>
+                    </div>
+                    <hr class="service-name-hr" />
+                </div>
+<!--                footer 추가-->
+                <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
+            </div>
+        </div>
+<!--        퀵메뉴-->
+        <aside class="aside2" th:replace="fragment/aside2 :: aside2">
+            <div class="menu-container"></div>
+        </aside>
+        <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script th:src="@{/js/fragment/aside.js}"></script>
+    </body>
+</html>
