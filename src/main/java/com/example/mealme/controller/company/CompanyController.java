@@ -263,6 +263,12 @@ public class CompanyController {
         return reviewList;
     }
 
+//    컨설팅 결제 내역 페이지
+    @GetMapping("/consultingPayInfo")
+    public void consultingPayInfo(){
+
+    }
+
     @GetMapping("/consultingReviewModify")
     public String consultingReviewModify(long reviewNumber, Model model){
         ConsultingReviewVo consultingReviewVo = reviewService.selectConsultingReviewInfo(reviewNumber);

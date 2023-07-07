@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 </head>
 <body id="body-pd">
 <div class="body-container">
@@ -23,10 +24,9 @@
         <!-- 헤더 추가 공간 -->
         <header class="header2" th:replace="fragment/header2 :: header2"></header>
         <!-- 헤더 추가 공간 -->
-        <div class="work-container">
-
         <!-- 작업공간 -->
-        <p>
+        <div class="work-container">
+            <p>
         <main class="container">
             <section class="main1">
                 <div class="main1-banner-wrap">
@@ -59,402 +59,52 @@
         <h1>상품목록</h1>
         <hr>
         <h2 class="index-top">
-
-          <span>
-            <div class="box"  onmouseover="mouseover()"
-                 onmouseleave="mouseleave()">
-            <img src="../img/닭가슴살.png" id="best">
-           <div class="shoppingName">닭가슴살</div>
-            </div>
-          </span>
-            <span class="vertical-bar"></span>
-            <span>
-            <div class="box"  onmouseover="mouseover2()"
-                 onmouseleave="mouseleave2()">
-            <img src="../img/샐러드,과일.png"  id="best2">
-            <div class="shoppingName">샐러드,과일</div>
-            </div>
-          </span>
-            <span class="vertical-bar"></span>
-            <span>
-            <div class="box"  onmouseover="mouseover3()"
-                 onmouseleave="mouseleave3()">
-            <img src="../img/건강식품.png"  id="best3">
-            <div class="shoppingName">건강식품</div>
-            </div>
-          </span>
-            <span class="vertical-bar"></span>
-            <span>
-          <div class="box"  onmouseover="mouseover4()"
-               onmouseleave="mouseleave4()">
-          <img src="../img/음료,차,프로틴.png" id="best4">
-          <div class="shoppingName">음료,차,프로틴</div>
-          </div>
-         </span>
-        </h2>
-        <div class="ShoppingContainer">
-            <div class="Shopping-text">
-                총
-                <a class="ShoppingNumber">
-                    <span>10개</span>
-                </a>
-                상품이 있습니다.
-            </div>
-
-            <div class="select-wrap">
-            <select name="selectItem" class="select">
-                <option label="신상품"></option>
-                <option label="높은가격순"></option>
-                <option label="낮은가격순"></option>
-            </select>
-            </div>
-        </div>
-        <hr class="hr-line">
-        <div class="shopping-list">
+            <div id="menu">
             <ul>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                        <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
+                <li><a href="#">MENU1</a>
+                    <ul>
+                        <li><a href="#">SUB_MENU</a></li>
+                        <li><a href="#">SUB_MENU2</a></li>
+                    </ul>
                 </li>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                            <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
+                <li><a href="#">MENU2</a>
+                    <ul>
+                        <li><a href="#">SUB_MENU</a></li>
+                        <li><a href="#">SUB_MENU2</a></li>
+                    </ul>
                 </li>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                            <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
+                <li><a href="#">MENU3</a>
+                    <ul>
+                        <li><a href="#">SUB_MENU</a></li>
+                        <li><a href="#">SUB_MENU2</a></li>
+                        <li><a href="#">SUB_MENU3</a></li>
+                    </ul>
                 </li>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                            <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                            <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                            <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="shoppingItem">
-                    <div class="shoppingItemContainer">
-                        <a th:href="@{/shop/shoppingDetail}">
-                            <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                        </a>
-                        <div class="shoppingDesc">
-                            <div class="top">
-                                <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                                <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                            </div>
-                        </div>
-                    </div>
-                </li><li class="shoppingItem">
-                <div class="shoppingItemContainer">
-                    <a th:href="@{/shop/shoppingDetail}">
-                        <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                    </a>
-                    <div class="shoppingDesc">
-                        <div class="top">
-                            <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                            <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                        </div>
-                    </div>
-                </div>
-            </li><li class="shoppingItem">
-                <div class="shoppingItemContainer">
-                    <a th:href="@{/shop/shoppingDetail}">
-                        <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                    </a>
-                    <div class="shoppingDesc">
-                        <div class="top">
-                            <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                            <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                        </div>
-                    </div>
-                </div>
-            </li><li class="shoppingItem">
-                <div class="shoppingItemContainer">
-                    <a th:href="@{/shop/shoppingDetail}">
-                        <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                    </a>
-                    <div class="shoppingDesc">
-                        <div class="top">
-                            <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                            <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                        </div>
-                    </div>
-                </div>
-            </li><li class="shoppingItem">
-                <div class="shoppingItemContainer">
-                    <a th:href="@{/shop/shoppingDetail}">
-                        <img src="../img/이미지 예시.jpg" class="itemImg" alt="">
-                    </a>
-                    <div class="shoppingDesc">
-                        <div class="top">
-                            <p class="title">맛있닭 다이어트 도시락 게살볶음밥&볼 깻잎맛 210g</p>
-                            <span>
-                    <div class="price-container"><span class="price">21,900원</span></div>
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <span class="reviewNumber">(13,626)</span>
-                        <span>
-                            <button class="button dark">
-                          <div class="hand">
-                              <div class="thumb"></div>
-                          </div>
-                          <span>찜하기</span>
-                      </button>
-                        </span>
-                  </div>
-                  </span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-
-
-
-
-
             </ul>
+        </div>
+
+
+
+        </h2>
+            <div class="ShoppingContainer">
+                <div class="Shopping-text">
+                    총
+                    <a class="ShoppingNumber">
+                        <span th:text="${productAll.size()} + '개 상품이 있습니다'"></span>
+                    </a>
+                    <div class="select-wrap">
+                        <select id="selectItem" class="select">
+                            <option value="allList">전체</option>
+                            <option value="lowPriceList">낮은 가격순</option>
+                            <option value="reviewPriceList">별점 높은 순</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="productList">
+                <ul>
+                </ul>
+            </div>
         </div>
         <div class="page_wrap">
             <div class="page_nation">
@@ -477,6 +127,7 @@
 
         </div>
     </div>
+</p>
         </div>
 
         <!-- 작업공간 -->
@@ -491,21 +142,14 @@
 <!-- 퀵 메뉴 추가 공간 -->
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="module" th:src="@{/js/shop/shoppingList.js}"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
-<script th:src="@{/js/meal/myPage.js}"></script>
 <script>
-    var images = [];
-    var currentImageIndex = 0;
-
-    function openModal(imageList) {
-        // Assign the image list to the global variable
-        images = imageList;
-
-        // Rest of the code...
-        // (Place the JavaScript code mentioned in the previous response here)
+    function redirectToShoppingDetail(productNumber) {
+        var url = '/shop/shoppingDetail?productNumber=' + productNumber;
+        location.href = url;
     }
 </script>
-<script th:src="@{/js/shop/shoppingList.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 </body>
 </html>
