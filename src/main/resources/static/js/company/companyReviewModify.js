@@ -25,6 +25,22 @@ $(document).ready(function () {
   });
 });
 
+starValue();
+function starValue() {
+  // DB에서 가져온 숫자
+  const reviewGrade = $('.star-value').val();
+  console.log(reviewGrade);
+
+  const starSpan = $('.star span');
+  const totalStars = starSpan.text().length;
+
+  // DB에서 가져온 숫자에 해당하는 별들만 색을 gold로 변경
+  // starSpan.html('★'.repeat(reviewGrade));
+
+  const widthPercentage = (reviewGrade / totalStars) * 100;
+  starSpan.css('width', `${widthPercentage}%`);
+}
+
 // 서머노트 꾸미기
 $(document).ready(function() {
   summerNote();

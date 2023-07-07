@@ -34,6 +34,9 @@
         <!-- 헤더 추가 공간 -->
         <!-- 작업공간 -->
         <div class="work-container">
+<!--            <input type="hidden" class="product-num1" th:value="${productVo.productNumber}">-->
+<!--            <input type="hidden" class="product-num2" th:value="${productVo.categoryCode2}">-->
+
             <p>
             <div class="headingArea">
                 <div class="mTitle">상품 등록</div>
@@ -50,18 +53,18 @@
 
 
                                 <div class="search">
-                                    <input type="text" placeholder="예시) 한 끼 통살">
+                                    <input type="text" placeholder="예시) 한 끼 통살" th:value="${productVo.proudctName}">
 
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row" style="background-color: rgb(255, 139, 38); color:white ; ">요약 설명</th>
+                            <th scope="row" style="background-color: rgb(255, 139, 38); color:white ; ">판매자</th>
                             <td class="selector" style="border: 0; border-top: 1px solid #bbb;">
 
 
                                 <div class="search">
-                                    <input type="text" placeholder="예시) 포보스 선정 맛있는 닭가슴살 1위!">
+                                    <input type="text" placeholder="예시) 포보스 선정 맛있는 닭가슴살 1위!" th:value="${productVo.productSeller}">
 
                                 </div>
                             </td>
@@ -71,7 +74,7 @@
                             <td class="selector" style="border: 0; border-top: 1px solid #bbb;">
                                 <div class="summernote-box">
                         <textarea id="summernote" name="applyContent" style="    width: 743.5px;
-                        height: 300px; border-color: #bbb;"></textarea>
+                        height: 300px; border-color: #bbb;" th:utext="${productVo.productExplanation}"></textarea>
                                 </div>
                             </td>
                         </tr>
@@ -135,31 +138,12 @@
                                         <td style="border-right: 1px solid #bbb;">
                                             <div class="list ">
                                                 <ul class="_category_1">
-
-                                                    <li class="_next">
-                                                        (대분류) Outerwear &gt;
-                                                        <input type="hidden" class="_category_no" value="24" hashtag="">
-                                                    </li>
-
-                                                    <li class="_next selected">
-                                                        (대분류) Tops &gt;
-                                                        <input type="hidden" class="_category_no" value="25" hashtag="">
-                                                    </li>
-
-                                                    <li class="">
-                                                        (대분류) Dresses &gt;
-                                                        <input type="hidden" class="_category_no" value="26" hashtag="">
-                                                    </li>
-
-                                                    <li class="_next">
-                                                        (대분류) Bottoms &gt;
-                                                        <input type="hidden" class="_category_no" value="27" hashtag="">
-                                                    </li>
-
-                                                    <li class="">
-                                                        (대분류) Accessories &gt;
-                                                        <input type="hidden" class="_category_no" value="28" hashtag="">
-                                                    </li>
+<!--                                                    <th:block th:each="product : ${productVo}">-->
+<!--                                                    <li class="_next select" th:text="${product.categoryName}" th:if="${product.categoryCode1 == }">-->
+<!--                                                        (대분류) ${c.categoryName} &gt;-->
+<!--                                                        <input type="hidden" name="categoryCode1" class="_category_no" th:value="${c.categoryCode1}">-->
+<!--                                                    </li>-->
+<!--                                                    </th:block>-->
 
                                                 </ul>
                                             </div>
@@ -167,8 +151,9 @@
                                         <td style="border-right: 0px;">
                                             <div class="list">
                                                 <ul class="_category_2">
-                                                    <li class=" _next">(중분류) Tees &gt;<input type="hidden" class="_category_no" value="32" hashtag="null"></li>
-                                                    <li class="">(중분류) Shirts &gt;<input type="hidden" class="_category_no" value="33" hashtag="null"></li></ul>
+<!--                                                    <li class=" _next">(중분류) Tees &gt;<input type="hidden" class="_category_no" value="32" hashtag="null"></li>-->
+<!--                                                    <li class="">(중분류) Shirts &gt;<input type="hidden" class="_category_no" value="33" hashtag="null"></li>-->
+                                                </ul>
                                             </div>
                                         </td>
 
@@ -183,8 +168,10 @@
                                 <span class="_product_category_none" style="display: none;">
                                 </span>
                                 <span style="display: inline;" class="_product_category_checked">
-                                    <input type="hidden" name="category_product[group1][25]" class="_selected_category_no" value="25">
-                                    <span class="txtLight txtLess" style="font-size: 14px;">(대분류) Tops </span>
+<!--                                    <span class="txtLight txtLess" style="font-size: 14px;" th:text="${productVo.categoryName}">(대분류) Tops </span>-->
+<!--                                    <input type="hidden" name="category_product[group1][25]" class="_selected_category_no" th:value="${productVo.categoryCode2}">-->
+
+
                                     <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
                                 </span>
                                 <input type="hidden" name="checked_category">
@@ -242,10 +229,18 @@
     <div class="menu-container"></div>
 </aside>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script th:src="@{/js/admin/admin8.js}"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
+<script>
+    // let productNum = $('.product-num1').val();
+    // let categoryCode2 = $('.product-num2').val();
+
+
+</script>
 <!-- 퀵 메뉴 추가 공간 -->
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>

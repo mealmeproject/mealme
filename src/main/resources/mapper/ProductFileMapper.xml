@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.ProductFileMapper">
+
+
+    <insert id="insert">
+        INSERT INTO TBL_PRODUCT_FILE(FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, PRODUCT_NUMBER)
+        VALUES (SEQ_PRODUCT_FILE.NEXTVAL, #{fileName}, #{fileUploadPath}, #{fileUuid}, #{productNumber})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM TBL_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </delete>
+
+    <select id="selectList" resultType="productFileDto">
+        SELECT FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, PRODUCT_NUMBER
+        FROM TBL_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+    <select id="productCheck" resultType="int">
+        SELECT COUNT(FILE_NUMBER) FROM TBL_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+<!--    <select id="select" resultType="productFileDto">-->
+<!--        SELECT FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, PRODUCT_NUMBER-->
+<!--        FROM TBL_PRODUCT_FILE-->
+<!--        WHERE PRODUCT_NUMBER = #{productNumber}-->
+<!--    </select>-->
+</mapper>

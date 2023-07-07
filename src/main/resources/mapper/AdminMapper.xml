@@ -2,27 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mealme.mapper.AdminMapper">
     <select id="selectAll" resultType="userDto">
-        SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
-        FROM (SELECT ROWNUM AS RNUM, USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
-            FROM (
-                  SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
-                FROM TBL_USER
-                     )S1
+        SELECT USER_NUMBER,
+               USER_NAME,
+               USER_BIRTH,
+               USER_ID,
+               USER_GENDER,
+               USER_PHONE_NUMBER,
+               USER_ADDRESS1,
+               USER_EMAIL,
+               USER_JOIN_DATE
+        FROM (SELECT ROWNUM AS RNUM,
+                     USER_NUMBER,
+                     USER_NAME,
+                     USER_BIRTH,
+                     USER_ID,
+                     USER_GENDER,
+                     USER_PHONE_NUMBER,
+                     USER_ADDRESS1,
+                     USER_EMAIL,
+                     USER_JOIN_DATE
+              FROM (
+                       SELECT USER_NUMBER,
+                              USER_NAME,
+                              USER_BIRTH,
+                              USER_ID,
+                              USER_GENDER,
+                              USER_PHONE_NUMBER,
+                              USER_ADDRESS1,
+                              USER_EMAIL,
+                              USER_JOIN_DATE
+                       FROM TBL_USER
+                   ) S1
         <![CDATA[
               WHERE ROWNUM <= #{page} * #{amount}
             ]]>
 
-            )S2
+            ) S2
         WHERE RNUM > (#{page} - 1) * #{amount}
 
     </select>
 
 
-    <select id="searchUser"  resultType="userDto">
-        SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
-        FROM( SELECT ROWNUM AS RNUM, USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
-            FROM( SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
-                 FROM TBL_USER where 1 = 1
+    <select id="searchUser" resultType="userDto">
+        SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1, USER_EMAIL,
+        USER_JOIN_DATE
+        FROM( SELECT ROWNUM AS RNUM, USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER,
+        USER_ADDRESS1, USER_EMAIL, USER_JOIN_DATE
+        FROM( SELECT USER_NUMBER, USER_NAME, USER_BIRTH, USER_ID, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS1,
+        USER_EMAIL, USER_JOIN_DATE
+        FROM TBL_USER where 1 = 1
         <if test="!searchVo.keyword.equals('')">
             <if test="searchVo.searchType.equals('name')">and USER_NAME like '%'|| #{searchVo.keyword}|| '%'
             </if>
@@ -32,7 +60,8 @@
             <if test="searchVo.searchType.equals('email')">
                 and USER_EMAIL like '%'|| #{searchVo.keyword}|| '%'
             </if>
-        </if>)S1
+        </if>
+        )S1
         <![CDATA[
               WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
             ]]>
@@ -46,14 +75,17 @@
         <selectKey keyProperty="userNumber" order="BEFORE" resultType="long">
             SELECT SEQ_USER.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER,
+        INSERT INTO TBL_USER (USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER,
+        USER_PHONE_NUMBER,
         USER_ADDRESS_NUMBER, USER_ADDRESS1, USER_ADDRESS2, USER_ADDRESS3, USER_EMAIL, USER_BIRTH)
-        VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender}, #{userPhoneNumber},
+        VALUES (#{userNumber}, #{userId}, #{userPassword}, #{userName}, #{userNickname}, #{userGender},
+        #{userPhoneNumber},
         #{userAddressNumber}, #{userAddress1}, #{userAddress2}, #{userAddress3}, #{userEmail}, #{userBirth})
     </insert>
 
     <delete id="delete">
-        DELETE FROM TBL_USER
+        DELETE
+        FROM TBL_USER
         WHERE USER_NUMBER = #{userNumber}
 
     </delete>
@@ -61,17 +93,325 @@
     <select id="selectTotal" resultType="_int">
         SELECT COUNT(USER_NUMBER) FROM TBL_USER
         <where>
-        <if test="!searchVo.keyword.equals('')">
-            <if test="searchVo.searchType.equals('name')">
-                USER_NAME like '%'|| #{searchVo.keyword}|| '%'
+            <if test="!searchVo.keyword.equals('')">
+                <if test="searchVo.searchType.equals('name')">
+                    USER_NAME like '%'|| #{searchVo.keyword}|| '%'
+                </if>
+                <if test="searchVo.searchType.equals('id')">
+                    USER_ID like '%'|| #{searchVo.keyword}|| '%'
+                </if>
+                <if test="searchVo.searchType.equals('email')">
+                    USER_EMAIL like '%'|| #{searchVo.keyword}|| '%'
+                </if>
             </if>
-            <if test="searchVo.searchType.equals('id')">
-                 USER_ID like '%'|| #{searchVo.keyword}|| '%'
-            </if>
-            <if test="searchVo.searchType.equals('email')">
-                 USER_EMAIL like '%'|| #{searchVo.keyword}|| '%'
-            </if>
-        </if>
         </where>
     </select>
+
+    <select id="selectCategory" resultType="productCategory1Dto">
+        SELECT CATEGORY_CODE1, CATEGORY_NAME
+        FROM TBL_PRODUCT_CATEGORY
+
+    </select>
+
+    <select id="selectCategory2" resultType="productCategory2Dto">
+        SELECT CATEGORY_CODE2, CATEGORY_NAME, CATEGORY_CODE1
+        FROM TBL_PRODUCT_CATEGORY2
+        WHERE CATEGORY_CODE1 = #{categoryCode1}
+    </select>
+
+    <insert id="insertProduct">
+        <selectKey keyProperty="productNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_PRODUCT.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_PRODUCT (PRODUCT_NUMBER, CATEGORY_CODE1, CATEGORY_CODE2, PRODUCT_NAME, PRODUCT_SELLER,
+        PRODUCT_PRICE, PRODUCT_EXPLANATION)
+        values (#{productNumber}, #{categoryCode1}, #{categoryCode2}, #{productName}, #{productSeller}, #{productPrice},
+        #{productExplanation})
+    </insert>
+
+    <select id="selectProduct" resultType="productVo">
+        SELECT P.PRODUCT_NUMBER,
+               P.PRODUCT_NAME,
+               P.PRODUCT_PRICE,
+               P.PRODUCT_SELLER,
+               P.CATEGORY_CODE2,
+               P.CATEGORY_CODE1,
+               C.CATEGORY_NAME,
+               G.CATEGORY_NAME,
+               P.PRODUCT_REGISTER_DATE,
+               F.FILE_NAME,
+               F.FILE_UPLOAD_PATH,
+               F.FILE_UUID,
+               F.FILE_NUMBER
+        FROM TBL_PRODUCT P
+                 LEFT JOIN TBL_PRODUCT_CATEGORY2 C ON P.CATEGORY_CODE2 = C.CATEGORY_CODE2
+                 LEFT JOIN TBL_PRODUCT_FILE F ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
+                 LEFT JOIN TBL_PRODUCT_CATEGORY G ON P.CATEGORY_CODE1 = G.CATEGORY_CODE1
+        WHERE P.PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+    <select id="productListSelect" resultType="productVo">
+
+
+        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_SELLER, CATEGORY_NAME,
+        PRODUCT_REGISTER_DATE, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER
+        FROM (
+        SELECT ROWNUM AS RNUM, PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_SELLER, CATEGORY_NAME,
+        PRODUCT_REGISTER_DATE, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER
+        FROM (
+        SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.PRODUCT_SELLER, C.CATEGORY_NAME,
+        P.PRODUCT_REGISTER_DATE, F.FILE_NAME, F.FILE_UPLOAD_PATH, F.FILE_UUID, F.FILE_NUMBER
+        FROM TBL_PRODUCT P
+        LEFT JOIN TBL_PRODUCT_CATEGORY2 C ON P.CATEGORY_CODE2 = C.CATEGORY_CODE2
+        LEFT JOIN (
+        SELECT FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER, PRODUCT_NUMBER
+        FROM (
+        SELECT FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER, PRODUCT_NUMBER,
+        RANK() OVER (PARTITION BY PRODUCT_NUMBER ORDER BY FILE_NUMBER) RK
+        FROM TBL_PRODUCT_FILE
+        )
+        WHERE RK = 1
+        ) F ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
+        <where>
+         TO_CHAR(P.PRODUCT_REGISTER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate}
+        AND #{searchProductVo.endDate} >= TO_CHAR(P.PRODUCT_REGISTER_DATE, 'yyyy-mm-dd')
+        <if test="!''.equals(searchProductVo.keyword)">
+            <if test="searchProductVo.searchType.equals('name')">
+                AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+            </if>
+            <if test="searchProductVo.searchType.equals('number')">
+                AND P.PRODUCT_NUMBER like '%'|| #{searchProductVo.keyword2}|| '%'
+            </if>
+            <if test="searchProductVo.searchType.equals('seller')">
+                AND PRODUCT_SELLER like '%'|| #{searchProductVo.keyword}|| '%'
+            </if>
+        </if>
+
+        <if test="!'cate'.equals(searchProductVo.productType) ">
+            AND C.CATEGORY_NAME = #{searchProductVo.productType}
+        </if>
+    </where>
+    ) S1
+    <![CDATA[
+          WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+        ]]>
+    ) S2
+    WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+
+<!--        SELECT PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_SELLER, CATEGORY_NAME, PRODUCT_REGISTER_DATE,-->
+<!--        FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER-->
+<!--        FROM(SELECT ROWNUM AS RNUM, PRODUCT_NUMBER, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_SELLER,-->
+<!--        CATEGORY_NAME, PRODUCT_REGISTER_DATE, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER-->
+<!--        FROM( SELECT P.PRODUCT_NUMBER, P.PRODUCT_NAME, P.PRODUCT_PRICE, P.PRODUCT_SELLER, C.CATEGORY_NAME,-->
+<!--        P.PRODUCT_REGISTER_DATE, F.FILE_NAME, F.FILE_UPLOAD_PATH, F.FILE_UUID, F.FILE_NUMBER-->
+<!--        FROM TBL_PRODUCT P-->
+<!--        LEFT JOIN TBL_PRODUCT_CATEGORY2 C ON P.CATEGORY_CODE2 = C.CATEGORY_CODE2-->
+<!--        LEFT JOIN-->
+<!--        (SELECT FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER, PRODUCT_NUMBER-->
+<!--        FROM (SELECT FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NUMBER, PRODUCT_NUMBER, RANK() over(PARTITION BY-->
+<!--        PRODUCT_NUMBER ORDER BY FILE_NUMBER) RK-->
+<!--        FROM TBL_PRODUCT_FILE)-->
+<!--        WHERE RK = 1 ) F-->
+<!--            ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER-->
+<!--        <where>-->
+<!--            TO_CHAR(P.PRODUCT_REGISTER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and-->
+<!--            #{searchProductVo.endDate} >= TO_CHAR(P.PRODUCT_REGISTER_DATE, 'yyyy-mm-dd')-->
+<!--            <if test="!''.equals(searchProductVo.keyword)">-->
+<!--                <if test="searchProductVo.searchType.equals('name')">-->
+<!--                    AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'-->
+<!--                </if>-->
+<!--                <if test="searchProductVo.searchType.equals('number')">-->
+<!--                    AND PRODUCT_NUMBER = #{searchProductVo.keyword2}-->
+<!--                </if>-->
+<!--                <if test="searchProductVo.searchType.equals('seller')">-->
+<!--                    AND PRODUCT_SELLER like '%'|| #{searchProductVo.keyword}|| '%'-->
+<!--                </if>-->
+<!--            </if>-->
+
+<!--          <trim prefix="and">-->
+<!--                <if test="!'cate'.equals(searchProductVo.productType) ">-->
+<!--                    C.CATEGORY_NAME = #{searchProductVo.productType}-->
+<!--                </if>-->
+<!--            </trim>-->
+<!--        </where>-->
+<!--        )S1-->
+<!--        <![CDATA[-->
+<!--              WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}-->
+<!--            ]]>-->
+
+<!--        )S2-->
+<!--        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}-->
+    </select>
+
+    <select id="selectProductTotal" resultType="_int">
+        SELECT COUNT(P.PRODUCT_NUMBER) FROM TBL_PRODUCT P
+        LEFT JOIN TBL_PRODUCT_CATEGORY2 C ON P.CATEGORY_CODE2 = C.CATEGORY_CODE2
+        LEFT JOIN TBL_PRODUCT_FILE F ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
+        <where>
+            TO_CHAR(P.PRODUCT_REGISTER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and
+            #{searchProductVo.endDate} >= TO_CHAR(P.PRODUCT_REGISTER_DATE, 'yyyy-mm-dd')
+            <if test="!''.equals(searchProductVo.keyword)">
+                <if test="searchProductVo.searchType.equals('name')">
+                    AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+                <if test="searchProductVo.searchType.equals('number')">
+                    AND P.PRODUCT_NUMBER = #{searchProductVo.keyword2}
+                </if>
+                <if test="searchProductVo.searchType.equals('seller')">
+                    AND PRODUCT_SELLER like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+            </if>
+
+            <trim prefix="and">
+                <if test="!'cate'.equals(searchProductVo.productType) ">
+                    C.CATEGORY_NAME = #{searchProductVo.productType}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+
+    <insert id="registProduct">
+        <selectKey keyProperty="productNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_PRODUCT.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_PRODUCT (PRODUCT_NUMBER,PRODUCT_NAME, PRODUCT_SELLER, PRODUCT_PRICE, PRODUCT_REGISTER_DATE)
+        values (#{productNumber},#{productName}, #{productSeller}, #{productPrice}, #{productRegisterDate})
+
+    </insert>
+
+    <select id="searchCompany" resultType="companyDto">
+        SELECT COMPANY_NUMBER,COMPANY_REGISTRATION_NUMBER, COMPANY_NAME, COMPANY_ID, COMPANY_CALL_NUMBER,
+        COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL
+        FROM( SELECT ROWNUM AS RNUM,COMPANY_NUMBER, COMPANY_REGISTRATION_NUMBER, COMPANY_NAME, COMPANY_ID,
+        COMPANY_CALL_NUMBER, COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL
+        FROM( SELECT COMPANY_NUMBER, COMPANY_REGISTRATION_NUMBER, COMPANY_NAME, COMPANY_ID, COMPANY_CALL_NUMBER,
+        COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL
+        FROM TBL_COMPANY where 1 = 1
+        <if test="!searchVo.keyword.equals('')">
+            <if test="searchVo.searchType.equals('name')">
+                and COMPANY_NAME like '%'|| #{searchVo.keyword}|| '%'
+            </if>
+            <if test="searchVo.searchType.equals('id')">
+                and COMPANY_ID like '%'|| #{searchVo.keyword}|| '%'
+            </if>
+            <if test="searchVo.searchType.equals('email')">
+                and COMPANY_EMAIL like '%'|| #{searchVo.keyword}|| '%'
+            </if>
+        </if>
+        )S1
+        <![CDATA[
+              WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+            ]]>
+
+        )S2
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+
+    </select>
+
+    <select id="selectCompanyTotal" resultType="_int">
+        SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY
+        <where>
+            <if test="!searchVo.keyword.equals('')">
+                <if test="searchVo.searchType.equals('name')">
+                    and COMPANY_NAME like '%'|| #{searchVo.keyword}|| '%'
+                </if>
+                <if test="searchVo.searchType.equals('id')">
+                    and COMPANY_ID like '%'|| #{searchVo.keyword}|| '%'
+                </if>
+                <if test="searchVo.searchType.equals('email')">
+                    and COMPANY_EMAIL like '%'|| #{searchVo.keyword}|| '%'
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOrderList" resultType="orderVo">
+        SELECT ORDER_DATE,
+               ORDER_NUMBER,
+               USER_NAME,
+               PRODUCT_SELLER,
+               PRODUCT_NAME,
+               PRODUCT_PRICE,
+               ORDER_COUNT,
+               CONDITION_CODE_NAME,
+               ORDER_CONDITION_CODE
+        FROM (SELECT ROWNUM AS RNUM,
+                     ORDER_DATE,
+                     ORDER_NUMBER,
+                     USER_NAME,
+                     PRODUCT_SELLER,
+                     PRODUCT_NAME,
+                     PRODUCT_PRICE,
+                     ORDER_COUNT,
+                     CONDITION_CODE_NAME,
+                     ORDER_CONDITION_CODE
+              FROM (
+                       SELECT O.ORDER_DATE,
+                              O.ORDER_NUMBER,
+                              U.USER_NAME,
+                              P.PRODUCT_SELLER,
+                              P.PRODUCT_NAME,
+                              P.PRODUCT_PRICE,
+                              O.ORDER_COUNT,
+                              OC.CONDITION_CODE_NAME,
+                              O.ORDER_CONDITION_CODE
+
+                       FROM TBL_ORDER O
+                                JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+                                JOIN TBL_USER U ON O.USER_NUMBER = U.USER_NUMBER
+                                JOIN TBL_ORDER_CONDITION OC ON O.ORDER_CONDITION_CODE = OC.ORDER_CONDITION_CODE
+                  <where>
+                      TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and
+                      #{searchProductVo.endDate} >= TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd')
+                      <if test="!''.equals(searchProductVo.keyword)">
+                          <if test="searchProductVo.searchType.equals('userName')">
+                              AND USER_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                          </if>
+                          <if test="searchProductVo.searchType.equals('productName')">
+                              AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                          </if>
+                          <if test="searchProductVo.searchType.equals('condition')">
+                              AND CONDITION_CODE_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                          </if>
+                      </if>
+                  </where>
+                   )S1
+        <![CDATA[
+              WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+            ]]>
+             )S2
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+    </select>
+
+    <select id="selectOrderTotal" resultType="_int">
+        SELECT COUNT(O.ORDER_NUMBER) FROM TBL_ORDER O
+        JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        JOIN TBL_USER U ON O.USER_NUMBER = U.USER_NUMBER
+        JOIN TBL_ORDER_CONDITION OC ON O.ORDER_CONDITION_CODE = OC.ORDER_CONDITION_CODE
+        <where>
+            TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and
+            #{searchProductVo.endDate} >= TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd')
+            <if test="!''.equals(searchProductVo.keyword)">
+                <if test="searchProductVo.searchType.equals('userName')">
+                    AND USER_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+                <if test="searchProductVo.searchType.equals('productName')">
+                    AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+                <if test="searchProductVo.searchType.equals('condition')">
+                    AND CONDITION_CODE_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <update id="modifyCondition">
+
+        UPDATE TBL_ORDER
+        SET ORDER_CONDITION_CODE = #{orderConditionCode}
+        WHERE ORDER_NUMBER = #{orderNumber}
+    </update>
+
+
 </mapper>
