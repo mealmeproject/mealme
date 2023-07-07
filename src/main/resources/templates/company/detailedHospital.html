@@ -269,17 +269,21 @@
           <!-- 페이지 이동 부분 -->
           <div class="page-button-section">
             <div class="pagination">
-              <ul>
-                <!-- ========== 페이징 처리 예시 ============ -->
-                <li><a href="#" class="prev">&lt;</a></li>
-                <li><a href="#" class="active">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#" class="next">&gt;</a></li>
-                <!-- ========== /페이징 처리 예시 ============ -->
-              </ul>
+              <a th:href="@{/company/detailedHospital(page=${pageInfo.criteriaCompany.page - 1})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page > 1}"></a>
+              <a th:href="@{/company/detailedHospital(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">
+                <li class="arrow prev">&lt</li>
+              </a>
+
+              <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+                <a th:href="@{/company/detailedHospital(page=${i}, companyNumber=${companyNumber})}" class="page_nation a">
+                  <li class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteriaCompany.page}"></li>
+                  <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteriaCompany.page}"></li>
+                </a>
+              </th:block>
+
+              <a th:href="@{/company/detailedHospital(page=${pageInfo.endPage + 1})}" class="page_nation a" th:if="${pageInfo.next}">
+                <li class="arrow next">&gt</li>
+              </a>
             </div>
           </div>
           <!-- 페이지 이동 부분 끝 -->
