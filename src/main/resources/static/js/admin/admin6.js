@@ -1,3 +1,9 @@
+import * as product from '../module/productList.js';
+let page = 1;
+let startDate = $('#datepicker1').val();
+let endDate = $('#datepicker2').val();
+let productType = $('#productType').val();
+product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: startDate, endDate:endDate }, productList, paging, showError);
 
 $(function() {
   //input을 datepicker로 선언
@@ -41,3 +47,190 @@ $(document).ready(function() {
 		else $("#cbx_chkAll").prop("checked", true); 
 	});
 });
+
+// let productNumber = $(".checkbox").val();
+// product.displayFile({productNumber : productNumber}, productList, showError)
+
+//전체 상품 리스트
+function productList(map){
+    console.log(map);
+    let list ='';
+
+    map.forEach(u => {
+        // let fileName = file.fileUploadPath + '/' + file.fileUuid + '_' + file.fileName;
+        list += `
+		    <tr class="product-num" >
+                  <th scope="col">
+                    <input type="checkbox" name="chk" id="chk"  value="${u.productNumber}">
+                  </th>
+                  <th scope="col" style="font-size:15px">${u.productRegisterDate}</th>
+                  <th scope="col" style="font-size:15px">${u.productNumber}</th>
+
+                  <th scope="col" style="font-size:15px">${u.productSeller}</th>
+                  <th scope="col" style="font-size:15px">${u.categoryName}</th>
+                  <th scope="col" style="font-size:15px; padding: 8px; " >
+                    <div class="gGoods gMedium" style="z-index: 0;">
+                      <div class="mOpen">
+                          <span class="frame eOpenOver" find="gGoods">
+                            <img src="/upload/${u.fileUploadPath}/${u.fileUuid}_${u.fileName}"  data-number="${u.fileNumber}" data-name="${u.fileName}" width="44" height="44" alt="">
+                          </span>
+<!--                          <div class="open" style="top: 20%; left: 20%; width: 145px; display: none;">-->
+<!--                              <div class="wrap">-->
+<!--                                  <ul class="default">-->
+<!--                                      <li><a href="" class="eProductDetail" product_no="10">상품 상세보기</a></li>-->
+<!--                                   </ul>   -->
+<!--                              </div>-->
+<!--                          </div>-->
+                      </div>
+                      <p style="text-align: left; margin-left: 55px;"><a href="/admin/registChange?productNumber=${u.productNumber}" onclick="handleClick()" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" product_no="10">${u.productName}</a>
+                      </p>
+                      
+                                                      </div>
+                  </th>
+                  <th scope="col" style="font-size:15px">${u.productPrice}</th>
+               
+		`;
+
+        list += `</tr>`;
+    });
+    $('.check').html(list);
+}
+function handleClick(event){
+    event.preventDefault();
+    alert("상품 수정 페이지로 이동합니다!")
+}
+
+//페이징 처리
+function paging(pageInfo){
+    console.log("===========================");
+    console.log(pageInfo);
+    let page ='';
+    if(pageInfo.prev){
+        page += `
+		
+		 
+		 	<a href="" data-page=${pageInfo.startPage-1} class="arrow prev"></a>
+		`}
+    for(let i = pageInfo.startPage; i<=pageInfo.endPage; i++){
+        if(i == pageInfo.criteria.page){
+            page += `
+				<a href="#" data-page="${i}" class="active">${i}</a>
+			`
+        }else{
+            page += `
+				<a href="#" data-page="${i}">${i}</a>
+			`
+        }
+    }
+    if(pageInfo.next) {
+        page += `
+			<a href="" data-page=${pageInfo.endPage + 1} class="arrow next""></a>
+		`
+    }
+
+    $(".page_nation").html(page);
+}
+
+//페이징 클릭 이벤트
+$('.page_nation').on('click','a', function (e){
+    e.preventDefault();
+    let searchKeyword = $('#keyword').val();
+    let searchType = $('.fSelect').val();
+    let page = $(this).data('page');
+    let productType = $('#productType').val();
+    let startDate = $('#datepicker1').val();
+    let endDate = $('#datepicker2').val();
+    console.log(page)
+    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+});
+
+// 검색 조건에 따른 회원 조회
+$('.search_user').on('click', function (){
+    let searchKeyword = $('#keyword').val();
+    let searchType = $('.fSelect').val();
+    let page = 1;
+    let productType = $('#productType').val();
+
+    let startDate = $('#datepicker1').val();
+    let endDate = $('#datepicker2').val();
+    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+
+    // $('#keyword').val('');
+
+})
+
+// 검색 input칸 엔터 이벤트
+$('#keyword').on('keydown', function (e){
+    console.log('++++++++++++++++++++++++++++');
+    console.log(e.code);
+    console.log(e.keyCode);
+    if(e.keyCode == 13){
+        console.log('Enter');
+        let searchKeyword = $('#keyword').val();
+        let searchType = $('.fSelect').val();
+        let page = 1;
+        let productType = $('#productType').val();
+
+        let startDate = $('#datepicker1').val();
+        let endDate = $('#datepicker2').val();
+        product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page,productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+    }
+});
+
+$(".changeBtn").on('click',function (){
+    let productNumber = productModify();
+    // let productNumber = $('#chk').val();
+    console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
+   console.log(productNumber);
+    console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
+
+    window.location.href = '/admin/registChange?productNumber=' + productNumber;
+
+
+
+
+
+});
+
+
+
+function productChangeBtn(){
+    var checkBoxArr = [];
+    $("input:checkbox[name=chk]:checked").each(function (){
+        checkBoxArr.push($(this).val());
+        console.log("================================");
+        console.log(checkBoxArr);
+        console.log("================================");
+
+    });
+    console.log(checkBoxArr)
+
+    if(checkBoxArr==""){
+        alert("수정할 상품을 선택해주세요.");
+        return false;
+    }
+
+    // var confirmAlert = confirm("정말로 삭제하시겠습니까?");
+    // user.deleteUserList({checkBoxArr: checkBoxArr ,confirmAlert, showError});
+    return checkBoxArr;
+}
+
+function productModify(){
+    let productNumber = $("input:checkbox[name=chk]:checked").val();
+    if(productNumber==""){
+        alert("수정할 상품을 선택해주세요.");
+        return false;
+    }
+    console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
+
+    console.log(productNumber);
+    console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
+
+    return productNumber;
+}
+
+
+
+function showError(a, b, c){
+    console.error(c);
+}

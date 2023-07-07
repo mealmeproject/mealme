@@ -1,15 +1,11 @@
 package com.example.mealme.service.admin;
 
-import com.example.mealme.dto.UserDto;
+import com.example.mealme.dto.*;
 import com.example.mealme.mapper.AdminMapper;
-import com.example.mealme.vo.Criteria;
-import com.example.mealme.vo.SearchVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 
@@ -18,6 +14,7 @@ import java.util.*;
 @Transactional
 public class AdminService {
     private final AdminMapper adminMapper;
+
 
 
     public void register(UserDto userDto){
@@ -36,6 +33,31 @@ public class AdminService {
 //    검색 조회
     public List<UserDto> searchUserList(SearchVo searchVo, Criteria criteria){
         return adminMapper.searchUser(searchVo, criteria);
+    }
+
+//    기업 검색 조회
+public List<CompanyDto> searchCompanyList(SearchVo searchVo, Criteria criteria){
+    return adminMapper.searchCompany(searchVo, criteria);
+}
+    //    상품 검색 조회
+    public List<ProductVo> searchProductList(SearchProductVo searchProductVo, Criteria criteria){
+        if(searchProductVo.getSearchType().equals("number")){
+            Long productNumber = Long.parseLong(searchProductVo.getKeyword());
+            searchProductVo.setKeyword2(productNumber);
+            System.out.println("keyword2 설정 !!!!!!!!!!!!!" + productNumber);
+        }
+        return adminMapper.productListSelect(searchProductVo, criteria);
+    }
+
+    //전체 상품 수 조회
+    @Transactional(readOnly = true)
+    public int getProductTotal(SearchProductVo searchProductVo){
+        if(searchProductVo.getSearchType().equals("number")){
+            Long productNumber = Long.parseLong(searchProductVo.getKeyword());
+            searchProductVo.setKeyword2(productNumber);
+            System.out.println("keyword2 설정 !!!!!!!!!!!!!" + productNumber);
+        }
+        return adminMapper.selectProductTotal(searchProductVo);
     }
 
 //    유저 삭제
@@ -81,5 +103,52 @@ public class AdminService {
     public int getTotal(SearchVo searchVo){
         return adminMapper.selectTotal(searchVo);
     }
-}
 
+    //전체 기업 수 조회
+    @Transactional(readOnly = true)
+    public int getCompanyTotal(SearchVo searchVo){
+        return adminMapper.selectCompanyTotal(searchVo);
+    }
+
+//    대분류 조회
+    @Transactional(readOnly = true)
+    public List<ProductCategory1Dto> findCategory(){
+        return adminMapper.selectCategory();
+
+    }
+//  중분류 조회
+    @Transactional(readOnly = true)
+    public List<ProductCategory2Dto> findCategory2(Long categoryCode1){
+        return adminMapper.selectCategory2(categoryCode1);
+    }
+
+//  상품추가
+    public void registerProduct(ProductDto productDto){
+        System.out.println(productDto);
+        if(productDto==null){
+            throw new IllegalArgumentException("상품 정보가 없습니다.(null)");
+        }
+        adminMapper.insertProduct(productDto);
+        System.out.println(productDto);
+    }
+
+//    상품조회
+    public List<ProductVo> modifyProduct(Long productNumber){
+       return adminMapper.selectProduct(productNumber);
+    }
+
+//  주문 조회
+    public List<OrderVo> findOrderList(SearchProductVo searchProductVo, Criteria criteria){
+        return adminMapper.selectOrderList(searchProductVo, criteria);
+    }
+//   주문 수 조회
+    public int findOrderTotal(SearchProductVo searchProductVo){
+        return adminMapper.selectOrderTotal(searchProductVo);
+    }
+//   주문 상태 변경
+    public void modifyStatus(Long orderNumber, Long orderConditionCode){
+
+        adminMapper.modifyCondition(orderNumber, orderConditionCode);
+
+    }
+}
