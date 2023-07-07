@@ -62,24 +62,9 @@ public class ShopService {
         productMapper.addCart(cartVo);
     }
 
-//    // 조회
-//    public void selectAllCart(String cartNumber){
-//
-//        productMapper.selectAllCart(Long.parseLong(cartNumber));
-//    }
 
-    // 수정
-    public void updateCart(CartVo cartVo){
 
-        productMapper.updateCart(cartVo);
-    }
 
-    //삭제
-
-    public void deleteCart(String cartNumber){
-
-        productMapper.deleteCart(Long.parseLong(cartNumber));
-    }
 }
 
 

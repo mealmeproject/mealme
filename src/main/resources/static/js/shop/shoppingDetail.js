@@ -92,4 +92,27 @@ increaseBtn.addEventListener('click', increaseCount);
 
 
 
+//****************shoppingCart*************///
 
+function addToCart() {
+    const productNumber = document.getElementById("productNumber").value;
+    const userNumber = document.getElementById("userNumber").value;
+
+
+
+    // AJAX를 통해 서버에 데이터 전송
+    $.ajax({
+        url: "/shops/addCart",
+        method: "get",
+        dataType : "json",
+
+        success: function(response) {
+            // 장바구니 추가가 성공한 경우, 응답 데이터를 처리
+            alert("상품이 추가되었습니다.");
+        },
+        error: function(xhr, status, error) {
+            // 에러 발생 시 처리
+        }
+    });
+
+}

@@ -46,37 +46,14 @@ public class ShopRestController {
         return selectLowPrice;
     }
 
-//    @PostMapping("/addCart")
-//    public String addCart(@RequestParam("userNumber") String userNumber,
-//                          @RequestParam("productNumber") String productNumber,
-//                          HttpSession session) {
-//
-//        List<CartVo> selectCart = shopService.addCart();
-//
-//        Long userNumberValue = (Long) session.getAttribute("userNumber");
-//        Long productNumberValue = (Long) session.getAttribute("productNumber");
-//
-//        shopService.addCart(userNumber, productNumber);
-//
-//        System.out.println("userNumber: " + userNumberValue);
-//        System.out.println("productNumber: " + productNumberValue);
-//
-//        return "shop/addCart";
-//    }
-
-    @PostMapping("/addCart")
-    public RedirectView addCart(CartVo cartVo, HttpServletRequest req, RedirectAttributes redirectAttributes) {
-
-        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        cartVo.setUserNumber(userNumber);
-        shopService.addCart(cartVo);
-
-        redirectAttributes.addFlashAttribute("userNumber", cartVo.getUserNumber());
 
 
-        return new RedirectView("/shop/shoppingBasket");
+    @GetMapping ("/addCart")
+    public List<CartVo> addCart(CartVo cartVo, HttpServletRequest req, RedirectAttributes redirectAttributes) {
 
     }
+
+
 }
 
 
