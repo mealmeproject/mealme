@@ -39,7 +39,7 @@ public class TodayRestController {
         System.out.println(recommendVo);
         System.out.println(calcNutrientUtil);
         System.out.println("==========================================================");
-
+        System.out.println(mealTime);
         Map<String, Object> todayChart = new HashMap<>();
         todayChart.put("recommendVo", recommendVo);
         todayChart.put("calcNutrientUtil", calcNutrientUtil);

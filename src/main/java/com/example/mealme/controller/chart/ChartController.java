@@ -31,7 +31,7 @@ public class ChartController {
 
     @GetMapping("/chartMonthly")
     public String chartMonthly(HttpServletRequest req, Model model){
-                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+        Long userNumber = (long)req.getSession().getAttribute("userNumber");
 //        Long userNumber = 1L;
         List<DailyTotalVo> dailyTotalVo = chartService.selectMonthly(userNumber);
         RecommendVo recommendVo = chartService.selectUserInfo(userNumber);

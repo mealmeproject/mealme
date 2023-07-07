@@ -631,3 +631,59 @@ element.style {
 .mBoard .gGoods.gMedium p, .mBoard .gGoods.gMedium ul {
   padding: 0 0 0 59px;
 }
+
+/* 페이징 스타일 */
+
+.page_wrap {
+  text-align:center;
+  font-size:0;
+  margin-top: 50px;
+}
+.page_nation {
+  display:inline-block;
+}
+.page_nation .none {
+  display:none;
+}
+.page_nation a {
+  display:block;
+  margin:0 3px;
+  float:left;
+  border:1px solid #e6e6e6;
+  width:28px;
+  height:28px;
+  line-height:28px;
+  text-align:center;
+  background-color:#fff;
+  font-size:13px;
+  color:#999999;
+  text-decoration:none;
+  border-radius: 10px;
+}
+
+.page_nation .arrow {
+  border:1px solid #ccc;
+}
+
+
+.page_nation .pprev {
+  background:#fff url('../img/화살표\ 왼쪽\ 둘.png') no-repeat center center;
+  margin-left:0;
+}
+.page_nation .prev {
+  background:#fff url('../img/화살표\ 왼쪽\ 하나.png') no-repeat center center;
+  margin-right:7px;
+}
+.page_nation .next {
+  background:#fff url('../img/화살표\ 오른쪽\ 하나.png') no-repeat center center;
+  margin-left:7px;
+}
+.page_nation .nnext {
+  background:#fff url('../img/화살표\ 오른쪽\ 둘.png') no-repeat center center;
+  margin-right:0;
+}
+.page_nation a.active {
+  background-color: #ff9326;
+  color: #fff;
+  border: 1px solid #e2e4e9;
+}

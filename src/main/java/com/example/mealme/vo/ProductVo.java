@@ -30,5 +30,4 @@ public class ProductVo {
     private String userId;
     private String reviewContent;
     private Date reviewDate;
-
 }

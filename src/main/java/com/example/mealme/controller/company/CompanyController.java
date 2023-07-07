@@ -231,7 +231,7 @@ public class CompanyController {
     @GetMapping("/consultingReview")
     public String consultingReview(HttpServletRequest req, Model model) {
 //        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long consultingRequestNumber = 5L;
+        Long consultingRequestNumber = 7L;
         ConsultingReviewVo consultingReviewVo = reviewService.findConsultingInfo(consultingRequestNumber);
         System.out.println("%%%%%%");
         System.out.println(consultingReviewVo);
@@ -243,12 +243,24 @@ public class CompanyController {
     @PostMapping("/consultingReview")
     public RedirectView consultingReviewWrite(ConsultingReviewVo consultingReviewVo){
         reviewService.register(consultingReviewVo);
-        return new RedirectView("/company/consultingReviewShow");
+        return new RedirectView("/company/consultingReviewList");
     }
-//
-//
-    @GetMapping("/consultingReviewShow")
-    public void consultingReviewShow() {
+
+    @GetMapping("/consultingReviewList")
+    public void consultingReviewList(){}
+
+    @ResponseBody
+    @GetMapping("/consultingReviewListData")
+    public Map<String, Object> consultingReviewListData(HttpServletRequest req) {
+//      Long userNumber = (long)req.getSession().getAttribute("userNumber");
+        Long userNumber = 1L;
+        List<ConsultingReviewVo> consultingReviewList = reviewService.findConsultingList(userNumber);
+
+        System.out.println("##########");
+        System.out.println(consultingReviewList);
+        Map<String, Object> reviewList = new HashMap<>();
+        reviewList.put("consultingReviewList", consultingReviewList);
+        return reviewList;
     }
 
 //    컨설팅 결제 내역 페이지
@@ -256,6 +268,29 @@ public class CompanyController {
     public void consultingPayInfo(){
 
     }
+
+    @GetMapping("/consultingReviewModify")
+    public String consultingReviewModify(long reviewNumber, Model model){
+        ConsultingReviewVo consultingReviewVo = reviewService.selectConsultingReviewInfo(reviewNumber);
+        model.addAttribute("consultingReviewVo", consultingReviewVo);
+        System.out.println("#####수정페이지 정보 받아오기#####");
+        System.out.println(consultingReviewVo);
+        return "company/consultingReviewModify";
+    }
+
+    @PostMapping("/consultingReviewModify")
+    public RedirectView consultingReviewModify(ConsultingReviewVo consultingReviewVo){
+        reviewService.consultingReviewUpdate(consultingReviewVo);
+        System.out.println("&&&&&&&&&&&&&&&&&&&"+consultingReviewVo.toString());
+        return new RedirectView("/company/consultingReviewList");
+    }
+
+    @GetMapping("/consultingReviewRemove")
+    public RedirectView consultingReviewRemove(Long reviewNumber){
+        reviewService.removeConsultingReview(reviewNumber);
+        return new RedirectView("/company/consultingReviewList");
+    }
+
 
 }
 
