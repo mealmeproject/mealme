@@ -286,14 +286,12 @@ function showError(a, b, c){
 // }
 
 function changeName() {
-    $('.check').on("change", function () {
-
+    $('.status').on("click", function () {
+        $(this).find('.orderStatus');
         $.ajax({
             type: 'post',
-            url: 'admins/v1/modify',
-            data: {
-                select_value: $("#changeStatus option:selected").text()
-            },
+            url: 'admins/v1/modifyName',
+            data: ,
             success: function (response) {
 
                 orderList(response)
