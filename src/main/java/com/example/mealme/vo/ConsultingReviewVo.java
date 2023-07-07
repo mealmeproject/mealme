@@ -14,6 +14,7 @@ public class ConsultingReviewVo {
     private String consultingComment;
     private String fileName;
     private String fileUploadPath;
+    private String consultingRequestDate;
     private long reviewNumber;
     private String reviewDate;
     private String reviewContent;
