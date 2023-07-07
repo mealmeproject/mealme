@@ -13,9 +13,10 @@ public class ProductVo {
     private long productNumber;
     private long categoryCode1;
     private long categoryCode2;
+    private String categoryName;
     private String productName;
     private String productSeller;
-    private int productPrice;
+    private long productPrice;
     private String productExplanation;
     private String productRegisterDate;
     private int productInventory;
@@ -23,6 +24,7 @@ public class ProductVo {
     private String fileName;
     private String fileUploadPath;
     private String fileUuid;
+    private long fileNumber;
     private double averageRating;
     private int totalCount;
     private int userNumber;
