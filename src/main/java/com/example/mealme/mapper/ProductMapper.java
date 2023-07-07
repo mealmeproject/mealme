@@ -30,11 +30,16 @@ public interface ProductMapper {
     ProductVo selectOne(Long productNumber);
 
     //장바구니 상품 조회
-    List<CartVo> selectCart(Long userNumber);
+    List<CartVo> selectCart(Long productNumber);
 
     //장바구니 상품 추가
-    public void addCart(CartVo cartVo);
+    void addCart(CartVo cartVo);
 
-    }
+    //장바구니 상품 업데이트
+    void updateCart(CartVo cartVo);
+
+    //장바구니 상품 삭제
+    void deleteCart(Long productNumber);
+}
 
 

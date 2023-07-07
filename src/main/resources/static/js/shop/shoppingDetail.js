@@ -1,5 +1,4 @@
 
-
 document.querySelectorAll('.button').forEach(button => {
 
     button.addEventListener('click', e => {
@@ -90,4 +89,7 @@ function increaseCount() {
 // 버튼에 이벤트 리스너 등록
 decreaseBtn.addEventListener('click', decreaseCount);
 increaseBtn.addEventListener('click', increaseCount);
+
+
+
 

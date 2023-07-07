@@ -18,22 +18,22 @@ import java.util.Optional;
 public class ShopService {
     private final ProductMapper productMapper;
 
-    public List<ProductVo> selectAll(){
+    public List<ProductVo> selectAll() {
 
         return productMapper.selectAll();
     }
 
-    public List<ProductVo> selectAllPrice(){
+    public List<ProductVo> selectAllPrice() {
 
         return productMapper.selectAllPrice();
     }
 
-    public  List<ProductVo> selectLowPrice(){
+    public List<ProductVo> selectLowPrice() {
 
         return productMapper.selectLowPrice();
     }
 
-    public  List<ProductVo> selectReviewPrice(){
+    public List<ProductVo> selectReviewPrice() {
 
         return productMapper.selectReviewPrice();
     }
@@ -47,19 +47,41 @@ public class ShopService {
     }
 
 
-    public List<CartVo> selectCart(String userNumber){
+    public List<CartVo> selectCart(String userNumber) {
 
         return productMapper.selectCart(Long.parseLong(userNumber));
     }
 
-//    장바구니에 상품 추가
-    public void addCart(CartVo cartVo){
+    //추가
+    public void addCart(CartVo cartVo) {
+
         if(cartVo == null){
-            throw new IllegalArgumentException("장바구니에 담긴 상품이 없습니다.");
+            throw new IllegalArgumentException("장바구니에 상품이 없습니다");
         }
+
         productMapper.addCart(cartVo);
     }
 
+//    // 조회
+//    public void selectAllCart(String cartNumber){
+//
+//        productMapper.selectAllCart(Long.parseLong(cartNumber));
+//    }
+
+    // 수정
+    public void updateCart(CartVo cartVo){
+
+        productMapper.updateCart(cartVo);
+    }
+
+    //삭제
+
+    public void deleteCart(String cartNumber){
+
+        productMapper.deleteCart(Long.parseLong(cartNumber));
+    }
 }
+
+
 
 

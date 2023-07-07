@@ -1,3 +1,5 @@
+
+
 var countElement = document.getElementById('count');
 var decreaseBtn = document.getElementById('decreaseBtn');
 var increaseBtn = document.getElementById('increaseBtn');
@@ -22,4 +24,6 @@ function increaseCount() {
 // 버튼에 이벤트 리스너 등록
 decreaseBtn.addEventListener('click', decreaseCount);
 increaseBtn.addEventListener('click', increaseCount);
+
+
 

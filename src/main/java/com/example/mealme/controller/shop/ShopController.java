@@ -50,13 +50,18 @@ public class ShopController {
 
     }
 
-    @GetMapping("/shoppingDetail/{userNumber}")
+    @GetMapping("/shoppingDetail")
     public String shoppingDetail(Model model, @RequestParam("productNumber") String productNumber, HttpSession session) {
 
         // 세션에서 userNumber를 가져옴
-        Long userNumber = (Long) session.getAttribute("userNumber");
+
+        Long userNumber = (Long)session.getAttribute("userNumber");
+
+        System.out.println("userNumber: " + userNumber);
+        System.out.println("productNumber: " + productNumber);
 
         ProductVo product = shopService.selectOne(productNumber);
+        product.setProductNumber(Long.parseLong(productNumber));
         model.addAttribute("product", product);
         model.addAttribute("userId", product.getUserId());
         model.addAttribute("reviewContent", product.getReviewContent());
@@ -69,47 +74,19 @@ public class ShopController {
         return "shop/shoppingDetail";
     }
 
-    @PostMapping("/shoppingDetail")
-    public String shoppingDetail(Model model, @RequestParam("userNumber") String userNumber, @RequestParam("productNumber") String productNumber, HttpSession session) {
-        // shoppingDetail 페이지의 로직 구현
-
-        // 세션에 userNumber 저장
-        session.setAttribute("userNumber", Long.parseLong(userNumber));
-
-        // userNumber 값을 모델에 추가
-        model.addAttribute("userNumber", userNumber);
-        // productNumber 값을 모델에 추가
-        model.addAttribute("productNumber", productNumber);
-
-        return "shop/shoppingDetail";
-    }
-
-
-
-
 
 
     @GetMapping("/shoppingBasket")
-    public String shoppingBasket(Model model,@RequestParam("userNumber") String userNumber) {
+    public String shoppingBasket(HttpSession session, Long productNumber) {
+        Long userNumberValue = (Long) session.getAttribute("userNumber");
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++" +
+                "");
+        System.out.println(productNumber);
+        System.out.println("userNumber: " + userNumberValue);
 
-        List<CartVo> cartList = shopService.selectCart(userNumber);
-        model.addAttribute("cartList", cartList);
+
 
         return "shop/shoppingBasket";
-    }
-
-    @PostMapping("/shoppingBasket")
-    public RedirectView addCart(CartVo cartVo, HttpServletRequest req,
-                                RedirectAttributes redirectAttributes) {
-
-        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
-        cartVo.setUserNumber(userNumber);
-        shopService.addCart(cartVo);
-
-        redirectAttributes.addFlashAttribute("userNumber", cartVo.getUserNumber());
-
-        // 상품을 장바구니에 추가한 후 장바구니 페이지로 리다이렉트
-        return new RedirectView("/shop/shoppingBasket");
     }
 
 

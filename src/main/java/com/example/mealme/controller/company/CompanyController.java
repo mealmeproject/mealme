@@ -251,6 +251,12 @@ public class CompanyController {
     public void consultingReviewShow() {
     }
 
+//    컨설팅 결제 내역 페이지
+    @GetMapping("/consultingPayInfo")
+    public void consultingPayInfo(){
+
+    }
+
 }
 
 

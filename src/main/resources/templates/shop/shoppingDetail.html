@@ -76,18 +76,17 @@
                   <em>총 상품금액</em>
                 </div>
                 <p class="addToCart">
-                  <button type="button" class="addCart_btn">카트에 담기</button>
                 <div class="button">
-                  <form action="/shop/shoppingBasket" method="post">
+                  <form action="/shop/shoppingBasket" method="get">
                     <input type="hidden" name="userNumber" th:value="${userNumber}" />
-                    <button class="cart" type="submit">장바구니</button>
+                    <input type="hidden" name="productNumber" th:value="${product.productNumber}">
+                    <button id="addToCartBtn" onclick="addToCart()" class="cart" type="submit">장바구니</button>
                   </form>
                   <form action="/shop/shoppingPay" method="post">
                     <input type="hidden" name="userNumber" th:value="${userNumber}" />
                     <button class="order" type="submit">구매하기</button>
                   </form>
                 </div>
-
               </div>
             </article>
             <article class="detail">
@@ -171,30 +170,36 @@
   <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 <script th:inline="javascript"></script>
-
 <script>
-  $(".addCart_btn").click(function(){
-    var gdsNum = $("#gdsNum").val();
-    var cartStock = $(".numBox").val();
 
-    var data = {
-      gdsNum : gdsNum,
-      cartStock : cartStock
-    };
+  function addToCart() {
+    const productNumber = document.getElementById("productNumber").value;
+    const userNumber = document.getElementById("userNumber").value;
 
+
+    console.log(productNumber);
+    console.log(userNumber);
+
+    // AJAX를 통해 서버에 데이터 전송
     $.ajax({
-      url : "/shop/shoppingBasket",
-      type : "post",
-      data : data,
-      success : function(result){
-        alert("카트 담기 성공");
-        $(".numBox").val("1");
+      url: "/shops/addCart",
+      method: "post",
+      data: {
+        userNumber: userNumber,
+        productNumber: productNumber,
       },
-      error : function(){
-        alert("카트 담기 실패");
+      success: function(response) {
+        // 장바구니 추가가 성공한 경우, 응답 데이터를 처리
+        // 예를 들어, 장바구니에 추가된 상품의 개수를 표시하거나 장바구니 페이지로 이동할 수 있음
+        alert("상품이 추가되었습니다.");
+        window.location.href = "/shop/shoppingBasket";
+      },
+      error: function(xhr, status, error) {
+        // 에러 발생 시 처리
       }
     });
-  });
+  }
+
 </script>
 
 </body>

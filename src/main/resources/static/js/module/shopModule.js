@@ -12,3 +12,6 @@ export function getAllList(callback, endPoint){
         }
     })
 }
+
+
+
