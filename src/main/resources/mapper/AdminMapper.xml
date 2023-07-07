@@ -331,28 +331,31 @@
                ORDER_NUMBER,
                USER_NAME,
                PRODUCT_SELLER,
-               USER_GENDER,
+               PRODUCT_NAME,
                PRODUCT_PRICE,
                ORDER_COUNT,
-               CONDITION_CODE_NAME
+               CONDITION_CODE_NAME,
+               ORDER_CONDITION_CODE
         FROM (SELECT ROWNUM AS RNUM,
                      ORDER_DATE,
                      ORDER_NUMBER,
                      USER_NAME,
                      PRODUCT_SELLER,
-                     USER_GENDER,
+                     PRODUCT_NAME,
                      PRODUCT_PRICE,
                      ORDER_COUNT,
-                     CONDITION_CODE_NAME
+                     CONDITION_CODE_NAME,
+                     ORDER_CONDITION_CODE
               FROM (
                        SELECT O.ORDER_DATE,
                               O.ORDER_NUMBER,
                               U.USER_NAME,
                               P.PRODUCT_SELLER,
-                              U.USER_GENDER,
+                              P.PRODUCT_NAME,
                               P.PRODUCT_PRICE,
                               O.ORDER_COUNT,
-                              OC.CONDITION_CODE_NAME
+                              OC.CONDITION_CODE_NAME,
+                              O.ORDER_CONDITION_CODE
 
                        FROM TBL_ORDER O
                                 JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
@@ -362,14 +365,14 @@
                       TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and
                       #{searchProductVo.endDate} >= TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd')
                       <if test="!''.equals(searchProductVo.keyword)">
-                          <if test="searchProductVo.searchType.equals('name')">
+                          <if test="searchProductVo.searchType.equals('userName')">
+                              AND USER_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                          </if>
+                          <if test="searchProductVo.searchType.equals('productName')">
                               AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
                           </if>
-                          <if test="searchProductVo.searchType.equals('number')">
-                              AND P.PRODUCT_NUMBER = #{searchProductVo.keyword2}
-                          </if>
-                          <if test="searchProductVo.searchType.equals('seller')">
-                              AND PRODUCT_SELLER like '%'|| #{searchProductVo.keyword}|| '%'
+                          <if test="searchProductVo.searchType.equals('condition')">
+                              AND CONDITION_CODE_NAME like '%'|| #{searchProductVo.keyword}|| '%'
                           </if>
                       </if>
                   </where>
@@ -390,17 +393,25 @@
             TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd') >= #{searchProductVo.startDate} and
             #{searchProductVo.endDate} >= TO_CHAR(O.ORDER_DATE, 'yyyy-mm-dd')
             <if test="!''.equals(searchProductVo.keyword)">
-                <if test="searchProductVo.searchType.equals('name')">
+                <if test="searchProductVo.searchType.equals('userName')">
+                    AND USER_NAME like '%'|| #{searchProductVo.keyword}|| '%'
+                </if>
+                <if test="searchProductVo.searchType.equals('productName')">
                     AND PRODUCT_NAME like '%'|| #{searchProductVo.keyword}|| '%'
                 </if>
-                <if test="searchProductVo.searchType.equals('number')">
-                    AND P.PRODUCT_NUMBER = #{searchProductVo.keyword2}
-                </if>
-                <if test="searchProductVo.searchType.equals('seller')">
-                    AND PRODUCT_SELLER like '%'|| #{searchProductVo.keyword}|| '%'
+                <if test="searchProductVo.searchType.equals('condition')">
+                    AND CONDITION_CODE_NAME like '%'|| #{searchProductVo.keyword}|| '%'
                 </if>
             </if>
         </where>
     </select>
+
+    <update id="modifyCondition">
+
+        UPDATE TBL_ORDER
+        SET ORDER_CONDITION_CODE = #{orderConditionCode}
+        WHERE ORDER_NUMBER = #{orderNumber}
+    </update>
+
 
 </mapper>

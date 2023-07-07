@@ -1,11 +1,7 @@
 package com.example.mealme.mapper;
 
 import com.example.mealme.dto.*;
-import com.example.mealme.service.admin.AdminService;
-import com.example.mealme.vo.Criteria;
-import com.example.mealme.vo.ProductVo;
-import com.example.mealme.vo.SearchProductVo;
-import com.example.mealme.vo.SearchVo;
+import com.example.mealme.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -67,6 +63,10 @@ List<ProductVo> selectProduct(Long productNumber);
     public int selectCompanyTotal(@Param("searchVo")SearchVo searchVo);
 
     //    주문 검색 조회
-    List<CompanyDto> searchCompany(@Param("searchVo") SearchVo searchVo , @Param("criteria") Criteria criteria);
+    List<OrderVo> selectOrderList(@Param("searchProductVo") SearchProductVo searchProductVo, @Param("criteria") Criteria criteria);
+    //    전체 상품 수 조회
+    public int selectOrderTotal(@Param("searchProductVo") SearchProductVo searchProductVo);
+//     주문 상태 변경
+    void modifyCondition(@Param("orderNumber") Long orderNumber, @Param("orderConditionCode") Long orderConditionCode );
 
 }

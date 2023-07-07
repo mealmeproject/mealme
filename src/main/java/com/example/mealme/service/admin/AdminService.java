@@ -2,16 +2,10 @@ package com.example.mealme.service.admin;
 
 import com.example.mealme.dto.*;
 import com.example.mealme.mapper.AdminMapper;
-import com.example.mealme.vo.Criteria;
-import com.example.mealme.vo.ProductVo;
-import com.example.mealme.vo.SearchProductVo;
-import com.example.mealme.vo.SearchVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 
@@ -143,7 +137,18 @@ public List<CompanyDto> searchCompanyList(SearchVo searchVo, Criteria criteria){
        return adminMapper.selectProduct(productNumber);
     }
 
-//    private class SearchPrductVo {
-//    }
-}
+//  주문 조회
+    public List<OrderVo> findOrderList(SearchProductVo searchProductVo, Criteria criteria){
+        return adminMapper.selectOrderList(searchProductVo, criteria);
+    }
+//   주문 수 조회
+    public int findOrderTotal(SearchProductVo searchProductVo){
+        return adminMapper.selectOrderTotal(searchProductVo);
+    }
+//   주문 상태 변경
+    public void modifyStatus(Long orderNumber, Long orderConditionCode){
 
+        adminMapper.modifyCondition(orderNumber, orderConditionCode);
+
+    }
+}

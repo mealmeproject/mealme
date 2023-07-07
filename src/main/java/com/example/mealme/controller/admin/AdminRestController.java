@@ -6,11 +6,7 @@ import com.example.mealme.service.admin.ProductFileService;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -132,5 +128,38 @@ public class AdminRestController {
 //////        return new RedirectView("/board/view");
 //////    }
 ////}
+
+    @GetMapping("/searchOrderList/{page}")
+    public Map<String, Object> findOrderList(@PathVariable("page") int page, SearchProductVo searchProductVo, Long orderNumber) {
+        Criteria criteria = new Criteria(page, 10);
+
+        System.out.println("====================================================================================");
+        System.out.println(searchProductVo);
+        System.out.println("====================================================================================");
+
+        PageVo pageVo = new PageVo(criteria, adminService.findOrderTotal(searchProductVo));
+        List<OrderVo> searchOrder = adminService.findOrderList(searchProductVo, criteria);
+
+
+        Map<String, Object> findOrder = new HashMap<>();
+        findOrder.put("pageVo", pageVo);
+        findOrder.put("orderList", searchOrder);
+
+        return findOrder;
+    }
+
+    @GetMapping("/modify")
+    public void conditionModify(Long orderNumber, Long orderConditionCode){
+        adminService.modifyStatus(orderNumber, orderConditionCode);
+
+
+    }
+
+    @PostMapping("/modify")
+    public void modifyName(@RequestParam("select_value") String selectValue ){
+        OrderVo orderVo = new OrderVo();
+        orderVo.setConditionCodeName(selectValue);
+    }
+
 
 }

@@ -103,25 +103,27 @@
         <div class="change-status">
           <div class="gRight">
             <span>상태 변경</span>
+            <input type="hidden" id="changeInput"/>
             <select name="searchType" class="status-select"
-                 id="changeStatus" onchange="selectBoxChange(this.value);">
+                 id="changeStatus">
               
-              <option value="결제완료" selected="">결제완료</option>
-              <option value="결제확인">결제확인</option>
-              <option value="결제확인">취소신청</option>
-              <option value="결제확인">취소완료</option>
-              <option value="배송출발">배송출발</option>
-              <option value="구매확정">구매확정</option>
-              <option value="환불/반품신청">환불신청</option>
-              <option value="결제확인">반품신청</option>
-              <option value="수거중">수거중</option>
-              <option value="환불/반품완료">환불완료</option>
-              <option value="결제확인">반품완료</option>
+              <option value="1" selected="selected">결제완료</option>
+              <option value="2">결제확인</option>
+              <option value="3">취소신청</option>
+              <option value="4">취소완료</option>
+              <option value="5">배송출발</option>
+              <option value="6">구매확정</option>
+              <option value="7">환불신청</option>
+              <option value="8">반품신청</option>
+              <option value="10">수거중</option>
+              <option value="11">환불완료</option>
+              <option value="12">반품완료</option>
 
 
             </select>
             <button type="button" class="status">
               확인
+            </button>
           </div>
         </div>
           <div class="mBoad gScroll">
@@ -157,244 +159,234 @@
                 </tr>
               </thead>
               <tbody class="check">
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">
-                    <!-- <input type="text" id="status-input"> -->
-                  </th>
-                </tr>
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">-->
+<!--                    &lt;!&ndash; <input type="text" id="status-input"> &ndash;&gt;-->
+<!--                  </th>-->
+<!--                </tr>-->
 
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-                <tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr><tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr><tr>
-                  <th >
-                    <input type="checkbox" name="chk">
-                  </th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>
-                </tr>
-               
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr><tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr><tr>-->
+<!--                  <th >-->
+<!--                    <input type="checkbox" name="chk">-->
+<!--                  </th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">2023-06-10</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">이동재</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">aaa</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">01012321423</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">남</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">32</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;">개포동</th>-->
+<!--                  <th scope="col" style="font-size: 13px; font-weight: 10;"></th>-->
+<!--                </tr>-->
+<!--               -->
               </tbody>
             </table>
             
             <!-- <p class="empty" style="display:block;">검색된 회원 내역이 없습니다.</p> -->
           </div>
-          <div class="typeFooter">
-            <div class="leftSide">
-            <div class="btnNormal">
-              <span>
-                <em class="icoDel"></em>
-                삭제
-              </span>
-            </div>
-          </div>
-          </div>
-          </div>
-          <div class="paging">
-            <p class="paging-btn">
-              <a href="">
-              <img src="https://2bob.co.kr/skin/nodskin_argio/images/paging_prev.jpg" alt="" class="direction">
-            </a>
-            </p>
-            <p class="paging-num">
-              
-              <a href="">1</a>
-              <a href="">2</a>
-              <a href="">3</a>
-              <a href="">4</a>
-              <a href="">5</a>
 
-            </p>
-            <p class="paging-btn">
-              <a href="">
-                <img src="https://2bob.co.kr/skin/nodskin_argio/images/paging_next.jpg" alt="다음으로">
-              </a>
-            </p>
-            <p class="paging-btn" id="paging-last">
-              <a href="">
-                <img src="https://2bob.co.kr/skin/nodskin_argio/images/paging_d_next.jpg" alt="마지막으로">
-              </a>
-            </p>
+          </div>
+          <div class="page_wrap">
+            <div class="page_nation">
+              <!--&lt;!&ndash;              <a class="arrow pprev" href="#"></a>&ndash;&gt;-->
+              <!--              <a th:href="@{/admin/list(page=${pageInfo.startPage - 1})}" class="arrow prev" th:if="${pageInfo.prev}">-->
+
+              <!--              </a>-->
+              <!--              <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">-->
+              <!--              <a th:href="@{/admin/list(page=${i})} class="active">-->
+              <!--                <li class="active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></li>-->
+              <!--                <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></li>-->
+              <!--                </a>-->
+              <!--              </th:block>-->
+              <!--&lt;!&ndash;              <a href="#">2</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">3</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">4</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">5</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">6</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">7</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">8</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">9</a>&ndash;&gt;-->
+              <!--&lt;!&ndash;              <a href="#">10</a>&ndash;&gt;-->
+              <!--              <a th:href="@{/admin/list(page=${pageInfo.endPage + 1})}" class="arrow next" th:if="${pageInfo.next}"></a>-->
+              <!--&lt;!&ndash;              <a class="arrow nnext" href="#"></a>&ndash;&gt;-->
+            </div>
           </div>
         </p>
         </div>
@@ -408,7 +400,7 @@
       <div class="menu-container"></div>
     </aside>
 
-    <script th:src="@{/js/admin/admin4.js}"></script>
+    <script type="module" th:src="@{/js/admin/admin4.js}"></script>
     <script th:src="@{/js/fragment/aside.js}"></script>
     <!-- 퀵 메뉴 추가 공간 -->
     <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
