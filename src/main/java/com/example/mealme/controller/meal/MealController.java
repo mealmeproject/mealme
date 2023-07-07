@@ -42,5 +42,8 @@ public class MealController {
         return "meal/myPage";
     }
 
+    @GetMapping("/mealWrite")
+    public void mealWrite(){}
+
 
 }
