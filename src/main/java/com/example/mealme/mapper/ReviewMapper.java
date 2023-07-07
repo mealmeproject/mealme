@@ -13,4 +13,8 @@ import java.util.List;
 public interface ReviewMapper {
     public ConsultingReviewVo selectConsultingInfo(Long consultingRequestNumber);
     public void insertConsultingReview(ConsultingReviewVo consultingReviewVo);
+    public List<ConsultingReviewVo> selectConsultingList(Long userNumber);
+    public ConsultingReviewVo selectConsultingReviewInfo(Long reviewNumber);
+    public void updateConsultingReview(ConsultingReviewVo consultingReviewVo);
+    public void deleteConsultingReview(Long reviewNumber);
 }
