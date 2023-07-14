@@ -25,6 +25,7 @@ export function getDailyList(callback, error){
             }
         },
         error : error
+
     });
 }
 

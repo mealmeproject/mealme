@@ -54,7 +54,10 @@
         <typeAlias type="com.example.mealme.vo.ConsultingReviewVo" alias="consultingReviewVo"/>
         <typeAlias type="com.example.mealme.vo.ProductVo" alias="productVo"/>
         <typeAlias type="com.example.mealme.vo.SearchProductVo" alias="searchProductVo"/>
+        <typeAlias type="com.example.mealme.vo.SearchCompanyVo" alias="searchCompanyVo"/>
         <typeAlias type="com.example.mealme.vo.OrderVo" alias="orderVo"/>
+        <typeAlias type="com.example.mealme.vo.DailyOrderVo" alias="dailyOrderVo"/>
+
 
 
     </typeAliases>

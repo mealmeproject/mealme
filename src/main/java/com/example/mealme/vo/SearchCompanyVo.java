@@ -1,15 +1,13 @@
 package com.example.mealme.vo;
+
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class SearchVo {
+public class SearchCompanyVo {
+
     private String keyword;
     private String searchType;
-    private String productType;
-    private String name;
-    private String id;
-    private String email;
+    private int productType;
 }
-

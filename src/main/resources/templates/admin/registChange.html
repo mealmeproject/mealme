@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -34,7 +34,10 @@
         <!-- 헤더 추가 공간 -->
         <!-- 작업공간 -->
         <div class="work-container">
-<!--            <input type="hidden" class="product-num1" th:value="${productVo.productNumber}">-->
+            <form class="new-product-form" id="myForm" th:action="@{/admin/registChange}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="productNumber" class="product-num" th:value="${productNumber}">
+
+                <!--            <input type="hidden" class="product-num1" th:value="${productVo.productNumber}">-->
 <!--            <input type="hidden" class="product-num2" th:value="${productVo.categoryCode2}">-->
 
             <p>
@@ -53,7 +56,7 @@
 
 
                                 <div class="search">
-                                    <input type="text" placeholder="예시) 한 끼 통살" th:value="${productVo.proudctName}">
+                                    <input type="text" name="productName" placeholder="예시) 한 끼 통살" th:value="${productVo.productName}">
 
                                 </div>
                             </td>
@@ -64,7 +67,7 @@
 
 
                                 <div class="search">
-                                    <input type="text" placeholder="예시) 포보스 선정 맛있는 닭가슴살 1위!" th:value="${productVo.productSeller}">
+                                    <input type="text"  name="productSeller" placeholder="예시) 포보스 선정 맛있는 닭가슴살 1위!" th:value="${productVo.productSeller}">
 
                                 </div>
                             </td>
@@ -73,7 +76,7 @@
                             <th scope="row" style="background-color: rgb(255, 139, 38); color:white ;">상세 설명</th>
                             <td class="selector" style="border: 0; border-top: 1px solid #bbb;">
                                 <div class="summernote-box">
-                        <textarea id="summernote" name="applyContent" style="    width: 743.5px;
+                        <textarea id="summernote" name="productExplanation" style="    width: 743.5px;
                         height: 300px; border-color: #bbb;" th:utext="${productVo.productExplanation}"></textarea>
                                 </div>
                             </td>
@@ -102,7 +105,17 @@
                         <div class="upload-text">※ 이미지를 등록하면 즉시 반영됩니다.</div>
                     </div>
                     <div class="img-controller-box">
-                        <ul class="file-list"></ul>
+                        <ul class="file-list">
+<!--                            <li>-->
+<!--                                <div class="show-img-box">-->
+<!--                                    <img th:src="'/upload/' + ${productVo.fileUploadPath} + '/' + ${productVo.fileUuid} + '_' + ${productVo.fileName}"  class="preview-image">-->
+<!--                                </div>-->
+<!--                                <div class="btn-box">-->
+<!--                                    <button type='button' class='img-cancel-btn' data-name='${files[i].name}'>삭제</button>-->
+<!--                                </div>-->
+<!--                            </li>-->
+
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -119,60 +132,21 @@
                         <th scope="row" style="background-color: rgb(255, 139, 38); color:white ;">분류 선택</th>
                         <td>
 
-                            <div class="mSearchSelect typeCategory gDouble">
-                                <table border="1" summary="">
 
-                                    <colgroup>
-                                        <col  span="2">
-                                    </colgroup>
-                                    <thead>
-                                    <tr>
-                                        <th scope="col" class="center" style="background-color: rgb(255, 139, 38); color:white ;">대분류</th>
-                                        <th scope="col" class="center" style="background-color: rgb(255, 139, 38); color:white ;">중분류</th>
-
-
-                                    </tr>
-                                    </thead>
-                                    <tbody class="_category_select_body">
-                                    <tr>
-                                        <td style="border-right: 1px solid #bbb;">
-                                            <div class="list ">
-                                                <ul class="_category_1">
-<!--                                                    <th:block th:each="product : ${productVo}">-->
-<!--                                                    <li class="_next select" th:text="${product.categoryName}" th:if="${product.categoryCode1 == }">-->
-<!--                                                        (대분류) ${c.categoryName} &gt;-->
-<!--                                                        <input type="hidden" name="categoryCode1" class="_category_no" th:value="${c.categoryCode1}">-->
-<!--                                                    </li>-->
-<!--                                                    </th:block>-->
-
-                                                </ul>
-                                            </div>
-                                        </td>
-                                        <td style="border-right: 0px;">
-                                            <div class="list">
-                                                <ul class="_category_2">
-<!--                                                    <li class=" _next">(중분류) Tees &gt;<input type="hidden" class="_category_no" value="32" hashtag="null"></li>-->
-<!--                                                    <li class="">(중분류) Shirts &gt;<input type="hidden" class="_category_no" value="33" hashtag="null"></li>-->
-                                                </ul>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                             <p class="gDouble">
                                 <span class="icoDot"></span>
                                 <strong class="gWidth wPrdCategory" style="font-size: 14px;">선택된 상품분류</strong>
                                 <span class="_product_category_none" style="display: none;">
                                 </span>
                                 <span style="display: inline;" class="_product_category_checked">
-<!--                                    <span class="txtLight txtLess" style="font-size: 14px;" th:text="${productVo.categoryName}">(대분류) Tops </span>-->
-<!--                                    <input type="hidden" name="category_product[group1][25]" class="_selected_category_no" th:value="${productVo.categoryCode2}">-->
+                                    <input type="hidden" name="categoryCode1" class="_selected_category_no" th:value="${productVo.categoryCode1}">
+                                    <span class="txtLight txtLess" name="categoryName1" style="font-size: 14px;"  th:text="'(대분류)' + ${productVo.categoryName1} +'&gt'"></span>
+
+                                    <input type="hidden" name="categoryCode2" class="_selected_category_no" th:value="${productVo.categoryCode2}">
+                                    <span class="txtLight txtLess" name="categoryName2" style="font-size: 14px;" th:text="'(중분류)' + ${productVo.categoryName2}"></span>
 
 
-                                    <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
+
                                 </span>
                                 <input type="hidden" name="checked_category">
                             </p>
@@ -194,7 +168,7 @@
 
 
                             <div class="search">
-                                <input type="text" placeholder="예시) 38,000">
+                                <input type="text" name="productPrice" placeholder="예시) 38,000" th:value="${productVo.productPrice}">
 
                             </div>
                         </td>
@@ -210,11 +184,11 @@
             <input type="file" name="applyFile" id="input-one" class="input" /><br />
             <input type="file" name="applyFile" id="input-one" class="input" /><br />
             <input type="file" name="applyFile" id="input-one" class="input" /><br />
-            </form>
             <div class="upload-input-box">
-                <input type="file" name="file-input" id="file-input" multiple />
+                <input type="file" name="productFile" id="file-input" multiple />
             </div>
             </p>
+            </form>
         </div>
 
 
@@ -233,7 +207,7 @@
 
 <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<script th:src="@{/js/admin/admin8.js}"></script>
+<script type="module" th:src="@{/js/admin/admin8.js}"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
 <script>
     // let productNum = $('.product-num1').val();

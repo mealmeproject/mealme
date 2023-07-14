@@ -131,21 +131,17 @@
 
     <select id="selectProduct" resultType="productVo">
         SELECT P.PRODUCT_NUMBER,
+               P.PRODUCT_EXPLANATION,
                P.PRODUCT_NAME,
                P.PRODUCT_PRICE,
                P.PRODUCT_SELLER,
                P.CATEGORY_CODE2,
                P.CATEGORY_CODE1,
-               C.CATEGORY_NAME,
-               G.CATEGORY_NAME,
-               P.PRODUCT_REGISTER_DATE,
-               F.FILE_NAME,
-               F.FILE_UPLOAD_PATH,
-               F.FILE_UUID,
-               F.FILE_NUMBER
+               C.CATEGORY_NAME as CATEGORY_NAME2,
+               G.CATEGORY_NAME as CATEGORY_NAME1,
+               P.PRODUCT_REGISTER_DATE
         FROM TBL_PRODUCT P
                  LEFT JOIN TBL_PRODUCT_CATEGORY2 C ON P.CATEGORY_CODE2 = C.CATEGORY_CODE2
-                 LEFT JOIN TBL_PRODUCT_FILE F ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
                  LEFT JOIN TBL_PRODUCT_CATEGORY G ON P.CATEGORY_CODE1 = G.CATEGORY_CODE1
         WHERE P.PRODUCT_NUMBER = #{productNumber}
     </select>
@@ -282,23 +278,36 @@
 
     <select id="searchCompany" resultType="companyDto">
         SELECT COMPANY_NUMBER,COMPANY_REGISTRATION_NUMBER, COMPANY_NAME, COMPANY_ID, COMPANY_CALL_NUMBER,
-        COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL
+        COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL, COMPANY_STATUS
         FROM( SELECT ROWNUM AS RNUM,COMPANY_NUMBER, COMPANY_REGISTRATION_NUMBER, COMPANY_NAME, COMPANY_ID,
-        COMPANY_CALL_NUMBER, COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL
+        COMPANY_CALL_NUMBER, COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL, COMPANY_STATUS
         FROM( SELECT COMPANY_NUMBER, COMPANY_REGISTRATION_NUMBER, COMPANY_NAME, COMPANY_ID, COMPANY_CALL_NUMBER,
-        COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL
-        FROM TBL_COMPANY where 1 = 1
-        <if test="!searchVo.keyword.equals('')">
-            <if test="searchVo.searchType.equals('name')">
-                and COMPANY_NAME like '%'|| #{searchVo.keyword}|| '%'
+        COMPANY_CEO_NAME, COMPANY_ADDRESS1, COMPANY_EMAIL, COMPANY_STATUS
+        FROM TBL_COMPANY
+        <where>
+        <if test="!searchCompanyVo.keyword.equals('')">
+            <if test="searchCompanyVo.searchType.equals('name')">
+                and COMPANY_NAME like '%'|| #{searchCompanyVo.keyword}|| '%'
             </if>
-            <if test="searchVo.searchType.equals('id')">
-                and COMPANY_ID like '%'|| #{searchVo.keyword}|| '%'
+            <if test="searchCompanyVo.searchType.equals('id')">
+                and COMPANY_ID like '%'|| #{searchCompanyVo.keyword}|| '%'
             </if>
-            <if test="searchVo.searchType.equals('email')">
-                and COMPANY_EMAIL like '%'|| #{searchVo.keyword}|| '%'
+            <if test="searchCompanyVo.searchType.equals('email')">
+                and COMPANY_EMAIL like '%'|| #{searchCompanyVo.keyword}|| '%'
             </if>
         </if>
+
+        <trim prefix="and">
+            <if test="searchCompanyVo.productType != null">
+                <if test="searchCompanyVo.productType == 0">
+                COMPANY_STATUS = 1
+                </if>
+                <if test="searchCompanyVo.productType == 1">
+                COMPANY_STATUS = 0
+                </if>
+            </if>
+        </trim>
+        </where>
         )S1
         <![CDATA[
               WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
@@ -312,17 +321,28 @@
     <select id="selectCompanyTotal" resultType="_int">
         SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY
         <where>
-            <if test="!searchVo.keyword.equals('')">
-                <if test="searchVo.searchType.equals('name')">
-                    and COMPANY_NAME like '%'|| #{searchVo.keyword}|| '%'
+            <if test="!searchCompanyVo.keyword.equals('')">
+                <if test="searchCompanyVo.searchType.equals('name')">
+                    and COMPANY_NAME like '%'|| #{searchCompanyVo.keyword}|| '%'
                 </if>
-                <if test="searchVo.searchType.equals('id')">
-                    and COMPANY_ID like '%'|| #{searchVo.keyword}|| '%'
+                <if test="searchCompanyVo.searchType.equals('id')">
+                    and COMPANY_ID like '%'|| #{searchCompanyVo.keyword}|| '%'
                 </if>
-                <if test="searchVo.searchType.equals('email')">
-                    and COMPANY_EMAIL like '%'|| #{searchVo.keyword}|| '%'
+                <if test="searchCompanyVo.searchType.equals('email')">
+                    and COMPANY_EMAIL like '%'|| #{searchCompanyVo.keyword}|| '%'
                 </if>
             </if>
+
+            <trim prefix="and">
+
+                    <if test="searchCompanyVo.productType.equals('0')">
+                        COMPANY_STATUS = #{companyStatus} +1
+                    </if>
+                    <if test="searchCompanyVo.productType.equals('1')">
+                        COMPANY_STATUS = #{companyStatus} -1
+                    </if>
+
+            </trim>
         </where>
     </select>
 
@@ -382,6 +402,8 @@
             ]]>
              )S2
         WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+        ORDER BY ORDER_NUMBER
+
     </select>
 
     <select id="selectOrderTotal" resultType="_int">
@@ -413,5 +435,196 @@
         WHERE ORDER_NUMBER = #{orderNumber}
     </update>
 
+    <update id="companyStatus">
+        update TBL_COMPANY
+        set COMPANY_STATUS = #{companyStatus}
+        where COMPANY_NUMBER = #{companyNumber}
+    </update>
 
+
+
+    <select id="getConditionName" resultType="string">
+        SELECT CONDITION_CODE_NAME
+        FROM TBL_ORDER_CONDITION
+        WHERE ORDER_CONDITION_CODE = #{orderConditionCode}
+    </select>
+
+
+    <update id="updateProduct">
+        update TBL_PRODUCT
+        set PRODUCT_NAME = #{productName},PRODUCT_SELLER = #{productSeller},PRODUCT_EXPLANATION = #{productExplanation}, PRODUCT_PRICE = #{productPrice}
+        where PRODUCT_NUMBER = #{productNumber}
+    </update>
+
+    <select id="selectOrder" resultType="DailyOrderVo" >
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 4 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 4 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+
+    </select>
+
+    <select id="weeklyOrder" resultType="DailyOrderVo" >
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 7 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 7 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+    </select>
+
+    <select id="selectPayment" resultType="DailyOrderVo" >
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 4 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 4 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+
+    </select>
+
+    <select id="weeklyPayment" resultType="DailyOrderVo" >
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 7 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 7 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+    </select>
+
+    <select id="selectRefund" resultType="DailyOrderVo" >
+
+            WITH date_range AS (
+                SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+                FROM dual
+        CONNECT BY 4 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 4 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+
+    </select>
+
+    <select id="weeklyRefund" resultType="DailyOrderVo" >
+
+            WITH date_range AS (
+                SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+                FROM dual
+        CONNECT BY 7 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 7 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+    </select>
+
+    <select id="monthlyRefund" resultType="DailyOrderVo" >
+
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 30 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 11 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 30 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+    </select>
+
+    <select id="monthlyOrder" resultType="DailyOrderVo" >
+
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 30 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 6 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 30 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+    </select>
+
+    <select id="monthlyPayment" resultType="DailyOrderVo" >
+
+        WITH date_range AS (
+            SELECT TRUNC(sysdate) - LEVEL + 1 AS order_date
+            FROM dual
+        CONNECT BY 30 >= LEVEL
+            )
+        SELECT TO_CHAR(DR.order_date, 'YYYY-MM-DD') AS ORDER_DATE,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT ELSE 0 END), 0) AS TOTAL_ORDER_COUNT,
+               NVL(SUM(CASE WHEN O.ORDER_NUMBER IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_COUNT * P.PRODUCT_PRICE ELSE 0 END), 0) AS TOTAL_PRICE,
+               COUNT(CASE WHEN O.ORDER_CONDITION_CODE IS NOT NULL AND (O.ORDER_CONDITION_CODE = 8 OR O.ORDER_CONDITION_CODE IS NULL) THEN O.ORDER_CONDITION_CODE END) AS ORDER_NUMBER_COUNT
+        FROM date_range DR
+                 LEFT JOIN TBL_ORDER O ON TRUNC(O.ORDER_DATE) = TRUNC(DR.order_date)
+                 LEFT JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 30 AND TRUNC(sysdate)
+        GROUP BY DR.order_date
+        ORDER BY DR.order_date
+    </select>
 </mapper>
+
+

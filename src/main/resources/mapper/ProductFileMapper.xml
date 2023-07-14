@@ -13,6 +13,12 @@
         WHERE PRODUCT_NUMBER = #{productNumber}
     </delete>
 
+    <update id="update">
+        UPDATE TBL_PRODUCT_FILE
+        SET FILE_NUMBER =
+        WHERE PRODUCT_NUMBER =#{productNumber}
+    </update>
+
     <select id="selectList" resultType="productFileDto">
         SELECT FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, PRODUCT_NUMBER
         FROM TBL_PRODUCT_FILE
