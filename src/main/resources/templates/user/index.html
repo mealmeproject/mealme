@@ -12,19 +12,32 @@
   <body>
   <header class="header1" th:replace="fragment/header1 :: header1"></header>
   <div class="main-container">
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/userOrCompany}">회원가입</a>
-      <a th:href="@{/meal/myPage}">마이페이지</a>
-      <a th:href="@{/meal/write}">마이페이지글쓰기</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
+        <div class="banner-container">배너 넣을 자리</div>
+        <div class="write-container">식단 보여줄 자리</div>
+        <div class="chart-container">
+            <div class="chart-box">
+                <div class="chart-img-box">
+                    <img src="" alt="">
+                </div>
 
+                <div class="chart-info">
+                    <h2>
+                        나에게 맞는 영양소 섭취,
+                        <br>
+                        밀미와 함께하면
+                        <br>
+                        어렵지 않습니다
+                    </h2>
+                    <a href="">
+                        <div class="chart-btn">
+                            차트로 식단 분석하기
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+      <div class="consulting-container">컨설팅 보여줄 자리</div>
+      <div class="shop-container">쇼핑몰 보여줄 자리</div>
     </div>
   <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
   </body>

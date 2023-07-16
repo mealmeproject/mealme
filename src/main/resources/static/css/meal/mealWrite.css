@@ -57,3 +57,443 @@ ul {
     background-color: #ff9326;
     border: 0;
 }
+
+
+
+input[type="text"]{
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #ececec;
+    border-radius: 6px;
+}
+
+/* 제목 */
+.board-title-box{
+    margin-bottom: 20px;
+}
+
+
+/* 사진 */
+input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.file-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-wrap > li {
+    list-style-type: none;
+    width: 160px;
+    height: 160px;
+    margin: 0.5rem;
+    border: 0.0625rem dashed #e1e1e1;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 100, "GRAD" -25, "opsz" 80;
+}
+
+.file-wrap > li:first-child {
+    position: relative;
+    cursor: pointer;
+    background: url("../../img/library_add.png") no-repeat 50%;
+    background-color: #ececec;
+}
+
+.img-list {
+    cursor: default;
+    background: url("../../img/photo_camera.png") no-repeat 50% #ececec;
+    position: relative;
+}
+
+input[type="file"] {
+    cursor: pointer;
+}
+
+.x-box::after {
+    content: "x";
+    background-color: #ff9326;
+    color: white;
+    display: block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    top: -5px;
+    right: -5px;
+    text-align: center;
+    line-height: 13px;
+}
+
+.img-group {
+    margin : 20px 0;
+}
+
+.time-container{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    justify-content: space-between;
+}
+
+
+/*아점저간*/
+.radio-group {
+    display: flex;
+    justify-content: left;
+    width: 50%;
+}
+
+.radio-group label {
+    margin-left: 5px;
+}
+
+.radio-group input[type="radio"] {
+    display: none;
+}
+
+.radio-group input[type="radio"] + label {
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    align-items: center;
+    width: 16%;
+    border: 1px solid #ff7b00;
+    line-height: 24px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.radio-group input[type="radio"] + label {
+    background-color: #fff;
+    color: #ff9326;
+}
+
+.radio-group input[type="radio"]:checked + label {
+    background-color: #ff9326;
+    color: #fff;
+}
+
+.radio-group label {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.meal-time{
+    display: flex;
+}
+
+
+
+.center-container{
+    display: flex;
+}
+
+
+/* 서머노트*/
+
+.summernote-box{
+    width: 50%;
+    height: 419px;
+}
+
+.add-food-box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    height: 500px;
+    padding: 10px;
+}
+
+/* 음식 추가 */
+
+.add-img-box {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.add-img-box {
+    width: 25px;
+    height: 25px;
+    margin-right: 20px;
+}
+
+.add-img-box img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+.food-list{
+    width: 100%;
+}
+
+.search-btn{
+    display: flex;
+    width: 100%;
+    margin: 20px 0;
+    justify-content: space-between;
+}
+
+.food-detail{
+    display: flex;
+    padding: 10px;
+    background-color: #ececec;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.food-name{
+    width: 50%;
+    padding-left: 10px;
+}
+
+.food-weight{
+    width: 25%;
+}
+
+.food-kcal{
+    width: 25%;
+}
+
+.delete-btn{
+    cursor: pointer;
+}
+
+/*모달*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 1000px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+
+/* 시간 설정*/
+/* Style the input field */
+input[type="datetime-local"] {
+    padding: 8px;
+    border: 2px solid #ff9326;
+    border-radius: 4px;
+    color: #ff9326;
+    font-size: 16px;
+    width: 230px;
+}
+
+/* Style the input field when focused */
+input[type="datetime-local"]:focus {
+    outline: none;
+    border-color: #7c7c7c;
+    box-shadow: 0 0 5px #7c7c7c;
+}
+
+.search-food{
+    margin: 20px 0;
+    display: flex;
+}
+.search-img-box {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.search-img-box {
+    display: flex;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 10px;
+}
+
+.search-img-box img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.search-img-box:hover{
+    filter: none;
+}
+.search-food-box{
+    border: 2px solid rgb(160, 160, 160);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.search-food-box:hover{
+    border: 2px solid rgb(255, 139, 38);
+}
+
+.search-food-box:hover .select-box{
+    background-color: rgb(255, 139, 38);
+    color: white;
+}
+
+
+.search-food-box div {
+    padding: 10px;
+}
+
+.search-food-name{
+    margin: 20px 0 20px;
+}
+
+
+
+.search-food-list-ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-food-list-ul li {
+    flex: 0 0 calc(33.33% - 20px); /* Adjust the width percentage and margin as needed */
+    margin: 10px;
+    /* Add any additional styling for the li element */
+}
+
+.select-box{
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px solid rgb(255, 139, 38);
+    border-radius: 8px;
+    color:  #ff7e00 ;
+    cursor: pointer;
+}
+
+/*모달*/
+.modal2 {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content2 {
+    background-color: #fefefe;
+    margin: 35% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 200px;
+    border-radius: 10px;
+}
+.modal-container2{
+    padding: 20px 10px;
+}
+
+.done-img-box {
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
+
+.done-img-box:hover {
+    filter: none;
+}
+
+.done-img-box {
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+
+.done-img-box img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.check-serving{
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.check-serving input[type="text"] {
+    width: 80%;
+}
+
+.close2 {
+    color: #aaa;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close2:hover,
+.close2:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.submit-box{
+    float: right;
+}
+
+
+input[type="submit"] {
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #ff9326;
+    margin: 10px 10px 30px 10px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+/* 로그인 호버 : 색 설정하기!!! */
+input[type="submit"]:hover {
+    background-color: #ff7e00;
+}

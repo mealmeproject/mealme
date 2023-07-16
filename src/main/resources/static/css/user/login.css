@@ -232,7 +232,8 @@ body {
     object-fit: cover;
 }
 
-.kaka-login-text {
+.kakao-login-text {
+    font-size: 14px;
     margin-left: 5px;
     display: flex;
     justify-content: center;
