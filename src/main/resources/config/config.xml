@@ -30,6 +30,7 @@
         <typeAlias type="com.example.mealme.dto.ProductCategory2Dto" alias="productCategory2Dto"/>
         <typeAlias type="com.example.mealme.dto.ProductDto" alias="productDto"/>
         <typeAlias type="com.example.mealme.vo.ProductVo" alias="productVo"/>
+        <typeAlias type="com.example.mealme.vo.ProductPayVo" alias="productPayVo"/>
         <typeAlias type="com.example.mealme.dto.ProductFileDto" alias="productFileDto"/>
         <typeAlias type="com.example.mealme.dto.UserDto" alias="userDto"/>
         <typeAlias type="com.example.mealme.dto.UserFileDto" alias="userFileDto"/>
@@ -41,6 +42,7 @@
         <typeAlias type="com.example.mealme.vo.CompanyModifyVo" alias="companyModifyVo"/>
         <typeAlias type="com.example.mealme.vo.Criteria" alias="criteria"/>
         <typeAlias type="com.example.mealme.vo.CriteriaCompany" alias="criteriaCompany"/>
+        <typeAlias type="com.example.mealme.vo.CriteriaProduct" alias="criteriaProduct"/>
         <typeAlias type="com.example.mealme.vo.PageVo" alias="pageVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyListVo" alias="companyListVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyReviewVo" alias="companyReviewVo"/>

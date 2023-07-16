@@ -26,6 +26,7 @@ public class ProductVo {
     private String fileUuid;
     private long fileNumber;
     private double averageRating;
+    private int starRating;
     private int totalCount;
     private int userNumber;
     private String userName;
