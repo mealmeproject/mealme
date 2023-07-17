@@ -94,7 +94,7 @@ public class CompanyController {
     }
 
     @GetMapping("/hospitalCategory")
-    public String hospitalCategory(@RequestParam("companyCodeNumber")Long companyCodeNumber, Model model){
+    public String hospitalCategory(@RequestParam("companyCodeNumber")Long companyCodeNumber, Model model, CriteriaCompany criteriaCompany){
         String companyCodeName = null;
         if(companyCodeNumber == 100){
             companyCodeName = "병원";
@@ -103,17 +103,21 @@ public class CompanyController {
         } else if(companyCodeNumber == 300){
             companyCodeName = "영양사";
         }
-        List<CompanyListVo> returnList = companyService.output(companyCodeNumber);
+        List<CompanyListVo> returnList = companyService.output(companyCodeNumber, criteriaCompany);
+        model.addAttribute("pageInfo", new PageListVo(criteriaCompany, companyService.getTotal(companyCodeNumber)));
         model.addAttribute("companies", returnList);
         model.addAttribute("companyCodeName", companyCodeName);
+        model.addAttribute("companyCodeNumber", companyCodeNumber);
         return "company/hospitalCategory";
     }
 
     @GetMapping("/detailedHospital")
-    public String detailedHospital(@RequestParam("companyNumber")Long companyNumber, Model model){
+    public String detailedHospital(@RequestParam("companyNumber")Long companyNumber, Model model, CriteriaCompany criteriaCompany){
         System.out.println(companyNumber + "==========================================");
         CompanyListVo detailedList = companyService.showDetail(companyNumber);
-        List<CompanyReviewVo> selectReviewList = companyService.showReview(companyNumber);
+        List<CompanyReviewVo> selectReviewList = companyService.showReview(companyNumber, criteriaCompany);
+        model.addAttribute("pageInfo", new PageListVo(criteriaCompany, companyService.getReview(companyNumber)));
+        model.addAttribute("companyNumber", companyNumber);
         model.addAttribute("companyinfo", detailedList);
         System.out.println(detailedList);
         model.addAttribute("companyReviewList", selectReviewList);
@@ -121,11 +125,17 @@ public class CompanyController {
         return "company/detailedHospital";
     }
 
+
     @GetMapping("/settingThePeriod")
-    public String settingThePeriod(@RequestParam("companyNumber")Long companyNumber, Model model){
+    public String settingThePeriod(@RequestParam("companyNumber")Long companyNumber, Model model, HttpServletRequest req) {
         System.out.println("작성 페이지 companyNumber" + companyNumber);
+//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         model.addAttribute("companyNumber", companyNumber);
-        return "company/settingThePeriod";
+        if (req.getSession().getAttribute("userNumber") == null) {
+            return "user/login";
+        } else {
+            return "company/settingThePeriod";
+        }
     }
 
     @PostMapping("/settingThePeriod")
@@ -141,8 +151,6 @@ public class CompanyController {
         String path = "/company/detailedHospital?companyNumber=" + consultingVo.getCompanyNumber();
         return new RedirectView(path);
     }
-
-
 
     @GetMapping("/ConsultingList")
     public String consultingList(ConsultingRequestDto consultingRequestDto, Model model, HttpServletRequest req) {
