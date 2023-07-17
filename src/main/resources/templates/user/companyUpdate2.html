@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="update-user-data ">
-                        <form id="companyForm" th:action="@{company/companyUpdate2}" method="post">
+                        <form id="companyForm" th:action="@{/user/companyUpdate2}" method="post">
                             <div class="update-name update-row">
                                 <div class="data-title">아이디</div>
                                 <div class="data-content">
@@ -108,11 +108,11 @@
                                 <div class="data-title">직종</div>
                                 <div class="data-content">
                                     <div class="radio-group" th:value="${company.companyCodeNumber}">
-                                        <input type="radio" id="hospital" name="companyCode" value="hospital" checked/>
+                                        <input type="radio" id="hospital" name="companyCodeNumber" value="100" checked/>
                                         <label for="hospital">병원</label>
-                                        <input type="radio" id="trainer" name="companyCode" value="trainer" />
+                                        <input type="radio" id="trainer" name="companyCodeNumber" value="200" />
                                         <label for="trainer">트레이너</label>
-                                        <input type="radio" id="Dietitian" name="companyCode" value="Dietitian"/>
+                                        <input type="radio" id="Dietitian" name="companyCodeNumber" value="300"/>
                                         <label for="Dietitian">영양사</label>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                             <div class="update-name update-row">
-                                <div class="data-title">창립일</div>
+                                <div class="data-title">대표이사</div>
                                 <div class="data-content">
                                     <input type="text" id="companyCeo" name="companyCeo" th:value="${company.companyCeoName}"/>
                                 </div>
@@ -150,7 +150,7 @@
                                         <option value="064" th:selected="${company.phone1 == '064'}">064</option>
                                     </select>
                                     &nbsp&nbsp-&nbsp&nbsp
-                                    <input type="text" id="phone2" name="phone2 " maxlength="4" th:value="${company.phone2}" required/>
+                                    <input type="text" id="phone2" name="phone2" maxlength="4" th:value="${company.phone2}" required/>
                                     &nbsp&nbsp-&nbsp&nbsp
                                     <input type="text" id="phone3" name="phone3" maxlength="4" th:value="${company.phone3}" required />
                                 </div>
@@ -158,14 +158,20 @@
                             <div class="update-name update-row">
                                 <div class="data-title">이메일</div>
                                 <div class="data-content email-box">
-                                    <input type="text" name="mail1" id="mail1" th:value="${company.companyEmail1}" maxlength="50" />&nbsp&nbsp@&nbsp&nbsp
-                                    <select name="mail2" id="mail2">
+                                    <input type="text" name="companyEmail1" id="mail1" th:value="${company.companyEmail1}" maxlength="50" />&nbsp&nbsp@&nbsp&nbsp
+                                    <select name="companyEmail2" id="mail2">
                                         <option value="선택" th:selected="${company.companyEmail2 == '선택'}">선택</option>
                                         <option value="naver.com" th:selected="${company.companyEmail2 == 'naver.com'}">naver.com</option>
                                         <option value="daum.net" th:selected="${company.companyEmail2 == 'daum.net'}">daum.net</option>
                                         <option value="gmail.com" th:selected="${company.companyEmail2 == 'gmail.com'}">gmail.com</option>
                                         <option value="nate.com" th:selected="${company.companyEmail2 == 'nate.com'}">nate.com</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="update-name update-row">
+                                <div class="data-title">URL</div>
+                                <div class="data-content">
+                                    <input type="text" id="companyUrl" name="companyUrl" th:value="${company.companyUrl}"/>
                                 </div>
                             </div>
                             <div class="update-name update-row">
@@ -219,17 +225,16 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
         <script th:src="@{/js/user/companyUpdate2.js}"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-
         <script>
             function openFileInput() {
                 document.getElementById('picture-input').click();

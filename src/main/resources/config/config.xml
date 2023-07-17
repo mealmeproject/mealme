@@ -66,6 +66,7 @@
         <typeAlias type="com.example.mealme.vo.TodayKcalSumVo" alias="todayKcalSumVo"/>
         <typeAlias type="com.example.mealme.vo.DailyOrderVo" alias="dailyOrderVo"/>
         <typeAlias type="com.example.mealme.vo.UserTotalVo" alias="userTotalVo"/>
+        <typeAlias type="com.example.mealme.vo.ProductListVo" alias="productListVo"/>
 
 
 

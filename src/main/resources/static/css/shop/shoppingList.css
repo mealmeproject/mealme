@@ -11,11 +11,7 @@ body {
 }
 
 .body-container {
-    flew-glow: 1;
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*margin: 0 auto;*/
-    width: 1200px;
+    flex-grow: 1;
 }
 
 .main-container {
@@ -24,21 +20,13 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    /* background-color: pink; */
 }
 
 .work-container{
     width: 900px;
     margin: 0 auto;
-    margin-bottom: 25px;
 }
 
-.sidebar {
-    width: 200px;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(255, 111, 15);
-}
 
 /* main1배너구역 */
 .main1-banner-wrap{
@@ -662,4 +650,15 @@ page_wrap {
 
 .filled {
     color: gold;
+}
+
+.img-box{
+    width: 250px;
+    height: 250px;
+}
+
+.img-box img{
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
 }

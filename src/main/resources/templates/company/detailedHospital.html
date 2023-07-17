@@ -50,7 +50,7 @@
             <!-- 상세 정보 이미지 -->
             <div class="main-detailed-image-section">
               <div class="main-detailed-image">
-                <img class="detailed-image" src="../img/choigosim.jpg">
+                <img class="detailed-image"  th:unless="${companyinfo.fileName == null}" th:src="${'/upload/' + companyinfo.fileUploadPath + '/' + companyinfo.fileUuid + '_' + companyinfo.fileName}">
               </div>
             </div>
             <div class="star-wrap">
@@ -202,7 +202,7 @@
               <!-- 리뷰 이미지 -->
               <div class="review-list-image-section">
                 <div class="review-list-image">
-                  <img class="review-image" src="../img/ohdungi.jpg">
+                  <img class="review-image" th:unless="${company.fileName == null}" th:src="${'/upload/' + company.fileUploadPath + '/' + company.fileUuid + '_' + company.fileName}">
                 </div>
               </div>
               <!-- 리뷰 이미지 끝 -->

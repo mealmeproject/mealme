@@ -1,16 +1,12 @@
 package com.example.mealme.mapper;
 
-import com.example.mealme.dto.ProductDto;
+import com.example.mealme.dto.ProductFileDto;
 import com.example.mealme.dto.UserDto;
 import com.example.mealme.vo.*;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.dao.DataAccessException;
 
-import java.io.CharArrayWriter;
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface ProductMapper {
@@ -82,6 +78,19 @@ public interface ProductMapper {
 //    List<ProductVo> selectCategory(CriteriaProduct criteriaProduct);
 
     List<CartVo> selectCartList(Long userNumber);
+
+
+
+// =========================================================================
+//    상품 리스트 페이지 전부다 가져오는 쿼리 매퍼
+    List<ProductListVo> selectProductList();
+
+//    상품 세부정보 불러오기 + 메인 사진 1장까지
+    ProductListVo selectProductDetail(Long productNumber);
+
+//    상품 파일 리스트로 가져오기
+    List<ProductFileDto> selectProductFileList(Long productNumber);
+
 }
 
 
