@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Nanum Gothic", sans-serif;
+}
+
+.body-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.sidebar {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+}
+
+.main-container {
+    width: 900px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    font-size: 28px;
+    float: left;
+    width: 800px;
+    height: 20px;
+    margin-top: 20px;
+}
+
+
+hr{
+    width: 800px;
+}
+
+
+.img{
+    width: 130px;
+
+}
+
+.name{
+    width: 80px;
+
+}
+
+.info{
+    width: 200px;
+}
+
+.human-name{
+    width: 40px;
+}
+
+.price{
+
+    width: 80px;
+}
+
+.date{
+    width: 80px;
+}
+
+.status{
+    width: 50px;
+}
+
+
+.page-title {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: 800px;
+}
+
+
+
+.page-title-type{
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: right;
+}
+
+.active {
+    color: gray;
+}
+
+
+
+
+.main {
+    max-width: 800px;
+    background: #ffffff;
+    float: left;
+}
+
+section {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+    width: 800px;
+}
+
+/*라디오버튼 숨김*/
+input {
+    display: none;}
+
+label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;}
+
+label:hover {
+    color: #ff9326;
+    cursor: pointer;}
+
+/*input 클릭시, label 스타일*/
+input:checked + label {
+    color: #555;
+    border: 1px solid #ddd;
+    border-top: 2px solid #ff9326;
+    border-bottom: 1px solid #ffffff;}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4 {
+    display: block;}
+
+
+
+
+#shopping-link{
+    font-size:35px;
+    text-decoration-line: none;
+    color:#ff9326;
+}
+
+#consulting-link{
+    font-size:15px;
+    text-decoration-line: none;
+    color:#f8e2c1;
+}
+
+
+
+.order-history-table {
+    width: 800px;
+    border-collapse: collapse;
+    font-size: 15px;
+    margin-top: 40px;
+}
+
+.order-history-table th,
+.order-history-table td {
+    padding: 10px;
+    border: 1px solid #f5eeee;
+}
+
+.order-history-table th {
+    background-color: #ff9326;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-history-table td {
+    text-align: center;
+}
+
+.product-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+}
+
+
+
+td{
+    font-size: 12px;
+}
+
+
+.page_wrap {
+    text-align:center;
+    font-size:0;
+    margin-top: 50px;
+}
+.page_nation {
+    display:inline-block;
+}
+.page_nation .none {
+    display:none;
+}
+.page_nation a {
+    display:block;
+    margin:0 3px;
+    float:left;
+    border:1px solid #e6e6e6;
+    width:28px;
+    height:28px;
+    line-height:28px;
+    text-align:center;
+    background-color:#fff;
+    font-size:13px;
+    color:#999999;
+    text-decoration:none;
+    border-radius: 10px;
+}
+
+.page_nation .arrow {
+    border:1px solid #ccc;
+}
+
+
+.page_nation .pprev {
+    background:#f8f8f8 url('../img/page_pprev.png') no-repeat center center;
+    margin-left:0;
+}
+.page_nation .prev {
+    background:#f8f8f8 url('../img/page_prev.png') no-repeat center center;
+    margin-right:7px;
+}
+.page_nation .next {
+    background:#f8f8f8 url('../img/page_next.png') no-repeat center center;
+    margin-left:7px;
+}
+.page_nation .nnext {
+    background:#f8f8f8 url('../img/page_nnext.png') no-repeat center center;
+    margin-right:0;
+}
+.page_nation a.active {
+    background-color:#ff9326;
+    color:#fff;
+    border:1px solid #e2e4e9;
+}

@@ -202,16 +202,15 @@ a, a:hover {
 colgroup {
     display: table-column-group;
 }
-col.checkbox {
-    width: 55px;
-}
+
 col.name{
-    width: 115px;
+    width: 150px;
 }
 
 col.date{
     width: 126px;
 }
+
 
 
 

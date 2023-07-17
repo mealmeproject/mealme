@@ -38,15 +38,17 @@
       <div class="all-wrap">
       <form th:action="@{/company/consultingReview}" method="post" enctype="multipart/form-data">
         <div class="review-consulting">
-          <input type="hidden" name="companyNumber" th:value="${consultingReviewVo.companyNumber}">
+          <input type="hidden" class="company-number" name="companyNumber" th:value="${consultingReviewVo.companyNumber}">
           <input type="hidden" name="consultingRequestNumber" th:value="${consultingReviewVo.consultingRequestNumber}">
           <input type="hidden" name="userNumber" th:value="${consultingReviewVo.userNumber}">
         <div class="review-text">리뷰작성 하기</div>
         <div class="review-sub">
-        <div class="company-file" th:text="${consultingReviewVo.fileUploadPath}"></div>
+        <div class="company-file">
+          <img th:src="${consultingReviewVo.fileUploadPath}" alt="기업이미지">
+        </div>
         <!-- 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 -->
         <div class="ranking-wrap">
-        <div class="consulting-comment" th:text="${consultingReviewVo.consultingComment}">
+        <div class="consulting-comment" th:text="${consultingReviewVo.consultingRequestComment}">
         </div>
         <!-- 상품일 경우 상품제목, 컨설팅일 경우  컨설팅 제목 -->
         <div class="star-wrap">
@@ -56,7 +58,7 @@
             <input name="reviewGrade" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="5">
           </span>
 
-          <input type="hidden" name="reviewGrade" class="star-value" value="">
+          <input type="hidden" name="reviewGrade" class="star-value" value="" required>
         </div>
       </div>
 
@@ -66,7 +68,7 @@
 
       <div class="review-wrap">
         <div class="summernote-box">
-          <textarea id="summernote" name="reviewContent"></textarea>
+          <textarea id="summernote" name="reviewContent" required></textarea>
         </div>
       </div>
 

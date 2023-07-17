@@ -3,20 +3,20 @@
 * {
     padding: 0;
     margin: 0;
+    border: 0;
 }
 body {
     font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
 }
 
-
 .body-container {
-    flex-grow: 1;
+    flew-glow: 1;
     /*display: flex;*/
     /*justify-content: center;*/
     /*margin: 0 auto;*/
     width: 1200px;
 }
-
 
 .main-container {
     width: 1100px;
@@ -30,7 +30,14 @@ body {
 .work-container{
     width: 900px;
     margin: 0 auto;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
+}
+
+.sidebar {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 111, 15);
 }
 
 
@@ -388,7 +395,7 @@ button[type="submit"] {
 }
 
 #address3{
-    width: 10px;
+    width: 150px;
     background-color: #F3F8FF;
     font-size: 10px;
 }
@@ -539,6 +546,15 @@ td {
 }
 
 .cart__bigorderbtn.right {
+    background-color :#ff9326;
+    border: 1px lightgray solid;
+    cursor: pointer;
+    font-weight: bold;
+    color:white;
+    cursor: pointer;
+}
+
+.payment {
     background-color: #ff9326;
     color: white;
     border: none;
@@ -563,10 +579,7 @@ td {
 
 }
 
-.cart{
-    margin-top: 500px;
-}
-
 .cart__mainbtns{
     margin-top: 100px;
 }
+

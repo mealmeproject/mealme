@@ -2,6 +2,7 @@ package com.example.mealme.service.admin;
 
 import com.example.mealme.dto.*;
 import com.example.mealme.mapper.AdminMapper;
+import com.example.mealme.vo.SearchProductVo;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

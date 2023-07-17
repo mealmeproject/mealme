@@ -1,43 +1,99 @@
-var menuDetails = document.getElementById("menuDetails");
-var summary = menuDetails.querySelector(".summary");
+//
+// document.querySelectorAll('.button').forEach(button => {
+//
+//     button.addEventListener('click', e => {
+//         button.classList.toggle('liked');
+//         if(button.classList.contains('liked')) {
+//             gsap.fromTo(button, {
+//                 '--hand-rotate': 8
+//             }, {
+//                 ease: 'none',
+//                 keyframes: [{
+//                     '--hand-rotate': -45,
+//                     duration: .16,
+//                     ease: 'none'
+//                 }, {
+//                     '--hand-rotate': 15,
+//                     duration: .12,
+//                     ease: 'none'
+//                 }, {
+//                     '--hand-rotate': 0,
+//                     duration: .2,
+//                     ease: 'none',
+//                     clearProps: true
+//                 }]
+//             });
+//         }
+//     })
+//
+// });
 
-summary.addEventListener("click", function() {
-    if (menuDetails.open) {
-        // 닫을 때이미지를 변경하는 로직
-        summary.style.backgroundImage = "url(../img/close.png')";
-    } else{
-        // 열 때 이미지를 변경하는 로직
-        summary.style.backgroundImage = "url('../img/open.png')";
-    }
+
+
+
+// const starRatingContainer = document.querySelector('#starRating .rating');
+// const averageRating = parseInt(starRatingContainer.dataset.rating);
+//
+// let starsHtml = '';
+// for (let i = 0; i < 5; i++) {
+//     if (i < averageRating) {
+//         starsHtml += '<span class="star filled">&#9733;</span>';
+//     } else {
+//         starsHtml += '<span class="star">&#9733;</span>';
+//     }
+// }
+//
+// starRatingContainer.innerHTML = starsHtml;
+
+//****************shoppingCart*************///
+
+// function addToCart() {
+//     const productNumber = document.getElementById("productNumber").value;
+//     const userNumber = document.getElementById("userNumber").value;
+// }
+//
+//
+//
+// ratingForEach();
+//
+// function ratingForEach(){
+//     let  starRatings = document.querySelectorAll('.star_rating');
+//
+//     starRatings.forEach(function (s){
+//             fillStars(s);
+//         }
+//     );
+// }
+
+
+$('.rating').each(function() {
+    fillStars(this);
 });
 
+function fillStars(stars) {
+    let rating = $(stars).data('grade');
+    let star = $(stars).find('.star');
 
+    const filledStars = Math.floor(rating);
+    const decimalPart = rating % 1;
 
-// 메뉴바 누르면 색상변경
-$(".reviewContainer-menu-list").on("click", function () {
-    // console.log(this);
-    let $tagA = $(this).children();
-    // console.log($tagA);
-    $(".reviewContainer-menu-list>a").removeClass("reviewContainer-active");
-    $tagA.toggleClass("header-active");
-});
+    star.each(function(index) {
+        const star = $(this);
 
-
-
-
-
-
-var tabBtn = $("#tab-btn > ul > li");     //각각의 버튼을 변수에 저장
-var tabCont = $("#tab-cont > div");       //각각의 콘텐츠를 변수에 저장
-
-//컨텐츠 내용을 숨겨주세요!
-tabCont.hide().eq(0).show();
-
-tabBtn.click(function(){
-    var target = $(this);         //버튼의 타겟(순서)을 변수에 저장
-    var index = target.index();   //버튼의 순서를 변수에 저장
-    tabBtn.removeClass("active");    //버튼의 클래스를 삭제
-    target.addClass("active");       //타겟의 클래스를 추가
-    tabCont.css("display","none");
-    tabCont.eq(index).css("display","block");
-});
+        if (index < filledStars) {
+            star.addClass('filled');
+            star.text('★');
+        }  else if (index === filledStars && decimalPart > 0) {
+        const percentage = decimalPart * 100;
+        const gradient = `linear-gradient(to right, gold ${percentage}%, transparent ${percentage}%)`;
+        star.css('background-image', gradient);
+        star.css('background-clip', 'text');
+        star.css('-webkit-background-clip', 'text');
+        star.css('color', 'transparent');
+        star.text('★');
+        } else {
+            star.removeClass('filled');
+            star.text('☆');
+        }
+    });
+}

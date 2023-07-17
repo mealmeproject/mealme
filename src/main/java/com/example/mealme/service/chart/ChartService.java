@@ -4,9 +4,7 @@ import com.example.mealme.dto.UserDto;
 import com.example.mealme.mapper.ChartMapper;
 import com.example.mealme.util.CalcNutrientUtil;
 import com.example.mealme.util.ChartUtil;
-import com.example.mealme.vo.DailyTotalVo;
-import com.example.mealme.vo.FoodVo;
-import com.example.mealme.vo.RecommendVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,5 +71,17 @@ public class ChartService {
         return dailyTotalVo;
     }
 
+    public List<MealVo> getMealList(Long userNumber, String mealTime){
+        if (userNumber == null || mealTime == null){
+            throw new IllegalArgumentException("유저넘버, 식사 날짜 없음 !");
+        }
+        return chartMapper.getMealList(userNumber, mealTime);
+    }
+
+    public TodayKcalSumVo getMealCodeNumberSum(long userNumber, String mealTime){
+        TodayKcalSumVo todayKcalSumVo = chartMapper.selectMealCodeNumberSum(userNumber, mealTime);
+        System.out.println(todayKcalSumVo);
+        return todayKcalSumVo;
+    }
 
 }

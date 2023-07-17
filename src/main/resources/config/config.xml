@@ -6,6 +6,7 @@
         <typeAlias type="com.example.mealme.dto.AdminDto" alias="adminDto"/>
         <typeAlias type="com.example.mealme.dto.CancelDto" alias="cancelDto"/>
         <typeAlias type="com.example.mealme.dto.CartDto" alias="cartDto"/>
+        <typeAlias type="com.example.mealme.vo.CartVo" alias="cartVo"/>
         <typeAlias type="com.example.mealme.dto.CompanyCodeDto" alias="companyCodeDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyDto" alias="companyDto"/>
         <typeAlias type="com.example.mealme.dto.CompanyFileDto" alias="companyFileDto"/>
@@ -28,6 +29,8 @@
         <typeAlias type="com.example.mealme.dto.ProductCategory1Dto" alias="productCategory1Dto"/>
         <typeAlias type="com.example.mealme.dto.ProductCategory2Dto" alias="productCategory2Dto"/>
         <typeAlias type="com.example.mealme.dto.ProductDto" alias="productDto"/>
+        <typeAlias type="com.example.mealme.vo.ProductVo" alias="productVo"/>
+        <typeAlias type="com.example.mealme.vo.ProductPayVo" alias="productPayVo"/>
         <typeAlias type="com.example.mealme.dto.ProductFileDto" alias="productFileDto"/>
         <typeAlias type="com.example.mealme.dto.UserDto" alias="userDto"/>
         <typeAlias type="com.example.mealme.dto.UserFileDto" alias="userFileDto"/>
@@ -39,6 +42,7 @@
         <typeAlias type="com.example.mealme.vo.CompanyModifyVo" alias="companyModifyVo"/>
         <typeAlias type="com.example.mealme.vo.Criteria" alias="criteria"/>
         <typeAlias type="com.example.mealme.vo.CriteriaCompany" alias="criteriaCompany"/>
+        <typeAlias type="com.example.mealme.vo.CriteriaProduct" alias="criteriaProduct"/>
         <typeAlias type="com.example.mealme.vo.PageVo" alias="pageVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyListVo" alias="companyListVo"/>
         <typeAlias type="com.example.mealme.vo.CompanyReviewVo" alias="companyReviewVo"/>
@@ -55,6 +59,10 @@
         <typeAlias type="com.example.mealme.vo.ProductVo" alias="productVo"/>
         <typeAlias type="com.example.mealme.vo.SearchProductVo" alias="searchProductVo"/>
         <typeAlias type="com.example.mealme.vo.OrderVo" alias="orderVo"/>
+        <typeAlias type="com.example.mealme.vo.ConsultingPayVo" alias="consultingPayVo"/>
+        <typeAlias type="com.example.mealme.vo.ProductPayListVo" alias="productPayListVo"/>
+        <typeAlias type="com.example.mealme.vo.ProductReviewVo" alias="productReviewVo"/>
+        <typeAlias type="com.example.mealme.vo.TodayKcalSumVo" alias="todayKcalSumVo"/>
 
 
     </typeAliases>

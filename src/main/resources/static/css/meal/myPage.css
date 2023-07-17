@@ -266,8 +266,9 @@ ul {
     margin-top: 15px;
 }
 
-.modal-header h2{
-
+.modal-header-text{
+    display: flex;
+    justify-content: space-around;
 }
 
 
@@ -448,3 +449,5 @@ ul.imgs li {
     cursor: pointer;
     border-radius: 6px;
 }
+
+

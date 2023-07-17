@@ -69,7 +69,7 @@
                         <h1>나의식단</h1>
                     </div>
                     <div class="write-img-box">
-                        <a href="">
+                        <a th:href="@{/meal/mealWrite}">
                             <img src="../img/edit_FILL0.png">
                         </a>
                     </div>
@@ -93,14 +93,14 @@
                                 <li class="meal-img-box" th:each="meal : ${day.value[0].dayMealList}" th:data-board-number="${meal.boardNumber}">
                                 <div class="meal-img">
                                         <div class="imgbox" >
-                                            <img th:src="@{/img/sample1.jpg}"  alt="" />
+                                            <img th:src="@{'/upload/' + ${meal.fileUploadPath} + '/th_' + ${meal.fileUuid} + '_' + ${meal.fileName}}"  alt="" />
                                         </div>
                                         <div class="meal-info">
                                             <div class="meal-eat-time">
                                                 <h2 th:text="${meal.mealTime}">08:00</h2>
                                             </div>
                                             <div class="meal-eat-kcal">
-                                                <h2 th:text="${meal.mealTotalKcal}">380kcal</h2>
+                                                <h2 th:text="${meal.mealTotalKcal} + ' Kcal'"></h2>
                                             </div>
                                         </div>
                                     </div>
@@ -139,7 +139,6 @@
 
             function openModal(imageList) {
                 images = imageList;
-
             }
         </script>
     </body>

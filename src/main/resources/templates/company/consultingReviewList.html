@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>리뷰</title>
+    <link rel="stylesheet" th:href="@{/css/company/companyReviewList.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/header2.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/aside2.css}"/>
+    <link rel="stylesheet" th:href="@{/css/fragment/aside.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet"
+          th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"/>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+</head>
+<body id="body-pd">
+
+<!-- 헤더 추가 공간 -->
+<div class="body-container">
+    <!-- 사이드바 추가 공간 -->
+    <aside class="aside" th:replace="fragment/aside :: aside"></aside>
+    <!-- 사이드바 추가 공간 -->
+    <div class="main-container">
+
+        <header class="header2" th:replace="fragment/header2 :: header2"></header>
+
+        <!-- 작업공간 -->
+        <div class="work-container">
+
+            <p>
+            <div class="all-wrap">
+                <div class="review-text-wrap">
+                    <div class="review-text">리뷰 내역</div>
+                </div>
+            <div class="tab-wrap">
+                <div class="company-tab" onclick="location.href='http://localhost:10000/company/consultingReviewList'">컨설팅</div>
+                <div class="shop-tab" onclick="location.href='http://localhost:10000/shop/productReviewList'">쇼핑몰</div>
+            </div>
+            <div class="line"></div>
+
+<!--            ====================================-->
+<!--                <div class="review-consulting">-->
+<!--                    <img src="../pasta.jpg" alt="">-->
+<!--                    <div class="review-sub">-->
+<!--                        <div class="company-file">-->
+<!--                            &lt;!&ndash;          <img src="../pasta.jpg" alt="">&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 &ndash;&gt;-->
+<!--                        <div class="ranking-wrap">-->
+<!--                            <div class="review-date">날짜</div>-->
+<!--                            <div class="consulting-comment">코멘트-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; 상품일 경우 상품제목, 컨설팅일 경우  컨설팅 제목 &ndash;&gt;-->
+<!--                            <div class="star-wrap">-->
+<!--                              <span class="star">-->
+<!--                                ★★★★★-->
+<!--                                <span class="star-span">★★★★★</span>-->
+<!--                                <input value="1" step="1" min="0" max="5">-->
+<!--                              </span>-->
+
+<!--                                <input type="hidden" name="reviewGrade" class="star-value" value="">-->
+<!--                                &lt;!&ndash; value에 DB에서 받아오는 값 넣어주기 &ndash;&gt;-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; DB에서 DB의 값에 따라 별 채우기 &ndash;&gt;-->
+
+<!--                        </div>-->
+
+
+<!--                    </div>-->
+<!--                    <div class="review-wrap">-->
+<!--                        <div class="summernote-box">-->
+<!--                            <div class="summernote-text">-->
+<!--                                리뷰-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="button-wrap">-->
+<!--                            <button class="delete">삭제</button>-->
+<!--                            <button class="modify">수정</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            <!--            ====================================-->
+
+
+            </div>
+            <div class="blank"> </div>
+            </p>
+        </div>
+        <!-- 작업공간 -->
+        <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
+    </div>
+</div>
+
+<aside class="aside2" th:replace="fragment/aside2 :: aside2">
+    <div class="menu-container"></div>
+</aside>
+<!-- 퀵 메뉴 추가 공간 -->
+<script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/js/fragment/aside.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script th:inline="javascript">
+  let loginNumber = [[${session.userNumber}]];
+</script> -->
+<script th:src="@{/js/company/companyReviewList.js}"></script>
+</body>
+</html>

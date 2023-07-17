@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>consultingPayInfo</title>
+  <link rel="stylesheet" th:href="@{/css/company/consultingPayInfo.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/header2.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/aside2.css}" />
+  <link rel="stylesheet" th:href="@{/css/fragment/aside.css}" />
+  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
+  <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body id="body-pd">
+<div class="body-container">
+  <!-- 사이드바 추가 공간 -->
+  <aside class="aside" th:replace="fragment/aside :: aside"></aside>
+  <!-- 사이드바 추가 공간 -->
+  <div class="main-container">
+    <!-- 헤더 추가 공간 -->
+    <header class="header2" th:replace="fragment/header2 :: header2"></header>
+    <!-- 헤더 추가 공간 -->
+    <!-- 작업공간 -->
+    <div class="work-container">
+      <!-- 작업공간 -->
+      <p>
+      <div class="page-title">
+        주문 내역
+        <div class="page-title-type">
+          <div class="main">
+
+            <div class="tab-wrap">
+              <div class="company-tab" onclick="location.href='http://localhost:10000/company/consultingPayInfo'">컨설팅</div>
+              <div class="shop-tab" onclick="location.href='http://localhost:10000/shop/shoppingPayInfo'">쇼핑몰</div>
+            </div>
+
+
+            <section id="content1">
+              <p></p>
+            </section>
+
+            <section id="content2">
+              <p></p>
+            </section>
+          </div>
+        </div>
+        <table class="order-history-table">
+          <thead>
+          <tr>
+            <th class="img">기업</th>
+            <th class="name">기업 명</th>
+            <th class="info">컨설팅 내역</th>
+            <th class="human-name">대표</th>
+            <th class="price">가격</th>
+            <th class="date">날짜</th>
+            <th class="status">답변 상태</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="consultingList : ${consultingPayVo}" class="consulting-list">
+            <input class="consulting-requestNumber" type="hidden" th:value="${consultingList.consultingRequestNumber}">
+            <td><img th:src="${consultingList.fileUploadPath}" alt="기업이미지" class="product-image"> </td>
+            <td th:text="${consultingList.companyName}"></td>
+            <td th:text="${consultingList.consultingRequestComment}"></td>
+            <td th:text="${consultingList.companyCeoName}"></td>
+            <td>3000원</td>
+            <td th:text="${consultingList.consultingRequestDate}"></td>
+            <td class="consulting-status">
+              <div th:if="${consultingList.consultingCondition == '0'}" class="consulting-condition">
+                <span>답변중</span>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '1'}" class="consulting-condition">
+                <span>답변완료</span>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '2'}" class="consulting-condition">
+                <span>답변완료</span>
+              </div>
+<!--              <div class="consulting-condition" th:text="${consultingList.consultingCondition}"></div>-->
+<!--              <div class="blank"></div>-->
+<!--              <button class="review-button" th:onclick="'reviewLink(' + ${consultingList.consultingRequestNumber} + ')'" >리뷰작성</button>-->
+              <div th:if="${consultingList.consultingCondition == '0'}">
+                <div class="blank" style="display: none;"></div>
+                <button class="review-button" th:onclick="'reviewLink(' + ${consultingList.consultingRequestNumber} + ')'" style="display: none;">리뷰작성</button>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '1'}">
+                <div class="blank"></div>
+                <button class="review-button" th:onclick="'reviewLink(' + ${consultingList.consultingRequestNumber} + ')'">리뷰작성</button>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '2'}">
+                <div class="blank"></div>
+                <button type="button" disabled class="review-button" style="background-color: rgb(210, 210, 210);">리뷰완료</button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="page_wrap">
+          <div class="page_nation">
+
+            <a class="arrow pprev" th:href="@{/company/consultingPayInfo(page=${pageInfo.startPage})}"></a>
+            <a class="arrow prev" th:href="@{/company/consultingPayInfo(page=${pageInfo.startPage - 1})}" th:if="${pageInfo.prev}"></a>
+            <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+              <a th:href="@{/company/consultingPayInfo(page=${i})}">
+                <div class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
+                <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>
+              </a>
+            </th:block>
+            <a class="arrow next" th:href="@{/company/consultingPayInfo(page=${pageInfo.endPage + 1})}" th:if="${pageInfo.next}"></a>
+            <a class="arrow nnext" th:href="@{/company/consultingPayInfo(page=${pageInfo.endPage})}"></a>
+
+          </div>
+        </div>
+      </div>
+      </p>
+    </div>
+
+      <!-- 작업공간 -->
+      <!--                </div>-->
+      <!-- 푸터 추가 공간 -->
+      <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
+    </div>
+  </div>
+  <aside class="aside2" th:replace="fragment/aside2 :: aside2">
+    <div class="menu-container"></div>
+  </aside>
+  <!-- 퀵 메뉴 추가 공간 -->
+  <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+  <script th:src="@{/js/fragment/aside.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/company/consultingPayInfo.js}"></script>
+
+</body>
+</html>

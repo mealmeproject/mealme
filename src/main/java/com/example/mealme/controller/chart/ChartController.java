@@ -31,7 +31,7 @@ public class ChartController {
 
     @GetMapping("/chartMonthly")
     public String chartMonthly(HttpServletRequest req, Model model){
-                Long userNumber = (long)req.getSession().getAttribute("userNumber");
+        Long userNumber = (long)req.getSession().getAttribute("userNumber");
 //        Long userNumber = 1L;
         List<DailyTotalVo> dailyTotalVo = chartService.selectMonthly(userNumber);
         RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
@@ -88,7 +88,6 @@ public class ChartController {
         Long userNumber = (long)req.getSession().getAttribute("userNumber");
 //        Long userNumber= 1L;
         String mealTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
 //        model에 저장하는 객체의 값을 chartService의 메소드를 통해 저장해줌
      RecommendVo recommendVo = chartService.selectUserInfo(userNumber);
      CalcNutrientUtil calcNutrientUtil = chartService.selectFoodInfo(userNumber, mealTime);
@@ -108,9 +107,12 @@ public class ChartController {
     return "chart/today";
     }
 
+//    @GetMapping("/today")
+//    public void todayMealCodeSum(){
+//
+//    }
 
     @GetMapping("/recommend")
     public void recommend(){}
-
 
 }

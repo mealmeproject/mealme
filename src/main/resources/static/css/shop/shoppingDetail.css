@@ -3,19 +3,20 @@
 * {
     padding: 0;
     margin: 0;
+    border: 0;
 }
 body {
     font-family: "Nanum Gothic", sans-serif;
+    color: rgba(50, 50, 50, 0.9);
 }
 
 .body-container {
-    flex-grow: 1;
+    flew-glow: 1;
     /*display: flex;*/
     /*justify-content: center;*/
     /*margin: 0 auto;*/
     width: 1200px;
 }
-
 
 .main-container {
     width: 1100px;
@@ -29,333 +30,635 @@ body {
 .work-container{
     width: 900px;
     margin: 0 auto;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
-.menuImg{
-    width:400px;
-    margin: 0 auto;
+.sidebar {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 111, 15);
 }
 
-.menuImg2{
-    width: 400px;
+.summary{
+    width: 100%;
+    height: 500px;
 }
 
-
-.menuDetail{
-    width: 400px;
+#product > .view > article {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
 }
 
-.menuTitle{
-    font-size:38px;
-    font-weight:545;
-    width: 400px;
-    text-align: right;
+#product > .view > .info > div {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-.menuReview{
-
-    margin-top: 15px;
-    text-align: right;
+#product > .view > .info > .image > img {
+    width: 100%;
+    height: 550px;
 }
 
-.menuPrice{
-    font-size : 33px;
+#product > .view > .info > .summary > nav {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+#product > .view > .info > .summary > nav > h1 {
+    float: left;
+    color: #ff9326;
     font-weight: bold;
-    margin-top: 20px;
-
+    font-size: 1.5em;
+    width: 100%;
 }
 
-.menuPrice2{
+
+.rating {
+    font-size: 24px;
+    color: #ff9326;
     width: 200px;
 }
 
-
-.hr1{
-    margin-top: 50px;
+.rating .star {
+    transition: color 0.3s;
+    color: gray;
 }
 
-.menuListContent{
-    color: #5A5D5A;
-    font-size:13px;
-    width: 80px;
+.rating /* 채워진 별점의 색깔 */
+.filled {
+    color: yellow;
 }
 
-.menuList{
-    list-style-type: none;
-    width: 300px;
-    font-size: 13px;
-    color: #606360;
-    line-height: 25px;
-    font-weight: 520;
-}
 
-.menuContainer{
-    display: flex;
-}
 
-.menuContainer2{
-    width: 90px;
-}
 
-.menu{
-    font-size:13px;
-    display: flex;
+#product > .view > .info{
+    width: 900px;
+    height: 600px;
 }
-
-.menuTotal{
-    display: flex;
-    width: 400px;
-    font-size:13px;
-}
-
-.menuTotal2{
-    font-size: 30px;
+#product > .view > .info > .summary > nav > h2 {
     float: right;
+    color: #777;
+    margin-top: 8px;
 }
 
-.summary {
-    background-repeat: no-repeat;
-    list-style-type: none;
-    cursor: pointer;
+#product > .view > .info > .summary > nav > h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1e2732;
 }
 
-.menuList[open] .summary {
-    background-image: url('../img/open.png');
-    cursor: pointer;
-    margin-left: 280px;
+#product > .view > .info > .summary > nav > p {
+    font-size: 14px;
+    color: #474747;
+    line-height: 36px;
+    letter-spacing: -1px;
 }
 
-.direction{
-    margin-left: 280px;
+#product > .view > .info > .summary > nav:nth-child(2) > .rating > a {
+    color: #ff9326;
+    text-decoration: underline;
 }
 
-
-.Purchase{
-    display: flex;
-    margin-top: 20px;
-    justify-content: space-around;
-
+#product > .view > .info > .summary .org_price > del {
+    font-size: 18px;
+    color: #aaa;
 }
 
-.menuBakset{
+#product > .view > .info > .summary .org_price > del::after { content: "원"; }
 
-    width: 190px;
-    height: 50px;
-    cursor: pointer;
-    border-radius: 8px;
+#product > .view > .info > .summary .org_price > span {
+    color: #ff9326;
     font-size: 16px;
-    background-color: white;
-    border:1px solid rgb(0, 0, 0);
+    margin-left: 6px;
 }
 
-.menuPurchase{
-    width: 190px;
-    height: 50px;
-    cursor: pointer;
-    border-radius: 8px;
+#product > .view > .info > .summary .org_price > span::after { content: "↓"; }
+
+#product > .view > .info > .summary .dis_price > ins {
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#product > .view > .info > .summary .dis_price > ins::after { content: "원"; }
+#product > .view > .info > .summary .delivery {
     font-size: 16px;
-    color:white;
-    background-color: #ff9326;
+    color: #ff9326;
+}
+
+#product > .view > .info > .summary .origin {
+    font-size: 16px;
+}
+
+#product > .view > .info > .summary .arrival {
+    font-size: 14px;
+    margin-left: 10px;
+}
+#product > .view > .info > .summary .desc {
+    display: block;
+    color: #ff9326;
+}
+
+#product > .view > .info > .summary .card > i {
+    display: inline-block;
+    width: 30px;
+    height: 18px;
+    top: 4px;
+    font-size: 0;
+    vertical-align: text-top;
+    margin-right: 2px;
+}
+
+#product > .view > .info > .summary .cardfree > i { background-position: -126px 0; }
+
+#product > .view > .info > .summary .cardadd > i { background-position: -51px -21px; }
+
+#product > .view > .info > .summary .banner { width: 100%; }
+
+
+
+
+#product > .view > .info > .summary .count {
+    position: relative;
+    width: 100px;
+    height: 40px;
+}
+.count-btn button {
+    width: 25px; /* 버튼의 너비 조정 */
+    height: 25px; /* 버튼의 높이 조정 */
+    font-size: 25px; /* 버튼의 글꼴 크기 조정 */
+    cursor: pointer;
+}
+.count-btn-container{
+    width: 100%;
+    text-align: right;
+}
+
+.star_rating {
+    font-size: 20px;
+}
+
+.star {
+    display: inline-block;
+}
+
+.star.filled {
+    color: gold;
+}
+
+
+
+
+
+
+.count-btn #count {
+    font-size: 20px; /* 숫자 표시 영역의 글꼴 크기 조정 */
+}
+#product > .view > .info > .summary .count > button {
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    background-image: url(./img/ico_sprites.png);
+    font-size: 0;
+    background-color: transparent;
     border: none;
 }
 
-.hr2{
-    width: 880px;
-}
-
-
-.reviewContainer{
-    display: flex;
-    width: 880px;
-    cursor: pointer;
-}
-
-.info{
-    width: 300px;
+#product > .view > .info > .summary .count > input[name=num] {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    width: 30px;
+    height: 21px;
+    border: 1px solid #ececec;
+    font-size: 14px;
     text-align: center;
+}
+
+#product > .view > .info > .summary .count > .decrease {
+    left: 0;
+    top: 0;
+    background-position: 0px -74px;
+}
+
+#product > .view > .info > .summary .count > .increase {
+    left: 70px;
+    top: 0;
+    background-position: -48px -74px;
+}
+
+
+#product > .view > .info > .summary .total {
+    overflow: hidden;
+    margin-top: 150px;
+
+}
+
+#product > .view > .info > .summary .total > span {
+    float: right;
+    display: inline-block;
+    line-height: 38px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #000;
+    text-align: right;
+    letter-spacing: -0.5px;
+}
+
+#product > .view > .info > .summary .total > span::after { content: "원";}
+
+#product > .view > .info > .summary .total > em {
+    float: right;
+    display: block;
+    width: 100px;
+    height: 22px;
+    padding: 10px 0 0;
+    font-size: 16px;
+    line-height: 22px;
+    color: #ff9326;
+    letter-spacing: -1px;
+}
+
+
+#product > .view > .info > .summary .button {
+    overflow: hidden;
+    margin-top: 35px;
+}
+
+#product > .view > .info > .summary .button .order  {
+    float: left;
+    width: 49%;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#product > .view > .info > .summary .button .cart  {
+    float: left;
+    width: 49%;
+    height: 50px;
+    margin: 2px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/*#product > .view > .info > .summary .button > .cart {*/
+/*    background: #fff;*/
+/*    border: 1px solid #d9d9d9;*/
+/*    color: #ff9326;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+.cart{
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    color: #ff9326;
+    border-radius: 10px;
+}
+
+.order{
+    background: #ff9326;
+    border: 1px solid #ff9326;
+    color: #fff;
+}
+
+
+
+
+/*#product > .view > .info > .summary .button > .order {*/
+/*    background: #ff9326;*/
+/*    border: 1px solid #ff9326;*/
+/*    color: #fff;*/
+/*}*/
+
+#product > .view > .review > .paging > .num > a.on {
+    color: #ff9326;
+    font-weight: bold;
+}
+
+#product > .view > article > nav {
+    border-bottom: 1px solid #a4a9b0;
+    padding: 6px 0;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.detail{
+
+    margin-top: 100px;
+}
+
+.notice{
+    margin-top: 100px;
 }
 
 .review{
-    width: 300px;
-    text-align: center;
+
+    margin-top: 50px;
+}
+#product > .view > article > nav > p {
+    float: left;
+    color: #777;
+    margin-top: 6px;
+    margin-left: 6px;
 }
 
-.purchaseinfo{
-    width: 300px;
-    text-align: center;
+#product > .view > article > nav > h1 {
+    float: left;
+    color: #1e2732;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
-
-
-
-.reviewContainer {
-    display: flex;
-}
-
-
-
-
-.star_rating{
-    width: 100px;
-    display: inline;
-    font-size: 25px;
-    text-align: left;
-}
-
-.on{
-    text-decoration-line: none;
-    color: #ff9326;
-
-}
-
-
-
-
-.underline-hover-btn:hover {
-    color: #b2876f;
-}
-.underline-hover-btn:hover:before {
-    transform: none;
-    opacity: 1;
-    transition-duration: 0.4s;
-}
-.underline-hover-btn:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    left: 0;
-    bottom: 0px;
-    background: #d6beb1;
-    transform: translateY(6px);
-    opacity: 0;
-    transition: 1.8s cubic-bezier(0.2, 1, 0.3, 1);
-    pointer-events: none;
-}
-
-
-
-
-
-main{
-    width: 800px;
-}
-
-
-/* main1배너구역 */
-.main1-banner-wrap{
-    width: 450px;
-    height: 200px;
-    margin:30px auto;
+.button2 {
+    --color: #1E2235;
+    --color-hover: #1E2235;
+    --color-active: #fff;
+    --icon: #BBC1E1;
+    --icon-hover: #8A91B4;
+    --icon-active: #fff;
+    --background: #fff;
+    --background-hover: #fff;
+    --background-active: #362A89;
+    --border: #E1E6F9;
+    --border-active: #362A89;
+    --shadow: rgba(0, 17, 119, 0.025);
+    display: block;
+    outline: none;
+    cursor: pointer;
     position: relative;
-    overflow: hidden;
+    border: 0;
+    background: none;
+    padding: 8px 20px 8px 24px;
+    border-radius: 9px;
+    line-height: 27px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color);
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s linear;
 }
-.main1-slide-ul {
-    /*이미지들이 담겨있는 슬라이드 컨테이너*/
+.button2.dark {
+    --color: #F6F8FF;
+    --color-hover: #F6F8FF;
+    --color-active: #fff;
+    --icon: #8A91B4;
+    --icon-hover: #fff;
+    --icon-active: #fff;
+    --background: #000000;
+    --background-hover: #171827;
+    --background-active:  #ff9326;
+    --border: transparent;
+    --border-active: transparent;
+    --shadow: #{rgba(#001177, .16)};
+}
+.button2:hover {
+    --icon: var(--icon-hover);
+    --color: var(--color-hover);
+    --background: var(--background-hover);
+    --border-width: 2px;
+}
+.button2:active {
+    --scale: .95;
+}
+.button2:not(.liked):hover {
+    --hand-rotate: 8;
+    --hand-thumb-1: -12deg;
+    --hand-thumb-2: 36deg;
+}
+.button2.liked {
+    --span-x: 2px;
+    --span-d-o: 1;
+    --span-d-x: 0;
+    --icon: var(--icon-active);
+    --color: var(--color-active);
+    --border: var(--border-active);
+    --background: var(--background-active);
+}
+.button2:before {
+    content: "";
+    min-width: 103px;
     position: absolute;
     left: 0;
     top: 0;
-    width: 450px;
-    display: flex;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    transition: background 0.2s linear, transform 0.2s, box-shadow 0.2s linear;
+    transform: scale(var(--scale, 1)) translateZ(0);
+    background: var(--background);
+    box-shadow: inset 0 0 0 var(--border-width, 1px) var(--border), 0 4px 8px var(--shadow), 0 8px 20px var(--shadow);
 }
-.main1-slide-ul>li{
-    width: 450px;
-    height: 200px;
-}
-.main1-slide-ul>li:hover{
-    cursor: pointer;
-}
-.banner{
+.button2 .hand {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px 0 0 0;
+    background: var(--icon);
     position: relative;
-    right: 100px;
-    bottom: 30px;
+    margin: 10px 8px 0 0;
+    transform-origin: -5px -1px;
+    transition: transform 0.25s, background 0.2s linear;
+    transform: rotate(calc(var(--hand-rotate, 0) * 1deg)) translateZ(0);
 }
-.banner img{
-    width: 450px;
-    height: 100%;
-    object-fit: cover;
-}
-.banner p{
+.button2 .hand:before, .button .hand:after {
+    content: "";
+    background: var(--icon);
     position: absolute;
-    font-size: 50px;
-    font-weight: 700;
+    transition: background 0.2s linear, box-shadow 0.2s linear;
 }
-.banner1{
-    color: #f2f2f2;
-    top: 50px;
-    left: 50px;
+.button2 .hand:before {
+    left: -5px;
+    bottom: 0;
+    height: 12px;
+    width: 4px;
+    border-radius: 1px 1px 0 1px;
 }
-.banner2{
-    top: 50px;
-    left: 50px;
+.button2 .hand:after {
+    right: -3px;
+    top: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 0 2px 2px 0;
+    background: var(--icon);
+    box-shadow: -0.5px 4px 0 var(--icon), -1px 8px 0 var(--icon), -1.5px 12px 0 var(--icon);
+    transform: scaleY(0.6825);
+    transform-origin: 0 0;
 }
-.banner3{
-    color: #f2f2f2;
-    right: 50px;
-    top: 150px;
+.button2 .hand .thumb {
+    background: var(--icon);
+    width: 10px;
+    height: 4px;
+    border-radius: 2px;
+    transform-origin: 2px 2px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: transform 0.25s, background 0.2s linear;
+    transform: scale(0.85) translateY(-0.5px) rotate(var(--hand-thumb-1, -45deg)) translateZ(0);
+}
+.button2 .hand .thumb:before {
+    content: "";
+    height: 4px;
+    width: 7px;
+    border-radius: 2px;
+    transform-origin: 2px 2px;
+    background: var(--icon);
+    position: absolute;
+    left: 7px;
+    top: 0;
+    transition: transform 0.25s, background 0.2s linear;
+    transform: rotate(var(--hand-thumb-2, -45deg)) translateZ(0);
+}
+.button2 .hand,
+.button2 span {
+    display: inline-block;
+    vertical-align: top;
+}
+.button2 .hand span,
+.button2 span span {
+    opacity: var(--span-d-o, 0);
+    transition: transform 0.25s, opacity 0.2s linear;
+    transform: translateX(var(--span-d-x, 4px)) translateZ(0);
+}
+.button2 > span {
+    transition: transform 0.25s;
+    transform: translateX(var(--span-x, 4px)) translateZ(0);
 }
 
-.slide-controller>span {
-    color: black;
-    font-weight: 700;
-    position: absolute;
-    background-color: transparent;
+
+
+#product > .view > .notice > table { width: 100%; }
+
+#product > .view > .notice > table:nth-of-type(2) { border-top: 1px solid #ececec; }
+
+#product > .view > .notice > table tr > td {
+    padding: 5px 0 6px 21px;
+    font-size: 14px;
+    color: #777;
+}
+
+#product > .view > .notice > table tr > td:nth-child(1) { width: 20%; color: #222; }
+
+#product > .view > .review > ul {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#product > .view > .review > ul > li {
+    padding-top: 16px;
+    border-bottom: 1px solid #ececec;
+    box-sizing: border-box;
+}
+
+#product > .view > .review > ul > li > div { overflow: hidden; }
+
+#product > .view > .review > ul > li > div > span {
+    float: right;
+    color: #555;
+}
+
+#product > .view > .review > ul > li > div >  h5 { float: left; }
+
+#product h5.rating {
+    width: 150px;
+    height: 20px;
+    font-size: 0px;
+    background-image: url(./img/ico_rating_star.png);
+    background-repeat: no-repeat;
+    background-position: 36px 0px;
+    text-indent: 86px;
+}
+
+#product > .view > .review > ul > li > h3 {
+    color: #555;
+    margin-top: 6px;
+}
+
+#product > .view > .review > ul > li > p {
+    width: 100%;
+    height: 60px;
+    color: #555;
+    font-size: 14px;
+    line-height: 19px;
+    word-break: break-all;
+    word-wrap: break-word;
+    margin-top: 10px;
+}
+
+#product > .view > .review > .paging {
+    width: 100%;
+    padding: 30px 0;
     text-align: center;
-    padding: 10px 20px;
-    top: 30%;
-    font-size: 1.3em;
-    cursor: pointer;
-} /* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
-.slide-controller>span:hover {
-    background-color: rgba(255, 255, 255, 0.11);
-}
-.prev {
-    left: 10px;
-} /* 이전 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 왼쪽으로 이동하는 효과*/
-.prev:hover {
-    transform: translateX(-10px);
-}
-.next {
-    right: 10px;
-} /* 다음 화살표에 마우스 커서가 올라가 있을때 이전 화살표가 살짝 오른쪽으로 이동하는 효과*/
-.next:hover {
-    transform: translateX(10px);
 }
 
-
-
-
-
-
-li {list-style: none;}
-
-#tab-menu {
-    width: 600px;
-    background : #eaa110;
-    position: absolute; left: 50%; top: 100px;
-    transform: translatex(-50%);
-    border-radius: 4px;
+#product > .view > .notice > .notice {
+    margin: 20px 0;
+    padding: 21px 26px 20px 19px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #757c8a;
+    background: #fafafa;
+    border-radius: 2px;
+    white-space: normal;
 }
-#tab-btn ul {
-    overflow: hidden;
+
+#product > .view > .review >.paging > span > a {
+    color: #777;
+    font-size: 11px;
+    letter-spacing: -1px;
 }
-#tab-btn li {
-    float: left; width: 90px; text-align: center;
+
+#product > .view > .review > .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    color: #000;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
 }
-#tab-btn li a {
-    display: block; color: #fff;
-    padding: 15px 20px;
+#product > .view > .review > .paging > .num > a.on {
+    color: #ff9326;
     font-weight: bold;
 }
-#tab-btn li.active a {
-    border-bottom: 3px solid #2b210e;
-    color: #2b210e;
+
+
+
+.rating {
+    display: flex;
+    font-size: 24px;
+    color: #ff9326;
 }
 
-#tab-cont {
-    width: 100%;
-    background: #fff; padding: 20px;
-    box-sizing: border-box;
-    border-radius: 0 0 4px 4px;
+.rating .star {
+    transition: color 0.3s;
+}
+
+
+
+.star {
+    color: gray;
+}
+
+.filled {
+    color: gold;
 }
