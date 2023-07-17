@@ -40,15 +40,40 @@ export function deleteOrderList(checkBoxArr,confirmAlert,error) {
 
 }
 
-export function orderStatusAjax(obj, callback, error){
+// export function orderStatusAjax(obj,error){
+//     $.ajax({
+//         url : `/admins/v1/modify`,
+//         type : 'get',
+//         data : obj,
+//         success : function(){
+//
+//                 window.alert("상태가 변경되었습니다.")
+//
+//             },
+//
+//         error : error
+//     });
+// }
+
+export function orderStatusAjax(obj,error) {
+
+    console.log(JSON.stringify(obj.orderNumber))
+    // if(comfirmAlert) {
     $.ajax({
-        url : `/admins/v1/modify`,
-        type : 'get',
-        data : obj,
-        success : function(){
-                window.alert("상태가 변경되었습니다.")
+        url: '/admins/v1/modify',
+        data: JSON.stringify(obj),
+        type: 'post',
+        // traditional: true,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+
+            window.alert("상태가 변경되었습니다.")
 
         },
-        error : error
+        error: error
+
     });
+
 }
+

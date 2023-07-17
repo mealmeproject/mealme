@@ -2,9 +2,11 @@ package com.example.mealme.controller.admin;
 
 import com.example.mealme.dto.*;
 import com.example.mealme.service.admin.AdminService;
+import com.example.mealme.service.admin.OrderService;
 import com.example.mealme.service.admin.ProductFileService;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -15,6 +17,7 @@ import java.util.*;
 public class AdminRestController {
     private final AdminService adminService;
     private final ProductFileService productFileService;
+    private final OrderService orderService;
 
     @GetMapping("/user")
     public List<UserDto> showUserList() {
@@ -35,7 +38,7 @@ public class AdminRestController {
         System.out.println("=============================================================");
         System.out.println(checkBoxArr);
         List<String> numberList = checkBoxArr.get("checkBoxArr");
-//        adminService.deleteUserList(numberList);
+
 
 
         String checkNum = "";
@@ -57,10 +60,10 @@ public class AdminRestController {
         PageVo pageVo = new PageVo(criteria, adminService.getTotal(searchVo));
         List<UserDto> searchUser = adminService.searchUserList(searchVo, criteria);
 
-//        List<UserDto> userList = adminService.findAll(criteria);
+
         Map<String, Object> findUser = new HashMap<>();
         findUser.put("pageVo", pageVo);
-//        findUser.put("userList", userList);
+
         findUser.put("userList", searchUser);
         return findUser;
     }
@@ -80,15 +83,15 @@ public class AdminRestController {
 
 
     @GetMapping("/searchCompanyList/{page}")
-    public Map<String, Object> findCompanyList(@PathVariable("page") int page, SearchVo searchVo) {
+    public Map<String, Object> findCompanyList(@PathVariable("page") int page, SearchCompanyVo searchCompanyVo) {
         Criteria criteria = new Criteria(page, 10);
 
         System.out.println("====================================================================================");
-        System.out.println(searchVo);
+        System.out.println(searchCompanyVo);
         System.out.println("====================================================================================");
 
-        PageVo pageVo = new PageVo(criteria, adminService.getCompanyTotal(searchVo));
-        List<CompanyDto> searchCompany = adminService.searchCompanyList(searchVo, criteria);
+        PageVo pageVo = new PageVo(criteria, adminService.getCompanyTotal(searchCompanyVo));
+        List<CompanyDto> searchCompany = adminService.searchCompanyList(searchCompanyVo, criteria);
 
 
         Map<String, Object> findCompany = new HashMap<>();
@@ -148,18 +151,147 @@ public class AdminRestController {
         return findOrder;
     }
 
-    @GetMapping("/modify")
-    public void conditionModify(Long orderNumber, Long orderConditionCode){
-        adminService.modifyStatus(orderNumber, orderConditionCode);
-
-
-    }
-
     @PostMapping("/modify")
-    public void modifyName(@RequestParam("select_value") String selectValue ){
-        OrderVo orderVo = new OrderVo();
-        orderVo.setConditionCodeName(selectValue);
+    public void conditionModify(@RequestBody Map<String, Object> orderNumber){
+        System.out.println(orderNumber);
+        List<String> numberList = (List<String>) orderNumber.get("orderNumber");
+        Long orderConditionCode = Long.parseLong((String)orderNumber.get("orderConditionCode"));
+
+        adminService.modifyStatus(orderConditionCode,numberList);
     }
 
+    @PostMapping("/modifyStatus")
+    public void statusModify(@RequestBody Map<String, Object> companyNumber){
+        System.out.println(companyNumber);
+        List<String> numberList = (List<String>) companyNumber.get("companyNumber");
+        Long companyStatus = Long.parseLong((String)companyNumber.get("companyStatus"));
+
+        adminService.modifyCompanyStatus(companyStatus,numberList);
+    }
+
+    @PostMapping("/modifyStatus2")
+    public void statusCancel(@RequestBody Map<String, Object> companyNumber){
+        System.out.println(companyNumber);
+        List<String> numberList = (List<String>) companyNumber.get("companyNumber");
+        Long companyStatus = Long.parseLong((String)companyNumber.get("companyStatus"));
+
+        adminService.modifyCompanyStatus(companyStatus,numberList);
+    }
+
+    @GetMapping("/modifyName")
+    public Map<String, Object> modifyName(Long orderConditionCode){
+       String conditionName = adminService.getConditionName(orderConditionCode);
+       Map<String, Object> result = new HashMap<>();
+       result.put("conditionName", conditionName);
+       return result;
+    }
+
+
+//    주문
+    @GetMapping("/dailyOrder")
+    public List<DailyOrderVo> dailyOrder(){
+
+        List<DailyOrderVo> dailyOrders = orderService.dailyOrder();
+        return dailyOrders;
+
+
+    }
+
+    @GetMapping("/weeklyTotal")
+    public Map<String,Object> weeklyTotal(){
+        List<DailyOrderVo> weeklyOrder = orderService.weeklyOrder();
+        List<DailyOrderVo> weeklyPayment = orderService.weeklyPayment();
+        List<DailyOrderVo> weeklyRefund = orderService.weeklyRefund();
+        Map<String,Object> weeklyTotal = new HashMap<>();
+
+        weeklyTotal.put("weeklyOrder", weeklyOrder);
+        weeklyTotal.put("weeklyPayment", weeklyPayment);
+        weeklyTotal.put("weeklyRefund", weeklyRefund);
+
+
+        return weeklyTotal;
+    }
+
+    @GetMapping("/monthlyTotal")
+    public Map<String,Object> monthlyTotal(){
+        List<DailyOrderVo> monthlyOrder = orderService.monthlyOrder();
+        List<DailyOrderVo> monthlyPayment = orderService.monthlyPayment();
+        List<DailyOrderVo> monthlyRefund = orderService.monthlyRefund();
+        Map<String,Object> monthlyTotal = new HashMap<>();
+
+        monthlyTotal.put("monthlyOrder", monthlyOrder);
+        monthlyTotal.put("monthlyPayment", monthlyPayment);
+        monthlyTotal.put("monthlyRefund", monthlyRefund);
+
+
+        return monthlyTotal;
+    }
+
+    @GetMapping("/weeklyChart")
+    public Map<String,Object> weeklyChart(){
+        List<DailyOrderVo> weeklyOrder = orderService.weeklyOrder();
+        List<DailyOrderVo> weeklyPayment = orderService.weeklyPayment();
+        List<DailyOrderVo> weeklyRefund = orderService.weeklyRefund();
+        Map<String,Object> weeklyTotal = new HashMap<>();
+
+        weeklyTotal.put("weeklyOrder", weeklyOrder);
+        weeklyTotal.put("weeklyPayment", weeklyPayment);
+        weeklyTotal.put("weeklyRefund", weeklyRefund);
+
+
+        return weeklyTotal;
+    }
+
+
+//    결제
+    @GetMapping("/dailyPayment")
+    public List<DailyOrderVo> dailyPayment(){
+        List<DailyOrderVo> dailyPayments = orderService.dailyPayment();
+        return dailyPayments;
+
+    }
+
+    @GetMapping("/weeklyPayment")
+    public List<DailyOrderVo> weeklyPayment(){
+        List<DailyOrderVo> weeklyPayment = orderService.weeklyPayment();
+        return weeklyPayment;
+    }
+
+
+//    환불
+    @GetMapping("/dailyRefund")
+    public List<DailyOrderVo> dailyRefund(){
+        List<DailyOrderVo> dailyRefunds = orderService.dailyRefund();
+        return dailyRefunds;
+
+    }
+
+    @GetMapping("/weeklyRefund")
+    public List<DailyOrderVo> weeklyRefund(){
+        List<DailyOrderVo> weeklyRefunds = orderService.weeklyRefund();
+        return weeklyRefunds;
+    }
+
+    @GetMapping("/statusCount")
+    public List<OrderDto> statusCount(){
+        List<OrderDto> statusCount = adminService.getStatusCount();
+        return statusCount;
+    }
+
+    @GetMapping("/totalCount")
+    public UserTotalVo userTotalCount(){
+       return adminService.getUserTotal();
+
+    }
+
+    @GetMapping("/userTotal")
+    public Map<String,Object> userTotal(SearchVo searchVo){
+        int userTotal = adminService.userTotal();
+        int searchTotal = adminService.getTotal(searchVo);
+        Map<String,Object> totalCount = new HashMap<>();
+        totalCount.put("userTotal", userTotal);
+        totalCount.put("searchTotal", searchTotal);
+        return totalCount;
+    }
 
 }
