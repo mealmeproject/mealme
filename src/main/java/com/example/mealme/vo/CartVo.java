@@ -23,5 +23,7 @@ public class CartVo {
     private long fileNumber;
     private String fileUploadPath;
     private String fileUuid;
-
+    private int quantity;
+    private int totalPrice;
 }
+
