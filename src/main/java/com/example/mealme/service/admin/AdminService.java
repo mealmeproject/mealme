@@ -7,7 +7,9 @@ import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -15,6 +17,7 @@ import java.util.*;
 @Transactional
 public class AdminService {
     private final AdminMapper adminMapper;
+    private final ProductFileService productFileService;
 
 
 
@@ -37,8 +40,8 @@ public class AdminService {
     }
 
 //    기업 검색 조회
-public List<CompanyDto> searchCompanyList(SearchVo searchVo, Criteria criteria){
-    return adminMapper.searchCompany(searchVo, criteria);
+public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Criteria criteria){
+    return adminMapper.searchCompany(searchCompanyVo, criteria);
 }
     //    상품 검색 조회
     public List<ProductVo> searchProductList(SearchProductVo searchProductVo, Criteria criteria){
@@ -105,13 +108,15 @@ public List<CompanyDto> searchCompanyList(SearchVo searchVo, Criteria criteria){
         return adminMapper.selectTotal(searchVo);
     }
 
+    public int userTotal(){return adminMapper.userTotal();}
+
     //전체 기업 수 조회
     @Transactional(readOnly = true)
-    public int getCompanyTotal(SearchVo searchVo){
-        return adminMapper.selectCompanyTotal(searchVo);
+    public int getCompanyTotal(SearchCompanyVo searchCompanyVo){
+        return adminMapper.selectCompanyTotal(searchCompanyVo);
     }
 
-//    대분류 조회
+//  대분류 조회
     @Transactional(readOnly = true)
     public List<ProductCategory1Dto> findCategory(){
         return adminMapper.selectCategory();
@@ -132,9 +137,22 @@ public List<CompanyDto> searchCompanyList(SearchVo searchVo, Criteria criteria){
         adminMapper.insertProduct(productDto);
         System.out.println(productDto);
     }
+//    상품 수정
+    public void changeProduct(ProductDto productDto, ProductVo productVo, List<MultipartFile> files) throws IOException {
+        if(productDto == null || files == null){
+            throw new IllegalArgumentException("상품 수정 매개변수 null 체크");
+        }
+        if(productVo == null || files == null){
+            throw new IllegalArgumentException("상품 수정 매개변수 null 체크");
+        }
+
+        productFileService.remove(productDto.getProductNumber());
+        productFileService.registerAndSaveFiles(files, productDto.getProductNumber());
+        adminMapper.updateProduct(productDto);
+    }
 
 //    상품조회
-    public List<ProductVo> modifyProduct(Long productNumber){
+    public ProductVo modifyProduct(Long productNumber){
        return adminMapper.selectProduct(productNumber);
     }
 
@@ -147,9 +165,46 @@ public List<CompanyDto> searchCompanyList(SearchVo searchVo, Criteria criteria){
         return adminMapper.selectOrderTotal(searchProductVo);
     }
 //   주문 상태 변경
-    public void modifyStatus(Long orderNumber, Long orderConditionCode){
+    public void modifyStatus(Long orderConditionCode, List<String> orderNumber){
+        if(orderNumber == null){
+            throw new IllegalArgumentException("회원을 선택하세요.");
+        }
 
-        adminMapper.modifyCondition(orderNumber, orderConditionCode);
+        for(int i=0; i<orderNumber.size(); i++){
+            adminMapper.modifyCondition(orderNumber.get(i),orderConditionCode);
+        }
+
 
     }
+
+    //  기업 상태 변경
+    public void modifyCompanyStatus(Long companyStatus, List<String> companyNumber){
+        if(companyNumber == null){
+            throw new IllegalArgumentException("기업을 선택하세요.");
+        }
+
+        for(int i=0; i<companyNumber.size(); i++){
+            adminMapper.companyStatus(companyNumber.get(i),companyStatus);
+        }
+
+
+    }
+
+//    상태명 뽑기
+    public String getConditionName(Long orderConditionCode){
+        return adminMapper.getConditionName(orderConditionCode);
+    }
+
+//상태 갯수 조회
+    public List<OrderDto> getStatusCount(){
+        return adminMapper.statusCount();
+    }
+
+//    일반, 기업회원 조회 및 총합
+    public UserTotalVo getUserTotal(){
+       return adminMapper.userTotalCount();
+
+    }
+
+
 }

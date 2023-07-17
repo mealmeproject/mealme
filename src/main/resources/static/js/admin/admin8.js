@@ -145,7 +145,7 @@ $uploadBox.on('click', function () {
 // 등록버튼
 $(".submit-btn").on("click", () => {
 
-  alert("상품 등록이 완료되었습니다.");
+  alert("상품 수정이 완료되었습니다.");
   window.location.href = "/admin/productList";
 
 });

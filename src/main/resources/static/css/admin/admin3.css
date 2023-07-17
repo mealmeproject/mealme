@@ -58,6 +58,19 @@ body {
   background: #fff url('//img.echosting.cafe24.com/ec/v2/ico_select.png') no-repeat right 7px center;
 }
 
+.tselect{
+  display: inline;
+  height: 38px;
+  margin: 0;
+  padding: 0 24px 0 8px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff url('//img.echosting.cafe24.com/ec/v2/ico_select.png') no-repeat right 7px center;
+}
+
 .search {
   margin-left: 5px;
   position: relative;

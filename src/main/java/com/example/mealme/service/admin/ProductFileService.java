@@ -97,13 +97,13 @@ public class ProductFileService {
         }
 
 //        productNumber 를 제외한 모든 정보를 가진 ProductFileDto를 반환한다.
-        ProductFileDto ProductFileDto = new ProductFileDto();
-        ProductFileDto.setFileUuid(uuid.toString());
-        ProductFileDto.setFileName(originName);
-        ProductFileDto.setFileUploadPath(getUploadPath());
+        ProductFileDto productFileDto = new ProductFileDto();
+        productFileDto.setFileUuid(uuid.toString());
+        productFileDto.setFileName(originName);
+        productFileDto.setFileUploadPath(getUploadPath());
 
 
-        return ProductFileDto;
+        return productFileDto;
     }
 
     /**
@@ -115,9 +115,9 @@ public class ProductFileService {
      */
     public void registerAndSaveFiles(List<MultipartFile> files, Long productNumber) throws IOException{
         for(MultipartFile file : files){
-            ProductFileDto ProductFileDto = saveFile(file);
-            ProductFileDto.setProductNumber(productNumber);
-            register(ProductFileDto);
+            ProductFileDto productFileDto = saveFile(file);
+            productFileDto.setProductNumber(productNumber);
+            register(productFileDto);
         }
     }
 
