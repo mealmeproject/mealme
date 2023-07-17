@@ -57,7 +57,7 @@ public class ShopController {
         System.out.println("==============================");
         System.out.println(new PageVo(criteria, shopService.getTotal()));
 
-        List<ProductVo> productList2 = shopService.selectList(productVo);
+        List<ProductReviewVo> productList2 = shopService.findReviewList(productVo.getProductNumber());
 
 
         model.addAttribute("productList2", productList2);
@@ -70,20 +70,12 @@ public class ShopController {
 
 
     @GetMapping("/shoppingDetail")
-    public String shoppingDetail(ProductVo productVo, Model model, @RequestParam("productNumber") String productNumber, HttpSession session) {
+    public String shoppingDetail(Model model, @RequestParam("productNumber") Long productNumber) {
 
         // 세션에서 userNumber를 가져옴
 
-        ProductVo starRating = shopService.selectStarRating(productNumber);
+        ProductVo starRating = shopService.selectStarRating(productNumber.toString());
 
-        Long userNumber = (Long)session.getAttribute("userNumber");
-
-        // userNumber 값이 없을 경우 로그인 페이지로 이동
-        if (userNumber == null) {
-            return "redirect:/user/login"; // 로그인 페이지 URL
-        }
-        // userNumber 값을 모델에 추가
-        model.addAttribute("userNumber", userNumber);
         // productNumber 값을 모델에 추가
         model.addAttribute("productNumber", productNumber);
 
@@ -98,21 +90,16 @@ public class ShopController {
         model.addAttribute("productRegisterDate",starRating.getProductRegisterDate());
         model.addAttribute("productSeller",starRating.getProductSeller());
 
-        System.out.println("userNumber: " + userNumber);
         System.out.println("productNumber: " + productNumber);
         System.out.println("averageRating: " + starRating.getAverageRating());
 
 
 
 
-        List<ProductVo> productList = shopService.selectList(productVo);
+        List<ProductReviewVo> reviewList = shopService.findReviewList(productNumber);
 
-        shopService.selectList(starRating);
+        model.addAttribute("reviewList", reviewList);
 
-        model.addAttribute("productList", productList);
-
-        System.out.println("======");
-        System.out.println(productVo);
 
         return "shop/shoppingDetail";
     }
@@ -120,16 +107,24 @@ public class ShopController {
 
 
     @GetMapping("/shoppingBasket")
-    public String shoppingBasket(CartVo cartVo, HttpSession session, HttpServletRequest request, Model model) {
-        Long userNumberValue = (Long) session.getAttribute("userNumber");
-        Long productNumber = Long.parseLong(request.getParameter("productNumber"));
+    public String shoppingBasket(CartVo cartVo, HttpServletRequest req, Model model) {
+        Long userNumberValue = (Long) req.getSession().getAttribute("userNumber");
+        if(userNumberValue == null){
+            return "redirect:/user/index";
+        }
+
+        cartVo.setUserNumber(userNumberValue);
 
         // 장바구니에 상품 추가
-        CartVo product = shopService.addCart(cartVo);
+        cartVo.setCartCount(1);
 
         System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("productNumber: " + productNumber);
+        System.out.println("productNumber: " + cartVo.getProductNumber());
         System.out.println("userNumber: " + userNumberValue);
+        System.out.println("count: " + cartVo.getCartCount());
+        shopService.processCart(cartVo);
+
+
 
         // 장바구니에 담긴 상품 조회
         List<CartVo> cartItems = shopService.selectCart(cartVo);
@@ -141,7 +136,6 @@ public class ShopController {
                 }
 
         model.addAttribute("cartItems", cartItems);
-        model.addAttribute("product", product);
         model.addAttribute("totalPrice", totalPrice);
 
         System.out.println("sssssssssssssssssssss");

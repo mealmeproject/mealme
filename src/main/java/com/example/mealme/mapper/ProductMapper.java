@@ -38,7 +38,7 @@ public interface ProductMapper {
     List<ProductVo> selectReviewPrice();
 
     //상품 상세정보 조회
-    List<ProductVo> selectList(ProductVo productVo);
+    List<ProductReviewVo> selectReviewList(Long productNumber);
 
     //상품 별점 조회
     ProductVo selectStarRating(String productNumber);
@@ -46,14 +46,20 @@ public interface ProductMapper {
     // 장바구니 상품 조회
     List<CartVo> selectCart(CartVo cartVo);
 
+    // 특정 회원이 장바구니에 상품이 담겨있는지 확인
+    int selectCartTotal(CartVo cartVo);
 
+    // 특정 회원, 특정 상품의 카트 번호 조회
+    Long selectCartNumber(CartVo cartVo);
 
     //장바구니 상품 추가
-    void addCart(CartVo cartVo);
+    void insertCart(CartVo cartVo);
 
     //장바구니 상품 삭제
     void deleteCart(Long cartNumber);
 
+    //장바구지 상품 수량 추가
+    void addCart(CartVo cartVo);
 
     //장바구니 상품 수량 변경
     void updateCartPlus(CartVo cartVo);

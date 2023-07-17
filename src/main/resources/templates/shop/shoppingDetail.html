@@ -52,7 +52,6 @@
                   </div>
 
                 </nav>
-              </div>
                 <nav>
                   <h3 th:text="${productSeller}"></h3>
                   <p th:text="${productExplanation}"></p>
@@ -79,7 +78,7 @@
                 <p class="addToCart">
                 <div class="button">
                   <form action="/shop/shoppingBasket" method="get">
-                    <input type="hidden" name="userNumber" th:value="${userNumber}" />
+<!--                    <input type="hidden" name="userNumber" th:value="${userNumber}" />-->
                     <input type="hidden" name="productNumber" th:value="${productNumber}" />
                     <button id="addToCartBtn" class="cart" type="submit">장바구니에 추가</button>
                   </form>
@@ -88,6 +87,7 @@
                     <button class="order" type="submit">구매하기</button>
                   </form>
                 </div>
+              </div>
 
             </article>
             <article class="detail">
@@ -132,9 +132,9 @@
               <nav><h1>상품리뷰</h1></nav>
               <h3 th:text="${productName}">상품명</h3>
               <ul>
-                <li th:each="product : ${productList}">
+                <li th:each="review : ${reviewList}">
                   <div>
-                    <div class="rating" th:data-grade="${product.starRating}">
+                    <div class="rating" th:data-grade="${review.starRating}">
                       <span class="star">&#9734;</span>
                       <span class="star">&#9734;</span>
                       <span class="star">&#9734;</span>
@@ -142,9 +142,9 @@
                       <span class="star">&#9734;</span>
                     </div>
                     </span>
-                    <span th:text="${product.userId}">iosghz</span>
-                    <span th:text="${#dates.format(product.reviewDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                    <p th:text="${product.reviewContent}" style="margin-top: 50px;"></p>
+                    <span th:text="${review.userNickname}">iosghz</span>
+                    <span th:text="${review.reviewDate}"></span>
+                    <p th:text="${review.reviewContent}" style="margin-top: 50px;"></p>
                   </div>
                 </li>
               </ul>
