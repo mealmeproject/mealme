@@ -1,4 +1,3 @@
-
 const drawStar = (target) => {
   $('.star span').css('width', `${target.value * 20}%`);
   console.log(`${target.value}`);
@@ -34,7 +33,7 @@ function summerNote(){
 }
 
 $('.cancel').click(function() {
-  window.location.href = '/company/consultingReviewList';
+  window.location.href = '/shop/productReviewList';
 });
 
-console.log($('.company-number').val());
+console.log('연결완');
