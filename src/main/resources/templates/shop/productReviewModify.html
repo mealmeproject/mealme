@@ -36,19 +36,20 @@
 
       <p>
       <div class="all-wrap">
-      <form th:action="@{/company/consultingReview}" method="post" enctype="multipart/form-data">
+      <form th:action="@{/shop/productReviewModify}" method="post" enctype="multipart/form-data">
         <div class="review-consulting">
-          <input type="hidden" class="company-number" name="companyNumber" th:value="${consultingReviewVo.companyNumber}">
-          <input type="hidden" name="consultingRequestNumber" th:value="${consultingReviewVo.consultingRequestNumber}">
-          <input type="hidden" name="userNumber" th:value="${consultingReviewVo.userNumber}">
+          <input type="hidden" th:value="${productReviewVo.productNumber}">
+          <input type="hidden" th:value="${productReviewVo.orderNumber}">
+          <input type="hidden" th:value="${productReviewVo.userNumber}">
+          <input type="hidden" name="reviewNumber" th:value="${productReviewVo.reviewNumber}">
         <div class="review-text">리뷰작성 하기</div>
         <div class="review-sub">
         <div class="company-file">
-          <img th:src="${consultingReviewVo.fileUploadPath}" alt="기업이미지">
+          <img th:src="${productReviewVo.fileUploadPath}" alt="상품이미지">
         </div>
         <!-- 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 -->
         <div class="ranking-wrap">
-        <div class="consulting-comment" th:text="${consultingReviewVo.consultingRequestComment}">
+        <div class="consulting-comment" th:text="${productReviewVo.productName}">
         </div>
         <!-- 상품일 경우 상품제목, 컨설팅일 경우  컨설팅 제목 -->
         <div class="star-wrap">
@@ -58,7 +59,7 @@
             <input name="reviewGrade" type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="5">
           </span>
 
-          <input type="hidden" name="reviewGrade" class="star-value" value="" required>
+          <input type="hidden" name="reviewGrade" class="star-value" th:value="${productReviewVo.reviewGrade}">
         </div>
       </div>
 
@@ -68,7 +69,7 @@
 
       <div class="review-wrap">
         <div class="summernote-box">
-          <textarea id="summernote" name="reviewContent" required></textarea>
+          <textarea id="summernote" name="reviewContent" th:text="${productReviewVo.reviewContent}"></textarea>
         </div>
       </div>
 
@@ -101,6 +102,6 @@
 <!-- <script th:inline="javascript">
   let loginNumber = [[${session.userNumber}]];
 </script> -->
-<script  th:src="@{/js/company/companyReview.js}"></script>
+<script  th:src="@{/js/shop/productReviewModify.js}"></script>
 </body>
 </html>
