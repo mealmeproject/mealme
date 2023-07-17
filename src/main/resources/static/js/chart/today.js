@@ -1,5 +1,11 @@
 import * as info from './todayExportFunction.js';
 
+let todayPhoto = '';
+const modal = document.querySelector('.modal');
+let mealImgBoxes;
+const closeModalButton = document.getElementById("close-modal");
+
+
 // 도넛 차트
 let dataDonut = {
   // labels: ['탄수화물', '단백질', '지방'],
@@ -223,8 +229,31 @@ function showUser(userInfo){
               <div class="today-kcal-unit">kcal</div>`
   $('.today-kcal-num-wrap').html(textKcal);
 
-  // console.log($('.today-kcal-num').text());
-  // console.log($('.today-kcal-total').text());
+  // $('.today-kcal-num').text(userInfo.calcNutrientUtil.kcalSum);
+  // $('.today-kcal-total').text(userInfo.recommendVo.recommendKcal);
+
+
+  if (userInfo.todayKcalSumVo != null){
+    $('.breakfast-kcal-num').text(userInfo.todayKcalSumVo.breakfastTotal);
+    $('.lunch-kcal-num').text(userInfo.todayKcalSumVo.lunchTotal);
+    $('.dinner-kcal-num').text(userInfo.todayKcalSumVo.dinnerTotal);
+    $('.snack-kcal-num').text(userInfo.todayKcalSumVo.snackTotal);
+  }else {
+    $('.breakfast-kcal-num').text(0);
+    $('.lunch-kcal-num').text(0);
+    $('.dinner-kcal-num').text(0);
+    $('.snack-kcal-num').text(0);
+  }
+
+
+  // $('.breakfast-kcal-num').text(userInfo.todayKcalSumVo.breakfastTotal);
+  // $('.lunch-kcal-num').text(userInfo.todayKcalSumVo.lunchTotal);
+  // $('.dinner-kcal-num').text(userInfo.todayKcalSumVo.dinnerTotal);
+  // $('.snack-kcal-num').text(userInfo.todayKcalSumVo.snackTotal);
+
+
+
+
 
   let eatKcal = $('.today-kcal-num').text();
   let dayKcal = $('.today-kcal-total').text();
@@ -319,15 +348,17 @@ function showUser(userInfo){
 
 
 // 칼로리에 따른 탄단지 비율
-  console.log($('.today-kcal-num').text());
-  let todayKcal = $('.today-kcal-num').text();
+//   console.log($('.today-kcal-num').text());
+  // let todayKcal = $('.today-kcal-num').text();
   let sumCarbohydrateKcal = $('.sumCarbohydrateNum').text()*4;
   // console.log(sumCarbohydrateKcal);
   let sumProteinKcal= $('.sumProteinNum').text()*4;
   let sumFatKcal = $('.sumFatNum').text()*9;
-  let sumCarbohydratePercent = Math.round((sumCarbohydrateKcal/todayKcal) * 100);
-  let sumProteinPercent = Math.round((sumProteinKcal/todayKcal) * 100);
-  let sumFatPercent = Math.round((sumFatKcal/todayKcal) * 100);
+  let sumTotalKcal = $('.sumCarbohydrateNum').text()*4 + $('.sumProteinNum').text()*4 + $('.sumFatNum').text()*9;
+  // let sumCarbohydratePercent = Math.round((sumCarbohydrateKcal/sumTotalKcal) * 100);
+  let sumProteinPercent = Math.round((sumProteinKcal/sumTotalKcal) * 100);
+  let sumFatPercent = Math.round((sumFatKcal/sumTotalKcal) * 100);
+  let sumCarbohydratePercent = 100-(sumProteinPercent+sumFatPercent);
 
   if (isNaN(sumCarbohydratePercent)) {
     $('.carbohydrate-percent-num').text(0);
@@ -383,8 +414,182 @@ function showUser(userInfo){
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.transFatSum);
 
   myChartNutri.update();
+
+
+  // 하루 식사 이미지 받아오기
+
+
+//  오늘 하루 사진 ========================================================================================================================================================
+
+  // 날짜로 받아온 식단 리스트 html 만드는 펑션
+  todayMealList(userInfo);
 }
 
 function showError(a, b, c){
   console.log(c);
+}
+
+
+// 모달창 html
+function showMeal(map){
+  console.log('모달창 map띄우기');
+  console.log(map);
+
+  let text = '';
+
+  //
+  text += `
+                            <div class="modal-header">
+                                <h2>${map.mealTime}</h2>
+                                <hr class="service-name-hr" />
+                            </div>
+                            <div class="modal-main">
+                                <!-- 이미지 -->
+                                <div class="day-img-box slider">
+                                    <input type="radio" name="slide" id="slide1" checked>
+                                    <input type="radio" name="slide" id="slide2">
+                                    <input type="radio" name="slide" id="slide3">
+                                    <input type="radio" name="slide" id="slide4">
+                                    <ul id="imgholder" class="imgs">
+                                        <li><img src="/img/sample1.jpg"></li>
+                                        <li><img src="/img/sample2.jpg"></li>
+                                        <li><img src="/img/sample3.jpg"></li>
+                                        <li><img src="/img/sample4.jpg"></li>
+                                    </ul>
+                                    <div class="bullets">
+                                        <label for="slide1">&nbsp;</label>
+                                        <label for="slide2">&nbsp;</label>
+                                        <label for="slide3">&nbsp;</label>
+                                        <label for="slide4">&nbsp;</label>
+                                    </div>
+                                </div>
+                                <!-- 이미지 끝-->
+                                <div class="day-detail">
+                                    <div class="day-detail1">
+                 `;
+  if(map.mealCodeNumber == 10){
+    text += `                                        
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span ">wb_twilight</span>아침</div>
+`;
+  }else if(map.mealCodeNumber == 20){
+    text += `    
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span">sunny</span>점심</div>
+
+            `;
+  }else if(map.mealCodeNumber == 30){
+    text += `
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span">dark_mode</span>저녁</div>
+            `;
+  }else if(map.mealCodeNumber == 40){
+    text += `
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span">icecream</span>간식</div>
+            `;
+  };
+  text += `
+                                    </div>
+                                    <div class="day-detail2">
+                `;
+  if (Array.isArray(map.foodList)) {
+    map.foodList.forEach(f => {
+      text += `
+                                       <div class="day-food-detail">
+                                         <div class="day-food-name">${f.foodName}</div>
+                                         <div class="day-food-weight">${f.foodWeight}g</div>
+                                         <div class="day-food-kcal">${f.foodKcal}kcal</div>
+                                       </div>
+                                     `;
+    });
+  };
+
+
+  text += `
+                                    <div class="day-detail3">
+                                        총 칼로리 : &nbsp<div class="detail3-kcal">${map.mealTotalKcal}kcal</div>
+                                    </div>
+                                    <div class="day-detail4">
+                                        <div class="modify-btn">수정</div>
+                                        <div class="delete-btn">삭제</div>
+                                    </div>
+                                </div>
+                            </div>
+        `;
+
+  $('.modal-container').html(text);
+}
+
+$('.meal-img-list').on('click', '.meal-img-box' , function (){
+  let boardNumber = $(this).data('boardnumber');
+
+  console.log(boardNumber);
+  openModal(boardNumber);
+})
+
+
+function todayMealList(userInfo){
+  // 날짜를 바꾸면 값이 쌓이므로 todayPhoto = '';을 통해 쌓이는 값을 초기화 시킴
+  todayPhoto = '';
+  userInfo.mealList.forEach(m => {
+    todayPhoto += `<li class="meal-img-box" data-boardnumber="${m.boardNumber}" >
+                            <div class="meal-img">
+                                <div class="imgbox" >
+                                    <img src="/img/sample1.jpg"  alt="" />
+                                </div>
+                                <div class="meal-info">
+                                    <div class="meal-eat-time">
+                                        <h2>${m.mealTime}</h2>
+                                    </div>
+                                    <div class="meal-eat-kcal">
+                                        <h2>${m.mealTotalKcal}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>`;
+  });
+  new Promise(function(resolve, reject) {
+    $('.meal-img-list').html(todayPhoto);
+    resolve();
+  }).then(function() {
+    mealImgBoxes = document.querySelectorAll(".meal-img-box");
+  //  이건 잘 줬니?
+  console.log("================================!")
+  });
+}
+
+
+
+
+
+function mealRead(boardNumber, callback, error){
+  console.log("mealRead 함수 실행 !");
+  console.log(boardNumber + "boardNumber");
+  $.ajax({
+    type: "get",
+    url : `/meal/myPage/${boardNumber}`,
+    dataType: 'json',
+    // data : {
+    //     "boardNumber" : boardNumber
+    // },
+    success : function (result){
+      if(callback){
+        callback(result);
+      }
+    },
+    error : error
+  });
+}
+
+
+closeModalButton.addEventListener('click', function(event) {
+  event.stopPropagation();
+  console.log("닫는다!");
+  modal.setAttribute("style", "display: none;");
+});
+
+
+function openModal(boardNumber) {
+  console.log("11111111111111111111111111111111");
+  // event.stopPropagation();
+  console.log("boardNumber는 이거 ! " + boardNumber);
+  mealRead(boardNumber, showMeal, showError);
+  modal.setAttribute("style", "display: block;");
 }

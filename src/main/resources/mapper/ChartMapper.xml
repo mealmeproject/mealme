@@ -84,6 +84,41 @@
         ORDER BY TRUNC(TB.MEAL_TIME, 'MM') DESC
     </select>
 
+    <select id="getMealList" resultType="mealVo">
+        SELECT B.BOARD_NUMBER, B.USER_NUMBER, TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') AS MEAL_DATE,
+               TO_CHAR(B.MEAL_TIME, 'HH24:MI') AS MEAL_TIME,
+               BF.FILE_NUMBER, BF.FILE_NAME, BF.FILE_UPLOAD_PATH, BF.FILE_UUID,
+               F.MEAL_TOTAL_KCAL
+        FROM TBL_BOARD B
+                 LEFT JOIN TBL_BOARD_FILE BF ON B.BOARD_NUMBER = BF.BOARD_NUMBER
+                 LEFT JOIN (
+            SELECT BOARD_NUMBER, SUM(FOOD_KCAL) AS MEAL_TOTAL_KCAL
+            FROM TBL_FOOD
+            GROUP BY BOARD_NUMBER
+        ) F ON B.BOARD_NUMBER = F.BOARD_NUMBER
+        WHERE B.USER_NUMBER = #{userNumber} AND TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') = #{mealTime}
+        ORDER BY MEAL_DATE, MEAL_TIME
+    </select>
+
+    <select id="selectMealCodeNumberSum" resultType="TodayKcalSumVo">
+        SELECT (SELECT SUM(FOOD_KCAL) AS TOTAL_FOOD_KCAL
+                FROM TBL_FOOD F
+                         JOIN TBL_BOARD B ON F.BOARD_NUMBER = B.BOARD_NUMBER
+                WHERE USER_NUMBER = #{userNumber} AND TRUNC(MEAL_TIME) = TO_DATE(#{mealTime}) AND MEAL_CODE_NUMBER = 10) AS BREAKFAST_TOTAL,
+               (SELECT SUM(FOOD_KCAL) AS TOTAL_FOOD_KCAL
+                FROM TBL_FOOD F
+                         JOIN TBL_BOARD B ON F.BOARD_NUMBER = B.BOARD_NUMBER
+                WHERE USER_NUMBER = #{userNumber} AND TRUNC(MEAL_TIME) = TO_DATE(#{mealTime}) AND MEAL_CODE_NUMBER = 20) AS LUNCH_TOTAL,
+               (SELECT SUM(FOOD_KCAL) AS TOTAL_FOOD_KCAL
+                FROM TBL_FOOD F
+                         JOIN TBL_BOARD B ON F.BOARD_NUMBER = B.BOARD_NUMBER
+                WHERE USER_NUMBER = #{userNumber} AND TRUNC(MEAL_TIME) = TO_DATE(#{mealTime}) AND MEAL_CODE_NUMBER = 30) AS DINNER_TOTAL,
+               (SELECT SUM(FOOD_KCAL) AS TOTAL_FOOD_KCAL
+                FROM TBL_FOOD F
+                         JOIN TBL_BOARD B ON F.BOARD_NUMBER = B.BOARD_NUMBER
+                WHERE USER_NUMBER = #{userNumber} AND TRUNC(MEAL_TIME) = TO_DATE(#{mealTime}) AND MEAL_CODE_NUMBER = 40) AS SNACK_TOTAL
+        FROM DUAL
+    </select>
 
 
 

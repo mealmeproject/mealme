@@ -229,9 +229,12 @@ public class CompanyController {
         return "company/AfterConsulting";
     }
     @GetMapping("/consultingReview")
-    public String consultingReview(HttpServletRequest req, Model model) {
+    public String consultingReview(HttpServletRequest req,@RequestParam("consultingRequestNumber") Long consultingRequestNumber ,Model model) {
 //        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long consultingRequestNumber = 7L;
+        System.out.println("@@consultingRequestNumber@@@");
+        System.out.println(consultingRequestNumber);
+//        Long consultingRequestNumber = (long)req.getSession().getAttribute("consultingRequestNumber");
+//        Long consultingRequestNumber = 7L;
         ConsultingReviewVo consultingReviewVo = reviewService.findConsultingInfo(consultingRequestNumber);
         System.out.println("%%%%%%");
         System.out.println(consultingReviewVo);
@@ -243,6 +246,7 @@ public class CompanyController {
     @PostMapping("/consultingReview")
     public RedirectView consultingReviewWrite(ConsultingReviewVo consultingReviewVo){
         reviewService.register(consultingReviewVo);
+        reviewService.updateConsultingCondition(consultingReviewVo.getConsultingRequestNumber());
         return new RedirectView("/company/consultingReviewList");
     }
 
@@ -265,8 +269,17 @@ public class CompanyController {
 
 //    컨설팅 결제 내역 페이지
     @GetMapping("/consultingPayInfo")
-    public void consultingPayInfo(){
+    public String consultingPayInfo(HttpServletRequest req, Model model, Criteria criteria){
+        //      Long userNumber = (long)req.getSession().getAttribute("userNumber");
+        Long userNumber = 1L;
+        List<ConsultingPayVo> consultingPayVo = reviewService.findConsultingOrderList(userNumber, criteria);
+        System.out.println("%%%컨설팅 구매내역 리스트%%%");
+        System.out.println(consultingPayVo);
 
+        model.addAttribute("consultingPayVo", consultingPayVo);
+        model.addAttribute("pageInfo", new PageVo(criteria, reviewService.orderConsultingListCount()));
+        System.out.println(new PageVo(criteria, reviewService.orderConsultingListCount()));
+        return "company/consultingPayInfo";
     }
 
     @GetMapping("/consultingReviewModify")

@@ -12,9 +12,11 @@ public class ConsultingReviewVo {
     private long companyNumber;
     private long userNumber;
     private String consultingComment;
+    private String consultingRequestComment;
     private String fileName;
     private String fileUploadPath;
     private String consultingRequestDate;
+    private String consultingCondition;
     private long reviewNumber;
     private String reviewDate;
     private String reviewContent;
