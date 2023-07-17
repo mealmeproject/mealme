@@ -64,4 +64,7 @@ public interface UserMapper {
     // 유저 업데이트
     public void updateCompany(CompanyDto companyDto);
 
+    // 유저 비밀번호 찾기
+    public int findUserPassword(UserDto userDto);
+
 }

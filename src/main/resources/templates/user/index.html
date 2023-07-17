@@ -12,20 +12,86 @@
   <body>
   <header class="header1" th:replace="fragment/header1 :: header1"></header>
   <div class="main-container">
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/userOrCompany}">회원가입</a>
-      <a th:href="@{/meal/myPage}">마이페이지</a>
-      <a th:href="@{/meal/write}">마이페이지글쓰기</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-      <a th:href="@{/user/login}">로그인</a>
-
-    </div>
+      <div class="banner-container">배너 넣을 자리</div>
+      <div class="write-container">식단 보여줄 자리</div>
+      <div class="chart-explain">
+          <div class="chart-explain-header">
+              <h2>
+                  맞춤 식단,
+                  <br />
+                  이제는 꼭 해야 하는 이유
+              </h2>
+              <div class="chart-sub-title">
+                  <div class="chart-line"></div>
+                  <h4>무작정 굶는 다이어트는 멈춰야 합니다</h4>
+                  <div class="chart-line"></div>
+              </div>
+          </div>
+          <div class="chart-explain-img-container">
+              <div class="chart-img-box1">
+                  <img
+                          src="https://dl8439a2el04c.cloudfront.net/static/image/landing/landing_necessity_top.svg"
+                          alt=""
+                  />
+              </div>
+              <div class="chart-img-box2">
+                  <img
+                          src="https://dl8439a2el04c.cloudfront.net/static/image/landing/landing_necessity_bottom.svg"
+                          alt=""
+                  />
+              </div>
+          </div>
+      </div>
+      <div class="chart-container">
+          <div class="chart-box">
+              <div class="chart-img-box">
+                  <img src="" alt="" />
+              </div>
+              <div class="chart-info">
+                  <h2>
+                      나에게 맞는 영양소 섭취,
+                      <br />
+                      밀미와 함께하면
+                      <br />
+                      어렵지 않습니다
+                  </h2>
+                  <a href="">
+                      <div class="chart-btn">차트로 식단 분석하기</div>
+                  </a>
+              </div>
+          </div>
+      </div>
+      <div class="consulting-container">
+          <div class="consulting-img-box">
+              <img src="/img/indexConsulting.png" alt="" />
+          </div>
+      </div>
+      <div class="shop-container">
+          <div class="shop-box">
+              <div class="shop-info">
+                  <div class="shop-info-header">내가 직접 선택 가능한 식단</div>
+                  <h3>
+                      내 입맞에 맞춰
+                      <br />
+                      원하는 상품으로 주문해요
+                  </h3>
+                  <p>
+                      먹고 있거나 추천받은 음식 중에서 바꾸고 싶은 음식이 있나요? 밀미의 다양한 상품 중에서 비슷한
+                      영양성분의 다른 상품으로 변경 할 수 있어요.
+                  </p>
+                  <a href="">
+                      <div class="chart-btn">쇼핑몰 바로가기</div>
+                  </a>
+              </div>
+              <div class="shop-img">
+                  <img src="https://dl8439a2el04c.cloudfront.net/static/image/landing/changeable_diet.gif" />
+              </div>
+          </div>
+      </div>
+      <div class="ride-container">
+          <img src="https://dl8439a2el04c.cloudfront.net/static/image/landing/landing_delivery_big.png" />
+      </div>
+  </div>
   <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
   </body>
 </html>

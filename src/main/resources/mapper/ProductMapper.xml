@@ -18,6 +18,109 @@
                  PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID
     </select>
 
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(PRODUCT_NUMBER) FROM TBL_PRODUCT
+    </select>
+
+    <!--    상품 상세정보 조회 (별점)-->
+    <select id = "selectStarRating" resultType="productVo">
+        SELECT
+            P.PRODUCT_NUMBER,
+            P.CATEGORY_CODE1,
+            P.CATEGORY_CODE2,
+            P.PRODUCT_NAME,
+            P.PRODUCT_SELLER,
+            P.PRODUCT_PRICE,
+            P.PRODUCT_EXPLANATION,
+            P.PRODUCT_INVENTORY,
+            P.PRODUCT_REGISTER_DATE,
+            AVG(ORV.REVIEW_GRADE) AS AVERAGE_RATING
+        FROM
+            TBL_PRODUCT P
+                LEFT JOIN TBL_ORDER_REVIEW ORV ON P.PRODUCT_NUMBER = ORV.PRODUCT_NUMBER
+        WHERE
+            P.PRODUCT_NUMBER = #{productNumber}
+        GROUP BY
+            P.PRODUCT_NUMBER,
+            P.CATEGORY_CODE1,
+            P.CATEGORY_CODE2,
+            P.PRODUCT_NAME,
+            P.PRODUCT_SELLER,
+            P.PRODUCT_PRICE,
+            P.PRODUCT_EXPLANATION,
+            P.PRODUCT_INVENTORY,
+            P.PRODUCT_REGISTER_DATE
+    </select>
+
+        <!--    상품 리뷰 조회-->
+    <select id="selectList" resultType="productVo">
+        SELECT
+            u.USER_NAME,
+            u.USER_ID,
+            r.REVIEW_GRADE AS STAR_RATING,
+            r.REVIEW_DATE,
+            r.REVIEW_CONTENT
+        FROM
+            TBL_PRODUCT p
+                LEFT JOIN TBL_PRODUCT_CATEGORY c ON p.CATEGORY_CODE1 = c.CATEGORY_CODE1
+                LEFT JOIN TBL_ORDER_REVIEW r ON p.PRODUCT_NUMBER = r.PRODUCT_NUMBER
+                LEFT JOIN TBL_PRODUCT_FILE f ON p.PRODUCT_NUMBER = f.PRODUCT_NUMBER
+                LEFT JOIN TBL_USER u ON r.USER_NUMBER = u.USER_NUMBER
+        WHERE
+            p.PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+
+
+    <select id="selectCategory" resultType="productVo" parameterType="criteriaProduct">
+        SELECT
+            pc1.CATEGORY_CODE1,
+            pc1.CATEGORY_NAME,
+            pc2.CATEGORY_CODE2,
+            pc2.CATEGORY_NAME,
+            pc2.CATEGORY_CODE1,
+            P.PRODUCT_NUMBER,
+            P.CATEGORY_CODE1,
+            P.CATEGORY_CODE2,
+            P.PRODUCT_NAME,
+            P.PRODUCT_SELLER,
+            P.PRODUCT_PRICE,
+            P.PRODUCT_EXPLANATION,
+            P.PRODUCT_INVENTORY,
+            P.PRODUCT_REGISTER_DATE,
+            AVG(ORV.REVIEW_GRADE) AS AVERAGE_RATING,
+            COUNT(*) AS TOTAL_COUNT,
+            PF.FILE_NAME,
+            PF.FILE_UPLOAD_PATH,
+            PF.FILE_UUID
+        FROM
+            TBL_PRODUCT P
+                LEFT JOIN TBL_ORDER O ON P.PRODUCT_NUMBER = O.PRODUCT_NUMBER
+                LEFT JOIN TBL_ORDER_REVIEW ORV ON P.PRODUCT_NUMBER = ORV.PRODUCT_NUMBER
+                LEFT JOIN TBL_PRODUCT_FILE PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+                JOIN TBL_PRODUCT_CATEGORY pc1 ON P.CATEGORY_CODE1 = pc1.CATEGORY_CODE1
+                JOIN TBL_PRODUCT_CATEGORY2 pc2 ON P.CATEGORY_CODE2 = pc2.CATEGORY_CODE2 AND P.CATEGORY_CODE1 = pc2.CATEGORY_CODE1
+        WHERE
+            (pc1.CATEGORY_CODE1 = 1 AND pc2.CATEGORY_CODE2 = 2)
+        GROUP BY
+            pc1.CATEGORY_CODE1,
+            pc1.CATEGORY_NAME,
+            pc2.CATEGORY_CODE2,
+            pc2.CATEGORY_NAME,
+            pc2.CATEGORY_CODE1,
+            P.PRODUCT_NUMBER,
+            P.CATEGORY_CODE1,
+            P.CATEGORY_CODE2,
+            P.PRODUCT_NAME,
+            P.PRODUCT_SELLER,
+            P.PRODUCT_PRICE,
+            P.PRODUCT_EXPLANATION,
+            P.PRODUCT_INVENTORY,
+            P.PRODUCT_REGISTER_DATE,
+            PF.FILE_NAME,
+            PF.FILE_UPLOAD_PATH,
+            PF.FILE_UUID
+    </select>
 
 
     <!-- 상품 전체 조회-->
@@ -48,50 +151,21 @@
         ORDER BY AVERAGE_RATING DESC
     </select>
 
-    <!--    상품 상세정보 상품 조회-->
-    <select id="selectOne" resultType="productVo">
-        SELECT
-            p.PRODUCT_NUMBER,
-            p.PRODUCT_NAME,
-            p.PRODUCT_SELLER,
-            p.PRODUCT_PRICE,
-            p.PRODUCT_EXPLANATION,
-            p.PRODUCT_REGISTER_DATE,
-            p.PRODUCT_INVENTORY,
-            c.CATEGORY_NAME,
-            r.REVIEW_NUMBER,
-            r.REVIEW_DATE,
-            r.REVIEW_CONTENT,
-            r.REVIEW_GRADE,
-            f.FILE_NUMBER,
-            f.FILE_NAME,
-            f.FILE_UPLOAD_PATH,
-            f.FILE_UUID,
-            u.USER_NUMBER,
-            u.USER_NAME,
-            u.USER_ID
-        FROM
-            TBL_PRODUCT p
-                JOIN TBL_PRODUCT_CATEGORY c ON p.CATEGORY_CODE1 = c.CATEGORY_CODE1
-                LEFT JOIN TBL_ORDER_REVIEW r ON p.PRODUCT_NUMBER = r.PRODUCT_NUMBER
-                LEFT JOIN TBL_PRODUCT_FILE f ON p.PRODUCT_NUMBER = f.PRODUCT_NUMBER
-                LEFT JOIN TBL_USER u ON p.PRODUCT_SELLER = u.USER_ID
-        WHERE
-            p.PRODUCT_NUMBER = #{productNumber}
-    </select>
-
     <!--    장바구니 상품 조회-->
     <select id="selectCart" resultType="cartVo">
-        SELECT DISTINCT
+        SELECT
             u.USER_NUMBER,
             u.USER_NAME,
             p.PRODUCT_NAME,
             p.PRODUCT_PRICE,
             c.CART_COUNT,
             p.PRODUCT_PRICE * c.CART_COUNT AS TOTAL_COUNT,
+            SUM(p.PRODUCT_PRICE) AS TOTAL_PRICE,
             pf.FILE_NAME,
             pf.FILE_UPLOAD_PATH,
-            pf.FILE_UUID
+            pf.FILE_UUID,
+            c.CART_COUNT AS QUANTITY,
+            c.CART_NUMBER
         FROM
             TBL_USER u
                 JOIN TBL_CART c ON u.USER_NUMBER = c.USER_NUMBER
@@ -99,16 +173,102 @@
                 LEFT JOIN TBL_PRODUCT_FILE pf ON pf.FILE_NUMBER = p.PRODUCT_NUMBER
         WHERE
             u.USER_NUMBER = #{userNumber}
+        GROUP BY
+            u.USER_NUMBER,
+            u.USER_NAME,
+            p.PRODUCT_NAME,
+            p.PRODUCT_PRICE,
+            c.CART_COUNT,
+            pf.FILE_NAME,
+            pf.FILE_UPLOAD_PATH,
+            pf.FILE_UUID,
+            c.CART_NUMBER
     </select>
 
 
-    <insert id="addCart">
+
+<!--    장바구니 상품 추가-->
+    <insert id="addCart" parameterType="cartVo">
         INSERT INTO TBL_CART (CART_NUMBER, PRODUCT_NUMBER, USER_NUMBER, CART_COUNT)
         VALUES (SEQ_CART.nextval, #{productNumber}, #{userNumber}, #{cartCount})
     </insert>
 
+    <select id = "selectCartList" resultType="cartVo">
+        select CART_NUMBER, C.PRODUCT_NUMBER, USER_NUMBER, CART_COUNT,
+               P.PRODUCT_NAME, P.PRODUCT_PRICE, P.PRODUCT_EXPLANATION,
+               PF.FILE_UPLOAD_PATH, PF.FILE_UUID, PF.FILE_NAME
+        from TBL_CART C JOIN TBL_PRODUCT P
+         ON USER_NUMBER = #{userNumber} AND C.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+        LEFT JOIN TBL_PRODUCT_FILE PF
+        ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+    </select>
 
 
+<!--    장바구니 상품 수량 변경-->
+    <update id="updateCartPlus">
+        UPDATE TBL_CART
+        SET CART_COUNT = #{cartCount}
+        WHERE CART_NUMBER = #{cartNumber}
+    </update>
+
+
+    <update id="updateCartMinus">
+        UPDATE TBL_CART
+        SET CART_COUNT = #{cartCount} - CART_COUNT
+        WHERE CART_NUMBER = #{cartNumber}
+    </update>
+
+
+    <!--    장바구니 상품 삭제-->
+    <delete id="deleteCart">
+        DELETE
+        FROM TBL_CART
+        WHERE CART_NUMBER = #{cartNumber}
+    </delete>
+
+
+    <!--결제-->
+    <insert id="insertPay">
+            INSERT INTO TBL_ORDER (ORDER_NUMBER, USER_NUMBER, PRODUCT_NUMBER, ORDER_CONDITION_CODE, SHIPPING_ADDRESS_NUMBER,
+                                   ORDER_COUNT, ORDER_DATE)
+            VALUES (#{orderNumber}, #{userNumber}, #{productNumber}, #{orderConditionCode}, #{shippingAddressNumber},
+                    #{orderCount}, NOW())
+    </insert>
+
+
+    <select id = "orderInfo">
+        SELECT
+            p.PRODUCT_NUMBER,
+            p.PRODUCT_PRICE,
+            p.PRODUCT_EXPLANATION,
+            pf.FILE_NAME,
+            pf.FILE_UPLOAD_PATH,
+            pf.FILE_UUID,
+            o.ORDER_DATE,
+            u.USER_NAME,
+            u.USER_ADDRESS1,
+            u.USER_ADDRESS2,
+            u.USER_ADDRESS3,
+            u.USER_PHONE_NUMBER,
+            oc.CONDITION_CODE_NAME
+        FROM
+            TBL_PRODUCT p
+                JOIN
+            TBL_PRODUCT_FILE pf ON p.PRODUCT_NUMBER = pf.PRODUCT_NUMBER
+                JOIN
+            TBL_ORDER o ON p.PRODUCT_NUMBER = o.PRODUCT_NUMBER
+                JOIN
+            TBL_USER u ON o.USER_NUMBER = u.USER_NUMBER
+                JOIN
+            TBL_ORDER_CONDITION oc ON o.ORDER_CONDITION_CODE = oc.ORDER_CONDITION_CODE
+    </select>
+
+<!--    유저 정보 불러오기-->
+    <select id = "selectUser" resultType="userDto">
+        select USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS_NUMBER, USER_ADDRESS1, USER_ADDRESS2, USER_ADDRESS3, USER_EMAIL, USER_BIRTH, USER_JOIN_DATE, USER_COMMENT, USER_HEIGHT, USER_WEIGHT, USER_GRADE
+        from TBL_USER
+        where USER_NUMBER = #{userNumber}
+    </select>
 
 
 

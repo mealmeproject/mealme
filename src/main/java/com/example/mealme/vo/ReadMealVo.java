@@ -18,7 +18,7 @@ public class ReadMealVo {
     private String boardTitle;
     private String boardContent;
     private String mealTime;
-    private int mealTotalKcal;
+    private double mealTotalKcal;
     private List<FoodDto> foodList;
     private List<BoardFileDto> files;
 }

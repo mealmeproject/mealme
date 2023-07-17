@@ -27,7 +27,6 @@
 
 $(".all-wrap").on('click', '.review-sub', function(){
   let $currentReviewWrap = $(this).siblings('.review-wrap');
-  // 클릭한 .review-sub 요소와 연결된 .review-wrap 요소만 토글하여 보이도록 처리합니다.
   if ($currentReviewWrap.css('display') === 'none') {
     $currentReviewWrap.css('display', 'block');
   } else {
@@ -77,7 +76,9 @@ function makeListHtml(result){
                         <!-- 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 -->
                         <div class="ranking-wrap">
                             <div class="review-date">${reviewList[i].consultingRequestDate}</div>
-                            <div class="consulting-comment">${reviewList[i].consultingComment}
+                            <div class="consulting-comment-wrap">
+                            <div class="consulting-comment">${reviewList[i].consultingRequestComment}
+                            </div>
                             </div>
                             <!-- 상품일 경우 상품제목, 컨설팅일 경우  컨설팅 제목 -->
                             <div class="star-wrap">

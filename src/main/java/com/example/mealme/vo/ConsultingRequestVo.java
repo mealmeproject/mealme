@@ -16,7 +16,8 @@ public class ConsultingRequestVo {
     private String consultingRequestFirstDate;
     private String consultingRequestLastDate;
     private String consultingRequestDate;
-    private String consultingRequestCondition;
+    private String consultingCondition;
     private String userNickname;
+    private String companyName;
 
 }

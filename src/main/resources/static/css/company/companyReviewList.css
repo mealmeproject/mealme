@@ -77,10 +77,22 @@
   /*border: 1px solid lightgray;*/
 }
 
+.consulting-comment-wrap{
+  position: relative;
+}
+
 .consulting-comment{
+  display: inline-block;
   font-size: 20px;
   margin-left: 25px;
   width: 600px;
+  height: 50px;
+  line-height: 50px;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .review-sub{
@@ -107,20 +119,21 @@
 
 .review-consulting{
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #c1c1c1;
+  border-right: none;
+  border-left: none;
 }
 
 .review-text-wrap{
   width: 900px;
-  display: flex;
-  justify-content: center;
 }
 
 .review-text{
-  padding-bottom: 20px;
-  font-size: 30px;
-  width: 775px;
+  padding-bottom: 50px;
+  font-size: 35px;
+  font-weight: bold;
 }
 
 
@@ -183,4 +196,80 @@
 
 .review-wrap{
   display: none;
+}
+
+.blank{
+  height: 50px;
+}
+
+/* 여기부터는 상품 리뷰 리스트 */
+.review-product{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #c1c1c1;
+  border-right: none;
+  border-left: none;
+}
+
+.product-name-wrap{
+  position: relative;
+}
+
+.product-name{
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 25px;
+  width: 600px;
+  height: 50px;
+  line-height: 50px;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 이동탭 부분 */
+.tab-wrap{
+  display: flex;
+  height: 50px;
+  width: 900px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid rgb(255, 139, 38);
+}
+
+.company-tab{
+  height: 50px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(255, 139, 38);
+  border-bottom: none;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background: rgb(255, 139, 38);
+  font-size: 15px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.shop-tab{
+  height: 50px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(255, 139, 38);
+  border-bottom: none;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  margin-left: 2px;
+  font-size: 15px;
+  color: rgb(255, 139, 38);
+  font-weight: bold;
+}
+
+.line{
+  border-bottom: 1px solid #c1c1c1;
 }

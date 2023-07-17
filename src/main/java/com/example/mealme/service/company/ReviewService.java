@@ -1,7 +1,9 @@
 package com.example.mealme.service.company;
 
 import com.example.mealme.mapper.ReviewMapper;
+import com.example.mealme.vo.ConsultingPayVo;
 import com.example.mealme.vo.ConsultingReviewVo;
+import com.example.mealme.vo.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,5 +51,17 @@ public class ReviewService {
             throw new IllegalArgumentException("존재하지 않는 컨설팅 리뷰입니다.");
         }
         reviewMapper.deleteConsultingReview(reviewNumber);
+    }
+    public List<ConsultingPayVo> findConsultingOrderList(Long userNumber, Criteria criteria){
+        List<ConsultingPayVo> consultingOrderList = reviewMapper.selectOrderConsultingList(userNumber, criteria);
+        System.out.println("@@@@@구매내역 리스트@@@@@");
+        System.out.println(consultingOrderList);
+        return consultingOrderList;
+    }
+
+    public int orderConsultingListCount(){ return reviewMapper.orderConsultingListCount(); };
+
+    public void updateConsultingCondition(Long consultingRequestNumber){
+        reviewMapper.updateConsultingCondition(consultingRequestNumber);
     }
 }

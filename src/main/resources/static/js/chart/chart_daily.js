@@ -35,7 +35,7 @@ function showDaily(dailyList){
 
   let today = new Date();
   let todayDates = [];
-
+  let MonthDay = [];
   for (let i = 0; i < 7; i++) {
     let date = new Date(today);
     date.setDate(date.getDate() - i);
@@ -46,8 +46,13 @@ function showDaily(dailyList){
 
     let formattedDate = year + '-' + month + '-' + day;
     todayDates.push(formattedDate);
+
+    let MonthDayDate = month + '-' + day;
+    MonthDay.push(MonthDayDate);
   }
   console.log(todayDates);
+  console.log('월+일만 뽑기')
+  console.log(MonthDay);
 
   let kcalSum= [0,0,0,0,0,0,0];
   let carbohydrateSum = [0,0,0,0,0,0,0];
@@ -125,7 +130,7 @@ function showDaily(dailyList){
   // *****바 차트
   // 일간 탄단지 섭취 그람수
   const data = {
-    labels: [todayDates[6], todayDates[5], todayDates[4], todayDates[3], todayDates[2], todayDates[1], todayDates[0]],
+    labels: [MonthDay[6], MonthDay[5], MonthDay[4], MonthDay[3], MonthDay[2], MonthDay[1], MonthDay[0]],
     datasets: [{
       label: '탄수화물',
       data: [carbohydrateSum[6], carbohydrateSum[5], carbohydrateSum[4], carbohydrateSum[3], carbohydrateSum[2], carbohydrateSum[1], carbohydrateSum[0]],
@@ -319,9 +324,11 @@ function showDaily(dailyList){
   let weekCarbohydrateKcal = carbohydrateTotal*4;
   let weekProteinKcal = proteinTotal*4;
   let weekFatKcal = fatTotal*9;
-  let weekCarbohydratePercent = Math.round((weekCarbohydrateKcal/kcalTotal) * 100);
-  let weekProteinPercent = Math.round((weekProteinKcal/kcalTotal) * 100);
-  let weekFatPercent = Math.round((weekFatKcal/kcalTotal) * 100);
+  let weekTotalKcal = carbohydrateTotal*4 + proteinTotal*4 + fatTotal*9;
+  // let weekCarbohydratePercent = Math.round((weekCarbohydrateKcal/weekTotalKcal) * 100);
+  let weekProteinPercent = Math.round((weekProteinKcal/weekTotalKcal) * 100);
+  let weekFatPercent = Math.round((weekFatKcal/weekTotalKcal) * 100);
+  let weekCarbohydratePercent = 100 - (weekProteinPercent+weekFatPercent);
 
   if (isNaN(weekCarbohydratePercent)) {
     $('.carbohydrate-percent-num').text(0);
