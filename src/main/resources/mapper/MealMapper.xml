@@ -34,19 +34,45 @@
     </select>
 
     <select id="getMealList" resultType="mealVo">
-        SELECT B.BOARD_NUMBER, B.USER_NUMBER, TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') AS MEAL_DATE,
-               TO_CHAR(B.MEAL_TIME, 'HH24:MI') AS MEAL_TIME,
-               BF.FILE_NUMBER, BF.FILE_NAME, BF.FILE_UPLOAD_PATH, BF.FILE_UUID,
-               F.MEAL_TOTAL_KCAL
-        FROM TBL_BOARD B
-                 LEFT JOIN TBL_BOARD_FILE BF ON B.BOARD_NUMBER = BF.BOARD_NUMBER
-                 LEFT JOIN (
-            SELECT BOARD_NUMBER, SUM(FOOD_KCAL) AS MEAL_TOTAL_KCAL
-            FROM TBL_FOOD
-            GROUP BY BOARD_NUMBER
-        ) F ON B.BOARD_NUMBER = F.BOARD_NUMBER
-        WHERE B.USER_NUMBER = #{userNumber}
-        ORDER BY MEAL_DATE, MEAL_TIME
+        SELECT
+            B.BOARD_NUMBER,
+            B.USER_NUMBER,
+            TO_CHAR(B.MEAL_TIME, 'YYYY-MM-DD') AS MEAL_DATE,
+            TO_CHAR(B.MEAL_TIME, 'HH24:MI') AS MEAL_TIME,
+            BF.FILE_NUMBER,
+            BF.FILE_NAME,
+            BF.FILE_UPLOAD_PATH,
+            BF.FILE_UUID,
+            F.MEAL_TOTAL_KCAL
+        FROM
+            TBL_BOARD B
+                LEFT JOIN
+            (
+                SELECT
+                    FILE_NUMBER,
+                    FILE_UPLOAD_PATH,
+                    FILE_UUID,
+                    FILE_NAME,
+                    BOARD_NUMBER,
+                    RANK() OVER (PARTITION BY BOARD_NUMBER ORDER BY FILE_NUMBER) RK
+                FROM
+                    TBL_BOARD_FILE F
+            ) BF ON B.BOARD_NUMBER = BF.BOARD_NUMBER AND BF.RK = 1
+                LEFT JOIN
+            (
+                SELECT
+                    BOARD_NUMBER,
+                    SUM(FOOD_KCAL) AS MEAL_TOTAL_KCAL
+                FROM
+                    TBL_FOOD
+                GROUP BY
+                    BOARD_NUMBER
+            ) F ON B.BOARD_NUMBER = F.BOARD_NUMBER
+        WHERE
+            B.USER_NUMBER = #{userNumber}
+        ORDER BY
+            MEAL_DATE,
+            MEAL_TIME
     </select>
 
     <select id="getMeal" resultType="readMealVo">
@@ -66,5 +92,29 @@
         SELECT * FROM TBL_BOARD_FILE
         WHERE BOARD_NUMBER = #{boardNumber}
     </select>
+
+
+    <insert id="insertBoard">
+        <selectKey keyProperty="boardNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_BOARD.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_BOARD (BOARD_NUMBER, MEAL_CODE_NUMBER, USER_NUMBER, BOARD_TITLE,
+                               BOARD_CONTENT, MEAL_TIME)
+        values (#{boardNumber}, #{mealCodeNumber}, #{userNumber}, #{boardTitle}, #{boardContent}, TO_DATE(#{mealTime}, 'YYYY-MM-DD"T"HH24:MI'))
+    </insert>
+
+    <insert id="insertFood">
+        <selectKey keyProperty="foodNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_FOOD.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_FOOD (
+        FOOD_NUMBER, BOARD_NUMBER, FOOD_NAME, FOOD_WEIGHT, FOOD_SERVING, FOOD_KCAL, FOOD_CARBOHYDRATE,
+        FOOD_PROTEIN, FOOD_FAT, FOOD_SUGARS, FOOD_SODIUM, FOOD_CHOLESTEROL, FOOD_FATTY_ACID,
+        FOOD_TRANS_FAT)
+        VALUES (
+        #{foodNumber}, #{boardNumber}, #{foodName}, #{foodWeight}, #{foodServing}, #{foodKcal}, #{foodCarbohydrate},
+        #{foodProtein}, #{foodFat}, #{foodSugars}, #{foodSodium}, #{foodCholesterol}, #{foodFattyAcid},
+        #{foodTransFat})
+    </insert>
 
 </mapper>

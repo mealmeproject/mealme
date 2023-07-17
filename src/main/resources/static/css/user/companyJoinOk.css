@@ -64,8 +64,10 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 6px;
+    text-decoration: none;
 }
 
 .btn-box div:hover {
     background-color: #ff7e00;
 }
+

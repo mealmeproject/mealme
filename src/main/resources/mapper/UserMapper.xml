@@ -135,6 +135,10 @@
         where COMPANY_NUMBER = #{companyNumber}
     </update>
 
+    <select id="findUserPassword">
+        select count(user_number) from TBL_USER
+        WHERE USER_ID = #{userid} AND USER_NAME = #{userName} AND USER_PHONE_NUMBER = #{userPhoneNumber}
+    </select>
 
 
 

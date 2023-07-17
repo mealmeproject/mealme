@@ -82,7 +82,9 @@ public class UserController {
         // 받은 Vo를 userDto로 바꿔주는 메소드 실행 (ex) 전화번호 합치기 (010/1234/1234))
         UserDto userDto = userVo.userVoToUserDto();
         userService.registerUser(userDto);
-        return new RedirectView("/user/userJoinOk");
+        Long userNumber = userDto.getUserNumber();
+        String path = "/user/userJoinOk?userNumber=" + userNumber;
+        return new RedirectView(path);
     }
 
     // 개인 회원가입 페이지 아이디 체크
@@ -100,7 +102,9 @@ public class UserController {
 
     // 회원 가입 완료 페이지
     @GetMapping("/userJoinOk")
-    public void userJoinOk() {
+    public void userJoinOk(@RequestParam("userNumber") Long userNumber, Model model) {
+        String userName = userService.getUserName(userNumber);
+        model.addAttribute("userName", userName);
     }
 
     // 카카오 로그인
@@ -136,7 +140,10 @@ public class UserController {
                 e.printStackTrace();
             }
         }
-        return new RedirectView("/user/companyJoinOk");
+
+
+        String path = "/user/companyJoinOk?companyNumber=" + companyNumber;
+        return new RedirectView(path);
     }
 
     // 기업 회원가입시 아이디 중복검사
@@ -153,7 +160,9 @@ public class UserController {
 
     // 기업 회원가입 완료 페이지
     @GetMapping("/companyJoinOk")
-    public void companyJoinOk() {
+    public void companyJoinOk(@RequestParam("companyNumber") Long companyNumber, Model model) {
+        String companyName = userService.getCompanyName(companyNumber);
+        model.addAttribute("companyName", companyName);
     }
 
     // 로그아웃 처리
@@ -166,6 +175,14 @@ public class UserController {
     // 비밀번호 찾기 경로 처리
     @GetMapping("/findPassword")
     public void findPassword() {
+    }
+
+    @PostMapping("/findPassword")
+    public void findPassword(UserDto userDto){
+
+        if(userService.findPassword(userDto)){
+
+        };
     }
 
     // 비밀번호 찾기 완료 페이지 (메일로 전송 했다는 메세지 출력)
