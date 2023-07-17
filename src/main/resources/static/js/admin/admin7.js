@@ -1,3 +1,122 @@
+import * as register from '../module/registProduct.js';
+
+// 대분류 화면에 띄우기
+
+register.categoryViewList(categoryView, showError);
+
+function categoryView(cate){
+  console.log("***********************************");
+  console.log(cate);
+
+  let list = '';
+
+  cate.forEach(c => {
+    list += `
+      
+                                                   
+       <li class="_next">
+         (대분류) ${c.categoryName} &gt;
+        <input type="hidden" name="categoryCode1" class="_category_no" value="${c.categoryCode1}">
+       </li>
+    `;
+  });
+  $('._category_1').html(list);
+}
+
+//중분류 띄우기
+function showCategoryList(list){
+  let text ='';
+
+  list.forEach(c => {
+    text+= `
+        <li class=" _next">(중분류) ${c.categoryName} &gt;
+        <input type="hidden" name="categoryCode2" class="_category_no" value="${c.categoryCode2}" ></li>
+    `;
+  });
+  $("._category_2").html(text);
+
+}
+
+
+//대분류 클릭 이벤트
+$("._category_1").on('click', '._next',function (){
+     let cateNum = $(this).find('._category_no').val();
+     let categoryName = $(this).text().trim().replace('(중분류)','');
+     console.log(cateNum)
+     register.categoryName(cateNum,showCategoryList,showError);
+
+  $("._category_1 ._next.selected").removeClass('selected');
+     $(this).addClass('selected');
+
+  $("._product_category_checked").html(`
+    <input type="hidden" name="category_product[group1][${cateNum}]" class="_selected_category_no" value="${cateNum}">
+    <span class="txtLight txtLess" id="topCate" style="font-size: 12px;">${categoryName}</span>
+    <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
+  `);
+
+  $(this).addClass('selected');
+
+
+});
+
+$("._category_2").on('click', '._next',function (){
+  let cateNum = $(this).find('._category_no').val();
+  let categoryName = $(this).text().trim();
+  let existingText = $("._product_category_checked").find('#topCate').text().trim();
+
+  // 중분류 이름을 추가한 새로운 텍스트 생성
+  let newText = existingText ? `${existingText} ${categoryName}` : categoryName;
+
+  $("._category_2 ._next.selected").removeClass('selected');
+  $(this).addClass('selected');
+
+  $("._product_category_checked").html(`
+    <input type="hidden" name="category_product[group1][${cateNum}]" class="_selected_category_no" value="${cateNum}">
+    <span class="txtLight txtLess" id="middleCate" style="font-size: 12px;">${newText}</span>
+    <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
+  `);
+
+  $("._product_category_checked").find('#middleCate').remove();
+
+  let existedText = $("._category_1 ._next.selected").text().trim().replace('(중분류)','');
+
+  let Text =  `
+    <span class="txtLight txtLess" style="font-size: 12px;">${existedText} ${categoryName}</span>
+  `;
+
+  $("._product_category_checked").prepend(Text);
+
+  $("._product_category_checked ._selected_category_no").val(cateNum);
+
+
+  $(this).addClass('selected');
+
+});
+
+//선택된 분류 삭제
+$(document).on('click', '._remove_selected_category', function() {
+  $(this).closest('._product_category_checked').find('.txtLight').text('');
+  $(this).closest('._product_category_checked').find('._selected_category_no').remove();
+  // $(this).closest('._category_1 ._next.selected').removeClass('selected');
+  // $(this).closest('._product_category_checked').removeClass('selected');
+  $(this).closest("td").find('li').removeClass("selected");
+});
+
+
+// //선택된 상품분류
+// function selectCategory(select){
+//   const text = `
+//     <input type="hidden" name="category_product[group1][25]" class="_selected_category_no" value="${select.categoryCode1}">
+//     <span class="txtLight txtLess" style="font-size: 14px;">(대분류) ${select.categoryName} </span>
+//     <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
+//   `;
+//
+//   $('._product_category_checked').html(text);
+// }
+
+function showError(a, b, c){
+  console.error(c);
+}
 
 let $fileInput = $('#file-input');
 let $fileList = $('.file-list');
@@ -142,12 +261,15 @@ $uploadBox.on('click', function () {
 });
 
 // 등록버튼
-$(".submit-btn-btn").on("click", () => {
-  window.location.href = "#";
+$(".submit-btn").on("click", () => {
+
+   alert("상품 등록이 완료되었습니다.");
+  window.location.href = "/admin/productList";
+
 });
 
-// 취소버튼 마이페이지로 이동처리 해야함.
+// 취소버튼
 $(".cancel-btn").on("click", () => {
-  window.location.href = "#";
+  window.location.href = "/admin/adminMain";
 });
 

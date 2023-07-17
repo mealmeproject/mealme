@@ -40,3 +40,7 @@ $(document).ready(function() {
 		else $("#cbx_chkAll").prop("checked", true); 
 	});
 });
+
+
+
+

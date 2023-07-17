@@ -34,7 +34,9 @@
           <!-- 헤더 추가 공간 -->
         <!-- 작업공간 -->
           <div class="work-container">
-        <p>
+              <form class="new-product-form" id="myForm" th:action="@{/admin/registProduct}" method="post" enctype="multipart/form-data">
+
+              <p>
           <div class="headingArea">
             <div class="mTitle">상품 등록</div>
           </div>
@@ -50,7 +52,7 @@
                    
 
                     <div class="search">
-                      <input type="text" placeholder="예시) 한 끼 통살">
+                      <input type="text" name="productName" placeholder="예시) 한 끼 통살">
                       
                     </div>
                   </td>
@@ -61,7 +63,7 @@
                    
 
                     <div class="search">
-                      <input type="text" placeholder="예시) 포보스 선정 맛있는 닭가슴살 1위!">
+                      <input type="text"  name="productSeller"  placeholder="예시) 포보스 선정 맛있는 닭가슴살 1위!">
                       
                     </div>
                   </td>
@@ -70,8 +72,9 @@
                     <th scope="row" style="background-color: rgb(255, 139, 38); color:white ;">상세 설명</th>
                     <td class="selector" style="border: 0; border-top: 1px solid #bbb;">
                       <div class="summernote-box">
-                        <textarea id="summernote" name="applyContent" style="    width: 743.5px;
+                        <textarea id="summernote" name="productExplanation" style="    width: 743.5px;
                         height: 300px; border-color: #bbb;"></textarea>
+<!--                          <input type="submit" value="Save">-->
                       </div>
                   </td>
                   </tr>
@@ -133,33 +136,19 @@
                                 <tbody class="_category_select_body">
                                     <tr>
                                         <td style="border-right: 1px solid #bbb;">
-                                            <div class="list ">
+                                            <div class="list " id="categoryList">
                                                 <ul class="_category_1">
                                                    
-                                                   <li class="_next">
-                                                        (대분류) Outerwear &gt;
-                                                        <input type="hidden" class="_category_no" value="24" hashtag="">
-                                                    </li>
-    
-                                                    <li class="_next selected">
-                                                        (대분류) Tops &gt;
-                                                        <input type="hidden" class="_category_no" value="25" hashtag="">
-                                                    </li>
-    
-                                                    <li class="">
-                                                        (대분류) Dresses &gt;
-                                                        <input type="hidden" class="_category_no" value="26" hashtag="">
-                                                    </li>
-    
-                                                    <li class="_next">
-                                                        (대분류) Bottoms &gt;
-                                                        <input type="hidden" class="_category_no" value="27" hashtag="">
-                                                    </li>
-    
-                                                    <li class="">
-                                                        (대분류) Accessories &gt;
-                                                        <input type="hidden" class="_category_no" value="28" hashtag="">
-                                                    </li>
+<!--                                                   <li class="_next">-->
+<!--                                                        (대분류) Outerwear &gt;-->
+<!--                                                        <input type="hidden" class="_category_no" value="24" hashtag="">-->
+<!--                                                    </li>-->
+<!--    -->
+<!--                                                    <li class="_next selected">-->
+<!--                                                        (대분류) Tops &gt;-->
+<!--                                                        <input type="hidden" class="_category_no" value="25" hashtag="">-->
+<!--                                                    </li>-->
+<!--    -->
     
                                                   </ul>
                                             </div>
@@ -167,8 +156,9 @@
                                         <td style="border-right: 0px;">
                                             <div class="list">
                                                 <ul class="_category_2">
-                                                  <li class=" _next">(중분류) Tees &gt;<input type="hidden" class="_category_no" value="32" hashtag="null"></li>
-                                                  <li class="">(중분류) Shirts &gt;<input type="hidden" class="_category_no" value="33" hashtag="null"></li></ul>
+<!--                                                  <li class=" _next">(중분류) Tees &gt;<input type="hidden" class="_category_no" value="32" hashtag="null"></li>-->
+<!--                                                    <li class="">(중분류) Shirts &gt;<input type="hidden" class="_category_no" value="33" hashtag="null"></li>-->
+                                                </ul>
                                             </div>
                                         </td>
                                 
@@ -179,12 +169,12 @@
                             </div>
                             <p class="gDouble">
                                 <span class="icoDot"></span>
-                                <strong class="gWidth wPrdCategory" style="font-size: 14px;">선택된 상품분류</strong>
+                                <strong class="gWidth wPrdCategory" style="font-size: 12px;">선택된 상품분류</strong>
                                 <span class="_product_category_none" style="display: none;">
                                 </span>
                                 <span style="display: inline;" class="_product_category_checked">
-                                    <input type="hidden" name="category_product[group1][25]" class="_selected_category_no" value="25">
-                                    <span class="txtLight txtLess" style="font-size: 14px;">(대분류) Tops </span>
+<!--                                    <input type="hidden" name="category_product[group1][25]" class="_selected_category_no" value="25">-->
+<!--                                    <span class="txtLight txtLess" style="font-size: 14px;">(대분류) Tops </span>-->
                                     <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
                                 </span>
                                 <input type="hidden" name="checked_category">
@@ -207,7 +197,7 @@
          
 
           <div class="search">
-            <input type="text" placeholder="예시) 38,000">
+            <input type="text" name="productPrice" placeholder="예시) 38,000">
             
           </div>
         </td>
@@ -223,11 +213,12 @@
         <input type="file" name="applyFile" id="input-one" class="input" /><br />
         <input type="file" name="applyFile" id="input-one" class="input" /><br />
         <input type="file" name="applyFile" id="input-one" class="input" /><br />
-      </form>
+
       <div class="upload-input-box">
-        <input type="file" name="file-input" id="file-input" multiple />
+        <input type="file" name="productFile" id="file-input" multiple />
       </div>
               </p>
+              </form>
     </div>
 
         
@@ -242,13 +233,42 @@
         <div class="menu-container"></div>
     </aside>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script th:src="@{/js/admin/admin7.js}"></script>
+    <script type="module" th:src="@{/js/admin/admin7.js}"></script>
     <script th:src="@{/js/fragment/aside.js}"></script>
     <!-- 퀵 메뉴 추가 공간 -->
     <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 
+
+<!--    <script>-->
+<!--        $(document).ready(function() {-->
+<!--            // Initialize Summernote editor-->
+<!--            $('#summernote').summernote();-->
+
+<!--            // Handle form submission-->
+<!--            $('#myForm').submit(function(e) {-->
+<!--                e.preventDefault();-->
+
+<!--                // Get the HTML content from Summernote-->
+<!--                var htmlContent = $('#summernote').summernote('code');-->
+
+<!--                // Make an AJAX request to save the data-->
+<!--                $.ajax({-->
+<!--                    url: 'save.php',-->
+<!--                    type: 'POST',-->
+<!--                    data: { productExplanation: htmlContent },-->
+<!--                    success: function(response) {-->
+<!--                        console.log('Data saved successfully.');-->
+<!--                    },-->
+<!--                    error: function(xhr, status, error) {-->
+<!--                        console.log('Error occurred while saving data:', error);-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
   </body>
 </html>

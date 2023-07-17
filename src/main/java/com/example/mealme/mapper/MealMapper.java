@@ -1,5 +1,6 @@
 package com.example.mealme.mapper;
 
+import com.example.mealme.dto.BoardDto;
 import com.example.mealme.dto.BoardFileDto;
 import com.example.mealme.dto.FoodDto;
 import com.example.mealme.vo.MealVo;
@@ -26,4 +27,11 @@ public interface MealMapper {
 
     // 마이페이지 모달창 음식 파일들
     public List<BoardFileDto> getFiles(Long boardNumber);
+
+    // 맘마 작성
+    public void insertBoard(BoardDto boardDto);
+
+    // 음식 추가
+    public void insertFood(FoodDto foodDto);
+
 }

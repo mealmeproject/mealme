@@ -8,11 +8,12 @@ function showMeal(map){
     console.log(map);
 
     let text = '';
-
-    //
         text += `
                             <div class="modal-header">
-                                <h2>${map.mealTime}</h2>
+                                <div class="modal-header-text">
+                                    <h2>${map.mealTime}</h2>
+                                    <h2>${map.boardTitle}</h2>    
+                                </div>
                                 <hr class="service-name-hr" />
                             </div>
                             <div class="modal-main">
@@ -23,10 +24,16 @@ function showMeal(map){
                                     <input type="radio" name="slide" id="slide3">
                                     <input type="radio" name="slide" id="slide4">
                                     <ul id="imgholder" class="imgs">
-                                        <li><img src="/img/sample1.jpg"></li>
-                                        <li><img src="/img/sample2.jpg"></li>
-                                        <li><img src="/img/sample3.jpg"></li>
-                                        <li><img src="/img/sample4.jpg"></li>
+             `;
+    map.files.forEach(f => {
+        text += `
+                        <li><img src="/upload/${f.fileUploadPath}/${f.fileUuid}_${f.fileName}"></li>
+  `;
+    });
+
+
+        text += `
+
                                     </ul>
                                     <div class="bullets">
                                         <label for="slide1">&nbsp;</label>
@@ -83,8 +90,6 @@ function showMeal(map){
                                 </div>
                             </div>
         `;
-    //
-
     $('.modal-container').html(text);
 }
 

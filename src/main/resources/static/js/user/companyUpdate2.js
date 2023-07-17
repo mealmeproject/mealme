@@ -87,7 +87,7 @@ $(document).ready(function() {
             ['para', ['ul', 'ol', 'paragraph']],
         ],
         placeholder:
-            "<br>* 식고수에게 궁금한 점을 작성해주세요 ! <br>",
+            "<br>* 회사에 대해서 소개해 주세요 ! <br>",
     });
 });
 

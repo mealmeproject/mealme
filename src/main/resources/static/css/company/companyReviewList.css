@@ -74,18 +74,33 @@
   width: 150px;
   height: 150px;
   border-radius: 20px;
+  /*border: 1px solid lightgray;*/
+}
+
+.consulting-comment-wrap{
+  position: relative;
 }
 
 .consulting-comment{
+  display: inline-block;
   font-size: 20px;
   margin-left: 25px;
   width: 600px;
+  height: 50px;
+  line-height: 50px;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .review-sub{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 15px;
+
 }
 
 .ranking-wrap{
@@ -99,19 +114,26 @@
   margin-bottom: -30px;
   /*width: 320px;*/
   /*  height: 150px;*/
-  margin-top: -30px;
+  margin-top: -22px;
 }
 
 .review-consulting{
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #c1c1c1;
+  border-right: none;
+  border-left: none;
+}
+
+.review-text-wrap{
+  width: 900px;
 }
 
 .review-text{
-  padding: 20px 80px 20px 80px;
-  font-size: 30px;
-  width: 780px;
+  padding-bottom: 50px;
+  font-size: 35px;
+  font-weight: bold;
 }
 
 
@@ -124,14 +146,16 @@
 
 .summernote-text{
   width: 775px;
+  padding-bottom: 15px;
 }
 
 .button-wrap{
   display: flex;
   justify-content: center;
+  margin-top: 15px;
 }
 
-.delete {
+.remove {
   margin-right: 10px;
   text-decoration: none;
   border-radius: 20px;
@@ -165,4 +189,87 @@
 
 .review-date{
   text-align: right;
+  width: 600px;
+  padding: 10px 0;
+  margin-left: 25px;
+}
+
+.review-wrap{
+  display: none;
+}
+
+.blank{
+  height: 50px;
+}
+
+/* 여기부터는 상품 리뷰 리스트 */
+.review-product{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid #c1c1c1;
+  border-right: none;
+  border-left: none;
+}
+
+.product-name-wrap{
+  position: relative;
+}
+
+.product-name{
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 25px;
+  width: 600px;
+  height: 50px;
+  line-height: 50px;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 이동탭 부분 */
+.tab-wrap{
+  display: flex;
+  height: 50px;
+  width: 900px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid rgb(255, 139, 38);
+}
+
+.company-tab{
+  height: 50px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(255, 139, 38);
+  border-bottom: none;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  background: rgb(255, 139, 38);
+  font-size: 15px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.shop-tab{
+  height: 50px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgb(255, 139, 38);
+  border-bottom: none;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  margin-left: 2px;
+  font-size: 15px;
+  color: rgb(255, 139, 38);
+  font-weight: bold;
+}
+
+.line{
+  border-bottom: 1px solid #c1c1c1;
 }

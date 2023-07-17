@@ -182,7 +182,7 @@ function showWeekly(weeklyList){
 // *****바 차트
 //  한 주의 일간 평균 탄단지 섭취 그람수
   const data = {
-    labels: [mondayMonthDay[4]+'~'+sundayMonthDay[4], mondayMonthDay[3]+'~'+sundayMonthDay[3], mondayMonthDay[2]+'~'+sundayMonthDay[2], mondayMonthDay[1]+'~'+sundayMonthDay[1], '이번주'],
+    labels: [mondayMonthDay[4]+' ~ '+sundayMonthDay[4], mondayMonthDay[3]+' ~ '+sundayMonthDay[3], mondayMonthDay[2]+' ~ '+sundayMonthDay[2], mondayMonthDay[1]+' ~ '+sundayMonthDay[1], '이번주'],
     datasets: [{
       label: '탄수화물',
       data: [carbohydrateList[4]/countMealTimeList[4], carbohydrateList[3]/countMealTimeList[3], carbohydrateList[2]/countMealTimeList[2], carbohydrateList[1]/countMealTimeList[1], carbohydrateList[0]/countMealTimeList[0]],
@@ -373,12 +373,14 @@ function showWeekly(weeklyList){
   let monthCarbohydrateKcal = carbohydrateTotal*4;
   let monthProteinKcal = proteinTotal*4;
   let monthFatKcal = fatTotal*9;
+  let monthTotalKal = monthCarbohydrateKcal + monthProteinKcal + monthFatKcal;
 
 
 
-  let monthlyCarbohydratePercent = Math.round((monthCarbohydrateKcal/kcalTotal) * 100);
-  let monthlyProteinPercent = Math.round((monthProteinKcal/kcalTotal) * 100);
-  let monthlyFatPercent = Math.round((monthFatKcal/kcalTotal) * 100);
+  // let monthlyCarbohydratePercent = Math.round((monthCarbohydrateKcal/monthTotalKal) * 100);
+  let monthlyProteinPercent = Math.round((monthProteinKcal/monthTotalKal) * 100);
+  let monthlyFatPercent = Math.round((monthFatKcal/monthTotalKal) * 100);
+  let monthlyCarbohydratePercent = 100-(monthlyProteinPercent+monthlyFatPercent);
 
   if (isNaN(monthlyCarbohydratePercent)) {
     $('.carbohydrate-percent-num').text(0);

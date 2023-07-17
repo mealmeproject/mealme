@@ -227,4 +227,15 @@ public class UserService {
         companyDto.setCompanyPassword(userPassword);
         userMapper.updateCompany(companyDto);
     }
+
+    public boolean findPassword(UserDto userDto){
+        if (userDto == null){
+            throw new IllegalArgumentException("입력받은 user정보가 없습니다.");
+        }
+        if (userMapper.findUserPassword(userDto)>0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

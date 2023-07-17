@@ -31,11 +31,10 @@
         주문 내역
         <div class="page-title-type">
           <div class="main">
-            <input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
-            <label for="tab1">쇼핑몰</label>
-
-            <input id="tab2" type="radio" name="tabs">
-            <label for="tab2">컨설팅</label>
+            <div class="tab-wrap">
+              <div class="company-tab" onclick="location.href='http://localhost:10000/company/consultingPayInfo'">컨설팅</div>
+              <div class="shop-tab" onclick="location.href='http://localhost:10000/shop/shoppingPayInfo'">쇼핑몰</div>
+            </div>
 
 
             <section id="content1">
@@ -51,8 +50,8 @@
           <thead>
           <tr>
             <th class="img">상품</th>
+            <th class="seller">판매자</th>
             <th class="name">상품명</th>
-            <th class="info">상품정보</th>
             <th class="price">가격</th>
             <th class="number">수량</th>
             <th class="total">총 가격</th>
@@ -60,123 +59,51 @@
             <th class="status">주문상태</th>
           </tr>
           </thead>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>입안 가-득 퍼지는 부드러움! 스팀 닭가슴살 오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>입안 가-득 퍼지는 부드러움! 스팀 닭가슴살 오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/이미지 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>스팀 닭가슴살</td>
-            <td>입안 가-득 퍼지는 부드러움! 스팀 닭가슴살 오리지널</td>
-            <td>13,500원</td>
-            <td>1</td>
-            <td>13,500원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>결제완료</td>
-          </tr>
+          <tbody>
+          <tr th:each="productList : ${productPayListVo}" class="product-list">
+            <input class="order-number" type="hidden" th:value="${productList.orderNumber}">
+            <td><img th:src="${productList.fileUploadPath}" alt="상품 이미지" class="product-image"> </td>
+            <td th:text="${productList.productSeller}"></td>
+            <td th:text="${productList.productName}"></td>
+            <td th:text="${productList.productPrice}"></td>
+            <td th:text="${productList.orderCount}"></td>
+            <td th:text="${productList.orderCount * productList.productPrice} + '원'"></td>
+            <td th:text="${productList.orderDate}"></td>
+            <td class="product-status">
+              <div th:text="${productList.conditionCodeName}"></div>
+              <div th:if="${productList.orderConditionCode == 6 }">
+              <div class="blank"></div>
+              <button class="review-button">리뷰작성</button>
+              </div>
+              <div th:if="${productList.orderConditionCode == 13 }">
+                <div class="blank"></div>
+                <button class="review-button" disabled style="background-color: rgb(210, 210, 210);" th:text="${productList.conditionCodeName}"></button>
+              </div>
+              <div th:unless="${productList.orderConditionCode != 6 || productList.orderConditionCode != 13}">
+                <div class="blank" style="display: none;"></div>
+                <button class="review-button" style="display: none;">리뷰작성</button>
+              </div>
 
+            </td>
+          </tr>
 
           <!-- 다른 주문 내역 행 추가 -->
           </tbody>
         </table>
         <div class="page_wrap">
           <div class="page_nation">
-            <a class="arrow pprev" href="#"></a>
-            <a class="arrow prev" href="#"></a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">9</a>
-            <a href="#">10</a>
-            <a class="arrow next" href="#"></a>
-            <a class="arrow nnext" href="#"></a>
+
+            <a class="arrow pprev" th:href="@{/shop/shoppingPayInfo(page=${pageInfo.startPage})}"></a>
+            <a class="arrow prev" th:href="@{/shop/shoppingPayInfo(page=${pageInfo.startPage - 1})}" th:if="${pageInfo.prev}"></a>
+            <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+              <a th:href="@{/shop/shoppingPayInfo(page=${i})}">
+                <div class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
+                <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>
+              </a>
+            </th:block>
+            <a class="arrow next" th:href="@{/shop/shoppingPayInfo(page=${pageInfo.endPage + 1})}" th:if="${pageInfo.next}"></a>
+            <a class="arrow nnext" th:href="@{/shop/shoppingPayInfo(page=${pageInfo.endPage})}"></a>
+
           </div>
         </div>
       </div>
@@ -197,18 +124,7 @@
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
-<script th:src="@{/js/meal/myPage.js}"></script>
-<script>
-  var images = [];
-  var currentImageIndex = 0;
-
-  function openModal(imageList) {
-    // Assign the image list to the global variable
-    images = imageList;
-
-    // Rest of the code...
-    // (Place the JavaScript code mentioned in the previous response here)
-  }
-</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/shop/shoppingPayInfo.js}"></script>
 </body>
 </html>

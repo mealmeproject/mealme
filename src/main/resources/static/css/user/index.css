@@ -1,8 +1,195 @@
-.main-container{
-    display: flex;
-    flex-direction: column;
+body {
+    font-family: Pretendard, NotoSansKR, Manrope, sans-serif;
 }
 
-.main-container a{
+a {
+    text-decoration: none;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container a {
     margin: 20px;
+}
+
+.banner-container {
+    background-color: pink;
+    width: 100%;
+    height: 400px;
+}
+
+.write-container {
+    background-color: grey;
+    width: 100%;
+    height: 600px;
+}
+
+/* 차트 전 설명 */
+
+.chart-explain {
+    align-items: center;
+    width: 100%;
+}
+
+.chart-explain-header {
+    margin: 0 auto;
+}
+
+.chart-explain-header h2 {
+    font-size: 50px;
+    line-height: 140%;
+    text-align: center;
+    font-weight: 700;
+}
+
+.chart-sub-title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.chart-sub-title h4 {
+    color: #ff7e00;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 180%;
+    width: auto;
+    flex-shrink: 0;
+    padding: 10px 24px;
+}
+
+.chart-line {
+    width: 100%;
+    height: 1px;
+    background: rgb(219, 221, 220);
+}
+.chart-explain-img-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-img-box2,
+.chart-img-box1 {
+    margin: 100px auto;
+}
+
+/* 차트*/
+.chart-container {
+    width: 100%;
+    height: 466px;
+}
+
+.chart-box {
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-btn {
+    width: 300px;
+    background-color: #ff7e00;
+    border-radius: 50px;
+    font-weight: 700;
+    line-height: 140%;
+    font-size: 24px;
+    height: 72px;
+    cursor: pointer;
+    align-items: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.chart-btn:hover {
+    background-color: rgba(233, 93, 0, 0.932);
+}
+
+/* 차트 이미지*/
+.chart-img-box {
+    width: 523px;
+    height: 466px;
+    background-color: greenyellow;
+}
+
+/* 차트 설명 */
+.chart-info h2 {
+    font-size: 40px;
+    line-height: 140%;
+    text-align: start;
+}
+
+.consulting-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.consulting-img-box {
+    width: 1200px;
+}
+
+.consulting-img-box img {
+    width: 100%;
+}
+.shop-container {
+    width: 100%;
+    background: rgb(248, 249, 248);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.shop-box {
+    width: 1000px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.shop-info-header {
+    font-size: 20px;
+    color: #ff7e00;
+    font-weight: 600;
+    line-height: 170%;
+}
+
+.shop-info h3 {
+    font-size: 40px;
+    margin-bottom: 24px;
+    font-weight: 700;
+    line-height: 140%;
+    margin: 8px 0px 12px;
+}
+
+.shop-info p {
+    width: 333px;
+    font-size: 20px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    line-height: 170%;
+    color: rgb(120, 124, 121);
+    margin: 0px;
+}
+
+.shop-img {
+    width: 400px;
+}
+
+.shop-img img {
+    width: 400px;
+}
+
+.ride-container img {
+    width: 100%;
 }
