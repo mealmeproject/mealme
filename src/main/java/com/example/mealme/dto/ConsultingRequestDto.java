@@ -17,5 +17,5 @@ public class ConsultingRequestDto {
     private String consultingRequestFirstDate;
     private String consultingRequestLastDate;
     private String consultingRequestDate;
-    private String consultingRequestCondition;
+    private String consultingCondition;
 }

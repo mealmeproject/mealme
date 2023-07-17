@@ -347,7 +347,40 @@ body {
     background-color:rgba(255, 139,38, 1);
     border: 1px solid rgba(255, 139,38, 1);
     color: rgb(255, 255,255);
+
 }
+
+.comment-btn-group input:hover{
+    background-color:rgba(255, 139,38, 1);
+    border: 1px solid rgba(255, 139,38, 1);
+    color: rgb(255, 255,255);
+
+}
+
+.input{
+    display: none;
+}
+
+.comment-btn-group input{
+    border-radius: 20px;
+    width: 65px;
+    height: 35px;
+    /* font-size: 14px; */
+    /* font-weight: 700; */
+    /* text-align: center; */
+    /* text-decoration: none; */
+    margin: 0 2px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    background-color: #fff;
+    color: rgb(255, 139,38);
+    border: 1px solid rgba(255, 139,38, 1);
+}
+
+
+
 
 .none{
     display : none;
@@ -588,4 +621,15 @@ ul.imgs li {
     color: white;
     cursor: pointer;
     border-radius: 6px;
+}
+
+
+.comment-content{
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"]{
+    width: 500px;
+    padding: 10px;
 }

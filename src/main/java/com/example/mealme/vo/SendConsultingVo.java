@@ -19,5 +19,6 @@ public class SendConsultingVo {
     private String companyName;
     private String userNickname;
     private long consultingRequestNumber;
+    private String consultingCondition;
 
 }

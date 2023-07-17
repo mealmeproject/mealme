@@ -35,7 +35,7 @@
 
       <div>
         <div>
-          <h2 class="H2Z">수신한 답변</h2>
+          <h2 class="H2Z">내가 신청한 컨설팅</h2>
         </div>
       </div>
       <!-- <hr>바 -->
@@ -46,11 +46,11 @@
       <div class="tab">
         <ul id="BoxTab">
           <li id="NoReadTab" class="active-tab">
-            <a href="" >새로 받은 답변</a>
+            <a href="" >내가 보낸 컨설팅 리스트</a>
           </li>
-          <li id="YesReadTab" >
-            <a th:href="@{/company/SendReadList2}" >읽은 답변</a>
-          </li>
+<!--          <li id="YesReadTab" >-->
+<!--            <a th:href="@{/company/SendReadList2}" >읽은 답변</a>-->
+<!--          </li>-->
         </ul>
       </div>
 
@@ -58,48 +58,27 @@
       <div class="list">
         <table id="tbList" border="0">
           <colgroup>
-            <col class="checkbox">
             <col class="name">
             <col class="content">
             <col class="date">
           </colgroup>
           <thead>
           <tr>
-            <th class="checkbox">
-                <span class="inputCheck">
-                  <input type="checkbox" id="listAll">
-                  <label for="listAll">
-                    <span class="visuallyHidden"></span>
-                  </label>
-                </span>
-              </label>
-              </span>
-            </th>
-            <th class="name">보낸 사람</th>
+            <th class="name">컨설팅 기관</th>
             <th class="content">내용</th>
-            <th class="date">받은 날짜</th>
+            <th class="date">보낸 날짜</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="consulting : ${consultingList}">
-            <th class="checkbox">
-            <span class="inputCheck">
-                <input type="checkbox" id="listAll" />
-                <label for="listAll">
-                    <span class="visuallyHidden"></span>
-                </label>
-            </span>
-            </th>
             <th class="name" id="modal-writer" th:text="${consulting.companyName}"></th>
             <th class="content">
-              <input type="hidden" class="companyNumber-h" th:value="${consulting.companyNumber}">
               <input type="hidden" class="userNumber-h" th:value="${consulting.userNumber}">
-              <input type="hidden" class="consultingNumber-h" th:value="${consulting.consultingNumber}">
-
-              <a href="#" class="modal-trigger" th:utext="${consulting.consultingComment}">
+              <a th:href="@{/company/SendConsulting(consultingRequestNumber=${consulting.consultingRequestNumber})}"
+                 class="modal-trigger" th:utext="${consulting.consultingRequestComment}">
               </a>
             </th>
-            <th class="date" th:text=" ${consulting.consultingDate}"></th>
+            <th class="date" th:text=" ${consulting.consultingRequestDate}"></th>
           </tr>
           </tbody>
         </table>
@@ -108,9 +87,9 @@
       <br>
       <!-- 보관 , 삭제  -->
       <div class="CsGroup">
-        <a href="" class="CsModify">
-          <span>보관</span>
-        </a>
+<!--        <a href="" class="CsModify">-->
+<!--          <span>보관</span>-->
+<!--        </a>-->
 
 
 
@@ -121,90 +100,33 @@
 
         <div class="page_wrap">
           <div class="page_nation">
-            <a th:href="@{/company/SendReadList(page=${pageInfo.criteria.page - 1})}" class="arrow prev" th:if="${pageInfo.criteria.page > 1}"></a>
-            <a th:href="@{/company/SendReadList(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">
-              <li class="arrow prev">&lt</li>
-            </a>
 
+            <a class="arrow pprev" th:href="@{/company/SendReadList(page=${pageInfo.startPage})}"></a>
+            <a class="arrow prev" th:href="@{/company/SendReadList(page=${pageInfo.startPage - 1})}" th:if="${pageInfo.prev}"></a>
             <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-              <a th:href="@{/company/SendReadList(page=${i})}" class="page_nation a">
-                <li class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></li>
-                <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></li>
+              <a th:href="@{/company/SendReadList(page=${i})}">
+                <div class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
+                <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>
               </a>
             </th:block>
+            <a class="arrow next" th:href="@{/company/SendReadList(page=${pageInfo.endPage - 1})}" th:if="${pageInfo.next}"></a>
+            <a class="arrow nnext" th:href="@{/company/SendReadList(page=${pageInfo.endPage})}"></a>
 
-            <a th:href="@{/company/SendReadList(page=${pageInfo.endPage + 1})}" class="page_nation a" th:if="${pageInfo.next}">
-              <li class="arrow next">&gt</li>
-            </a>
-            <a th:href="@{/company/SendReadList(page=${pageInfo.criteria.page + 1})}" class="arrow next"></a>
           </div>
         </div>
       </div>
-
-      <!-- 모달 창 -->
-      <!-- 모달 창 -->
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h1 id="modal-content" style="margin-bottom: 10px">수신한 답변</h1>
-
-
-          <!-- <div class="ModalInWriter">
-            <label for="writer">안녕?????:</label>
-            <span id="modal-writer"></span>
-          </div> -->
-
-
-          <div class="ModalInContent" >
-            <span id="modal-contents" style="margin-bottom: 30px;"></span>
-          </div>
-
-          <br>
-          <br>
-          <div class="ReplyText>" >
-            <h3>답변에 대한 코멘트 보내기</h3>
-
-
-
-            <form th:action="@{/company/SendReadList}"  method="post">
-              <input type="hidden" name="userNumber" class="userNumber" value="" />
-              <input type="hidden" name="companyNumber" class="companyNumber" value="" />
-              <input type="hidden" name="consultingNumber" class="consultingNumber" value="" />
-
-              <div class="ModalTextArea">
-                <div class="summernote-box">
-
-                  <textarea id="summernote" name="replyContent"></textarea>
-                </div>
-              </div>
-
-
-
-              <div class="ModalInButton">
-                <button type="submit" id="modalSubmit">답변 보내기</button>
-              </div>
-            </form>
-
-          </div>
-
-        </div>
-      </div>
-
-
-
-
     </div>
   </div>
+
+
+
   <!-- 퀵 메뉴 추가 공간 -->
   <!-- 푸터 추가 공간 -->
 
 
 
 
-</div>
 
-</div>
-</div>
 <!-- 작업공간 -->
 <!--                </div>-->
 <!-- 푸터 추가 공간 -->
@@ -217,6 +139,7 @@
 <!-- 퀵 메뉴 추가 공간 -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/company/SendReadList.js}"></script>
 
 
