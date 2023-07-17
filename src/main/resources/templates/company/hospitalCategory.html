@@ -264,10 +264,10 @@
 <!--                  <li><a href="#" class="next">&gt;</a></li>-->
 <!--                  &lt;!&ndash; ========== /페이징 처리 예시 ============ &ndash;&gt;-->
 <!--                </ul>-->
-                <a th:href="@{/company/hospitalCategory(page=${pageInfo.criteriaCompany.page - 1})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page > 1}"></a>
-                <a th:href="@{/company/hospitalCategory(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">
-<!--                  <li class="arrow prev">&lt;</li>-->
-                  <li class="arrow prev"><</li>
+                <a th:href="@{/company/hospitalCategory(page=${1}, companyCodeNumber=${companyCodeNumber})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page > 1}">&lt;&lt;</a>
+                <a th:href="@{/company/hospitalCategory(page=${pageInfo.startPage - 1}, companyCodeNumber=${companyCodeNumber})}" class="page_nation a" th:if="${pageInfo.prev}">
+                  <li class="arrow prev">&lt;</li>
+<!--                  <li class="arrow prev"><</li>-->
                 </a>
                 <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
                   <a th:href="@{/company/hospitalCategory(page=${i}, companyCodeNumber=${companyCodeNumber})}" class="page_nation a">
@@ -276,12 +276,12 @@
                   </a>
                 </th:block>
 
-                <a th:href="@{/company/hospitalCategory(page=${pageInfo.endPage + 1})}" class="page_nation a" th:if="${pageInfo.next}">
-<!--                  <li class="arrow next">&gt;</li>-->
-                  <li class="arrow next">></li>
+                <a th:href="@{/company/hospitalCategory(page=${pageInfo.endPage + 1}, companyCodeNumber=${companyCodeNumber})}" class="page_nation a" th:if="${pageInfo.next}">
+                  <li class="arrow next">&gt;</li>
+<!--                  <li class="arrow next">></li>-->
                 </a>
 <!--                  여기=================================-->
-<!--                <a th:href="@{/company/hospitalCategory(page=${pageInfo.criteriaCompany.page + 1})}" class="arrow next"></a>-->
+                <a th:href="@{/company/hospitalCategory(page=${pageInfo.realEnd}, companyCodeNumber=${companyCodeNumber})}" class="arrow next" th:if="${pageInfo.criteriaCompany.page != pageInfo.realEnd}">&gt;&gt;</a>
                       </div>
                   </div>
               </div>
