@@ -53,9 +53,9 @@ public class ShopService {
 
 
 
-    public List<ProductVo> selectList(ProductVo productVo) {
+    public List<ProductReviewVo> findReviewList(Long productNumber) {
 
-        return productMapper.selectList(productVo);
+        return productMapper.selectReviewList(productNumber);
     }
 
 
@@ -64,14 +64,19 @@ public class ShopService {
         return productMapper.selectCart(cartVo);
     }
 
+    // 특정 회원이 장바구니에 상품이 담겨있는지 확인
+    public int findCartCount(CartVo cartVo){
+        return productMapper.selectCartTotal(cartVo);
+    }
+
     //추가
-    public CartVo addCart(CartVo cartVo) {
+    public CartVo registerCart(CartVo cartVo) {
 
         if(cartVo == null){
             throw new IllegalArgumentException("장바구니에 상품이 없습니다");
         }
 
-        productMapper.addCart(cartVo);
+        productMapper.insertCart(cartVo);
         return cartVo;
     }
 
@@ -93,6 +98,20 @@ public class ShopService {
     public void updateCartMinus(CartVo cartVo){
 
         productMapper.updateCartMinus(cartVo);
+    }
+
+
+    // 장바구니 로직
+    public void processCart(CartVo cartVo){
+        int cartTotal = productMapper.selectCartTotal(cartVo);
+
+        if(cartTotal == 0){
+            productMapper.insertCart(cartVo);
+        }else{
+            Long cartNumber = productMapper.selectCartNumber(cartVo);
+            cartVo.setCartNumber(cartNumber);
+            productMapper.addCart(cartVo);
+        }
     }
 
 

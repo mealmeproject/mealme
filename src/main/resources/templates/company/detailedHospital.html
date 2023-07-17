@@ -281,9 +281,9 @@
           <!-- 페이지 이동 부분 -->
           <div class="page-button-section">
             <div class="pagination">
-              <a th:href="@{/company/detailedHospital(page=${pageInfo.criteriaCompany.page - 1})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page > 1}"></a>
-              <a th:href="@{/company/detailedHospital(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">
-                <li class="arrow prev">&lt</li>
+              <a th:href="@{/company/detailedHospital(page=${1}, companyNumber=${companyNumber})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page > 1}">&lt;&lt;</a>
+              <a th:href="@{/company/detailedHospital(page=${pageInfo.startPage - 1}, companyNumber=${companyNumber})}" class="page_nation a" th:if="${pageInfo.prev}">
+                <li class="arrow prev">&lt;</li>
               </a>
 
               <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
@@ -293,9 +293,10 @@
                 </a>
               </th:block>
 
-              <a th:href="@{/company/detailedHospital(page=${pageInfo.endPage + 1})}" class="page_nation a" th:if="${pageInfo.next}">
-                <li class="arrow next">&gt</li>
+              <a th:href="@{/company/detailedHospital(page=${pageInfo.endPage + 1}, companyNumber=${companyNumber})}" class="page_nation a" th:if="${pageInfo.next}">
+                <li class="arrow next">&gt;</li>
               </a>
+              <a th:href="@{/company/detailedHospital(page=${pageInfo.realEnd}, companyNumber=${companyNumber})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page != pageInfo.realEnd}">&gt;&gt;</a>
             </div>
           </div>
           <!-- 페이지 이동 부분 끝 -->
