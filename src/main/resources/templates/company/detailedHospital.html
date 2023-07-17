@@ -54,7 +54,16 @@
               </div>
             </div>
             <div class="star-wrap">
-              <div class="star">★★★★★</div>
+<!--              <div class="star">★★★★★</div>-->
+              <div class="star-ratings">
+                <div class="star-ratings-fill space-x-2 text-lg" th:attr="style='width: ' + ${companyinfo.averageGrade * 20} + '%'">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <div class="star-ratings-base space-x-2 text-lg">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+              </div>
+
               <div class="star-num" th:text="${companyinfo.averageGrade} + '/' + '5'">( 4.2 / 5 )</div>
             </div>
             <!-- 상세 정보 이미지 끝 -->
@@ -170,12 +179,12 @@
                 <!-- 별점 -->
                 <div class="review-list-asterion">
                   <div class="asterion">
-                    <div class="star_rating">
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
-                      <a href="#" class="on">★</a>
+                    <div class="star_rating" th:data-grade="${company.reviewGrade}">
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
                     </div>
                   </div>
                 </div>
@@ -276,7 +285,7 @@
 
               <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
                 <a th:href="@{/company/detailedHospital(page=${i}, companyNumber=${companyNumber})}" class="page_nation a">
-                  <li class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteriaCompany.page}"></li>
+                  <li class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteriaCompany.page}"></li>
                   <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteriaCompany.page}"></li>
                 </a>
               </th:block>

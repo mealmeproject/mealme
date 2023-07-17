@@ -623,6 +623,7 @@ body {
     border-radius: 5px;
     border: 1px solid #333;
     transition: background-color 0.3s ease, color 0.3s ease;
+    list-style: none;
 }
 
 .pagination a:hover {
@@ -631,8 +632,52 @@ body {
     color: #fff;
 }
 
-.pagination .active {
-    background-color: #ff9326;
+.pagination .active1 {
+    /*background-color: #ff9326;*/
     border-color: #333;
-    color: #fff;
+    /*color: #fff;*/
 }
+
+/*여기서부터 별점*/
+.star_rating {
+    font-size: 20px;
+}
+
+.star {
+    display: inline-block;
+}
+
+.star.filled {
+    color: gold;
+}
+
+/*평균 별점*/
+.star-ratings {
+    color: #aaa9a9;
+    position: relative;
+    unicode-bidi: bidi-override;
+    width: max-content;
+    font-size: 25px;
+    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 0.4px;
+    -webkit-text-stroke-color: #ff9326;
+}
+
+.star-ratings-fill {
+    color: #FFD700;
+    padding: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    -webkit-text-fill-color: #FFD700;
+    -webkit-text-stroke-color: #FFD700;
+}
+
+.star-ratings-base {
+    z-index: 0;
+    padding: 0;
+}
+
