@@ -69,8 +69,7 @@ prev.addEventListener('click', function () {
 
 
 
-
-
+// 찜하기
 document.querySelectorAll('.button').forEach(button => {
 
     button.addEventListener('click', e => {
@@ -101,154 +100,9 @@ document.querySelectorAll('.button').forEach(button => {
 });
 
 
-function toggleFoodList() {
-    const foodList = document.getElementById('food-list');
-    foodList.classList.toggle('show');
-}
 
 
 
-// 각 상품 별점에 대한 이벤트 처리
-const ratingElements = document.querySelectorAll('.rating');
-ratingElements.forEach(ratingElement => {
-    const stars = ratingElement.querySelectorAll('.star');
-
-    // 초기 평가 표시
-    const initialRating = ratingElement.dataset.rating;
-    setRating(initialRating);
-
-    // 클릭 이벤트 처리
-    stars.forEach(star => {
-        star.addEventListener('click', () => {
-            const ratingValue = star.dataset.value;
-            setRating(ratingValue);
-        });
-    });
-
-    // 별점 설정 함수
-    function setRating(ratingValue) {
-        stars.forEach(star => {
-            if (star.dataset.value <= ratingValue) {
-                star.classList.add('selected');
-            } else {
-                star.classList.remove('selected');
-            }
-        });
-    }
-});
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-// function changeSort() {
-//     let selectedValue = document.getElementById('selectItem').value;
-//
-//     // AJAX 요청을 보냅니다
-//     $.ajax({
-//         url: '/shop/shoppingList', // 데이터를 가져올 URL
-//         type: 'GET', // 요청 방식 (GET, POST 등)
-//         dataType: 'json', // 데이터 타입을 JSON으로 설정합니다
-//         data: { selectedValue: selectedValue }, // 선택된 값도 함께 전달합니다.
-//         success: function (response) {
-//             // 요청이 성공했을 때 실행될 콜백 함수
-//             // 서버에서 반환된 JSON 데이터를 이용하여 웹 페이지를 업데이트합니다.
-//             processResponse(response);
-//         },
-//         error: function (xhr, status, error) {
-//             // 요청이 실패했을 때 실행될 콜백 함수
-//             console.log(xhr, status, error);
-//         },
-//     });
-// }
-
-
-//    // AJAX 요청을 보냅니다
-//     $.ajax({
-//         url: '/shop/shoppingList', // 데이터를 가져올 URL
-//         type: 'GET', // 요청 방식 (GET, POST 등)
-//         dataType: 'json', // 데이터 타입을 JSON으로 설정합니다
-//         data: {selectedValue: selectedValue}, // 선택된 값도 함께 전달합니다.
-//         success: function (response) {
-//             // 요청이 성공했을 때 실행될 콜백 함수
-//             // 서버에서 반환된 JSON 데이터를 이용하여 웹 페이지를 업데이트합니다.
-//             processResponse(response);
-//         },
-//         error: function (xhr, status, error) {
-//             // 요청이 실패했을 때 실행될 콜백 함수
-//             console.log(xhr, status, error);
-//         }
-//     });
-//
-//     // JavaScript 코드
-//     function processResponse(response) {
-//         let map = response; // JSON 데이터를 직접 전달받아 사용
-//
-//         let productList = ''; // productList HTML 문자열 초기화
-//
-//         Object.values(map).forEach(products => {
-//             products.forEach(p => {
-//                 productList += `
-//                     <li>
-//                         <div class="shopping-list">
-//                             <ul>
-//                                 <li class="shoppingItem">
-//                                     <div class="shoppingItemContainer">
-//                                         <a href="/shop/shoppingDetail">
-//                                             <img src="/img/이미지 예시.jpg" class="itemImg">
-//                                             <div class="shoppingDesc">
-//                                                 <div class="top">
-//                                                     <p class="title">${p.productName}</p>
-//                                                     <div class="price-container">
-//                                                         <span class="price">${p.productPrice}원</span>
-//                                                     </div>
-//                                                     <button class="button dark">
-//                                                         <div class="hand">
-//                                                             <div class="thumb"></div>
-//                                                         </div>
-//                                                         <span>찜하기</span>
-//                                                     </button>
-//                                                 </div>
-//                                             </div>
-//                                         </a>
-//                                     </div>
-//                                 </li>
-//                             </ul>
-//                         </div>
-//                     </li>
-//                 `;
-//             });
-//         });
-// console.log(productList);
-//         // productList 요소를 선택하고, 업데이트된 HTML을 삽입합니다.
-//         $('#productList').html(productList);
-//
-// };
-
-
-// function allPrice() {
-//     let selectedValue = document.getElementById('selectItem').value;
-//
-//     $.ajax({
-//         url: '/shops/allList',
-//         type: 'GET',
-//         dataType: 'json',
-//         data: { selectedValue: selectedValue },
-//         success: function(response) {
-//             // 서버에서 반환된 JSON 데이터를 이용하여 웹 페이지를 업데이트합니다.
-//             allPrice(response);
-//         },
-//         error: function(xhr, status, error) {
-//             console.log(xhr, status, error);
-//         }
-//     });
-//     $('#selectItem').html(allPrice);
-// }
 
 shop.getAllList(makeList, 'allList');
 
@@ -263,7 +117,7 @@ function makeList(result){
 
     result.forEach(product => {
         text += `
-            <li">
+            <li>
                 <div class="shopping-list">
                     <ul>
                         <li class="shoppingItem">
@@ -282,6 +136,9 @@ function makeList(result){
                                                     <div class="rating" data-rating=${product.averageRating}">
                                                     `
 
+
+
+
         for(let i=0; i<5; i++){
             if(i < product.averageRating){
                 text += `<span class="star filled">&#9733;</span>`;
@@ -290,16 +147,10 @@ function makeList(result){
             }
         }
 
-
         text +=                                     `</div>
                                                 </div>
                                             </div>
-                                            <button class="button dark">
-                                                <div class="hand">
-                                                    <div class="thumb"></div>
-                                                </div>
-                                                <span>찜하기</span>
-                                            </button>
+                                            
                                         </div>
                                     </div>
                                 </a>
@@ -318,9 +169,34 @@ function makeList(result){
 
 
 
+$('.rating').each(function() {
+    fillStars(this);
+});
 
+function fillStars(stars) {
+    let rating = $(stars).data('grade');
+    let star = $(stars).find('.star');
 
+    const filledStars = Math.floor(rating);
+    const decimalPart = rating % 1;
 
+    star.each(function(index) {
+        const star = $(this);
 
-
-
+        if (index < filledStars) {
+            star.addClass('filled');
+            star.text('★');
+        }  else if (index === filledStars && decimalPart > 0) {
+            const percentage = decimalPart * 100;
+            const gradient = `linear-gradient(to right, gold ${percentage}%, transparent ${percentage}%)`;
+            star.css('background-image', gradient);
+            star.css('background-clip', 'text');
+            star.css('-webkit-background-clip', 'text');
+            star.css('color', 'transparent');
+            star.text('★');
+        } else {
+            star.removeClass('filled');
+            star.text('☆');
+        }
+    });
+}

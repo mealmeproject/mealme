@@ -36,27 +36,41 @@
                 <td><input type="checkbox"
                            name="basket_product_normal_type_normal"
                            value="selectall"
-                           onclick="selectAll(this)"></td>
+                           class="select-all"
+                           ></td>
                 <td colspan="2">상품정보</td>
                 <td>상품금액</td>
                 <td>주문수량</td>
               </tr>
               </thead>
               <tbody>
-              <tr class="cart__list__detail" th:each="cart : ${cartList}">
-                <td><input type="checkbox"></td>
+              <tr class="cart__list__detail" th:each="cart : ${cartItems}">
+                <td><input type="checkbox" class="detail-checkbox" th:value="${cart.cartNumber}"></td>
                 <td><img src="../img/장바구니 예시1.jpg" alt="magic keyboard"></td>
                 <td class="product-name">
-                  <span class="cart__list__smartstore"> </span>
+                  <span class="cart__list__smartstore"></span>
                   <p th:text="${cart.productName}">스팀 닭가슴살</p>
                 </td>
-                <td class="product-price"><span class="price1" th:text="${cart.productPrice}+'원'">116,620원</span><br></td>
-                <td th:text="${cart.cartCount}+'개'"></td>
+                <td class="product-price"><span class="price1" th:text="${cart.productPrice * cart.cartCount} + '원'" th:data-price="${cart.productPrice}">116,620원</span><br></td>
+                <td>
+                  <div>
+                    <button class="quantity_btn plus_btn" type="button">+</button>
+                    <span class="quantity" th:text="${cart.cartCount}+'개'">1개</span>
+                    <button class="quantity_btn minus_btn" type="button">-</button>
+                  </div>
+                  <!-- 수량 조정 form -->
+<!--                  <form action="/shops/updateCart" method="post" class="quantity_update_form">-->
+<!--                    <input type="hidden" name="cartId" class="update_cartId">-->
+<!--                    <input type="hidden" name="bookCount" class="update_bookCount">-->
+<!--                    <input type="hidden" name="memberId" th:value="${cart.cartNumber}">-->
+<!--                  </form>-->
+                </td>
               </tr>
               </tbody>
               <tfoot>
               <tr>
-                <td colspan="3"> <button class="cart__list__optionbtn">선택상품 삭제</button>
+                <td colspan="3">
+                  <button class="cart__list__optionbtn" value="선택 삭제" type="button">선택상품 삭제</button>
                 </td>
                 <td></td>
                 <td></td>
@@ -65,7 +79,7 @@
               </tfoot>
             </form>
           </table>
-          <div class="priceResult">
+          <div class="priceResult" th:text="${totalPrice}+'원'">
             205,651원
           </div>
           <div class="cart__mainbtns">
@@ -97,12 +111,12 @@
 <aside class="aside2" th:replace="fragment/aside2 :: aside2">
   <div class="menu-container"></div>
 </aside>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/shop/shoppingBasket.js}"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
 <!-- 퀵 메뉴 추가 공간 -->
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
-<script th:inline="javascript"></script>
 
 </body>
 

@@ -36,25 +36,24 @@
               </div>
               <div class="summary">
                 <nav>
-                  <h1 th:text="${product.productName}"></h1>
-                            <div class="star-rating">
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            </div>
-                  <div class="count-btn-container">
-                  <span class="count-btn">
-                    <button id="decreaseBtn">-</button>
-                    <span id="count">1</span>
-                    <button id="increaseBtn">+</button>
-                  </span>
+                  <h1 th:text="${productName}"></h1>
+                  <div id="starRatingOne">
+                    <div class="product-item">
+                      <span>
+                        <div class="rating" th:data-grade="${averageRating}">
+                                            <span class="star">&#9734;</span>
+                                            <span class="star">&#9734;</span>
+                                            <span class="star">&#9734;</span>
+                                            <span class="star">&#9734;</span>
+                                            <span class="star">&#9734;</span>
+                                          </div>
+                      </span>
+                    </div>
                   </div>
                 </nav>
                 <nav>
-                  <h3 th:text="${product.productSeller}"></h3>
-                  <p th:text="${product.productExplanation}"></p>
+                  <h3 th:text="${productSeller}"></h3>
+                  <p th:text="${productExplanation}"></p>
                   <h5 class="rating star4">
                     <a href="#">상품평보기</a>
                   </h5>
@@ -63,7 +62,7 @@
                   <span class="delivery">무료배송</span>
                   <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
-                <span th:text="${product.productInventory} + '개'"></span>
+                <span th:text="${productInventory} + '개'"></span>
 
 
 <!--                <div class="count">-->
@@ -72,22 +71,22 @@
 <!--                  <button class="increase">+</button>-->
 <!--                </div>-->
                 <div class="total">
-                  <span th:text="${product.productPrice}"></span>
+                  <span th:text="${productPrice}"></span>
                   <em>총 상품금액</em>
                 </div>
                 <p class="addToCart">
                 <div class="button">
                   <form action="/shop/shoppingBasket" method="get">
                     <input type="hidden" name="userNumber" th:value="${userNumber}" />
-                    <input type="hidden" name="productNumber" th:value="${product.productNumber}">
-                    <button id="addToCartBtn" onclick="addToCart()" class="cart" type="submit">장바구니</button>
+                    <input type="hidden" name="productNumber" th:value="${productNumber}" />
+                    <button id="addToCartBtn" class="cart" type="submit">장바구니에 추가</button>
                   </form>
-                  <form action="/shop/shoppingPay" method="post">
+                  <form action="/shop/shoppingPay" method="get">
                     <input type="hidden" name="userNumber" th:value="${userNumber}" />
                     <button class="order" type="submit">구매하기</button>
                   </form>
                 </div>
-              </div>
+
             </article>
             <article class="detail">
               <nav><h1>상품정보</h1></nav>
@@ -103,15 +102,15 @@
               <table>
                 <tr>
                   <td>상품번호</td>
-                  <td th:text="${product.productNumber}"></td>
+                  <td th:text="${productNumber}"></td>
                 </tr>
                 <tr>
                   <td>상품 등록일</td>
-                  <td th:text="${product.productRegisterDate}"></td>
+                  <td th:text="${productRegisterDate}"></td>
                 </tr>
                 <tr>
                   <td>재고 수량</td>
-                  <td th:text="${product.productInventory}+'개'"></td>
+                  <td th:text="${productInventory}+'개'"></td>
                 </tr>
                 <td colspan="2">
                   구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우
@@ -129,26 +128,26 @@
             </article>
             <article class="review">
               <nav><h1>상품리뷰</h1></nav>
+              <h3 th:text="${productName}">상품명</h3>
               <ul>
-                <li>
+                <li th:each="product : ${productList}">
                   <div>
-                    <span>
-                         <div class="star-rating">
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            <a href="#" class="on">★</a>
-                            </div>
+                    <div class="rating" th:data-grade="${product.starRating}">
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                      <span class="star">&#9734;</span>
+                    </div>
                     </span>
-                    <span> <!--th:text="${userId}"-->iosghz</span>
-                    <span th:text="${#dates.format(reviewDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                  <h3 th:text="${product.productName}">상품명</h3>
-                  <p th:text="${reviewContent}" style="margin-top: 50px;">
-                  </p>
+                    <span th:text="${product.userId}">iosghz</span>
+                    <span th:text="${#dates.format(product.reviewDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                    <p th:text="${product.reviewContent}" style="margin-top: 50px;"></p>
                   </div>
                 </li>
               </ul>
+
+
             </article>
           </section>
         </main>
@@ -164,16 +163,14 @@
   <aside class="aside2" th:replace="fragment/aside2 :: aside2">
     <div class="menu-container"></div>
   </aside>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script th:src="@{/js/shop/shoppingDetail.js}"></script>
   <script th:src="@{/js/fragment/aside.js}"></script>
   <!-- 퀵 메뉴 추가 공간 -->
   <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 <script th:inline="javascript"></script>
-<script>
 
-
-</script>
 
 </body>
 
