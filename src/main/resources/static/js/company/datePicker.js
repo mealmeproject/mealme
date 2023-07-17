@@ -40,3 +40,63 @@ $(document).ready(function () {
         ],
     });
 });
+
+
+
+
+    //결제 api
+$(".pay-button-detailed").on("click", function () {
+    IMP.init("imp00651153"); //가맹점 식별코드를 매개변수로 넘겨준다.
+
+    IMP.request_pay(
+        {
+            pg: "kakaopay.TC0ONETIME", // kakaopay.{상점아이디(CID)}
+            pay_method: "card", // 생략가
+            merchant_uid: "merchant" + new Date().getTime(), // 상점에서 생성한 고유 주문번호
+            name: "컨설팅 신청", // 상품 구매 이름
+            amount: 3000, // 가격
+            buyer_id: "구매자 아이디",
+            pg_tid: "결제번호",
+            m_redirect_url: "/shop/shoppingFinish", //결제 후 이동할 페이지 url(리다이렉트)
+        },
+    function (rsp) {
+        // callback
+        if (rsp.success) {
+        // 빌링키 발급 성공
+
+        console.log(rsp);
+        console.log(rsp.buyer_id);
+        console.log(rsp.name); //상품 이름
+        console.log(rsp.merchant_uid); // 주문 고유 번호
+        console.log(rsp.amount); // 가격
+        console.log(rsp.pg_tid); // 결제 고유 번호
+
+            let dataObj = {
+                companyNumber : $('input[name="companyNumber"]').val(),
+                consultingRequestComment : $('#summernote').val(),
+                consultingRequestFirstDate : $('input[name="consultingRequestFirstDate"]').val(),
+                consultingRequestLastDate : $('input[name="consultingRequestLastDate"]').val()
+            };
+
+            console.log(dataObj);
+        $.ajax({
+            url : '/companies/settingThePeriods',
+            type : 'post',
+            data : JSON.stringify(dataObj),
+            contentType : "application/json; charset=utf-8",
+            success : function (){
+                console.log("success");
+                window.location.href = "/company/consultingFinish";
+            }
+        });
+        } else {
+            // 빌링키 발급 실패
+        }
+    }
+    );
+});
+
+
+
+
+

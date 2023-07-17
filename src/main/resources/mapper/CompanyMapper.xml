@@ -3,22 +3,32 @@
 <mapper namespace="com.example.mealme.mapper.CompanyMapper">
 <!--    이 쿼리 변경-->
     <select id="selectAll" resultType="companyListVo">
-        SELECT c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER, c.COMPANY_ADDRESS1,
-               cc.COMPANY_CODE_NUMBER, cc.COMPANY_CODE_NAME, AVG(r.REVIEW_GRADE) AS AVERAGE_GRADE,
-               f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
-        FROM TBL_COMPANY c
-                 JOIN TBL_COMPANY_CODE cc ON c.COMPANY_CODE_NUMBER = cc.COMPANY_CODE_NUMBER
-                 JOIN TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
-                 LEFT JOIN TBL_COMPANY_FILE f ON c.COMPANY_NUMBER = f.COMPANY_NUMBER
-        WHERE cc.COMPANY_CODE_NUMBER = #{companyCodeNumber}
-        GROUP BY c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER,
-                 c.COMPANY_ADDRESS1, cc.COMPANY_CODE_NUMBER, cc.COMPANY_CODE_NAME, f.FILE_NUMBER,
-                 f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+        SELECT COMPANY_NUMBER, COMPANY_NAME, COMPANY_CEO_NAME, COMPANY_CALL_NUMBER, COMPANY_ADDRESS1,
+               COMPANY_CODE_NAME, COMPANY_CODE_NUMBER, AVERAGE_GRADE, FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID
+        FROM (
+                 SELECT ROWNUM AS RNUM, COMPANY_NUMBER, COMPANY_NAME, COMPANY_CEO_NAME, COMPANY_CALL_NUMBER, COMPANY_ADDRESS1, COMPANY_CODE_NAME,
+                        COMPANY_CODE_NUMBER, AVERAGE_GRADE, FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID
+                 FROM (
+                          SELECT c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER, c.COMPANY_ADDRESS1, cc.COMPANY_CODE_NUMBER,
+                                 cc.COMPANY_CODE_NAME, TRUNC(AVG(r.REVIEW_GRADE), 1) AS AVERAGE_GRADE, f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+                          FROM TBL_COMPANY c
+                                   JOIN TBL_COMPANY_CODE cc ON c.COMPANY_CODE_NUMBER = cc.COMPANY_CODE_NUMBER
+                                   JOIN TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
+                                   LEFT JOIN TBL_COMPANY_FILE f ON c.COMPANY_NUMBER = f.COMPANY_NUMBER
+                          WHERE cc.COMPANY_CODE_NUMBER = #{companyCodeNumber}
+                          GROUP BY c.COMPANY_NUMBER, c.COMPANY_NAME, c.COMPANY_CEO_NAME, c.COMPANY_CALL_NUMBER,
+                                   c.COMPANY_ADDRESS1, cc.COMPANY_CODE_NUMBER, cc.COMPANY_CODE_NAME, f.FILE_NUMBER,
+                                   f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+                      ) J <![CDATA[
+         WHERE ROWNUM <= #{page} * #{amount}
+                     ]]>
+             )
+        WHERE RNUM > (#{page} - 1) * #{amount}
     </select>
 
     <select id="selectDetail" resultType="companyListVo">
         SELECT c.COMPANY_NAME, c.COMPANY_NUMBER, c.COMPANY_CEO_NAME, c.COMPANY_REGISTRATION_NUMBER, r.COMPANY_NUMBER, c.COMPANY_CALL_NUMBER,
-               c.COMPANY_URL, c.COMPANY_ADDRESS1, c.COMPANY_COMMENT, c.COMPANY_EMAIL, AVG(r.REVIEW_GRADE) AS AVERAGE_GRADE,
+               c.COMPANY_URL, c.COMPANY_ADDRESS1, c.COMPANY_COMMENT, c.COMPANY_EMAIL, TRUNC(AVG(r.REVIEW_GRADE), 1) AS AVERAGE_GRADE,
                f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
         FROM TBL_COMPANY c
                  JOIN TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
@@ -31,13 +41,24 @@
 
 <!--    이 쿼리 변경-->
     <select id="selectReview" resultType="companyReviewVo">
-        SELECT tc.REVIEW_NUMBER, tc.USER_NUMBER, tc.COMPANY_NUMBER, tc.REVIEW_DATE, tc.REVIEW_CONTENT, tc.REVIEW_GRADE, u.USER_NICKNAME,
-               uf.FILE_UPLOAD_PATH, uf.FILE_UUID, uf.FILE_NAME, uf.FILE_NUMBER
-        FROM TBL_CONSULTING_REVIEW tc
-                 JOIN TBL_COMPANY c ON tc.COMPANY_NUMBER = c.COMPANY_NUMBER
-                 JOIN TBL_USER u ON tc.USER_NUMBER = u.USER_NUMBER
-                 LEFT JOIN TBL_USER_FILE uf ON tc.USER_NUMBER = uf.USER_NUMBER
-        WHERE c.COMPANY_NUMBER = #{companyNumber}
+        SELECT REVIEW_NUMBER, USER_NUMBER, COMPANY_NUMBER, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE, USER_NICKNAME,
+               FILE_UPLOAD_PATH, FILE_UUID, FILE_NAME, FILE_NUMBER
+        FROM (
+                 SELECT ROWNUM AS RNUM, REVIEW_NUMBER, USER_NUMBER, COMPANY_NUMBER, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE,
+                        USER_NICKNAME, FILE_UPLOAD_PATH, FILE_UUID, FILE_NAME, FILE_NUMBER
+                 FROM (
+                          SELECT tc.REVIEW_NUMBER, tc.USER_NUMBER, tc.COMPANY_NUMBER, tc.REVIEW_DATE, tc.REVIEW_CONTENT, tc.REVIEW_GRADE,
+                                 u.USER_NICKNAME, uf.FILE_UPLOAD_PATH, uf.FILE_UUID, uf.FILE_NAME, uf.FILE_NUMBER
+                          FROM TBL_CONSULTING_REVIEW tc
+                                   JOIN TBL_COMPANY c ON tc.COMPANY_NUMBER = c.COMPANY_NUMBER
+                                   JOIN TBL_USER u ON tc.USER_NUMBER = u.USER_NUMBER
+                                   LEFT JOIN TBL_USER_FILE uf ON tc.USER_NUMBER = uf.USER_NUMBER
+                          WHERE c.COMPANY_NUMBER = #{companyNumber}
+                      ) J <![CDATA[
+         WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+            ]]>
+             )
+        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
 
     <insert id="insert">
@@ -49,15 +70,14 @@
         values (#{companyNumber}, #{consultingRequestNumber}, #{consultingRequestComment}, #{consultingRequestFirstDate},
                 #{consultingRequestLastDate}, #{userNumber})
     </insert>
+
+    <select id="selectTotal" resultType="_int">
+        SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY
+        WHERE COMPANY_CODE_NUMBER = #{companyCodeNumber}
+    </select>
+
+    <select id="selectReviewList" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER) FROM TBL_CONSULTING_REVIEW
+        WHERE COMPANY_NUMBER = #{companyNumber}
+    </select>
 </mapper>
-
-
-
-
-        <!-- <insert id="insert">
-                <selectKey keyProperty="consultingNumber" order="BEFORE" resultType="long">
-                    SELECT SEQ_CONSULTING.NEXTVAL FROM DUAL
-                </selectKey>
-                insert into TBL_CONSULTING (CONSULTING_NUMBER, COMPANY_NUMBER, USER_NUMBER, CONSULTING_COMMENT,CONSULTING_DATE)
-                VALUES (#{consultingNumber}, #{companyNumber}, #{userNumber}, #{consultingComment}, #{consultingDate, jdbcType=TIMESTAMP})
-            </insert>-->
