@@ -95,18 +95,34 @@ export function getMonthlyTotal(callback,error){
     });
 }
 
-// export function getWeeklyPayment(callback,error){
-//     $.ajax({
-//         url : `/admins/v1/weeklyPayment`,
-//         type : 'get',
-//         dataType : 'json',
-//         success : function (order){
-//             if(callback){
-//                 callback(order);
-//
-//
-//             }
-//         },
-//         error : error
-//     });
-// }
+export function getStatusCount(callback,error){
+    $.ajax({
+        url : `/admins/v1/statusCount`,
+        type : 'get',
+        dataType : 'json',
+        success : function (order){
+            if(callback){
+                callback(order);
+
+
+            }
+        },
+        error : error
+    });
+}
+
+export function getUserTotal(callback,error){
+    $.ajax({
+        url : `/admins/v1/totalCount`,
+        type : 'get',
+        dataType : 'json',
+        success : function (order){
+            if(callback){
+                callback(order);
+
+
+            }
+        },
+        error : error
+    });
+}

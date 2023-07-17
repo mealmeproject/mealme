@@ -1,4 +1,5 @@
 import * as daily from '../module/daily.js';
+import {getDailyRefund} from "../module/daily.js";
 
 
 daily.getDailyOrder(chartDate,dailyOrder,showError);
@@ -192,6 +193,29 @@ function dailyRefund(order) {
 }
 
 daily.getDailyRefund(chartDate,dailyRefund,showError);
+
+// 상태에 따른 개수 뽑기
+function statusCount(status){
+console.log(status)
+  $('#preparing').text(status[0].orderCount);
+  $('#shipping').text(status[1].orderCount);
+  $('#cancel-count').text(status[2].orderCount);
+  $('#change-count').text(status[3].orderCount);
+  $('#refund-count').text(status[4].orderCount);
+
+}
+
+daily.getStatusCount(statusCount,showError);
+
+//일반,기업 회원 조회 및 총합
+function userTotal(user){
+  console.log(user)
+  $('#n-user').text(user.userCount);
+  $('#c-user').text(user.companyCount);
+  $('#user-total').text(user.totalCount);
+
+}
+daily.getUserTotal(userTotal,showError);
 
 
 

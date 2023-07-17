@@ -90,6 +90,10 @@
 
     </delete>
 
+    <select id="userTotal" resultType="_int">
+        SELECT COUNT(USER_NUMBER) FROM TBL_USER
+    </select>
+
     <select id="selectTotal" resultType="_int">
         SELECT COUNT(USER_NUMBER) FROM TBL_USER
         <where>
@@ -624,6 +628,22 @@
         WHERE TRUNC(DR.order_date) BETWEEN TRUNC(sysdate) - 30 AND TRUNC(sysdate)
         GROUP BY DR.order_date
         ORDER BY DR.order_date
+    </select>
+
+    <select id="statusCount" resultType="orderDto">
+        SELECT ORDER_CONDITION_CODE, COUNT(ORDER_NUMBER) AS ORDER_COUNT
+        FROM TBL_ORDER
+        WHERE ORDER_CONDITION_CODE IN (2, 5, 3, 8, 7)
+        GROUP BY ORDER_CONDITION_CODE
+    </select>
+
+    <select id="userTotalCount" resultType="userTotalVo">
+        SELECT
+                (SELECT COUNT(USER_NUMBER) FROM TBL_USER) AS USER_COUNT,
+                (SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY) AS COMPANY_COUNT,
+                (SELECT COUNT(USER_NUMBER) FROM TBL_USER) + (SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY) AS TOTAL_COUNT
+        FROM DUAL
+
     </select>
 </mapper>
 

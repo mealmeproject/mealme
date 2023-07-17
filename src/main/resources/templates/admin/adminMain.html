@@ -57,10 +57,10 @@
                     </tr>
                     <tr>
                       <th scope="col">
-                        신규회원
+                        일반회원
                       </th>
                       <th scope="col">
-                        방문회원
+                        기업회원
                       </th>
                       <th scope="col">
                         TOTAL
@@ -70,19 +70,19 @@
                   <tbody class="right" align="right">
                     <tr>
                       <td>
-                        <strong class="underline txtEm">
+                        <strong class="underline txtEm" id="n-user">
                           <a>0</a>
                         </strong>
                         명
                       </td>
                       <td>
-                        <strong class="underline txtEm">
+                        <strong class="underline txtEm" id="c-user">
                           <a>0</a>
                         </strong>
                         명
                       </td>
                       <td>
-                        <strong class="underline txtEm">
+                        <strong class="underline txtEm" id="user-total">
                           <a>0</a>
                         </strong>
                         명
@@ -111,13 +111,12 @@
                   </colgroup>
                   <thead>
                     <tr>
-                      <th scope="col" rowspan="2">배송준비중/<br>배송보류중</th>
-                      <th scope="col" rowspan="2">배송대기</th>
+                      <th scope="col" rowspan="2">배송준비중</th>
                       <th scope="col" rowspan="2">배송중</th>
-                      <th scope="col" >취소</th>
-                      <th scope="col" >반품</th>
-                      <th scope="col" rowspan="2">환불전</th>
-                      <th scope="col" rowspan="2">게시물 관리</th>
+                      <th scope="col" >취소신청</th>
+                      <th scope="col" >반품신청</th>
+                      <th scope="col" rowspan="2">환불신청</th>
+
                       
                     </tr>
                     <tr>
@@ -133,21 +132,9 @@
                         <strong>
                           <span id="preparing">0</span>
                         </strong>
-                      </a>
-                        /
-                        <a href="">
-                        <strong>
-                          <span id="delay">0</span>
-                        </strong>
-                      </a>
-                      </td>
-                      <td>
-                        <a href="">
-                          <strong>
-                            <span id="shipped">0</span>
-                          </strong>
                         </a>
                       </td>
+
                       <td>
                         <a href="">
                           <strong>
@@ -161,12 +148,6 @@
                           <span id="cancel-count">0</span>
                         </strong>
                       </a>
-                        /
-                        <a href="">
-                        <strong>
-                          <span id="canceling-count">0</span>
-                        </strong>
-                      </a>
                       </td>
                       <td>
                         <a href="">
@@ -174,27 +155,16 @@
                           <span id="change-count">0</span>
                         </strong>
                       </a>
-                        
-                        <a href="">
-                        <strong>
-                          <span id="changing-count">0</span>
-                        </strong>
-                      </a>
                       </td>
-                      <td>
-                        <a href="">
-                          <strong>
-                            <span id="before-refund">0</span>
-                          </strong>
-                        </a>
-                      </td>
-                      <td>
-                        <a href="">
-                          <strong>
-                            <span id="post-count">0</span>
-                          </strong>
-                        </a>
-                      </td>
+
+                        <td>
+                            <a href="">
+                                <strong>
+                                    <span id="refund-count">0</span>
+                                </strong>
+                            </a>
+                        </td>
+
                     </tr>
                   </tbody>
                 </table>

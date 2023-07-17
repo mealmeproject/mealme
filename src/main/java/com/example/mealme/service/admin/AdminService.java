@@ -107,13 +107,15 @@ public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Crite
         return adminMapper.selectTotal(searchVo);
     }
 
+    public int userTotal(){return adminMapper.userTotal();}
+
     //전체 기업 수 조회
     @Transactional(readOnly = true)
     public int getCompanyTotal(SearchCompanyVo searchCompanyVo){
         return adminMapper.selectCompanyTotal(searchCompanyVo);
     }
 
-//    대분류 조회
+//  대분류 조회
     @Transactional(readOnly = true)
     public List<ProductCategory1Dto> findCategory(){
         return adminMapper.selectCategory();
@@ -190,6 +192,17 @@ public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Crite
 //    상태명 뽑기
     public String getConditionName(Long orderConditionCode){
         return adminMapper.getConditionName(orderConditionCode);
+    }
+
+//상태 갯수 조회
+    public List<OrderDto> getStatusCount(){
+        return adminMapper.statusCount();
+    }
+
+//    일반, 기업회원 조회 및 총합
+    public UserTotalVo getUserTotal(){
+       return adminMapper.userTotalCount();
+
     }
 
 

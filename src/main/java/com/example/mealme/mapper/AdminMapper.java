@@ -27,6 +27,8 @@ public interface AdminMapper {
 
     //    전체 게시글 수 조회
     public int selectTotal(@Param("searchVo")SearchVo searchVo);
+    int userTotal();
+
 
     List<UserDto> selectAll(Criteria criteria);
 
@@ -93,5 +95,11 @@ void companyStatus(@Param("companyNumber") String companyNumber, @Param("company
     List<DailyOrderVo> monthlyOrder();
     List<DailyOrderVo> monthlyPayment();
     List<DailyOrderVo> monthlyRefund();
+
+    List<OrderDto> statusCount();
+    UserTotalVo userTotalCount();
+
+
+
 
 }

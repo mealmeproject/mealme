@@ -272,4 +272,26 @@ public class AdminRestController {
         return weeklyRefunds;
     }
 
+    @GetMapping("/statusCount")
+    public List<OrderDto> statusCount(){
+        List<OrderDto> statusCount = adminService.getStatusCount();
+        return statusCount;
+    }
+
+    @GetMapping("/totalCount")
+    public UserTotalVo userTotalCount(){
+       return adminService.getUserTotal();
+
+    }
+
+    @GetMapping("/userTotal")
+    public Map<String,Object> userTotal(SearchVo searchVo){
+        int userTotal = adminService.userTotal();
+        int searchTotal = adminService.getTotal(searchVo);
+        Map<String,Object> totalCount = new HashMap<>();
+        totalCount.put("userTotal", userTotal);
+        totalCount.put("searchTotal", searchTotal);
+        return totalCount;
+    }
+
 }
