@@ -78,27 +78,27 @@ body {
     font-size: 1.5em;
     width: 100%;
 }
-#product > .view > .info > .summary > nav > .star-rating{
 
-}
 
 .rating {
-    display: flex;
     font-size: 24px;
     color: #ff9326;
+    width: 200px;
 }
 
 .rating .star {
     transition: color 0.3s;
-}
-
-.star {
     color: gray;
 }
 
+.rating /* 채워진 별점의 색깔 */
 .filled {
-    color: gold;
+    color: yellow;
 }
+
+
+
+
 #product > .view > .info{
     width: 900px;
     height: 600px;
@@ -202,23 +202,17 @@ body {
     text-align: right;
 }
 
-.rating {
-    font-size: 24px; /* 별점 영역의 글꼴 크기 조정 */
+.star_rating {
+    font-size: 20px;
 }
-
-.rating .star {
-    font-size: 24px; /* 별 아이콘의 글꼴 크기 조정 */
-}
-
 
 .star {
-    color: gray;
+    display: inline-block;
 }
 
-.filled {
+.star.filled {
     color: gold;
 }
-
 
 
 
@@ -647,3 +641,24 @@ body {
     font-weight: bold;
 }
 
+
+
+.rating {
+    display: flex;
+    font-size: 24px;
+    color: #ff9326;
+}
+
+.rating .star {
+    transition: color 0.3s;
+}
+
+
+
+.star {
+    color: gray;
+}
+
+.filled {
+    color: gold;
+}
