@@ -1,19 +1,12 @@
 package com.example.mealme.controller.shop;
 
 
-import com.example.mealme.dto.ProductDto;
+import com.example.mealme.dto.ProductFileDto;
 import com.example.mealme.dto.UserDto;
-import com.example.mealme.mapper.ProductMapper;
-import com.example.mealme.service.meal.MealService;
+import com.example.mealme.service.shop.ShopReviewService;
 import com.example.mealme.service.shop.ShopService;
 import com.example.mealme.vo.*;
-import com.example.mealme.service.shop.ShopReviewService;
-import com.example.mealme.vo.ProductPayListVo;
-import com.example.mealme.vo.ProductVo;
-
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,40 +23,17 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ShopController {
     private final ShopService shopService;
-
     private final ShopReviewService shopReviewService;
 
 
-//    @Autowired
-//    public ShopController(ShopService shopService, ShopReviewService shopReviewService) {
-//
-//        this.shopService = shopService;
-//        this.shopReviewService = shopReviewService;
-//    }
-
-
     @GetMapping("/shoppingList")
-    public String shoppingList(@RequestParam(value = "sort", required = false) String sort, Model model,ProductVo productVo, PageVo pageVo, Criteria criteria) {
-        List<ProductVo> productAll = shopService.selectAll(criteria);
-        List<ProductVo> productAllPrice = shopService.selectAllPrice();
-        List<ProductVo> productList;
+    public String shoppingList(Model model) {
+        System.out.println("쇼핑몰 상품 리스트==================================================");
+        List<ProductListVo> productList = shopService.findProductList();
+        int listCount = shopService.getTotal();
 
-        model.addAttribute("products", productAllPrice);
-        model.addAttribute("productAll", productAll);
-
-        model.addAttribute("pageInfo",new PageVo(criteria, shopService.getTotal()));
-
-
-        System.out.println("==============================");
-        System.out.println(new PageVo(criteria, shopService.getTotal()));
-
-        List<ProductReviewVo> productList2 = shopService.findReviewList(productVo.getProductNumber());
-
-
-        model.addAttribute("productList2", productList2);
-
-
-
+        model.addAttribute("productList", productList);
+        model.addAttribute("getTotal", listCount);
         return "shop/shoppingList";
     }
 
@@ -71,35 +41,18 @@ public class ShopController {
 
     @GetMapping("/shoppingDetail")
     public String shoppingDetail(Model model, @RequestParam("productNumber") Long productNumber) {
+        System.out.println("쇼핑몰 상품 세부 페이지==================================================");
 
-        // 세션에서 userNumber를 가져옴
-
-        ProductVo starRating = shopService.selectStarRating(productNumber.toString());
-
-        // productNumber 값을 모델에 추가
-        model.addAttribute("productNumber", productNumber);
-
-        //상품detail에 들어갈 것들
-        model.addAttribute("productName",starRating.getProductName());
-        model.addAttribute("reviewDate",starRating.getReviewDate());
-        model.addAttribute("averageRating",starRating.getAverageRating());
-        model.addAttribute("productNumber",starRating.getProductNumber());
-        model.addAttribute("productInventory",starRating.getProductInventory());
-        model.addAttribute("productExplanation",starRating.getProductExplanation());
-        model.addAttribute("productPrice",starRating.getProductPrice());
-        model.addAttribute("productRegisterDate",starRating.getProductRegisterDate());
-        model.addAttribute("productSeller",starRating.getProductSeller());
-
-        System.out.println("productNumber: " + productNumber);
-        System.out.println("averageRating: " + starRating.getAverageRating());
-
-
-
-
+//        상품 상세보기 상단 사진과 정보들
+        ProductListVo productDetail = shopService.findProductDetail(productNumber);
+//        상품 등록시 추가한 제품 사진 파일 리스트
+        List<ProductFileDto> files = shopService.findProductFiles(productNumber);
+//        리뷰 목록
         List<ProductReviewVo> reviewList = shopService.findReviewList(productNumber);
 
+        model.addAttribute("productDetail", productDetail);
+        model.addAttribute("files", files);
         model.addAttribute("reviewList", reviewList);
-
 
         return "shop/shoppingDetail";
     }
@@ -109,12 +62,15 @@ public class ShopController {
     @GetMapping("/shoppingBasket")
     public String shoppingBasket(CartVo cartVo, HttpServletRequest req, Model model) {
         Long userNumberValue = (Long) req.getSession().getAttribute("userNumber");
+
+        // 세션체크
         if(userNumberValue == null){
-            return "redirect:/user/index";
+            return "redirect:/user/login";
         }
 
+        // 장바구니 추가 버튼으로 들어왔을 경우에만 카트에 추가하게 설정
+        if (cartVo.getProductNumber() != 0){
         cartVo.setUserNumber(userNumberValue);
-
         // 장바구니에 상품 추가
         cartVo.setCartCount(1);
 
@@ -123,11 +79,12 @@ public class ShopController {
         System.out.println("userNumber: " + userNumberValue);
         System.out.println("count: " + cartVo.getCartCount());
         shopService.processCart(cartVo);
-
+        }
 
 
         // 장바구니에 담긴 상품 조회
-        List<CartVo> cartItems = shopService.selectCart(cartVo);
+        cartVo.setUserNumber(userNumberValue);
+        List<CartVo> cartItems = shopService.selectCart(cartVo); //
 
         // 총 가격 계산
                 int totalPrice = cartVo.getTotalPrice();

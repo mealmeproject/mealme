@@ -75,13 +75,15 @@ public class MealController {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("======================================");
         System.out.println(foodDto);
-        System.out.println("======================================");
-
         mealService.registerFood(foodDto, boardDto.getBoardNumber());
 
         return new RedirectView ("/meal/myPage");
+    }
+
+    @GetMapping("mealDelete")
+    public RedirectView mealDelete(@RequestParam("boardNumber") Long boardNumber){
+        mealService.DeleteBoard(boardNumber);
+        return new RedirectView("/meal/myPage");
     }
 }

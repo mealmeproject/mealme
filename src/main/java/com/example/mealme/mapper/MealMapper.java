@@ -34,4 +34,7 @@ public interface MealMapper {
     // 음식 추가
     public void insertFood(FoodDto foodDto);
 
+    // 게시글 삭제
+    public void deleteBoard(Long boardNumber);
+
 }

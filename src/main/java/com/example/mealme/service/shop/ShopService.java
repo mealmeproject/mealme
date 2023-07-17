@@ -1,16 +1,14 @@
 package com.example.mealme.service.shop;
 
+import com.example.mealme.dto.ProductFileDto;
 import com.example.mealme.dto.UserDto;
 import com.example.mealme.mapper.ProductMapper;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -18,19 +16,15 @@ import java.util.Map;
 public class ShopService {
     private final ProductMapper productMapper;
 
-
     public List<ProductVo> selectAll(Criteria criteria) {
-
         return productMapper.selectAll(criteria);
     }
 
-        //전체 게시글 수 조회
-        @Transactional(readOnly = true)
-        public int getTotal(){
+    //전체 게시글 수 조회
+    @Transactional(readOnly = true)
+    public int getTotal(){
             return productMapper.selectTotal();
         }
-
-
 
     public List<ProductVo> selectAllPrice() {
 
@@ -137,6 +131,30 @@ public class ShopService {
     public List<CartVo> findCartList(Long userNumber){
         return productMapper.selectCartList(userNumber);
     }
+
+// ================================================================================
+
+//     쇼핑몰 상품 리스트 ( 사진까지 )
+    public List<ProductListVo> findProductList(){
+        return productMapper.selectProductList();
+    }
+
+//    상품 세부정보
+    public ProductListVo findProductDetail(Long productNumber){
+        if (productNumber== null){
+            throw new IllegalArgumentException("찾으시는 상품 번호가 없습니다.");
+        }
+        return productMapper.selectProductDetail(productNumber);
+    }
+
+//    상품 파일 리스트
+    public List<ProductFileDto> findProductFiles(Long productNumber){
+        if (productNumber == null) {
+            throw new IllegalArgumentException("찾으시는 상품 번호가 없습니다.");
+        }
+        return productMapper.selectProductFileList(productNumber);
+    }
+
 }
 
 
