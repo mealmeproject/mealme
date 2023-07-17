@@ -158,3 +158,16 @@
 .button-wrap{
   margin-bottom: 30px;
 }
+
+/* 여기부터는 productReview부분 css */
+.review-product{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.producr-name{
+  font-size: 20px;
+  margin-left: 25px;
+  width: 600px;
+}

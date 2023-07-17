@@ -25,6 +25,7 @@ export function getDailyList(callback, error){
             }
         },
         error : error
+
     });
 }
 
@@ -54,4 +55,9 @@ export function getMonthlyList(callback, error){
         },
         error : error
     });
+}
+
+
+export function getCodeSum(mealTime, callback, error){
+
 }

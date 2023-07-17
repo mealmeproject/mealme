@@ -1,6 +1,7 @@
 package com.example.mealme.controller.admin;
 
 import com.example.mealme.dto.ProductDto;
+import com.example.mealme.dto.ProductFileDto;
 import com.example.mealme.dto.UserDto;
 import com.example.mealme.service.admin.AdminService;
 import com.example.mealme.service.admin.ProductFileService;
@@ -64,11 +65,12 @@ public class AdminController {
     public void registProduct(){}
 
     @PostMapping("/registProduct")
-    public void registProduct(ProductDto productDto, @RequestParam("productFile") List<MultipartFile> files){
+    public void registProduct(ProductDto productDto, @RequestParam("productFile") List<MultipartFile> files, Model model){
 
         System.out.println("=======================");
         System.out.println(productDto);
         System.out.println("============================");
+        model.addAttribute("productNumber", productDto.getProductNumber());
         adminService.registerProduct(productDto);
 
         System.out.println("=======================");
@@ -87,9 +89,39 @@ public class AdminController {
     }
 
     @GetMapping("/registChange")
-    public void registChange(Long productNumber, Model model){
-        List<ProductVo> productVo = adminService.modifyProduct(productNumber);
+    public void registChange(@RequestParam("productNumber") Long productNumber, Model model){
+        ProductVo productVo = adminService.modifyProduct(productNumber);
+        List<ProductFileDto> files = productFileService.findList(productNumber);
+        model.addAttribute("productNumber", productNumber);
         model.addAttribute("productVo", productVo);
+        model.addAttribute("files", files);
+    }
+
+    @PostMapping("/registChange")
+    public void registChange(ProductDto productDto, ProductVo productVo,@RequestParam("productFile") List<MultipartFile> files){
+
+        System.out.println("=======================");
+        System.out.println(productDto);
+        System.out.println("============================");
+        try {
+            adminService.changeProduct(productDto,productVo,files);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("=======================");
+        System.out.println(productDto);
+        System.out.println("============================");
+
+        if(files != null){
+            try {
+                productFileService.registerAndSaveFiles(files, productDto.getProductNumber());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
 }

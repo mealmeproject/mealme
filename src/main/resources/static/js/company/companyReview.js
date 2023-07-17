@@ -36,3 +36,5 @@ function summerNote(){
 $('.cancel').click(function() {
   window.location.href = '/company/consultingReviewList';
 });
+
+console.log($('.company-number').val());

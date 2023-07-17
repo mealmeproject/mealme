@@ -51,11 +51,11 @@
           <div class="today-kcal-wrap">
             <div class="today-kcal">섭취/표준 칼로리</div>
             <div class="today-kcal-num-wrap">
-<!--              <div class="today-kcal-num" th:text="${CalcNutrientUtil.kcalSum}"></div>-->
-<!--              <div class="today-kcal-wrap-sub">-->
-<!--              <div class="today-kcal-slide">/</div>-->
-<!--              <div class="today-kcal-total" th:text="${RecommendVo.recommendKcal}"></div>-->
-<!--              <div class="today-kcal-unit">kcal</div>-->
+              <div class="today-kcal-num"></div>
+              <div class="today-kcal-wrap-sub">
+              <div class="today-kcal-slide">/</div>
+              <div class="today-kcal-total"></div>
+              <div class="today-kcal-unit">kcal</div>
             </div>
           </div>
           </div>
@@ -68,6 +68,7 @@
         <div class="kcal-comment-bar"><span class="kcal-comment-bar-span"></span></div>
           </div>
           <div class="day-meal-part">
+
             <div class="breakfast-wrap">
               <div class="meal-icon"><span class="material-symbols-outlined meal-icon-span">
                 wb_twilight
@@ -76,7 +77,7 @@
                 <div class="breakfast-wrap-sub">
               <div>아침</div>
               <div class="breakfast-num-wrap">
-              <div class="part-kcal-num">285</div>
+              <div class="breakfast-kcal-num">0</div>
               <div>kcal</div>
             </div>
           </div>
@@ -89,12 +90,12 @@
                   <div class="lunch-wrap-sub">
                 <div>점심</div>
                 <div class="lunch-num-wrap">
-                <div class="part-kcal-num">420</div>
+                <div class="lunch-kcal-num">0</div>
                 <div>kcal</div>
               </div>
               </div>
               </div>
-     
+
               <div class="dinner-wrap">
                 <div class="meal-icon"><span class="material-symbols-outlined meal-icon-span">
                   dark_mode
@@ -102,12 +103,12 @@
                   <div class="dinner-wrap-sub">
                 <div>저녁</div>
                 <div class="dinner-num-wrap">
-                <div class="part-kcal-num">380</div>
+                <div class="dinner-kcal-num">0</div>
                 <div>kcal</div>
               </div>
               </div>
               </div>
-                     
+
               <div class="snack-wrap">
                 <div class="meal-icon"><span class="material-symbols-outlined meal-icon-span">
                   icecream
@@ -115,11 +116,12 @@
                   <div class="snack-wrap-sub">
                 <div>간식</div>
                 <div class="snack-num-wrap">
-                <div class="part-kcal-num">500</div>
+                <div class="snack-kcal-num">0</div>
                 <div>kcal</div>
               </div>
               </div>
               </div>
+
           </div>
 
 
@@ -162,25 +164,46 @@
               <div class="photo-all-wrap">
 
 
-                <div> 여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야v여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야여기에 이미지를 넣을거야v</div>
+                <div>
+                    <ul class="meal-img-list">
 
 
 
+<!--                        <li class="meal-img-box" th:each="meal : mealList" th:data-board-number="${meal.boardNumber}">-->
+<!--                            <div class="meal-img">-->
+<!--                                <div class="imgbox" >-->
+<!--                                    <img th:src="@{/img/sample1.jpg}"  alt="" />-->
+<!--                                </div>-->
+<!--                                <div class="meal-info">-->
+<!--                                    <div class="meal-eat-time">-->
+<!--                                        <h2 th:text="${meal.mealTime}">08:00</h2>-->
+<!--                                    </div>-->
+<!--                                    <div class="meal-eat-kcal">-->
+<!--                                        <h2 th:text="${meal.mealTotalKcal}">380kcal</h2>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </li>-->
 
 
 
-
-
-
-
+                    </ul>
               </div>
 
 
 
 
+                  <!-- 모달창 -->
+                  <div id="myModal" class="modal modal-hidden">
+                      <div class="modal-content">
+                          <span class="close" id="close-modal">&times;</span>
+                          <div class="modal-container">
+                          </div>
+                      </div>
+                  </div>
+                  <!--                                모달창끝-->
 
-
-
+              </div>
 
 
 
@@ -322,14 +345,10 @@
 
 
 
-        </div>
+<!--        </div>-->
       </div>
             <!-- 차트 전체 감싸기 끝 -->
-
-
-
-
-            </div>
+          </div>
 
 
 
@@ -374,5 +393,14 @@
       let loginNumber = [[${session.userNumber}]];
     </script>
     <script type="module" th:src="@{/js/chart/today.js}"></script>
+    <script>
+        var images = [];
+        var currentImageIndex = 0;
+
+        function openModal(imageList) {
+            images = imageList;
+
+        }
+    </script>
   </body>
 </html>

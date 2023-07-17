@@ -1,8 +1,11 @@
 import * as company from '../module/companyList.js'
 
 
+let productType = $('#productType').val();
+console.log(productType);
+
 let page = 1;
-company.searchCompanyList({searchType:'', keyword:'', page : page}, companyList, paging, showError);
+company.searchCompanyList({searchType:'', keyword:'', productType: productType, page : page}, companyList, paging, buttonChange, showError);
 
 
 
@@ -29,6 +32,11 @@ function companyList(map){
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyCeoName}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyAddress1}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyEmail}</th>
+                  <input type="hidden" name="status" value="${u.companyStatus}">
+                  
+                  
+
+                  
                 
 		`;
 
@@ -75,9 +83,12 @@ $('.page_nation').on('click','a', function (e){
 	e.preventDefault();
 	let searchKeyword = $('#keyword').val();
 	let searchType = $('.fSelect').val();
+	let productType = $('#productType').val();
+	console.log("=======================");
+	console.log(productType);
 	let page = $(this).data('page');
 	console.log(page)
-	company.searchCompanyList({searchType:searchType, keyword:searchKeyword, page : page}, companyList, paging, showError);
+	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList, paging,buttonChange, showError);
 });
 
 
@@ -86,8 +97,9 @@ $('.page_nation').on('click','a', function (e){
 $('.btn-image').on('click', function (){
 	let searchKeyword = $('#keyword').val();
 	let searchType = $('.fSelect').val();
+	let productType = $('#productType').val();
 	let page = 1;
-	company.searchCompanyList({keyword : searchKeyword, searchType : searchType, page: page}, companyList,paging, showError);
+	company.searchCompanyList({keyword : searchKeyword, searchType : searchType,productType: productType, page: page}, companyList,buttonChange,paging, showError);
 
 	// $('#keyword').val('');
 
@@ -102,8 +114,9 @@ $('#keyword').on('keydown', function (e){
 		console.log('Enter');
 		let searchKeyword = $('#keyword').val();
 		let searchType = $('.fSelect').val();
+		let productType = $('#productType').val();
 		let page = 1;
-		company.searchCompanyList({keyword : searchKeyword, searchType : searchType, page: page}, companyList,paging, showError);
+		company.searchCompanyList({keyword : searchKeyword, searchType : searchType,productType: productType, page: page}, companyList,buttonChange,paging, showError);
 	}
 });
 
@@ -123,6 +136,87 @@ $(document).ready(function() {
 		else $("#cbx_chkAll").prop("checked", true);
 	});
 });
+
+// 상태변경
+
+$('.leftSide').on('click','.btnNormal', function() {
+	let companyStatus = $('#productType').val();
+
+	let companyNumber = productDeleteBtn();
+	// let conditionName = $(".status-select").text();
+	// let orderNumber2 = $(this).closest('tr').find('input[type="checkbox"]').val();
+	// let orderStatus = $(".orderStatus").text();
+	console.log(companyNumber);
+	let searchKeyword = $('#keyword').val();
+	let searchType = $('.fSelect').val();
+	let productType = $('#productType').val();
+	let page = 1;
+
+
+	company.searchCompanyList({searchType:searchType, keyword:searchKeyword, productType: productType, page : page}, companyList, buttonChange,paging, showError);
+
+	company.orderStatusAjax({companyNumber: companyNumber, companyStatus: companyStatus},showError)
+
+});
+
+//수정, 취소 버튼
+function buttonChange(){
+	let statusNumber = $('#productType').val();
+	if(statusNumber == 1){
+		$('.leftSide').html(`
+			<button type="button" class="btnNormal">
+            승인
+           </button>
+		`)
+	} else{
+		$('.leftSide').html(`
+			<button type="button" class="btnNormal">
+            취소
+           </button>
+		`)
+	}
+
+
+}
+
+$('#btnCancel').on('click', function() {
+	let companyStatus = '0';
+	let companyNumber = productDeleteBtn();
+	// let conditionName = $(".status-select").text();
+	// let orderNumber2 = $(this).closest('tr').find('input[type="checkbox"]').val();
+	// let orderStatus = $(".orderStatus").text();
+	console.log(companyNumber);
+	let searchKeyword = $('#keyword').val();
+	let searchType = $('.fSelect').val();
+	let productType = $('#productType').val();
+	let page = 1;
+
+
+	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList, paging, showError);
+
+	company.changeStatusAjax({companyNumber: companyNumber, companyStatus: companyStatus},showError)
+
+});
+
+function productDeleteBtn() {
+	var companyNumber = [];
+
+	$("input:checkbox[name=chk]:checked").each(function () {
+		companyNumber.push($(this).val());
+		console.log("================================");
+		console.log(companyNumber);
+		console.log("================================");
+
+	});
+	console.log(companyNumber)
+
+	if (companyNumber == "") {
+		alert("수정할 상품을 선택해주세요.");
+		return false;
+	}
+
+	return companyNumber;
+}
 
 function showError(a, b, c){
 	console.error(c);

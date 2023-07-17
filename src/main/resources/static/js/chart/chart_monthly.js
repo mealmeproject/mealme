@@ -293,9 +293,12 @@ function showMonthly(monthlyList){
   let sixMonthCarbohydrateKcal = carbohydrateTotal*4;
   let sixMonthProteinKcal = proteinTotal*4;
   let sixMonthFatKcal = fatTotal*9;
-  let sixMonthCarbohydratePercent = Math.round((sixMonthCarbohydrateKcal/kcalTotal) * 100);
-  let sixMonthProteinPercent = Math.round((sixMonthProteinKcal/kcalTotal) * 100);
-  let sixMonthFatPercent = Math.round((sixMonthFatKcal/kcalTotal) * 100);
+  let sixMonthTotalKcal = sixMonthCarbohydrateKcal+sixMonthProteinKcal+sixMonthFatKcal;
+
+  // let sixMonthCarbohydratePercent = Math.round((sixMonthCarbohydrateKcal/sixMonthTotalKcal) * 100);
+  let sixMonthProteinPercent = Math.round((sixMonthProteinKcal/sixMonthTotalKcal) * 100);
+  let sixMonthFatPercent = Math.round((sixMonthFatKcal/sixMonthTotalKcal) * 100);
+  let sixMonthCarbohydratePercent = 100-(sixMonthProteinPercent+sixMonthFatPercent);
 
   if (isNaN(sixMonthCarbohydratePercent)) {
     $('.carbohydrate-percent-num').text(0);

@@ -50,7 +50,7 @@
             <div class="list-main" th:each="company : ${companies}">
               <div class="list-image-section">
                 <div class="list-image">
-                  <img th:src="@{/img/서울대병원.jpg}" class="image1">
+                  <img th:unless="${company.fileName == null}" class="image1" th:src="${'/upload/' + company.fileUploadPath + '/' + company.fileUuid + '_' + company.fileName}">
                 </div>
               </div>
               <div class="list-comment-section">
@@ -62,7 +62,15 @@
                     <div class="name-list" th:text="${company.companyName} + '에 오신 것을 환영합니다.'">서울나우병원에 오신 것을 환영합니다.</div>
                   </div>
                   <div class="star-wrap">
-                    <div class="star">★★★★★</div>
+<!--                    <div class="star">★★★★★</div>-->
+                    <div class="star-ratings">
+                      <div class="star-ratings-fill space-x-2 text-lg" th:attr="style='width: ' + ${company.averageGrade * 20} + '%'">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                      </div>
+                      <div class="star-ratings-base space-x-2 text-lg">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                      </div>
+                    </div>
                     <div class="star-num" th:text="${company.averageGrade} + '/' + '5'">( 4.2 / 5 )</div>
                   </div>
                   <div class="minutely-information">
@@ -245,17 +253,37 @@
             <!-- 페이지 이동 부분 -->
             <div class="page-button-section">
               <div class="pagination">
-                <ul>
-                  <!-- ========== 페이징 처리 예시 ============ -->
-                  <li><a href="#" class="prev">&lt;</a></li>
-                  <li><a href="#" class="active">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#" class="next">&gt;</a></li>
-                  <!-- ========== /페이징 처리 예시 ============ -->
-                </ul>
+<!--                <ul>-->
+<!--                  &lt;!&ndash; ========== 페이징 처리 예시 ============ &ndash;&gt;-->
+<!--                  <li><a href="#" class="prev">&lt;</a></li>-->
+<!--                  <li><a href="#" class="active">1</a></li>-->
+<!--                  <li><a href="#">2</a></li>-->
+<!--                  <li><a href="#">3</a></li>-->
+<!--                  <li><a href="#">4</a></li>-->
+<!--                  <li><a href="#">5</a></li>-->
+<!--                  <li><a href="#" class="next">&gt;</a></li>-->
+<!--                  &lt;!&ndash; ========== /페이징 처리 예시 ============ &ndash;&gt;-->
+<!--                </ul>-->
+                <a th:href="@{/company/hospitalCategory(page=${pageInfo.criteriaCompany.page - 1})}" class="arrow prev" th:if="${pageInfo.criteriaCompany.page > 1}"></a>
+                <a th:href="@{/company/hospitalCategory(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">
+<!--                  <li class="arrow prev">&lt;</li>-->
+                  <li class="arrow prev"><</li>
+                </a>
+                <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+                  <a th:href="@{/company/hospitalCategory(page=${i}, companyCodeNumber=${companyCodeNumber})}" class="page_nation a">
+                    <li class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteriaCompany.page}"></li>
+                    <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteriaCompany.page}"></li>
+                  </a>
+                </th:block>
+
+                <a th:href="@{/company/hospitalCategory(page=${pageInfo.endPage + 1})}" class="page_nation a" th:if="${pageInfo.next}">
+<!--                  <li class="arrow next">&gt;</li>-->
+                  <li class="arrow next">></li>
+                </a>
+<!--                  여기=================================-->
+<!--                <a th:href="@{/company/hospitalCategory(page=${pageInfo.criteriaCompany.page + 1})}" class="arrow next"></a>-->
+                      </div>
+                  </div>
               </div>
             </div>
             <!-- 페이지 이동 부분 끝 -->
@@ -276,21 +304,10 @@
   <div class="menu-container"></div>
 </aside>
 <!-- 퀵 메뉴 추가 공간 -->
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
-<script th:src="@{/js/meal/myPage.js}"></script>
-<script>
-  var images = [];
-  var currentImageIndex = 0;
-
-  function openModal(imageList) {
-    // Assign the image list to the global variable
-    images = imageList;
-
-    // Rest of the code...
-    // (Place the JavaScript code mentioned in the previous response here)
-  }
-</script>
+<script th:src="@{/js/company/companyReviewGrade.js}"></script>
 </body>
 </html>

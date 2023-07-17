@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Page</title>
+  <title>consultingPayInfo</title>
   <link rel="stylesheet" th:href="@{/css/company/consultingPayInfo.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/header2.css}" />
   <link rel="stylesheet" th:href="@{/css/fragment/footer2.css}" />
@@ -31,11 +31,11 @@
         주문 내역
         <div class="page-title-type">
           <div class="main">
-            <input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
-            <label for="tab1">쇼핑몰</label>
 
-            <input id="tab2" type="radio" name="tabs">
-            <label for="tab2">컨설팅</label>
+            <div class="tab-wrap">
+              <div class="company-tab" onclick="location.href='http://localhost:10000/company/consultingPayInfo'">컨설팅</div>
+              <div class="shop-tab" onclick="location.href='http://localhost:10000/shop/shoppingPayInfo'">쇼핑몰</div>
+            </div>
 
 
             <section id="content1">
@@ -52,121 +52,65 @@
           <tr>
             <th class="img">기업</th>
             <th class="name">기업 명</th>
-            <th class="info">기업 정보</th>
-            <th class="human-name">대표 이름</th>
+            <th class="info">컨설팅 내역</th>
+            <th class="human-name">대표</th>
             <th class="price">가격</th>
             <th class="date">날짜</th>
-            <th class="status">컨설팅 상태</th>
+            <th class="status">답변 상태</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
+          <tr th:each="consultingList : ${consultingPayVo}" class="consulting-list">
+            <input class="consulting-requestNumber" type="hidden" th:value="${consultingList.consultingRequestNumber}">
+            <td><img th:src="${consultingList.fileUploadPath}" alt="기업이미지" class="product-image"> </td>
+            <td th:text="${consultingList.companyName}"></td>
+            <td th:text="${consultingList.consultingRequestComment}"></td>
+            <td th:text="${consultingList.companyCeoName}"></td>
+            <td>3000원</td>
+            <td th:text="${consultingList.consultingRequestDate}"></td>
+            <td class="consulting-status">
+              <div th:if="${consultingList.consultingCondition == '0'}" class="consulting-condition">
+                <span>답변중</span>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '1'}" class="consulting-condition">
+                <span>답변완료</span>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '2'}" class="consulting-condition">
+                <span>답변완료</span>
+              </div>
+<!--              <div class="consulting-condition" th:text="${consultingList.consultingCondition}"></div>-->
+<!--              <div class="blank"></div>-->
+<!--              <button class="review-button" th:onclick="'reviewLink(' + ${consultingList.consultingRequestNumber} + ')'" >리뷰작성</button>-->
+              <div th:if="${consultingList.consultingCondition == '0'}">
+                <div class="blank" style="display: none;"></div>
+                <button class="review-button" th:onclick="'reviewLink(' + ${consultingList.consultingRequestNumber} + ')'" style="display: none;">리뷰작성</button>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '1'}">
+                <div class="blank"></div>
+                <button class="review-button" th:onclick="'reviewLink(' + ${consultingList.consultingRequestNumber} + ')'">리뷰작성</button>
+              </div>
+              <div th:if="${consultingList.consultingCondition == '2'}">
+                <div class="blank"></div>
+                <button type="button" disabled class="review-button" style="background-color: rgb(210, 210, 210);">리뷰완료</button>
+              </div>
             </td>
-            <td>답변 완료</td>
           </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <tr>
-            <td><img src="../img/기업사진 예시.jpg" alt="상품 이미지" class="product-image"> </td>
-            <td>용인 세브란스 병원</td>
-            <td>용인세브란스병원은 디지털 혁신의 효율적인 시스템을 통해 안전하고 질 높은 의료서비스를 제공합니다. </td>
-            <td>최동훈</td>
-            <td>10,000원</td>
-            <td>2023-06-14
-              <br>09:38:20
-            </td>
-            <td>답변 완료</td>
-          </tr>
-          <!-- 다른 주문 내역 행 추가 -->
           </tbody>
         </table>
         <div class="page_wrap">
           <div class="page_nation">
-            <a class="arrow pprev" href="#"></a>
-            <a class="arrow prev" href="#"></a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">7</a>
-            <a href="#">8</a>
-            <a href="#">9</a>
-            <a href="#">10</a>
-            <a class="arrow next" href="#"></a>
-            <a class="arrow nnext" href="#"></a>
+
+            <a class="arrow pprev" th:href="@{/company/consultingPayInfo(page=${pageInfo.startPage})}"></a>
+            <a class="arrow prev" th:href="@{/company/consultingPayInfo(page=${pageInfo.startPage - 1})}" th:if="${pageInfo.prev}"></a>
+            <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+              <a th:href="@{/company/consultingPayInfo(page=${i})}">
+                <div class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
+                <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>
+              </a>
+            </th:block>
+            <a class="arrow next" th:href="@{/company/consultingPayInfo(page=${pageInfo.endPage + 1})}" th:if="${pageInfo.next}"></a>
+            <a class="arrow nnext" th:href="@{/company/consultingPayInfo(page=${pageInfo.endPage})}"></a>
+
           </div>
         </div>
       </div>
@@ -186,6 +130,8 @@
   <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
   <script th:src="@{/js/fragment/aside.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/company/consultingPayInfo.js}"></script>
 
 </body>
 </html>

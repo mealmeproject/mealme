@@ -82,7 +82,7 @@ function productList(map){
 <!--                              </div>-->
 <!--                          </div>-->
                       </div>
-                      <p style="text-align: left; margin-left: 55px;"><a href="/admin/registChange?productNumber=${u.productNumber}" onclick="handleClick()" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" product_no="10">${u.productName}</a>
+                      <p style="text-align: left; margin-left: 55px;"><a href="/admin/registChange" onclick="handleClick(event)" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" data-product-number="${u.productNumber}" product_no="10">${u.productName}</a>
                       </p>
                       
                                                       </div>
@@ -95,9 +95,32 @@ function productList(map){
     });
     $('.check').html(list);
 }
-function handleClick(event){
+// function handleClick(event){
+//     event.preventDefault();
+//     alert("상품 수정 페이지로 이동합니다!")
+// }
+
+function handleClick(event) {
     event.preventDefault();
-    alert("상품 수정 페이지로 이동합니다!")
+
+    var productNumber = event.target.getAttribute('data-product-number');
+
+    // AJAX 요청 보내기
+    $.ajax({
+        url: '/admins/v1/registChange',
+        type: 'GET',
+        data: { productNumber: productNumber },
+        success: function(response) {
+
+            console.log('요청이 성공적으로 완료되었습니다.');
+            console.log(response);
+        },
+        error: function(xhr, status, error) {
+
+            console.log('요청이 실패하였습니다.');
+            console.log(error);
+        }
+    });
 }
 
 //페이징 처리
