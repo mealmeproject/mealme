@@ -371,11 +371,10 @@ public class UserController {
         System.out.println("컴퍼니회원 수정 컨트롤러 !");
         Long companyNumber = (Long) req.getSession().getAttribute("companyNumber");
         System.out.println(companyModifyVo);
-//        UserDto userDto = companyModifyVo;
-//        System.out.println(companyModifyVo);
-//        companyModifyVo.setCompanyNumber(companyNumber);
-//        userService.modifyCompany(companyModifyVo);
-//        System.out.println("유저 회원 수정 완료 !");
+        CompanyDto companyDto = companyModifyVo.companyVoToDto();
+        companyDto.setCompanyNumber(companyNumber);
+        userService.modifyCompany(companyDto);
+        System.out.println("기업 회원 수정 완료 !");
         return new RedirectView("/user/companyUpdate2");
     }
 

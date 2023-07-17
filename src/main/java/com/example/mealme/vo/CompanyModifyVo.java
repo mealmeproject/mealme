@@ -1,5 +1,6 @@
 package com.example.mealme.vo;
 
+import com.example.mealme.dto.CompanyDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -97,6 +98,29 @@ public class CompanyModifyVo {
         companyModifyVo.setGetFile(settingFile);
 
         return companyModifyVo;
+    }
+
+    public CompanyDto companyVoToDto(){
+        String companyCallNumber = phone1 + phone2 + phone3;
+        String companyEmail = companyEmail1 + "@" + companyEmail2;
+
+        CompanyDto companyDto = new CompanyDto();
+        companyDto.setCompanyCodeNumber(companyCodeNumber);
+        companyDto.setCompanyPassword(companyPassword);
+        companyDto.setCompanyBirth(companyBirth);
+        companyDto.setCompanyCallNumber(companyCallNumber);
+        companyDto.setCompanyEmail(companyEmail);
+        companyDto.setCompanyAddressNumber(companyAddressNumber);
+        companyDto.setCompanyUrl(companyUrl);
+        companyDto.setCompanyAddress1(companyAddress1);
+        companyDto.setCompanyAddress2(companyAddress2);
+        companyDto.setCompanyAddress3(companyAddress3);
+        companyDto.setCompanyInformation(companyInformation);
+        System.out.println(companyDto);
+        return companyDto;
+
+
+
     }
 
 }
