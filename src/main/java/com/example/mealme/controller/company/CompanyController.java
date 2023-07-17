@@ -4,45 +4,21 @@ import com.example.mealme.dto.ConsultingDto;
 import com.example.mealme.dto.ConsultingRequestDto;
 import com.example.mealme.mapper.ConsultingMapper;
 import com.example.mealme.mapper.ConsultingReplyMapper;
+import com.example.mealme.service.company.CompanyService;
 import com.example.mealme.service.company.ConsultingReplyService;
 import com.example.mealme.service.company.ConsultingService;
-import com.example.mealme.vo.*;
-import com.example.mealme.service.company.CompanyService;
 import com.example.mealme.service.company.ReviewService;
-import com.example.mealme.service.meal.MealService;
-
-import com.example.mealme.vo.CompanyListVo;
-import com.example.mealme.vo.CompanyReviewVo;
-import com.example.mealme.vo.ConsultingVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
-import com.example.mealme.vo.ConsultingReviewVo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -147,6 +123,7 @@ public class CompanyController {
 
         System.out.println(consultingRequests + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(new PageVo(criteria, consultingService.getTotal()));
+        model.addAttribute("pageInfo", new PageVo(criteria, consultingService.getTotal()));
         model.addAttribute("consultingRequests", consultingRequests);
         return "/company/ConsultingList";
     }

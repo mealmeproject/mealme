@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -55,7 +55,7 @@
                       <br />
                       어렵지 않습니다
                   </h2>
-                  <a href="">
+                  <a href="@{/chart/today}">
                       <div class="chart-btn">차트로 식단 분석하기</div>
                   </a>
               </div>
@@ -79,7 +79,7 @@
                       먹고 있거나 추천받은 음식 중에서 바꾸고 싶은 음식이 있나요? 밀미의 다양한 상품 중에서 비슷한
                       영양성분의 다른 상품으로 변경 할 수 있어요.
                   </p>
-                  <a href="">
+                  <a th:href="@{/shop/shoppingList}">
                       <div class="chart-btn">쇼핑몰 바로가기</div>
                   </a>
               </div>

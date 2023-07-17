@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ProductReviewVo {
-        long orderNumber;
-        long userNumber;
-        long productNumber;
-        long reviewNumber;
-        String reviewDate;
-        String reviewContent;
-        long reviewGrade;
-        String orderDate;
-        String productName;
-        String productSeller;
-        String fileName;
-        String fileUploadPath;
-        long orderConditionCode;
+        private long orderNumber;
+        private long userNumber;
+        private long productNumber;
+        private long reviewNumber;
+        private String reviewDate;
+        private String reviewContent;
+        private long reviewGrade;
+        private String orderDate;
+        private String productName;
+        private String productSeller;
+        private String fileName;
+        private String fileUploadPath;
+        private long orderConditionCode;
 }

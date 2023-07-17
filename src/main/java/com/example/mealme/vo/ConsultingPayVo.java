@@ -1,7 +1,5 @@
 package com.example.mealme.vo;
 
-import com.example.mealme.dto.CompanyDto;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -10,15 +8,14 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ConsultingPayVo {
-
-        long userNumber;
-        long consultingRequestNumber;
-        long companyNumber;
-        String fileName;
-        String fileUploadPath;
-        String companyName;
-        String consultingRequestComment;
-        String consultingRequestDate;
-        String companyCeoName;
-        String consultingCondition;
+        private long userNumber;
+        private long consultingRequestNumber;
+        private long companyNumber;
+        private String fileName;
+        private String fileUploadPath;
+        private String companyName;
+        private String consultingRequestComment;
+        private String consultingRequestDate;
+        private String companyCeoName;
+        private String consultingCondition;
 }
