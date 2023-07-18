@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.OrderMapper">
+    <insert id="insert">
+        <selectKey keyProperty="orderNumber" resultType="long" order="BEFORE">
+            SELECT SEQ_ORDER.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_ORDER (ORDER_NUMBER, USER_NUMBER, PRODUCT_NUMBER, ORDER_CONDITION_CODE, SHIPPING_ADDRESS_NUMBER,
+                               ORDER_COUNT)
+        values (#{orderNumber}, #{userNumber}, #{productNumber}, #{orderConditionCode}, #{shippingAddressNumber}, #{orderCount})
+    </insert>
+
+    <select id="selectOrderListByOrderNumbers">
+        SELECT ORDER_NUMBER, USER_NUMBER, O.PRODUCT_NUMBER, ORDER_COUNT,
+               P.PRODUCT_NAME, P.PRODUCT_PRICE,
+               PF.FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID
+        FROM TBL_ORDER O
+                 JOIN TBL_PRODUCT P ON O.ORDER_NUMBER IN (10,11) 
+                    AND O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+                 LEFT JOIN (
+            SELECT FILE_NUMBER, PRODUCT_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, RK
+            FROM (
+                     SELECT FILE_NUMBER, PRODUCT_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID,
+                            RANK() over (PARTITION BY PRODUCT_NUMBER ORDER BY FILE_NUMBER) AS RK
+                     FROM TBL_PRODUCT_FILE
+                 )
+            WHERE RK = 1
+        )PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+    </select>
+
+</mapper>

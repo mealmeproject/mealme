@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mealme.mapper.UserShippingAddressMapper">
+    <insert id="insert">
+        <selectKey keyProperty="shippingAddressNumber" resultType="long" order="BEFORE">
+            SELECT SEQ_SHIPPING_ADDRESS.nextval FROM DUAL
+        </selectKey>
+        insert into TBL_USER_SHIPPING_ADDRESS (SHIPPING_ADDRESS_NUMBER, USER_NUMBER, ADDRESS_NUMBER, SHIPPING_ADDRESS1,
+                                               SHIPPING_ADDRESS2, SHIPPING_ADDRESS3)
+        values (#{shippingAddressNumber}, #{userNumber}, #{addressNumber}, #{shippingAddress1}, #{shippingAddress2}, #{shippingAddress3})
+    </insert>
+
+</mapper>

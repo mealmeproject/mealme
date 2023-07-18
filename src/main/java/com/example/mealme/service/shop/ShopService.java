@@ -1,8 +1,12 @@
 package com.example.mealme.service.shop;
 
+import com.example.mealme.dto.OrderDto;
 import com.example.mealme.dto.ProductFileDto;
 import com.example.mealme.dto.UserDto;
+import com.example.mealme.mapper.CartMapper;
+import com.example.mealme.mapper.OrderMapper;
 import com.example.mealme.mapper.ProductMapper;
+import com.example.mealme.mapper.UserShippingAddressMapper;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,9 @@ import java.util.List;
 @Transactional
 public class ShopService {
     private final ProductMapper productMapper;
+    private final OrderMapper orderMapper;
+    private final UserShippingAddressMapper userShippingAddressMapper;
+    private final CartMapper cartMapper;
 
     public List<ProductVo> selectAll(Criteria criteria) {
         return productMapper.selectAll(criteria);
@@ -113,6 +120,28 @@ public class ShopService {
     public List<ProductPayVo> insertPay() {
 
        return productMapper.insertPay();
+    }
+
+//    결제 프로세스
+    public List<OrderDto> paymentProcess(ShippingVo shippingVo){
+        if (shippingVo == null) {
+            throw new IllegalArgumentException("상품 결제 정보 누락");
+        }
+//        조건 추가해야함 이미 배송지 정보가 존재하는 경우 insert를 하지 않음
+        userShippingAddressMapper.insert(shippingVo);
+
+        shippingVo.getOrderDtoList().stream().map(dto -> {
+            dto.setShippingAddressNumber(shippingVo.getShippingAddressNumber());
+            return dto;
+        }).forEach(orderMapper::insert);
+
+//        결제 완료 후 장바구니에서 상품 삭제
+        shippingVo.getOrderDtoList().stream().forEach(orderDto -> {
+            cartMapper.delete(orderDto.getUserNumber(), orderDto.getProductNumber());
+        });
+
+//        결제 완료 후 final페이지에 뿌려줄 데이터 반환
+        return shippingVo.getOrderDtoList();
     }
 
 
