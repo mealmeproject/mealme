@@ -33,11 +33,14 @@
                     <div class="s">
                         <div class="purchase-info-container">주문자 정보</div>
                         <div class="purchase-info">
-                            <ul>
-                                <li class="userId"><a th:text="${userId}">사용자 ID</a></li>
-                                <li class="userTelePhone"><a th:text="${userPhoneNumber}">전화번호</a></li>
-                                <li class="userEmail"><a th:text="${userEmail}">이메일</a></li>
-                            </ul>
+                            <input type="hidden" class="userId" th:value="${userId}">
+                            <input type="hidden" class="userPhoneNumber" th:value="${userPhoneNumber}">
+                            <input type="hidden" class="userEmail" th:value="${userEmail}">
+<!--                            <ul>-->
+<!--                                <li class="userId"><a th:text="${userId}">사용자 ID</a></li>-->
+<!--                                <li class="userTelePhone"><a th:text="${userPhoneNumber}">전화번호</a></li>-->
+<!--                                <li class="userEmail"><a th:text="${userEmail}">이메일</a></li>-->
+<!--                            </ul>-->
 
                             <a th:href="@{/user/userUpdate}" class="modify-info">주문자 정보 변경 ></a>
                         </div>
@@ -109,7 +112,7 @@
                         </thead>
                         <tbody>
 <!--                        =================== -->
-                        <tr class="cart__list__detail" th:each="list : ${cartList}">
+                        <tr class="cart__list__detail" th:each="list : ${cartList}" th:data-count="${list.cartCount}" th:data-number="${list.productNumber}">
                             <td></td>
                             <td><img src="../img/장바구니 예시1.jpg" alt="magic keyboard"></td>
                             <td><a href="#"></a><span class="cart__list__smartstore"> </span>
@@ -141,7 +144,7 @@
                     </form>
                 </table>
                 <div class="priceResult">
-                    <span th:text="${totalPrice + '원'}" class="priceResultNumber"></span>
+                    <span th:text="${totalPrice}" class="priceResultNumber"></span>원
                 </div>
                 <div class="cart__mainbtns">
                     <div class="cart_info">- 배송방법 선택 또는 배송지에 따라 배송비가 달라질 수 있습니다. <br>

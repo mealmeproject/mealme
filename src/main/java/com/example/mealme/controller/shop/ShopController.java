@@ -141,26 +141,6 @@ public class ShopController {
 
 
 
-
-
-
-    @GetMapping("/shoppingFinish")
-    public void shoppingFinish(){
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //    상품 구매내역 리스트 & 리뷰
     @GetMapping("/shoppingPayInfo")
     public String shoppingPayInfo(Criteria criteria, HttpServletRequest req, Model model){
@@ -262,4 +242,9 @@ public class ShopController {
 
     @GetMapping("/shoppingLikeList")
     public void shoppingLikeList(){}
+
+    @GetMapping("/shoppingFinish")
+    public void moveShoppingFinishPage(@RequestParam("orderNumber") List<Long> orderNumberList){
+        System.out.println(orderNumberList);
+    }
 }
