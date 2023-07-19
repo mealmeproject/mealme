@@ -68,7 +68,7 @@
 .ui-datepicker .ui-datepicker-calendar {
     position: relative;
     width: 260px;
-    padding-top: 100px;
+    /*padding-top: 100px;*/
     margin: 0 auto;
 }
 .ui-datepicker-calendar thead tr {

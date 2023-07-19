@@ -27,6 +27,8 @@ public interface AdminMapper {
 
     //    전체 게시글 수 조회
     public int selectTotal(@Param("searchVo")SearchVo searchVo);
+    int userTotal();
+
 
     List<UserDto> selectAll(Criteria criteria);
 
@@ -38,6 +40,8 @@ public interface AdminMapper {
 
 //    상품 등록
     void insertProduct(ProductDto productDto);
+//    상품 수정
+    void updateProduct(ProductDto productDto);
 
 //    상품 조회
     List<ProductVo> productListSelect(@Param("searchProductVo") SearchProductVo searchProductVo, @Param("criteria") Criteria criteria);
@@ -45,7 +49,8 @@ public interface AdminMapper {
     public int selectProductTotal(@Param("searchProductVo") SearchProductVo searchProductVo);
 
 //    상품 단일 조회
-List<ProductVo> selectProduct(Long productNumber);
+ProductVo selectProduct(Long productNumber);
+
 
 
 
@@ -57,16 +62,44 @@ List<ProductVo> selectProduct(Long productNumber);
 
 
     //    검색 기업 조회
-    List<CompanyDto> searchCompany(@Param("searchVo") SearchVo searchVo , @Param("criteria") Criteria criteria);
+    List<CompanyDto> searchCompany(@Param("searchCompanyVo") SearchCompanyVo searchCompanyVo , @Param("criteria") Criteria criteria);
 
     //    전체 기업 수 조회
-    public int selectCompanyTotal(@Param("searchVo")SearchVo searchVo);
+    public int selectCompanyTotal(@Param("searchCompanyVo") SearchCompanyVo searchCompanyVo);
 
     //    주문 검색 조회
     List<OrderVo> selectOrderList(@Param("searchProductVo") SearchProductVo searchProductVo, @Param("criteria") Criteria criteria);
+
     //    전체 상품 수 조회
     public int selectOrderTotal(@Param("searchProductVo") SearchProductVo searchProductVo);
 //     주문 상태 변경
-    void modifyCondition(@Param("orderNumber") Long orderNumber, @Param("orderConditionCode") Long orderConditionCode );
+    void modifyCondition(@Param("orderNumber") String orderNumber, @Param("orderConditionCode") Long orderConditionCode );
+
+//    상태명 뽑기
+    String getConditionName(Long orderConditionCode);
+
+//    기업 상태 변경
+void companyStatus(@Param("companyNumber") String companyNumber, @Param("companyStatus") Long companyStatus );
+
+
+
+
+    List<DailyOrderVo> selectOrder();
+    List<DailyOrderVo> selectPayment();
+    List<DailyOrderVo> selectRefund();
+
+    List<DailyOrderVo> weeklyOrder();
+    List<DailyOrderVo> weeklyPayment();
+    List<DailyOrderVo> weeklyRefund();
+
+    List<DailyOrderVo> monthlyOrder();
+    List<DailyOrderVo> monthlyPayment();
+    List<DailyOrderVo> monthlyRefund();
+
+    List<OrderDto> statusCount();
+    UserTotalVo userTotalCount();
+
+
+
 
 }

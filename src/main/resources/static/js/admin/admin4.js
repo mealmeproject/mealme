@@ -60,7 +60,7 @@ function orderList(map){
         list += `
 		   <tr>
                  <th>
-                   <input type="checkbox" name="chk" value="${u.orderNumber}">
+                   <input type="checkbox" name="chk" class="chk" value="${u.orderNumber}">
                  </th>
                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.orderDate}</th>
              <th scope="col" style="font-size: 13px; font-weight: 10;">${u.orderNumber}</th>
@@ -80,6 +80,29 @@ function orderList(map){
     $('.check').html(list);
 }
 
+function orderName(map){
+    let list ='';
+    list += `
+		   <tr>
+                 <th>
+                   <input type="checkbox" name="chk" class="chk" value="${map.orderNumber}">
+                 </th>
+                 <th scope="col" style="font-size: 13px; font-weight: 10;">${map.orderDate}</th>
+             <th scope="col" style="font-size: 13px; font-weight: 10;">${map.orderNumber}</th>
+                 <th scope="col" style="font-size: 13px; font-weight: 10;">${map.userName}</th>
+                 <th scope="col" style="font-size: 13px; font-weight: 10;">${map.productSeller}</th>
+                 <th scope="col" style="font-size: 13px; font-weight: 10;">${map.productName}</th>
+                  <th scope="col" style="font-size: 13px; font-weight: 10;">${map.productPrice * map.orderCount}</th>
+                  <th scope="col" style="font-size: 13px; font-weight: 10;">${map.orderCount}</th>
+                  <th scope="col" style="font-size: 13px; font-weight: 10;" class="orderStatus">${map.conditionCodeName}
+          
+                  </th>
+                </tr>
+               
+		`;
+
+    $('.check').html(list);
+}
 
 //페이징 처리
 function paging(pageInfo){
@@ -121,16 +144,48 @@ $(".status-select").on('change', function(){
   conditionNum = $(this).val();
 })
 
+// function refreshOrderList() {
+//     // AJAX 요청
+//
+//     $.ajax({
+//         url: `/admins/v1/searchOrderList/${obj.page}`, // 서버의 URL을 적절히 수정해야 합니다.
+//         method: 'GET', // GET 또는 POST 등 적절한 HTTP 메서드를 선택해야 합니다.
+//         data: obj,
+//         success: function(response) {
+//             // 서버로부터 데이터를 성공적으로 가져왔을 때 실행되는 콜백 함수
+//             orderList(response); // orderList 함수를 호출하여 목록을 다시 생성합니다.
+//         },
+//         error: function(xhr, status, error) {
+//             // AJAX 요청이 실패했을 때 실행되는 콜백 함수
+//             console.error(error); // 에러 메시지를 출력하거나 적절한 오류 처리를 수행합니다.
+//         }
+//     });
+// }
+
 $('.status').on('click', function() {
     let conditionNum = $(".status-select").val();
-    let orderNumber = productModify();
-    let conditionName = $(".status-select").text();
+    let orderNumber = productDeleteBtn();
+    // let conditionName = $(".status-select").text();
     // let orderNumber2 = $(this).closest('tr').find('input[type="checkbox"]').val();
     // let orderStatus = $(".orderStatus").text();
     console.log(orderNumber);
+    let searchKeyword = $('#keyword').val();
+    let searchType = $('.fSelect').val();
+    let page = 1;
+
+
+    let startDate = $('#datepicker1').val();
+    let endDate = $('#datepicker2').val();
+    order.searchOrderList({searchType:searchType, keyword:searchKeyword, page : page, startDate: startDate, endDate:endDate }, orderList, paging, showError);
 
  order.orderStatusAjax({orderNumber: orderNumber, orderConditionCode: conditionNum},showError)
-});
+
+ });
+
+
+// $('.status').on('click', function(){
+//     order.
+// })
 
 
 //페이징 클릭 이벤트
@@ -198,24 +253,25 @@ $(".deleteBtn").on('click',function (){
 
 
 function productDeleteBtn(){
-    var checkBoxArr = [];
+    var orderNumber = [];
+
     $("input:checkbox[name=chk]:checked").each(function (){
-        checkBoxArr.push($(this).val());
+        orderNumber.push($(this).val());
         console.log("================================");
-        console.log(checkBoxArr);
+        console.log(orderNumber);
         console.log("================================");
 
     });
-    console.log(checkBoxArr)
+    console.log(orderNumber)
 
-    if(checkBoxArr==""){
+    if(orderNumber==""){
         alert("수정할 상품을 선택해주세요.");
         return false;
     }
 
     // var confirmAlert = confirm("정말로 삭제하시겠습니까?");
     // user.deleteUserList({checkBoxArr: checkBoxArr ,confirmAlert, showError});
-    return checkBoxArr;
+    return orderNumber;
 }
 
 function productModify(){
@@ -284,20 +340,38 @@ function showError(a, b, c){
 //
 //     $('.check').html(list);
 // }
+//
+//
+//     $('.status').on("click", function () {
+//         let orderStatus = $(".check").find('.orderStatus').text();
+//         let orderConditionCode = $('.status-select').val();
+//         let conditionCodeName = $('.status-select').text();
+//         $.ajax({
+//             type: 'get',
+//             url: '/admins/v1/modifyName',
+//             data: {orderConditionCode : orderConditionCode},
+//             success: function (result) {
+//                 console.log(result.conditionName);
+//                 // $(".check").find('.orderStatus').text(result.conditionCodeName);
+//                 // let text = result.conditionName;
+//                 click(result.conditionName);
+//             }
+//         });
+//     });
 
-function changeName() {
-    $('.check').on("change", function () {
 
-        $.ajax({
-            type: 'post',
-            url: 'admins/v1/modify',
-            data: {
-                select_value: $("#changeStatus option:selected").text()
-            },
-            success: function (response) {
+function click() {
+    $('.check').on("click", ".chk", function () {
 
-                orderList(response)
-            }
-        });
-    });
+        // console.log($(this).closest('tr').find('.orderStatus').text().trim());
+       $(this).closest('tr').find('.orderStatus').text();
+    })
 }
+
+
+// let text = "sfsdfsdf";
+//
+// $('.check').on("click", ".chk", function () {
+//     // console.log($(this).closest('tr').find('.orderStatus').text().trim());
+//     $(this).closest('tr').find('.orderStatus').text(text);
+// })

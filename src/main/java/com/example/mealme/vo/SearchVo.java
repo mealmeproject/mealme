@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class SearchVo {
     private String keyword;
     private String searchType;
+    private String productType;
     private String name;
     private String id;
     private String email;

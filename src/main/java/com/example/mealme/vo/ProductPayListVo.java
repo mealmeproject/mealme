@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 public class ProductPayListVo {
-        long orderNumber;
-        long userNumber;
-        long productNumber;
-        long orderCount;
-        String orderDate;
-        long orderConditionCode;
-        String conditionCodeName;
-        String productName;
-        String productExplanation;
-        String productSeller;
-        long productPrice;
-        String fileName;
-        String fileUploadPath;
+        private long orderNumber;
+        private long userNumber;
+        private long productNumber;
+        private long orderCount;
+        private String orderDate;
+        private long orderConditionCode;
+        private String conditionCodeName;
+        private String productName;
+        private String productExplanation;
+        private String productSeller;
+        private long productPrice;
+        private String fileName;
+        private String fileUploadPath;
 }

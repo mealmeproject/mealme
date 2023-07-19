@@ -81,6 +81,7 @@ $('.page_nation').on('click','a', function (e){
 $('.btn-image').on('click', function (){
 	let searchKeyword = $('#keyword').val();
 	let searchType = $('.fSelect').val();
+	$()
 	let page = 1;
 	user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging, showError);
 

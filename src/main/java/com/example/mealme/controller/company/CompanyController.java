@@ -4,45 +4,21 @@ import com.example.mealme.dto.ConsultingDto;
 import com.example.mealme.dto.ConsultingRequestDto;
 import com.example.mealme.mapper.ConsultingMapper;
 import com.example.mealme.mapper.ConsultingReplyMapper;
+import com.example.mealme.service.company.CompanyService;
 import com.example.mealme.service.company.ConsultingReplyService;
 import com.example.mealme.service.company.ConsultingService;
-import com.example.mealme.vo.*;
-import com.example.mealme.service.company.CompanyService;
 import com.example.mealme.service.company.ReviewService;
-import com.example.mealme.service.meal.MealService;
-
-import com.example.mealme.vo.CompanyListVo;
-import com.example.mealme.vo.CompanyReviewVo;
-import com.example.mealme.vo.ConsultingVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-
-import com.example.mealme.vo.ConsultingReviewVo;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -216,7 +192,7 @@ public class CompanyController {
 
 
     @GetMapping("/hospitalCategory")
-    public String hospitalCategory(@RequestParam("companyCodeNumber")Long companyCodeNumber, Model model){
+    public String hospitalCategory(@RequestParam("companyCodeNumber")Long companyCodeNumber, Model model, CriteriaCompany criteriaCompany){
         String companyCodeName = null;
         if(companyCodeNumber == 100){
             companyCodeName = "병원";
@@ -225,17 +201,23 @@ public class CompanyController {
         } else if(companyCodeNumber == 300){
             companyCodeName = "영양사";
         }
-        List<CompanyListVo> returnList = companyService.output(companyCodeNumber);
+        List<CompanyListVo> returnList = companyService.output(companyCodeNumber, criteriaCompany);
+        model.addAttribute("pageInfo", new PageListVo(criteriaCompany, companyService.getTotal(companyCodeNumber)));
         model.addAttribute("companies", returnList);
         model.addAttribute("companyCodeName", companyCodeName);
+        model.addAttribute("companyCodeNumber", companyCodeNumber);
         return "company/hospitalCategory";
     }
 
     @GetMapping("/detailedHospital")
-    public String detailedHospital(@RequestParam("companyNumber")Long companyNumber, Model model){
+    public String detailedHospital(@RequestParam("companyNumber")Long companyNumber, Model model, CriteriaCompany criteriaCompany){
         System.out.println(companyNumber + "==========================================");
         CompanyListVo detailedList = companyService.showDetail(companyNumber);
-        List<CompanyReviewVo> selectReviewList = companyService.showReview(companyNumber);
+        List<CompanyReviewVo> selectReviewList = companyService.showReview(companyNumber, criteriaCompany);
+
+        System.out.println(new PageListVo(criteriaCompany, companyService.getReview(companyNumber)));
+        model.addAttribute("pageInfo", new PageListVo(criteriaCompany, companyService.getReview(companyNumber)));
+        model.addAttribute("companyNumber", companyNumber);
         model.addAttribute("companyinfo", detailedList);
         System.out.println(detailedList);
         model.addAttribute("companyReviewList", selectReviewList);
@@ -243,11 +225,17 @@ public class CompanyController {
         return "company/detailedHospital";
     }
 
+
     @GetMapping("/settingThePeriod")
-    public String settingThePeriod(@RequestParam("companyNumber")Long companyNumber, Model model){
+    public String settingThePeriod(@RequestParam("companyNumber")Long companyNumber, Model model, HttpServletRequest req) {
         System.out.println("작성 페이지 companyNumber" + companyNumber);
+//        Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         model.addAttribute("companyNumber", companyNumber);
-        return "company/settingThePeriod";
+        if (req.getSession().getAttribute("userNumber") == null) {
+            return "user/login";
+        } else {
+            return "company/settingThePeriod";
+        }
     }
 
     @PostMapping("/settingThePeriod")
@@ -263,7 +251,27 @@ public class CompanyController {
         String path = "/company/detailedHospital?companyNumber=" + consultingVo.getCompanyNumber();
         return new RedirectView(path);
     }
-    
+
+//    @GetMapping("/ConsultingList")
+//    public String consultingList(ConsultingRequestDto consultingRequestDto, Model model, HttpServletRequest req) {
+//
+//        Long companyNumber = (Long) req.getSession().getAttribute("companyNumber");
+//
+//        List<ConsultingRequestDto> consultingRequests = consultingService.findAllConsultingRequests(companyNumber);
+//
+//        System.out.println(consultingRequests + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//
+//        model.addAttribute("consultingRequests", consultingRequests);
+//        return "/company/ConsultingList";
+//    }
+
+//    @PostMapping("consultingList2")
+//    public RedirectView consultingList2(Model model) {
+//        List<ConsultingRequestDto> consultingRequests = consultingService.findAllConsultingRequests();
+//        model.addAttribute("consultingRequests", consultingRequests);
+//        return new RedirectView( "/company/SendConsulting");
+//    }
+
 
 
     @GetMapping("/WhyRefund")

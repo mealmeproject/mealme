@@ -1,14 +1,39 @@
 $(".cart__bigorderbtn").on("click", function() {
     console.log("click!");
-    console.log($(".priceResult").text());
+    console.log($(".priceResultNumber").text().trim());
     console.log($(".orderName").text());
-    console.log($(".userId").text());
-    console.log($(".userTelePhone").text());
-    console.log($(".userEmail").text());
-    console.log($("#address").text());
-    console.log($('input[name="#address"]').val()),
-    console.log($('input[name="#address3"]').val()),
-        console.log($("#address3").text());
+    console.log($(".userId").val());
+    console.log($(".userPhoneNumber").val());
+    console.log($(".userEmail").val());
+    console.log( $("#address").val() + " " + $("#address2").val());
+    console.log($("#address3").val());
+
+
+    let $cartList = $('.cart__list__detail');
+    let orderDto = {};
+    let orderDtoList = [];
+
+    $cartList.each((i, product) =>{
+       let productNumber = $(product).data('number');
+       let orderCount = $(product).data('count');
+
+        orderDto.productNumber = productNumber;
+        orderDto.orderCount = orderCount;
+        orderDto.orderConditionCode = 1;
+
+        orderDtoList.push({...orderDto});
+
+    });
+
+    let orderName = '';
+
+    if($(".orderName").length == 1){
+        orderName = $(".orderName").text();
+    }else if($(".orderName").length > 1){
+        orderName = $(".orderName").eq(0).text() + ' 외 ' + $(".orderName").length + '개';
+    }
+
+
     IMP.init("imp67568217"); // 가맹점 식별코드를 매개변수로 넘겨준다.
 
     IMP.request_pay(
@@ -16,14 +41,13 @@ $(".cart__bigorderbtn").on("click", function() {
             pg: "kakaopay.TC0ONETIME", // kakaopay.{상점아이디(CID)}
             pay_method: "card", // 생략가
             merchant_uid: "merchant" + new Date().getTime(), // 상점에서 생성한 고유 주문번호
-            name: $(".orderName").text(), // 상품 구매 이름
-            amount: $(".priceResultNumber").text(), // 가격
-            buyer_email: $(".userEmail").text(),
-            buyer_id: $(".userId").text(),
-            buyer_addr: $("#address").text(),
-            buyer_postcode: $("#address3").text(),
-            m_redirect_url: "/shop/shoppingFinish", // 결제 후 이동할 페이지 url(리다이렉트)
-            buyer_tel: $(".userTelePhone").text()
+            name: orderName, // 상품 구매 이름
+            amount: $(".priceResultNumber").text().trim(), // 가격
+            buyer_email: $(".userEmail").val(),
+            buyer_id: $(".userId").val(),
+            buyer_addr: $("#address").val() + " " + $("#address2").val(),
+            buyer_postcode: $("#address3").val(),
+            buyer_tel: $(".userPhoneNumber").val()
         },
         function(rsp) {
             console.log(rsp);
@@ -36,31 +60,40 @@ $(".cart__bigorderbtn").on("click", function() {
             console.log(rsp.merchant_uid); // 주문 고유 번호
 
             if (rsp.success) {
-                let obj = {
-                    shoppingName: $(".orderName").text().trim(),
-                    amount: parseInt($(".priceResultNumber").text().replace("원", "").replace(",", "")),
-                    buyerEmail: $(".userEmail").text().trim(),
-                    buyerId: $(".userId").text().trim(),
-                    buyerAddress: $("#address").val().trim(),
-                    buyerPostcode: $("#address3").val().trim(),
-                    buyerTel: $(".userTelePhone").text().trim()
+                let shippingVo = {
+                    shoppingName: orderName,
+                    shippingAddress1: $("#address").val(),
+                    shippingAddress2 : $("#address2").val(),
+                    addressNumber: $("#address3").val().trim(),
+                    orderDtoList : orderDtoList
                 };
 
-                console.log(obj);
+                console.log(shippingVo);
 
                 $.ajax({
                     url: '/shops/payList',
                     type: 'post',
-                    data: JSON.stringify(obj),
+                    data: JSON.stringify(shippingVo),
                     contentType: "application/json; charset=utf-8",
-                    success: function() {
+                    success: function(result) {
                         console.log("success");
-                        window.location.href = "/shop/shoppingFinish";
+                        console.log(result)
+
+                        // shoppingFinish 페이지로 이동할 때 필요한 orderNumber를 get방식 파라미터로 생성
+                        let params = '';
+                        result.forEach(obj => {
+                            params += `orderNumber=${obj.orderNumber}&`;
+                        });
+
+                        //마지막 &를 삭제
+                        params.slice(0,-1);
+
+                        window.location.href = "/shop/shoppingFinish?" + params;
                     }
                 });
             } else {
                 console.log("else");
-                // window.location.href = "/shop/shoppingPayInfoError";
+                window.location.href = "/shop/shoppingPayInfoError";
             }
         }
     );
@@ -89,7 +122,7 @@ function loadUserInfo() {
             $('#recipient').val(result.userName);
             $('#address').val(result.userAddress1);
             $('#address2').val(result.userAddress2);
-            $('#address3').val(result.userAddress3);
+            $('#address3').val(result.userAddressNumber);
 
             let phoneNumber = result.userPhoneNumber;
 

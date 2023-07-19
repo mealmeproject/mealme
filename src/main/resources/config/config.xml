@@ -58,11 +58,18 @@
         <typeAlias type="com.example.mealme.vo.ConsultingReviewVo" alias="consultingReviewVo"/>
         <typeAlias type="com.example.mealme.vo.ProductVo" alias="productVo"/>
         <typeAlias type="com.example.mealme.vo.SearchProductVo" alias="searchProductVo"/>
+        <typeAlias type="com.example.mealme.vo.SearchCompanyVo" alias="searchCompanyVo"/>
         <typeAlias type="com.example.mealme.vo.OrderVo" alias="orderVo"/>
         <typeAlias type="com.example.mealme.vo.ConsultingPayVo" alias="consultingPayVo"/>
         <typeAlias type="com.example.mealme.vo.ProductPayListVo" alias="productPayListVo"/>
         <typeAlias type="com.example.mealme.vo.ProductReviewVo" alias="productReviewVo"/>
         <typeAlias type="com.example.mealme.vo.TodayKcalSumVo" alias="todayKcalSumVo"/>
+        <typeAlias type="com.example.mealme.vo.DailyOrderVo" alias="dailyOrderVo"/>
+        <typeAlias type="com.example.mealme.vo.UserTotalVo" alias="userTotalVo"/>
+        <typeAlias type="com.example.mealme.vo.ProductListVo" alias="productListVo"/>
+        <typeAlias type="com.example.mealme.vo.ShippingVo" alias="shippingVo"/>
+
+
 
 
     </typeAliases>

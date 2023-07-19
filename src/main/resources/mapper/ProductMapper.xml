@@ -53,21 +53,12 @@
     </select>
 
         <!--    상품 리뷰 조회-->
-    <select id="selectList" resultType="productVo">
-        SELECT
-            u.USER_NAME,
-            u.USER_ID,
-            r.REVIEW_GRADE AS STAR_RATING,
-            r.REVIEW_DATE,
-            r.REVIEW_CONTENT
-        FROM
-            TBL_PRODUCT p
-                LEFT JOIN TBL_PRODUCT_CATEGORY c ON p.CATEGORY_CODE1 = c.CATEGORY_CODE1
-                LEFT JOIN TBL_ORDER_REVIEW r ON p.PRODUCT_NUMBER = r.PRODUCT_NUMBER
-                LEFT JOIN TBL_PRODUCT_FILE f ON p.PRODUCT_NUMBER = f.PRODUCT_NUMBER
-                LEFT JOIN TBL_USER u ON r.USER_NUMBER = u.USER_NUMBER
-        WHERE
-            p.PRODUCT_NUMBER = #{productNumber}
+    <select id="selectReviewList" resultType="productReviewVo">
+        SELECT REVIEW_NUMBER, PRODUCT_NUMBER, R.USER_NUMBER, ORDER_NUMBER, TO_CHAR(REVIEW_DATE, 'yyyy-mm-dd hh:mi') as REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE,
+               U.USER_NICKNAME
+        FROM TBL_ORDER_REVIEW R
+                 JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
+        WHERE PRODUCT_NUMBER = #{productNumber}
     </select>
 
 
@@ -188,10 +179,24 @@
 
 
 <!--    장바구니 상품 추가-->
-    <insert id="addCart" parameterType="cartVo">
+    <insert id="insertCart" parameterType="cartVo">
         INSERT INTO TBL_CART (CART_NUMBER, PRODUCT_NUMBER, USER_NUMBER, CART_COUNT)
         VALUES (SEQ_CART.nextval, #{productNumber}, #{userNumber}, #{cartCount})
     </insert>
+
+<!--    특정 회원이 장바구니에 상품이 담겨있는지 확인-->
+    <select id="selectCartTotal" resultType="_int">
+        SELECT COUNT(CART_NUMBER)
+        FROM TBL_CART
+        WHERE USER_NUMBER = #{userNumber} AND PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+<!--    특정 회원, 특정 상품의 카트 번호 조회-->
+    <select id="selectCartNumber" resultType="long">
+        SELECT CART_NUMBER
+        FROM TBL_CART
+        WHERE USER_NUMBER = #{userNumber} AND PRODUCT_NUMBER = #{productNumber}
+    </select>
 
     <select id = "selectCartList" resultType="cartVo">
         select CART_NUMBER, C.PRODUCT_NUMBER, USER_NUMBER, CART_COUNT,
@@ -203,6 +208,12 @@
         ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
     </select>
 
+<!--    장바구지 상품 수량 추가-->
+    <update id="addCart">
+        UPDATE TBL_CART
+        SET CART_COUNT = CART_COUNT + #{cartCount}
+        WHERE CART_NUMBER = #{cartNumber}
+    </update>
 
 <!--    장바구니 상품 수량 변경-->
     <update id="updateCartPlus">
@@ -268,6 +279,56 @@
         select USER_NUMBER, USER_ID, USER_PASSWORD, USER_NAME, USER_NICKNAME, USER_GENDER, USER_PHONE_NUMBER, USER_ADDRESS_NUMBER, USER_ADDRESS1, USER_ADDRESS2, USER_ADDRESS3, USER_EMAIL, USER_BIRTH, USER_JOIN_DATE, USER_COMMENT, USER_HEIGHT, USER_WEIGHT, USER_GRADE
         from TBL_USER
         where USER_NUMBER = #{userNumber}
+    </select>
+
+<!--    상품 전체 리스트 파일까지 가져오기-->
+    <select id="selectProductList" resultType="productListVo">
+        SELECT P.PRODUCT_NUMBER, P.CATEGORY_CODE1, P.CATEGORY_CODE2, P.PRODUCT_NAME, P.PRODUCT_SELLER,
+               P.PRODUCT_PRICE, P.PRODUCT_EXPLANATION, P.PRODUCT_REGISTER_DATE,
+               PF.FILE_NUMBER, PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID, AVG_GRADE
+        FROM TBL_PRODUCT P
+                 LEFT JOIN (
+            select PRODUCT_NUMBER, FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, rn
+            from (
+                     SELECT PF.PRODUCT_NUMBER, PF.FILE_NUMBER, PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID,
+                            RANK() OVER (PARTITION BY PF.PRODUCT_NUMBER ORDER BY PF.FILE_NUMBER) AS rn
+                     FROM TBL_PRODUCT_FILE PF
+                 ) s1
+            WHERE s1.rn = 1
+        ) PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+                 LEFT JOIN (
+            SELECT PRODUCT_NUMBER, AVG(REVIEW_GRADE) AS AVG_GRADE
+            FROM TBL_ORDER_REVIEW
+            GROUP BY PRODUCT_NUMBER
+        ) AVG ON P.PRODUCT_NUMBER = AVG.PRODUCT_NUMBER
+    </select>
+
+    <select id="selectProductDetail" resultType="productListVo">
+        SELECT P.PRODUCT_NUMBER, P.CATEGORY_CODE1, P.CATEGORY_CODE2, P.PRODUCT_NAME, P.PRODUCT_SELLER,
+               P.PRODUCT_PRICE, P.PRODUCT_EXPLANATION, P.PRODUCT_REGISTER_DATE,
+               PF.FILE_NUMBER, PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID, AVG_GRADE
+        FROM TBL_PRODUCT P
+                 LEFT JOIN (
+            select PRODUCT_NUMBER, FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, rn
+            from (
+                     SELECT PF.PRODUCT_NUMBER, PF.FILE_NUMBER, PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID,
+                            RANK() OVER (PARTITION BY PF.PRODUCT_NUMBER ORDER BY PF.FILE_NUMBER) AS rn
+                     FROM TBL_PRODUCT_FILE PF
+                 ) s1
+            WHERE s1.rn = 1
+        ) PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+                 LEFT JOIN (
+            SELECT PRODUCT_NUMBER, AVG(REVIEW_GRADE) AS AVG_GRADE
+            FROM TBL_ORDER_REVIEW
+            GROUP BY PRODUCT_NUMBER
+        ) AVG ON P.PRODUCT_NUMBER = AVG.PRODUCT_NUMBER
+        WHERE P.PRODUCT_NUMBER = #{productNumber}
+    </select>
+
+    <select id="selectProductFileList" resultType="productFileDto">
+        SELECT FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, PRODUCT_NUMBER
+        FROM TBL_PRODUCT_FILE
+        WHERE PRODUCT_NUMBER = #{productNumber}
     </select>
 
 

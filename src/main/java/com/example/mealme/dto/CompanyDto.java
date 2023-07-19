@@ -44,4 +44,5 @@ public class CompanyDto {
         this.companyAddress3 = companyAddress3;
         this.companyEmail = companyEmail;
     }
+
 }

@@ -17,7 +17,6 @@ ul {
 
 .body-container {
     flex-grow: 1;
-    /*width: 1200px;*/
 }
 .main-container {
     width: 1100px;
@@ -25,7 +24,6 @@ ul {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    /* background-color: pink; */
 }
 
 .work-container{
@@ -40,7 +38,6 @@ ul {
     justify-content: space-between;
 }
 
-/*사이드바 지움*/
 
 /* 페이지 설명 */
 .service-name-box {

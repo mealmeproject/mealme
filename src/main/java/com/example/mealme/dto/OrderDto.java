@@ -10,11 +10,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class OrderDto {
-    private long orderNumber;
-    private long userNumber;
-    private long productNumber;
-    private long orderConditionCode;
-    private long shippingAddressNumber;
+    private Long orderNumber;
+    private Long userNumber;
+    private Long productNumber;
+    private Long orderConditionCode;
+    private Long shippingAddressNumber;
     private int orderCount;
     private String orderDate;
 

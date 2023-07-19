@@ -219,7 +219,8 @@ function showUser(userInfo){
             <div class="goal-content">${userInfo.recommendVo.userComment}</div>`;
   $('.goal-wrap').html(textGoal);
   // $('.goal-content').text(test);
-  // $('.goal-content').text(userInfo.recommendVo.userComment);
+  // $('.goal-content').text(us
+  // Comment);
 
   let textKcal = '';
   textKcal += `<div class="today-kcal-num">${userInfo.calcNutrientUtil.kcalSum}</div>
