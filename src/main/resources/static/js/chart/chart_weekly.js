@@ -318,6 +318,20 @@ function showWeekly(weeklyList){
   let recommendProteinNum= $('.recommendProtein-num').text();
   let recommendFatNum= $('.recommendFat-num').text();
 
+  if (recommendCarbohydrateNum <= 0){
+    $('.recommendCarbohydrate-num').text(0);
+  }
+
+  if (recommendProteinNum <= 0){
+    $('.recommendProtein-num').text(0);
+  }
+
+  if (recommendFatNum <= 0){
+    $('.recommendFat-num').text(0);
+  }
+
+
+
   let textCarbohydrate ='';
   textCarbohydrate = Math.round(carbohydrateTotal/countMealTimeTotal);
   // $('.taken-carbohydrate-gram').text(textCarbohydrate);
@@ -355,7 +369,7 @@ function showWeekly(weeklyList){
 
   graph2();
   function graph2(){
-    let graph2Width = ((fatTotal/countMealTimeTotal)/recommendProteinNum) *100;
+    let graph2Width = ((proteinTotal/countMealTimeTotal)/recommendProteinNum) *100;
     $('.graph2-span').animate({
       width: graph2Width + '%'    // 저장한 변수에 % 붙여서 width 적용하기
     }, 500);

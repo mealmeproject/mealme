@@ -230,6 +230,22 @@ function showUser(userInfo){
               <div class="today-kcal-unit">kcal</div>`
   $('.today-kcal-num-wrap').html(textKcal);
 
+  checkRecommendKcal();
+  function checkRecommendKcal(){
+    let todayKcalTotal = parseFloat($('.today-kcal-total').text());
+    let kcalCommentPercent = parseFloat($('.kcal-comment-percent').text());
+  if (todayKcalTotal > 0 ){
+    $('.today-kcal-total').text(userInfo.recommendVo.recommendKcal);
+  } else if (todayKcalTotal <= 0){
+    $('.today-kcal-total').text(0);
+  }
+
+    // if (kcalCommentPercent == NaN) {
+    //   $('.kcal-comment-percent').text(0);
+    // }
+}
+
+
   // $('.today-kcal-num').text(userInfo.calcNutrientUtil.kcalSum);
   // $('.today-kcal-total').text(userInfo.recommendVo.recommendKcal);
 
@@ -262,10 +278,43 @@ function showUser(userInfo){
 // 섭취 칼로리 퍼센트 숫자 계산
   kcalPercent();
   function kcalPercent() {
-    let targetNumber = Math.round((eatKcal/dayKcal) * 100); // 애니메이션의 최종 값
+    // let targetNumber = Math.round((eatKcal/dayKcal) * 100); // 애니메이션의 최종 값
+    let targetNumber = 0; // 애니메이션의 최종 값
     let duration = 500;                                 // 애니메이션의 지속 시간 (밀리초)
     let startNumber = 0;                                 // 애니메이션의 시작 값
     let intervalTime = 20;                               // 애니메이션의 간격 시간 (밀리초)
+
+    console.log("여기를 봐줘... 타겟 넘버")
+    console.log(targetNumber)
+
+    // if (!isNaN(targetNumber)) { // targetNumber가 NaN이 아닐 때 내부 코드를 실행합니다.
+    //   $('.kcal-comment-percent').text(targetNumber);
+    // } else {
+    //   $('.kcal-comment-percent').text(0); // NaN이라면 0으로 설정합니다.
+    // }
+
+    setTargetNumber();
+    function setTargetNumber(){
+      console.log('섭취칼로리'+eatKcal);
+      console.log('추천칼로리'+dayKcal);
+
+      // targetNumber = Math.round((eatKcal / dayKcal) * 100);
+
+
+
+    if (dayKcal == 0 || isNaN(dayKcal)) {
+      // dayKcal이 0이거나 NaN인 경우
+      $('.kcal-comment-percent').text(0);
+      console.log("if안에 타겟 넘버");
+      console.log(targetNumber);
+    }else {
+      // targetNumber가 0이 아니고 NaN이 아닌 경우
+      targetNumber = Math.round((eatKcal / dayKcal) * 100);
+      $('.kcal-comment-percent').text(targetNumber);
+      console.log("if안에 타겟 넘버22222");
+      console.log(targetNumber);
+    }
+    }
 
     let step = (targetNumber - startNumber) / (duration / intervalTime);
     let currentNumber = startNumber;
@@ -299,12 +348,25 @@ function showUser(userInfo){
                 <div>g</div>`
   $('.carbohydrate-gram').html(textCarbohydrate);
 
+  if ($('.recommendCarbohydrateNum').text() <= 0){
+    $('.recommendCarbohydrateNum').text(0)
+  }else {
+    $('.recommendCarbohydrateNum').text(userInfo.recommendVo.recommendCarbohydrate)
+  }
+
+
   let textProtein = '';
   textProtein += `<div class="sumProteinNum">${userInfo.calcNutrientUtil.proteinSum}</div>
                 <div>/</div>
                 <div class="recommendProteinNum">${userInfo.recommendVo.recommendProtein}</div>
                 <div>g</div>`
   $('.protein-gram').html(textProtein);
+
+  if ($('.recommendProteinNum').text() <= 0){
+    $('.recommendProteinNum').text(0)
+  }else {
+    $('.recommendProteinNum').text(userInfo.recommendVo.recommendProtein)
+  }
 
   let textFat ='';
   textFat += `<div class="sumFatNum">${userInfo.calcNutrientUtil.fatSum}</div>
@@ -313,13 +375,19 @@ function showUser(userInfo){
                 <div>g</div>`
   $('.fat-gram').html(textFat);
 
+  if ($('.recommendFatNum').text() <= 0){
+    $('.recommendFatNum').text(0)
+  }else {
+    $('.recommendFatNum').text(userInfo.recommendVo.recommendFat)
+  }
+
   // 탄단지 bar 계산, kcal별 섭취량 계산
 
   let sumCarbohydrateNum = $('.sumCarbohydrateNum').text();
   let recommendCarbohydrateNum = $('.recommendCarbohydrateNum').text();
   let sumProteinNum = $('.sumProteinNum').text();
   let recommendProteinNum = $('.recommendProteinNum').text();
-  let sumFatNum = $('.sumProteinNum').text();
+  let sumFatNum = $('.sumFatNum').text();
   let recommendFatNum = $('.recommendFatNum').text();
 
   graph1();
@@ -470,20 +538,20 @@ function showMeal(map){
                  `;
   if(map.mealCodeNumber == 10){
     text += `                                        
-                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span ">wb_twilight</span>아침</div>
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-modal">wb_twilight</span>아침</div>
 `;
   }else if(map.mealCodeNumber == 20){
     text += `    
-                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span">sunny</span>점심</div>
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-modal">sunny</span>점심</div>
 
             `;
   }else if(map.mealCodeNumber == 30){
     text += `
-                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span">dark_mode</span>저녁</div>
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-modal">dark_mode</span>저녁</div>
             `;
   }else if(map.mealCodeNumber == 40){
     text += `
-                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-span">icecream</span>간식</div>
+                          <div class="meal-time meal-time-checked"><span class="material-symbols-outlined meal-icon-modal">icecream</span>간식</div>
             `;
   };
   text += `

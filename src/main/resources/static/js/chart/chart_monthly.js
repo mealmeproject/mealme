@@ -236,6 +236,18 @@ function showMonthly(monthlyList){
   let recommendProteinNum= $('.recommendProtein-num').text();
   let recommendFatNum= $('.recommendFat-num').text();
 
+  if (recommendCarbohydrateNum <= 0){
+    $('.recommendCarbohydrate-num').text(0);
+  }
+
+  if (recommendProteinNum <= 0){
+    $('.recommendProtein-num').text(0);
+  }
+
+  if (recommendFatNum <= 0){
+    $('.recommendFat-num').text(0);
+  }
+
   let textCarbohydrate ='';
   textCarbohydrate = Math.round(carbohydrateTotal/countMealTimeTotal);
   // $('.taken-carbohydrate-gram').text(textCarbohydrate);
