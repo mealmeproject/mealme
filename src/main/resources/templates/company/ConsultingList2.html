@@ -149,11 +149,11 @@
                     <a class="arrow prev" th:href="@{/company/ConsultingList(page=${pageInfo.startPage - 1})}" th:if="${pageInfo.prev}"></a>
                     <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
                         <a th:href="@{/company/ConsultingList(page=${i})}">
-                            <div class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
+                            <div class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
                             <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>
                         </a>
                     </th:block>
-                    <a class="arrow next" th:href="@{/company/ConsultingList(page=${pageInfo.endPage - 1})}" th:if="${pageInfo.next}"></a>
+                    <a class="arrow next" th:href="@{/company/ConsultingList(page=${pageInfo.endPage + 1})}" th:if="${pageInfo.next}"></a>
                     <a class="arrow nnext" th:href="@{/company/ConsultingList(page=${pageInfo.endPage})}"></a>
 
                 </div>
