@@ -1,6 +1,5 @@
 package com.example.mealme.mapper;
 
-import com.example.mealme.dto.UserDto;
 import com.example.mealme.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,7 +11,7 @@ public interface ReviewMapper {
 //    컨설팅
     public ConsultingReviewVo selectConsultingInfo(Long consultingRequestNumber);
     public void insertConsultingReview(ConsultingReviewVo consultingReviewVo);
-    public List<ConsultingReviewVo> selectConsultingList(Long userNumber);
+    public List<ConsultingReviewVo> selectConsultingList(@Param("userNumber")Long userNumber, @Param("criteria") CriteriaCompany criteriaCompany);
     public ConsultingReviewVo selectConsultingReviewInfo(Long reviewNumber);
     public void updateConsultingReview(ConsultingReviewVo consultingReviewVo);
     public void deleteConsultingReview(Long reviewNumber);
@@ -32,5 +31,7 @@ public interface ReviewMapper {
     public ProductReviewVo selectProductReviewInfo(Long reviewNumber);
     public void updateProductReview(ProductReviewVo productReviewVo);
     public void deleteProductReview(Long reviewNumber);
+//    리뷰 리스트 전체 갯수
+    public int selectConsultingReviewCount(Long userNumber);
 
 }

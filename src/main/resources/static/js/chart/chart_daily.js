@@ -267,6 +267,26 @@ function showDaily(dailyList){
   let recommendProteinNum= $('.recommendProtein-num').val();
   let recommendFatNum= $('.recommendFat-num').val();
 
+  if (recommendCarbohydrateNum <= 0){
+    $('.recommendCarbohydrate').text(0);
+  }else {
+    $('.recommendCarbohydrate').text($('.recommendCarbohydrate-num').val());
+  }
+
+  if (recommendProteinNum <= 0){
+    $('.recommendProtein').text(0);
+  }else {
+    $('.recommendProtein').text($('.recommendProtein-num').val());
+  }
+
+  if (recommendFatNum <= 0){
+    $('.recommendFat').text(0);
+  }else {
+    $('.recommendFat').text($('.recommendFat-num').val());
+  }
+
+
+
   let textCarbohydrate ='';
   textCarbohydrate = Math.round(carbohydrateTotal/registeredDateNum);
   // $('.taken-carbohydrate-gram').text(textCarbohydrate);
