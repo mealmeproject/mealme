@@ -124,7 +124,7 @@
 <!--                                <p> 닭가슴살 매운맛</p>-->
 <!--                                <button class="cart__list__optionbtn">주문조건 추가/변경</button>-->
 <!--                            </td>-->
-                            <td><span class="price1" th:text="${list.productPrice * list.cartCount} + '원'"></span><br>
+                            <td><span class="price1" th:text="${#numbers.formatInteger(list.productPrice * list.cartCount, 3, 'COMMA')} + '원'"></span><br>
                             </td>
                             <td th:text="${list.cartCount} + '개'">
                                 1개
@@ -144,7 +144,7 @@
                     </form>
                 </table>
                 <div class="priceResult">
-                    <span th:text="${totalPrice}" class="priceResultNumber"></span>원
+                    <span th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA')}" class="priceResultNumber"></span>원
                 </div>
                 <div class="cart__mainbtns">
                     <div class="cart_info">- 배송방법 선택 또는 배송지에 따라 배송비가 달라질 수 있습니다. <br>
