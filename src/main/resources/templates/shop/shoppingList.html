@@ -13,17 +13,12 @@
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap}"/>
     <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-
 </head>
 <body id="body-pd">
 <div class="body-container">
-    <!-- 사이드바 추가 공간 -->
     <aside class="aside" th:replace="fragment/aside :: aside"></aside>
-    <!-- 사이드바 추가 공간 -->
     <div class="main-container">
-        <!-- 헤더 추가 공간 -->
         <header class="header2" th:replace="fragment/header2 :: header2"></header>
-        <!-- 헤더 추가 공간 -->
         <!-- 작업공간 -->
         <div class="work-container">
             <p>
@@ -56,39 +51,105 @@
             </section>
         </main>
         </p>
-        <h1>상품목록</h1>
-        <hr>
-        <h2 class="index-top">
-            <div id="menu" style="height: 170px; width:500px; text-align: center; background-color: white; ">
-                <ul>
-                    <li>
-                        <a href="/shop/shoppingList?sort=">음식</a>
-                        <ul>
-                            <li><a th:href="@{/shop/shoppingList(sort='protein')}">단백질</a></li>
-                            <li><a th:href="@{/shop/shoppingList(sort='lowCalorie')}">저칼로리</a></li>
-                        </ul>
+
+<!--  상품 카테고리 -->
+            <div class="product-category">
+                <ul class="category-ul">
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/01닭가슴살.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    닭가슴살
+                                </div>
+                            </div>
+                        </a>
                     </li>
-                    <li><a href="#">보충제</a>
-                        <ul>
-                            <li><a href="#">프로틴 쉐이크</a></li>
-                            <li><a href="#">프로틴 바</a></li>
-                        </ul>
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/02도시락.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    도시락
+                                </div>
+                            </div>
+                        </a>
                     </li>
-                    <li><a href="#">영양제</a>
-                        <ul>
-                            <li><a href="#">비타민</a></li>
-                            <li><a href="#">유산균</a></li>
-                            <li><a href="#">마그네슘</a></li>
-                        </ul>
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/03야채과일.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    야채/과일
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/04건강식품.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    건강식품
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/05프로틴.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    프로틴
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/06프로틴바.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    프로틴바
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a href="">
+                            <div class="category-box">
+                                <div class="category-img-box filter">
+                                    <img th:src="@{/img/07영양제.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    영양제
+                                </div>
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>
-        </h2>
+            <div>
+                <h1>상품목록</h1>
+                <hr>
+            </div>
             <div class="ShoppingContainer">
                 <div class="Shopping-text">
                     총
                     <a class="ShoppingNumber">
-                        <span th:text="${productAll.size()} + '개 상품이 있습니다'"></span>
+                        <span th:text="${getTotal} + '개 상품이 있습니다'"></span>
                     </a>
                     <div class="select-wrap">
                         <select id="selectItem" class="select">
@@ -101,43 +162,48 @@
             </div>
             <div id="productList">
                 <ul>
+                    <li th:each="productList : ${productList}" class="product">
+                        <div class="shopping-list">
+                            <ul>
+                                <li class="shoppingItem">
+                                    <div class="shoppingItemContainer">
+                                        <a th:href="@{/shop/shoppingDetail(productNumber=${productList.productNumber})}">
+                                            <div class="img-box">
+                                                <img th:unless="${productList.fileName == null}" th:src="${'/upload/' + productList.fileUploadPath + '/' + productList.fileUuid + '_' + productList.fileName}">
+                                            </div>
+                                        </a>
+                                        <div class="shoppingDesc">
+                                            <div class="top">
+                                                <p class="title" th:text="${productList.productName}"></p>
+                                                <div class="price-container">
+                                                    <span class="price" th:text="${productList.productPrice} + '원'"></span>
+                                                </div>
+                                                <div id="starRating">
+                                                    <div class="product-item">
+                                                        <div class="rating" th:data-rating="${productList.avgGrade}">
+                                                            <span class="star filled" th:each="i: ${#numbers.sequence(1, 5)}" th:classappend="${i <= productList.avgGrade ? 'filled' : ''}">★</span>
+                                                        </div>
 
-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="page_wrap">
-            <div class="page_nation">
-                <a th:href="@{/shop/shoppingList(page=${pageInfo.criteria.page - 1})}" class="arrow prev" th:if="${pageInfo.criteria.page > 1}"></a>
-                <a th:href="@{/shop/shoppingList(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">
-                    <li class="arrow prev">&lt</li>
-                </a>
-
-                <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-                    <a th:href="@{/shop/shoppingList(page=${i})}" class="page_nation a">
-                        <li class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></li>
-                        <li class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></li>
-                    </a>
-                </th:block>
-
-                <a th:href="@{/shop/shoppingList(page=${pageInfo.endPage + 1})}" class="page_nation a" th:if="${pageInfo.next}">
-                    <li class="arrow next">&gt</li>
-                </a>
-                <a th:href="@{/shop/shoppingList(page=${pageInfo.criteria.page + 1})}" class="arrow next"></a>
-            </div>
-        </div>
     </div>
-
 </div>
 </div>
-
         </div>
     </div>
 </p>
         </div>
-
         <!-- 작업공간 -->
-        <!--                </div>-->
         <!-- 푸터 추가 공간 -->
         <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
     </div>
@@ -151,11 +217,5 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="module" th:src="@{/js/shop/shoppingList.js}"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
-<script>
-    function redirectToShoppingDetail(productNumber) {
-        var url = '/shop/shoppingDetail?productNumber=' + productNumber;
-        location.href = url;
-    }
-</script>
 </body>
 </html>

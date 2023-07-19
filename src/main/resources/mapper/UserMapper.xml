@@ -129,9 +129,9 @@
 
     <update id="updateCompany">
         update TBL_COMPANY
-        set COMPANY_PASSWORD = #{userPassword}, COMPANY_REGISTRATION_NUMBER = #{companyRegistrationNumber}, COMPANY_BIRTH = #{companyBirth}, COMPANY_CALL_NUMBER = #{companyCallNumber},
-            COMPANY_EMAIL = #{userEmail}, COMPANY_ADDRESS_NUMBER = #{companyAddressNumber}, COMPANY_ADDRESS1 = #{companyAddress1}, COMPANY_ADDRESS2 = #{companyAddress2}, COMPANY_ADDRESS3 = #{companyAddress3},
-            COMPANY_URL = #{userUrl}, COMPANY_INFORMATION = #{companyInformation}
+        set COMPANY_PASSWORD = #{companyPassword}, COMPANY_CODE_NUMBER = #{companyCodeNumber}, COMPANY_BIRTH = #{companyBirth}, COMPANY_CALL_NUMBER = #{companyCallNumber},
+            COMPANY_EMAIL = #{companyEmail}, COMPANY_ADDRESS_NUMBER = #{companyAddressNumber}, COMPANY_ADDRESS1 = #{companyAddress1}, COMPANY_ADDRESS2 = #{companyAddress2}, COMPANY_ADDRESS3 = #{companyAddress3},
+            COMPANY_URL = #{companyUrl}, COMPANY_INFORMATION = #{companyInformation}
         where COMPANY_NUMBER = #{companyNumber}
     </update>
 

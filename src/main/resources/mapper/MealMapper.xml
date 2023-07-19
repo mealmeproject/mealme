@@ -4,9 +4,9 @@
     <select id="userInfo" resultType="userInfoVo">
         SELECT
             U.USER_NUMBER, U.USER_NAME, U.USER_NICKNAME, U.USER_COMMENT,
-            CF.CONSULTING_REQUEST_COUNT,
-            O.ORDER_COUNT,
-            B.BOARD_COUNT,
+            COALESCE(CF.CONSULTING_REQUEST_COUNT, 0) AS CONSULTING_REQUEST_COUNT,
+            COALESCE(O.ORDER_COUNT, 0) AS ORDER_COUNT,
+            COALESCE(B.BOARD_COUNT, 0) AS BOARD_COUNT,
             TUF.FILE_NUMBER, TUF.FILE_NAME, TUF.FILE_UPLOAD_PATH, TUF.FILE_UUID
         FROM
             TBL_USER U
@@ -102,6 +102,12 @@
                                BOARD_CONTENT, MEAL_TIME)
         values (#{boardNumber}, #{mealCodeNumber}, #{userNumber}, #{boardTitle}, #{boardContent}, TO_DATE(#{mealTime}, 'YYYY-MM-DD"T"HH24:MI'))
     </insert>
+
+    <delete id="deleteBoard">
+        delete
+        from TBL_BOARD
+        where BOARD_NUMBER = #{boardNumber}
+    </delete>
 
     <insert id="insertFood">
         <selectKey keyProperty="foodNumber" order="BEFORE" resultType="long">

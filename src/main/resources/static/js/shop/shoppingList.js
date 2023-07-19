@@ -104,7 +104,7 @@ document.querySelectorAll('.button').forEach(button => {
 
 
 
-shop.getAllList(makeList, 'allList');
+// shop.getAllList(makeList, 'allList');
 
 $('#selectItem').on('change', function (){
     let endPoint = $(this).val();
@@ -114,7 +114,6 @@ $('#selectItem').on('change', function (){
 function makeList(result){
 
     let text = '';
-
     result.forEach(product => {
         text += `
             <li>

@@ -97,9 +97,10 @@
                 <!-- 신청 버튼 -->
                 <div class="pay-button-section">
                   <div class="pay-button-detailed-section">
-                    <button type="submit" class="pay-button-detailed">
+                    <button type="button" class="pay-button-detailed">
                       <span>결제하기</span>
                     </button>
+                    <input type="hidden" name="companyNumber" th:value="${companyNumber}">
                   </div>
                 </div>
                 <!-- 신청 버튼 끝 -->
@@ -135,7 +136,12 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script type="text/javascript" src="@{/js/company/jqueryUi.js}"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
+<!-- 아임포트 SDK 추가 -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script th:src="@{/js/company/datePicker.js}"></script>
+<!--아임포트-->
+
+
 <!--<script th:src="@{/js/comapany/jqueryUi.js}"></script>-->
 <!--<script>-->
 <!--  var images = [];-->

@@ -1,12 +1,10 @@
 package com.example.mealme.controller.shop;
 
+import com.example.mealme.dto.OrderDto;
 import com.example.mealme.dto.ProductDto;
 import com.example.mealme.dto.UserDto;
 import com.example.mealme.service.shop.ShopService;
-import com.example.mealme.vo.CartVo;
-import com.example.mealme.vo.ProductPayVo;
-import com.example.mealme.vo.ProductVo;
-import com.example.mealme.vo.UserVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
@@ -135,14 +133,21 @@ public class ShopRestController {
 //    }
 
     @PostMapping("/payList" )
-    public List<ProductPayVo> insertPayList() {
+    public List<OrderDto> insertPayList(@RequestBody ShippingVo shippingVo, HttpServletRequest req) {
+        Long userNumber = (Long)req.getSession().getAttribute("userNumber");
 
-       List<ProductPayVo> insertPay =  shopService.insertPay();
+        shippingVo.setUserNumber(userNumber);
+        shippingVo.getOrderDtoList().stream().forEach(dto -> dto.setUserNumber(userNumber));
+//       List<ProductPayVo> insertPay =  shopService.insertPay();
+
+        //현재 shoppingAddress3가 화면에서 이력되지 않아 임시로 넣음
+        shippingVo.setShippingAddress3("(임시)");
 
         System.out.println("sadasdasdasdasdasd");
-        System.out.println(insertPay);
+        System.out.println(shippingVo);
+//        return insertPay;
 
-        return insertPay;
+        return shopService.paymentProcess(shippingVo);
     }
 
     @GetMapping("/userInfo")

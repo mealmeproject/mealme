@@ -299,7 +299,6 @@ ul {
 
 .day-detail1 {
     display: flex;
-    margin-bottom: 20px;
 }
 
 .day-detail2 {
@@ -450,4 +449,9 @@ ul.imgs li {
     border-radius: 6px;
 }
 
+
+.board-content{
+    width: 100%;
+    padding: 20px;
+}
 

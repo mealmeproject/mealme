@@ -1,5 +1,6 @@
 package com.example.mealme.mapper;
 
+import com.example.mealme.dto.OrderDto;
 import com.example.mealme.vo.DailyOrderVo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +11,5 @@ public interface OrderMapper {
     List<DailyOrderVo> selectOrder();
     List<DailyOrderVo> selectPayment();
     List<DailyOrderVo> selectRefund();
+    public void insert(OrderDto orderDto);
 }

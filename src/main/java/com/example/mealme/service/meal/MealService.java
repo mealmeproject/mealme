@@ -80,6 +80,8 @@ public class MealService {
         if (foodDto == null) {
             throw new IllegalArgumentException("음식 정보 없음 !");
         }
+        System.out.println("==================================================================");
+        System.out.println(foodDto);
 
         String[] foodNameArr = foodDto.getFoodName().split(",");
         String[] foodWeightArr = foodDto.getFoodWeight().split(",");
@@ -98,20 +100,54 @@ public class MealService {
 
         for (int i = 0; i < foodNameArr.length; i++) {
             foodDto.setFoodName(foodNameArr[i].trim());
-            foodDto.setFoodWeight(foodWeightArr[i].trim().isEmpty() ? "0" : foodWeightArr[i].trim());
-            foodDto.setFoodServing(foodServingArr[i].trim().isEmpty() ? "0" : foodServingArr[i].trim());
-            foodDto.setFoodKcal(foodKcalArr[i].trim().isEmpty() ? "0" : foodKcalArr[i].trim());
-            foodDto.setFoodCarbohydrate(foodCarbohydrateArr[i].trim().isEmpty() ? "0" : foodCarbohydrateArr[i].trim());
-            foodDto.setFoodProtein(foodProteinArr[i].trim().isEmpty() ? "0" : foodProteinArr[i].trim());
-            foodDto.setFoodFat(foodFatArr[i].trim().isEmpty() ? "0" : foodFatArr[i].trim());
-            foodDto.setFoodSugars(foodSugarsArr[i].trim().isEmpty() ? "0" : foodSugarsArr[i].trim());
-            foodDto.setFoodSodium(foodSodiumArr[i].trim().isEmpty() ? "0" : foodSodiumArr[i].trim());
-            foodDto.setFoodCholesterol(foodCholesterolArr[i].trim().isEmpty() ? "0" : foodCholesterolArr[i].trim());
-            foodDto.setFoodFattyAcid(foodFattyAcidArr[i].trim().isEmpty() ? "0" : foodFattyAcidArr[i].trim());
-            foodDto.setFoodTransFat(foodTransFatArr[i].trim().isEmpty() ? "0" : foodTransFatArr[i].trim());
+            foodDto.setFoodWeight(foodWeightArr[i].trim());
+            foodDto.setFoodServing(foodServingArr[i].trim());
+            foodDto.setFoodKcal(foodKcalArr[i].trim());
+            foodDto.setFoodCarbohydrate(foodCarbohydrateArr[i].trim());
+            foodDto.setFoodProtein(foodProteinArr[i].trim());
+            foodDto.setFoodFat(foodFatArr[i].trim());
+            foodDto.setFoodSugars(foodSugarsArr[i].trim());
+            foodDto.setFoodSodium(foodSodiumArr[i].trim());
+            foodDto.setFoodCholesterol(foodCholesterolArr[i].trim());
+            foodDto.setFoodFattyAcid(foodFattyAcidArr[i].trim());
+            foodDto.setFoodTransFat(foodTransFatArr[i].trim());
+
+            if (foodDto.getFoodCarbohydrate().equals("NaN")) {
+                foodDto.setFoodCarbohydrate("0");
+            }
+            if (foodDto.getFoodProtein().equals("NaN")) {
+                foodDto.setFoodProtein("0");
+            }
+            if (foodDto.getFoodFat().equals("NaN")) {
+                foodDto.setFoodFat("0");
+            }
+            if (foodDto.getFoodSugars().equals("NaN")) {
+                foodDto.setFoodSugars("0");
+            }
+            if (foodDto.getFoodSodium().equals("NaN")) {
+                foodDto.setFoodSodium("0");
+            }
+            if (foodDto.getFoodCholesterol().equals("NaN")) {
+                foodDto.setFoodCholesterol("0");
+            }
+            if (foodDto.getFoodFattyAcid().equals("NaN")) {
+                foodDto.setFoodFattyAcid("0");
+            }
+            if (foodDto.getFoodTransFat().equals("NaN")) {
+                foodDto.setFoodTransFat("0");
+            }
 
             mealMapper.insertFood(foodDto);
         }
+    }
+
+
+
+    public void DeleteBoard(Long boardNumber){
+        if (boardNumber == null){
+            throw new IllegalArgumentException("삭제할 게시글번호가 없습니다.");
+        }
+        mealMapper.deleteBoard(boardNumber);
     }
 
 

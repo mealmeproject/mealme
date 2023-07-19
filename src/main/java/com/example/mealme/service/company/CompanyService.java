@@ -1,9 +1,7 @@
 package com.example.mealme.service.company;
 
 import com.example.mealme.mapper.CompanyMapper;
-import com.example.mealme.vo.CompanyListVo;
-import com.example.mealme.vo.CompanyReviewVo;
-import com.example.mealme.vo.ConsultingVo;
+import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +15,13 @@ import java.util.function.LongFunction;
 public class CompanyService {
     private final CompanyMapper companyMapper;
 
-    public List<CompanyListVo> output(Long companyCodeNumber){
+    public List<CompanyListVo> output(Long companyCodeNumber, CriteriaCompany criteriaCompany){
         if(companyCodeNumber == null){
             throw new IllegalArgumentException("companyCodeNumber 없음 !");
         }
         System.out.println(companyCodeNumber);
-        List<CompanyListVo> companyList = companyMapper.selectAll(companyCodeNumber);
+        System.out.println(criteriaCompany);
+        List<CompanyListVo> companyList = companyMapper.selectAll(companyCodeNumber, criteriaCompany.getPage(), criteriaCompany.getAmount());
         System.out.println(companyList);
 
         return companyList;
@@ -32,8 +31,8 @@ public class CompanyService {
         return companyMapper.selectDetail(companyNumber);
     }
 
-    public List<CompanyReviewVo> showReview(Long companyNumber){
-        return companyMapper.selectReview(companyNumber);
+    public List<CompanyReviewVo> showReview(Long companyNumber, CriteriaCompany criteriaCompany){
+        return companyMapper.selectReview(companyNumber, criteriaCompany);
     }
 
     public void register(ConsultingVo consultingVo) {
@@ -41,5 +40,16 @@ public class CompanyService {
             throw new IllegalArgumentException("신청내용이 없습니다.");
         }
         companyMapper.insert(consultingVo);
+    }
+
+    //    전체 게시글 수 조회
+    @Transactional(readOnly = true)
+    public int getTotal(Long companyCodeNumber){
+        return companyMapper.selectTotal(companyCodeNumber);
+    }
+
+    @Transactional(readOnly = true)
+    public int getReview(Long companyNumber){
+        return companyMapper.selectReviewList(companyNumber);
     }
 }

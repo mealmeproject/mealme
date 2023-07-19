@@ -46,10 +46,15 @@
               <tbody>
               <tr class="cart__list__detail" th:each="cart : ${cartItems}">
                 <td><input type="checkbox" class="detail-checkbox" th:value="${cart.cartNumber}"></td>
-                <td><img src="../img/장바구니 예시1.jpg" alt="magic keyboard"></td>
+                <td>
+                  <div class="img-box">
+                    <img th:unless="${cart.fileName == null}" th:src="${'/upload/' + cart.fileUploadPath + '/' + cart.fileUuid + '_' + cart.fileName}">
+                  </div>
+                </td>
                 <td class="product-name">
-                  <span class="cart__list__smartstore"></span>
+                  <div class="product-name-box">
                   <p th:text="${cart.productName}">스팀 닭가슴살</p>
+                  </div>
                 </td>
                 <td class="product-price"><span class="price1" th:text="${cart.productPrice * cart.cartCount} + '원'" th:data-price="${cart.productPrice}">116,620원</span><br></td>
                 <td>
