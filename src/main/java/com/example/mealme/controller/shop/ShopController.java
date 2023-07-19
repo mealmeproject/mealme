@@ -150,6 +150,40 @@ public class ShopController {
         return "shop/shoppingPay"; // 주문 페이지 뷰 반환
     }
 
+//    즉시 구매
+@GetMapping("/shoppingPayment")
+public String shoppingPayment(HttpSession session, Model model, Long productNumber) {
+    // 사용자 정보 가져오기
+    Long userNumber = (Long) session.getAttribute("userNumber");
+    UserDto user = shopService.findUser(userNumber);
+
+    // 필요한 사용자 정보를 세션에서 가져와서 모델에 추가
+    model.addAttribute("userId", user.getUserId());
+    model.addAttribute("userEmail", user.getUserEmail());
+    model.addAttribute("userPhoneNumber", user.getUserPhoneNumber());
+//        model.addAttribute("user", user);
+
+    List<CartVo> cartList = shopService.findProductInfoByProductNumber(productNumber);
+
+    for(CartVo vo : cartList){
+        vo.setCartCount(1);
+    }
+
+    model.addAttribute("cartList", cartList);
+
+    int totalPrice = 0;
+    for(int i=0; i<cartList.size(); i++){
+        totalPrice += cartList.get(i).getProductPrice() * cartList.get(i).getCartCount();
+    }
+
+    model.addAttribute("totalPrice", totalPrice);
+
+    // 다른 필요한 로직 수행...
+
+
+    return "shop/shoppingPay"; // 주문 페이지 뷰 반환
+}
+
 
 
 
@@ -258,7 +292,12 @@ public class ShopController {
     public void shoppingLikeList(){}
 
     @GetMapping("/shoppingFinish")
-    public void moveShoppingFinishPage(@RequestParam("orderNumber") List<Long> orderNumberList){
+    public void moveShoppingFinishPage(@RequestParam("orderNumber") List<Long> orderNumberList, Model model){
         System.out.println(orderNumberList);
+        List<OrderVo> orderInfoList = shopService.findOrderListByOrderNumbers(orderNumberList);
+        model.addAttribute("orderInfoList", orderInfoList);
+        System.out.println("============================================================");
+        System.out.println(orderInfoList);
+        System.out.println("============================================================");
     }
 }

@@ -97,6 +97,8 @@ public interface ProductMapper {
 //    카테고리 선택시 전체 갯수
     int selectTotalForCategory(Long categoryCode2);
 
+//    즉시 구매
+    List<CartVo> selectProductInfoByProductNumber(Long productNumber);
 }
 
 

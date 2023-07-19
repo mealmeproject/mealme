@@ -357,6 +357,14 @@
         ) AVG ON P.PRODUCT_NUMBER = AVG.PRODUCT_NUMBER
         WHERE P.CATEGORY_CODE2 = #{categoryCode2}
     </select>
+    
+    <select id="selectProductInfoByProductNumber" resultType="cartVo">
+        SELECT P.PRODUCT_NUMBER,  PRODUCT_NAME, PRODUCT_SELLER, PRODUCT_PRICE, PRODUCT_EXPLANATION,
+               PF.FILE_NUMBER, PF.FILE_UUID, PF.FILE_UPLOAD_PATH, PF.FILE_NAME
+        FROM TBL_PRODUCT P LEFT JOIN TBL_PRODUCT_FILE PF
+                                     ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+        WHERE P.PRODUCT_NUMBER = #{productNumber}
+    </select>
 
 
 

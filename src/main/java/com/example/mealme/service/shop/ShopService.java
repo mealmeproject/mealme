@@ -134,10 +134,19 @@ public class ShopService {
             cartMapper.delete(orderDto.getUserNumber(), orderDto.getProductNumber());
         });
 
-//        결제 완료 후 final페이지에 뿌려줄 데이터 반환
+//        결제 완료 후 final페이지에 사용할 데이터 반환
         return shippingVo.getOrderDtoList();
     }
 
+//    구매 final 페이지에 뿌릴 정보 조회
+    public List<OrderVo> findOrderListByOrderNumbers(List<Long> productNumberList){
+        return orderMapper.selectOrderListByOrderNumbers(productNumberList);
+    }
+
+//    즉시 구매
+    public List<CartVo> findProductInfoByProductNumber(Long productNumber){
+        return productMapper.selectProductInfoByProductNumber(productNumber);
+    }
 
 
 //
