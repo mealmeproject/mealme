@@ -100,17 +100,17 @@ public class MealService {
 
         for (int i = 0; i < foodNameArr.length; i++) {
             foodDto.setFoodName(foodNameArr[i].trim());
-            foodDto.setFoodWeight(foodWeightArr[i].trim().isEmpty() ? "0" : foodWeightArr[i].trim());
-            foodDto.setFoodServing(foodServingArr[i].trim().isEmpty() ? "0" : foodServingArr[i].trim());
-            foodDto.setFoodKcal(foodKcalArr[i].trim().isEmpty() ? "0" : foodKcalArr[i].trim());
-            foodDto.setFoodCarbohydrate(foodCarbohydrateArr[i].trim().isEmpty() ? "0" : foodCarbohydrateArr[i].trim());
-            foodDto.setFoodProtein(foodProteinArr[i].trim().isEmpty() ? "0" : foodProteinArr[i].trim());
-            foodDto.setFoodFat(foodFatArr[i].trim().isEmpty() ? "0" : foodFatArr[i].trim());
-            foodDto.setFoodSugars(foodSugarsArr[i].trim().isEmpty() ? "0" : foodSugarsArr[i].trim());
-            foodDto.setFoodSodium(foodSodiumArr[i].trim().isEmpty() ? "0" : foodSodiumArr[i].trim());
-            foodDto.setFoodCholesterol(foodCholesterolArr[i].trim().isEmpty() ? "0" : foodCholesterolArr[i].trim());
-            foodDto.setFoodFattyAcid(foodFattyAcidArr[i].trim().isEmpty() ? "0" : foodFattyAcidArr[i].trim());
-            foodDto.setFoodTransFat(foodTransFatArr[i].trim().isEmpty() ? "0" : foodTransFatArr[i].trim());
+            foodDto.setFoodWeight(foodWeightArr[i].trim());
+            foodDto.setFoodServing(foodServingArr[i].trim());
+            foodDto.setFoodKcal(foodKcalArr[i].trim());
+            foodDto.setFoodCarbohydrate(foodCarbohydrateArr[i].trim());
+            foodDto.setFoodProtein(foodProteinArr[i].trim());
+            foodDto.setFoodFat(foodFatArr[i].trim());
+            foodDto.setFoodSugars(foodSugarsArr[i].trim());
+            foodDto.setFoodSodium(foodSodiumArr[i].trim());
+            foodDto.setFoodCholesterol(foodCholesterolArr[i].trim());
+            foodDto.setFoodFattyAcid(foodFattyAcidArr[i].trim());
+            foodDto.setFoodTransFat(foodTransFatArr[i].trim());
 
             if (foodDto.getFoodCarbohydrate().equals("NaN")) {
                 foodDto.setFoodCarbohydrate("0");

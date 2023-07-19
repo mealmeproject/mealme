@@ -51,52 +51,118 @@
             </section>
         </main>
         </p>
-        <h1>상품목록</h1>
-        <hr>
-        <h2 class="index-top">
-            <div id="menu" style="height: 170px; width:500px; text-align: center; background-color: white; ">
-                <ul>
-                    <li>
-                        <a href="/shop/shoppingList?sort=">음식</a>
-                        <ul>
-                            <li><a th:href="@{/shop/shoppingList(sort='protein')}">단백질</a></li>
-                            <li><a th:href="@{/shop/shoppingList(sort='lowCalorie')}">저칼로리</a></li>
-                        </ul>
+
+<!--  상품 카테고리 -->
+            <div class="product-category">
+                <ul class="category-ul">
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=1)}">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/01닭가슴살.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    닭가슴살
+                                </div>
+                            </div>
+                        </a>
                     </li>
-                    <li><a href="#">보충제</a>
-                        <ul>
-                            <li><a href="#">프로틴 쉐이크</a></li>
-                            <li><a href="#">프로틴 바</a></li>
-                        </ul>
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=2)}">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/02도시락.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    도시락
+                                </div>
+                            </div>
+                        </a>
                     </li>
-                    <li><a href="#">영양제</a>
-                        <ul>
-                            <li><a href="#">비타민</a></li>
-                            <li><a href="#">유산균</a></li>
-                            <li><a href="#">마그네슘</a></li>
-                        </ul>
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=3)}">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/03야채과일.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    야채/과일
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=4)}">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/04건강식품.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    건강식품
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=5)}">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/05프로틴.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    프로틴
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=6)}">
+                            <div class="category-box">
+                                <div class="category-img-box">
+                                    <img th:src="@{/img/06프로틴바.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    프로틴바
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="category-li">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=7)}">
+                            <div class="category-box">
+                                <div class="category-img-box filter">
+                                    <img th:src="@{/img/07영양제.png}" alt="다이어트" class="on-img">
+                                </div>
+                                <div class="category-name">
+                                    영양제
+                                </div>
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>
-        </h2>
+            <div>
+                <h1>상품목록</h1>
+                <hr>
+            </div>
             <div class="ShoppingContainer">
                 <div class="Shopping-text">
                     총
                     <a class="ShoppingNumber">
                         <span th:text="${getTotal} + '개 상품이 있습니다'"></span>
                     </a>
-                    <div class="select-wrap">
-                        <select id="selectItem" class="select">
-                            <option value="allList">전체</option>
-                            <option value="lowPriceList">낮은 가격순</option>
-                            <option value="reviewPriceList">별점 높은 순</option>
-                        </select>
-                    </div>
+<!--                    <div class="select-wrap">-->
+<!--                        <select id="selectItem" class="select">-->
+<!--                            <option value="allList">전체</option>-->
+<!--                            <option value="lowPriceList">낮은 가격순</option>-->
+<!--                            <option value="reviewPriceList">별점 높은 순</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                 </div>
             </div>
             <div id="productList">
                 <ul>
-                    <li th:each="productList : ${productList}">
+                    <li th:each="productList : ${productList}" class="product">
                         <div class="shopping-list">
                             <ul>
                                 <li class="shoppingItem">

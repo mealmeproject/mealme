@@ -37,7 +37,16 @@ public class ShopController {
         return "shop/shoppingList";
     }
 
+    @GetMapping("/selectCategory")
+    public String selectCategory(@RequestParam("categoryCode2") Long categoryCode2, Model model){
+        List<ProductListVo> productList = shopService.findProductList(categoryCode2);
+        int listCount = shopService.getTotal(categoryCode2);
 
+        model.addAttribute("productList", productList);
+        model.addAttribute("getTotal", listCount);
+
+        return "shop/shoppingList";
+    }
 
     @GetMapping("/shoppingDetail")
     public String shoppingDetail(Model model, @RequestParam("productNumber") Long productNumber) {
@@ -56,6 +65,11 @@ public class ShopController {
 
         return "shop/shoppingDetail";
     }
+
+
+
+
+
 
 
 

@@ -83,7 +83,7 @@
                                     <h2 th:text="${day.key}">6월 15일</h2>
                                 </div>
                                 <div class="eat-kcal">
-                                    <h2 th:text="${day.value[0].dayTotalKcal}"></h2>
+                                    <h2 th:text="${day.value[0].dayTotalKcal} + kcal"></h2>
                                 </div>
                                 <div class="eat-list-view-btn">
                                     <img th:src="@{/img/chevron_right.png}" alt="" />

@@ -34,17 +34,14 @@ public class ShopService {
         }
 
     public List<ProductVo> selectAllPrice() {
-
         return productMapper.selectAllPrice();
     }
 
     public List<ProductVo> selectLowPrice() {
-
         return productMapper.selectLowPrice();
     }
 
     public List<ProductVo> selectReviewPrice() {
-
         return productMapper.selectReviewPrice();
     }
 
@@ -55,13 +52,11 @@ public class ShopService {
 
 
     public List<ProductReviewVo> findReviewList(Long productNumber) {
-
         return productMapper.selectReviewList(productNumber);
     }
 
 
     public List<CartVo> selectCart(CartVo cartVo) {
-
         return productMapper.selectCart(cartVo);
     }
 
@@ -72,7 +67,6 @@ public class ShopService {
 
     //추가
     public CartVo registerCart(CartVo cartVo) {
-
         if(cartVo == null){
             throw new IllegalArgumentException("장바구니에 상품이 없습니다");
         }
@@ -183,6 +177,16 @@ public class ShopService {
         }
         return productMapper.selectProductFileList(productNumber);
     }
+
+    //     쇼핑몰 상품 리스트 카테고리2로 리스트 뽑기 ( 사진까지 )
+    public List<ProductListVo> findProductList(Long categoryNumber2){
+        return productMapper.selectProductListForCategory(categoryNumber2);
+    }
+
+    public int getTotal(Long categoryCode2){
+        return productMapper.selectTotalForCategory(categoryCode2);
+    }
+
 
 }
 
