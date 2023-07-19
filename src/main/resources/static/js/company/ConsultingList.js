@@ -1,7 +1,7 @@
 pageTage();
 function pageTage(){
-    $('.active').css('background','none');
-    $('.active').css('color','rgb(255,139,38)');
+    $('.active1').css('background','none');
+    $('.active1').css('color','rgb(255,139,38)');
 
 }
 
