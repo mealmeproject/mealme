@@ -57,6 +57,15 @@ public class ShopController {
         return "shop/shoppingDetail";
     }
 
+//    @GetMapping("/selectCategory")
+//    public RedirectView selectCategory(@RequestParam("categoryCode2") Long categoryCode2){
+//        List<ProductListVo> productList = shopService.findProductListForCategory(categoryCode2);
+//        int listCount = shopService.getTotal();
+//    }
+
+
+
+
 
 
     @GetMapping("/shoppingBasket")

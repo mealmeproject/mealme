@@ -184,6 +184,19 @@ public class ShopService {
         return productMapper.selectProductFileList(productNumber);
     }
 
+
+    //     쇼핑몰 상품 리스트 카테고리2로 검색 ( 사진까지 )
+    public List<ProductListVo> findProductListForCategory(Long categoryNumber2){
+        return productMapper.selectProductList();
+    }
+
+    // getTOtal 상품리스트 카테고리2 검색
+    public int getTotalForCategory(Long categoryNumber2){
+        return productMapper.selectTotal();
+    }
+
+
+
 }
 
 
