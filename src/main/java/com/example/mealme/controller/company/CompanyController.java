@@ -147,6 +147,7 @@ public class CompanyController {
 
         System.out.println(consultingRequests + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(new PageVo(criteria, consultingService.getTotal()));
+        model.addAttribute("pageInfo", new PageVo(criteria, consultingService.getTotal()));
         model.addAttribute("consultingRequests", consultingRequests);
         return "/company/ConsultingList";
     }
