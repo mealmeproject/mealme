@@ -10,12 +10,15 @@
         values (#{orderNumber}, #{userNumber}, #{productNumber}, #{orderConditionCode}, #{shippingAddressNumber}, #{orderCount})
     </insert>
 
-    <select id="selectOrderListByOrderNumbers">
+    <select id="selectOrderListByOrderNumbers" resultType="orderVo">
         SELECT ORDER_NUMBER, USER_NUMBER, O.PRODUCT_NUMBER, ORDER_COUNT,
                P.PRODUCT_NAME, P.PRODUCT_PRICE,
                PF.FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID
         FROM TBL_ORDER O
-                 JOIN TBL_PRODUCT P ON O.ORDER_NUMBER IN (10,11) 
+                 JOIN TBL_PRODUCT P ON O.ORDER_NUMBER IN
+                   <foreach collection="productNumberList" index="index" open="(" close=")" separator="," item="number">
+                       #{number}
+                   </foreach>
                     AND O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
                  LEFT JOIN (
             SELECT FILE_NUMBER, PRODUCT_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, RK
