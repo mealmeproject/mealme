@@ -91,6 +91,8 @@ public interface ProductMapper {
 //    상품 파일 리스트로 가져오기
     List<ProductFileDto> selectProductFileList(Long productNumber);
 
+//    즉시 구매
+    List<CartVo> selectProductInfoByProductNumber(Long productNumber);
 }
 
 
