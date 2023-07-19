@@ -1,6 +1,6 @@
 
 
-export function searchCompanyList(obj, callback, pageCallback, btnCallback, error){
+export function searchCompanyList(obj, callback, pageCallback, btnCallback,countCallback,error){
     // let searchKeyword = $('#keyword').val()
     $.ajax({
         url: `/admins/v1/searchCompanyList/${obj.page}`,
@@ -12,6 +12,8 @@ export function searchCompanyList(obj, callback, pageCallback, btnCallback, erro
                 callback(map.companyList);
                 pageCallback(map.pageVo);
                 btnCallback(map.companyList);
+                countCallback(map)
+
             }
 
         },
@@ -32,6 +34,7 @@ export function deleteUserList(checkBoxArr,confirmAlert,error) {
         dataType: "json",
         success: function (result) {
 
+            pageCallBack(map);
             console.log(result);
             alert("해당글이 정상적으로 삭제되었습니다.")
             location.reload();

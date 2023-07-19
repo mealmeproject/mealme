@@ -1,4 +1,4 @@
-export function searchOrderList(obj, callback, pageCallback, error){
+export function searchOrderList(obj, callback, pageCallback,orderTotal, error){
     $.ajax({
         url: `/admins/v1/searchOrderList/${obj.page}`,
         type: 'get',
@@ -9,6 +9,7 @@ export function searchOrderList(obj, callback, pageCallback, error){
             if(callback){
                 callback(map.orderList);
                 pageCallback(map.pageVo);
+                orderTotal(map);
             }
 
         },

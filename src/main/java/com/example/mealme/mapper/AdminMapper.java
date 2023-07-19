@@ -47,6 +47,7 @@ public interface AdminMapper {
     List<ProductVo> productListSelect(@Param("searchProductVo") SearchProductVo searchProductVo, @Param("criteria") Criteria criteria);
     //    전체 상품 수 조회
     public int selectProductTotal(@Param("searchProductVo") SearchProductVo searchProductVo);
+    int productCountTotal();
 
 //    상품 단일 조회
 ProductVo selectProduct(Long productNumber);
@@ -66,12 +67,15 @@ ProductVo selectProduct(Long productNumber);
 
     //    전체 기업 수 조회
     public int selectCompanyTotal(@Param("searchCompanyVo") SearchCompanyVo searchCompanyVo);
+    int companyCountTotal();
 
     //    주문 검색 조회
     List<OrderVo> selectOrderList(@Param("searchProductVo") SearchProductVo searchProductVo, @Param("criteria") Criteria criteria);
 
     //    전체 상품 수 조회
     public int selectOrderTotal(@Param("searchProductVo") SearchProductVo searchProductVo);
+    int orderCountTotal();
+
 //     주문 상태 변경
     void modifyCondition(@Param("orderNumber") String orderNumber, @Param("orderConditionCode") Long orderConditionCode );
 

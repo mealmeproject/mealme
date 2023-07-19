@@ -64,6 +64,10 @@ public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Crite
         return adminMapper.selectProductTotal(searchProductVo);
     }
 
+    public int productCountTotal(){
+        return adminMapper.productCountTotal();
+    }
+
 //    유저 삭제
     public void deleteUserList(List<String> checkBoxArr){
         if(checkBoxArr == null){
@@ -115,6 +119,9 @@ public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Crite
     public int getCompanyTotal(SearchCompanyVo searchCompanyVo){
         return adminMapper.selectCompanyTotal(searchCompanyVo);
     }
+    public int companyCountTotal(){
+        return adminMapper.companyCountTotal();
+    }
 
 //  대분류 조회
     @Transactional(readOnly = true)
@@ -164,6 +171,10 @@ public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Crite
     public int findOrderTotal(SearchProductVo searchProductVo){
         return adminMapper.selectOrderTotal(searchProductVo);
     }
+    public int orderCountTotal(){
+        return adminMapper.orderCountTotal();
+    }
+
 //   주문 상태 변경
     public void modifyStatus(Long orderConditionCode, List<String> orderNumber){
         if(orderNumber == null){

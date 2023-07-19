@@ -243,8 +243,13 @@
 <!--        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}-->
     </select>
 
+    <select id="productCountTotal">
+        SELECT COUNT(PRODUCT_NUMBER) FROM TBL_PRODUCT
+    </select>
+
+
     <select id="selectProductTotal" resultType="_int">
-        SELECT COUNT(P.PRODUCT_NUMBER) FROM TBL_PRODUCT P
+        SELECT COUNT(DISTINCT P.PRODUCT_NUMBER) FROM TBL_PRODUCT P
         LEFT JOIN TBL_PRODUCT_CATEGORY2 C ON P.CATEGORY_CODE2 = C.CATEGORY_CODE2
         LEFT JOIN TBL_PRODUCT_FILE F ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
         <where>
@@ -322,6 +327,10 @@
 
     </select>
 
+    <select id="companyCountTotal" resultType="_int">
+        SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY
+    </select>
+
     <select id="selectCompanyTotal" resultType="_int">
         SELECT COUNT(COMPANY_NUMBER) FROM TBL_COMPANY
         <where>
@@ -338,14 +347,14 @@
             </if>
 
             <trim prefix="and">
-
-                    <if test="searchCompanyVo.productType.equals('0')">
-                        COMPANY_STATUS = #{companyStatus} +1
+                <if test="searchCompanyVo.productType != null">
+                    <if test="searchCompanyVo.productType == 0">
+                        COMPANY_STATUS = 1
                     </if>
-                    <if test="searchCompanyVo.productType.equals('1')">
-                        COMPANY_STATUS = #{companyStatus} -1
+                    <if test="searchCompanyVo.productType == 1">
+                        COMPANY_STATUS = 0
                     </if>
-
+                </if>
             </trim>
         </where>
     </select>
@@ -408,6 +417,10 @@
         WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
         ORDER BY ORDER_NUMBER
 
+    </select>
+
+    <select id="orderCountTotal">
+        SELECT COUNT(ORDER_NUMBER) FROM TBL_ORDER
     </select>
 
     <select id="selectOrderTotal" resultType="_int">

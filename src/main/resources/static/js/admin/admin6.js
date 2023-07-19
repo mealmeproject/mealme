@@ -3,7 +3,7 @@ let page = 1;
 let startDate = $('#datepicker1').val();
 let endDate = $('#datepicker2').val();
 let productType = $('#productType').val();
-product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: startDate, endDate:endDate }, productList, paging, showError);
+product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: startDate, endDate:endDate }, productList, paging,productTotal, showError);
 
 $(function() {
   //input을 datepicker로 선언
@@ -154,6 +154,13 @@ function paging(pageInfo){
     $(".page_nation").html(page);
 }
 
+//상품 수
+function productTotal(total){
+    console.log(total);
+    $('.productTotal').text(total.productTotal);
+    $('.searchTotal').text(total.searchTotal);
+}
+
 //페이징 클릭 이벤트
 $('.page_nation').on('click','a', function (e){
     e.preventDefault();
@@ -164,7 +171,7 @@ $('.page_nation').on('click','a', function (e){
     let startDate = $('#datepicker1').val();
     let endDate = $('#datepicker2').val();
     console.log(page)
-    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, productTotal,showError);
 });
 
 // 검색 조건에 따른 회원 조회
@@ -176,7 +183,7 @@ $('.search_user').on('click', function (){
 
     let startDate = $('#datepicker1').val();
     let endDate = $('#datepicker2').val();
-    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging,productTotal, showError);
 
     // $('#keyword').val('');
 
@@ -196,7 +203,7 @@ $('#keyword').on('keydown', function (e){
 
         let startDate = $('#datepicker1').val();
         let endDate = $('#datepicker2').val();
-        product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page,productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+        product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page,productType:productType, startDate:startDate, endDate:endDate }, productList, paging,productTotal, showError);
     }
 });
 
