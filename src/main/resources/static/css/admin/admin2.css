@@ -83,7 +83,10 @@ tbody {
 
 .section td{
   /* width: 120px; */
-  padding: 9px 9px 7px;
+  /*padding: 9px 9px 7px;*/
+  padding-top: 2px ;
+  padding-bottom: 2px;
+
     vertical-align: top;
     display: flex;
     border: 0px solid #bbb;
@@ -91,10 +94,28 @@ tbody {
     
 }
 
+
+table{
+  table-layout: fixed;
+}
+
+th{
+  overflow:hidden;
+
+  white-space : nowrap;
+
+  text-overflow: ellipsis;
+
+  border-right:solid 1px #bbb ;
+  padding: 3px;
+  text-align: center;
+}
+
 .headingArea{
   position: relative;
   margin: 0 0 16px;
 }
+
 
 
 input {
@@ -409,4 +430,8 @@ a{
   background-color:#ff9326;
   color:#fff;
   border:1px solid #e2e4e9;
+}
+
+.check th{
+  height: 33px;
 }

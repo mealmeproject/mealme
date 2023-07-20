@@ -30,7 +30,7 @@
           <!-- 고객관리 -->
           <div class="headingArea">
             <div class="admin-title">
-              <div>고객관리</div>
+              <div style="font-size: 18px; font-weight: bold">고객관리</div>
             </div>
           </div>
           <!-- 메인 시작 -->
@@ -50,39 +50,39 @@
                     <col style="width:25%;">
                   </colgroup>
                   <thead>
+<!--                    <tr>-->
+<!--                      <th colspan="3" align="left" margin-left="10px" style="border-bottom: solid 1px #bbb; background-color: #ff7e00; font-size: 14px" >-->
+<!--                      회원현황-->
+<!--                    </th>-->
+<!--                    </tr>-->
                     <tr>
-                      <th colspan="3" align="left" margin-left="10px">
-                      회원현황
-                    </th>
-                    </tr>
-                    <tr>
-                      <th scope="col">
+                      <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3); ">
                         일반회원
                       </th>
-                      <th scope="col">
+                      <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3); ">
                         기업회원
                       </th>
-                      <th scope="col">
+                      <th scope="col" style="background-color: rgba(210, 210, 210,0.3);">
                         TOTAL
                       </th>
                     </tr>
                   </thead>
                   <tbody class="right" align="right">
-                    <tr>
-                      <td>
-                        <strong class="underline txtEm" id="n-user">
+                    <tr style="border-top: solid 1px #bbb ">
+                      <td style="border-right: solid 1px #bbb ">
+                        <strong class="underline txtEm" id="n-user" style=" color: #3971FF">
+                          <a>0</a>
+                        </strong>
+                        명
+                      </td>
+                      <td style="border-right: solid 1px #bbb ">
+                        <strong class="underline txtEm" id="c-user" style=" color: #3971FF">
                           <a>0</a>
                         </strong>
                         명
                       </td>
                       <td>
-                        <strong class="underline txtEm" id="c-user">
-                          <a>0</a>
-                        </strong>
-                        명
-                      </td>
-                      <td>
-                        <strong class="underline txtEm" id="user-total">
+                        <strong class="underline txtEm" id="user-total" style=" color: #3971FF">
                           <a>0</a>
                         </strong>
                         명
@@ -97,7 +97,7 @@
             <!-- 오늘의 할 일 -->
             <div class="dashBoard">
               <div class="title">
-                <div>오늘의 할 일</div>
+                <div style="font-size: 18px; font-weight: bold">오늘의 할 일</div>
                 <p class="today">
                 <strong class="todayDayIs">06월 08일</strong>
                 <span id="weekDay"></span>
@@ -107,23 +107,19 @@
               <div class="mBoard">
                 <table border="1" summary>
                   <colgroup>
-                    <col span="6" style="width:auto;">
+                    <col span="5" style="width:auto;">
                   </colgroup>
-                  <thead>
+                  <thead style=" border: solid 1px #bbb;">
                     <tr>
-                      <th scope="col" rowspan="2">배송준비중</th>
-                      <th scope="col" rowspan="2">배송중</th>
-                      <th scope="col" >취소신청</th>
-                      <th scope="col" >반품신청</th>
-                      <th scope="col" rowspan="2">환불신청</th>
+                      <th scope="col" rowspan="2" style=" border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">배송준비중</th>
+                      <th scope="col" rowspan="2" style=" border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">배송중</th>
+                      <th scope="col" style=" border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">취소신청</th>
+                      <th scope="col" style=" border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">반품신청</th>
+                      <th scope="col" rowspan="2" style="background-color: rgba(210, 210, 210,0.3);">환불신청</th>
 
                       
                     </tr>
-                    <tr>
-                      <th>신청/처리중</th>
-                      <th>신청/처리중</th>
 
-                    </tr>
                   </thead>
                   <tbody class="center">
                     <tr class="total">
@@ -178,18 +174,18 @@
           <div class="dashBoardArea">
             <div class="mDashboard">
               <div class="title">
-                <div>일별 매출 현황</div>
+                <div style="font-size: 18px; font-weight: bold">일별 매출 현황</div>
               </div>
                 <div class="mallArea">
                   <div class="gFlow graph">
-                    <span class="chartUnit">단위/만원</span>
-                    <div class="chart">
-                    <canvas id="myChart" ></canvas>
+                    <span class="chartUnit" style="font-weight: bold">단위/만원</span>
+                    <div class="chart" style="font-size: 11px">
+                    <canvas id="myChart" style="font-size: 8px" ></canvas>
                   </div>
                   </div>
                   <div class="gReverse">
                   <div class="mBoard">
-                    <table border="1" summary="">
+                    <table border="1" summary="" style="border: solid 1px #bbb">
                         
                         <colgroup>
                             <col style="width:auto;">
@@ -197,17 +193,17 @@
                             <col style="width:26%;">
                             <col style="width:25%;">
                         </colgroup>
-                        <thead>
+                        <thead style="border: solid 1px #bbb">
                         <tr>
-                            <th scope="col">날짜</th>
-                            <th scope="col">주문</th>
-                            <th scope="col">결제</th>
-                            <th scope="col">환불(취소/반품)</th>
+                            <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">날짜</th>
+                            <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">주문</th>
+                            <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3);">결제</th>
+                            <th scope="col" style="background-color: rgba(210, 210, 210,0.3);">환불(취소/반품)</th>
                         </tr>
                         </thead>
                         <tbody class="right">
                             <tr class="">
-                                <th scope="row" id="dailyCountTitle1">06월 05일</th>
+                                <th scope="row" id="dailyCountTitle1" style="border-bottom: solid 1px #bbb">06월 05일</th>
                                 <td id="dailyCountOrderPrice1" >
                                     <span class="dailyCountOrderPrice1">0</span>원<br>(<span class="dailyCountOrderCount1">0</span>건)</td>
                                 <td id="dailyCountPayedPrice1">
@@ -216,7 +212,7 @@
                                     <span class="dailyCountRefundPrice1">0</span>원<br>(<span class="dailyCountRefundCount1">0</span>건)</td>
                             </tr>
                             <tr class="">
-                                <th scope="row" id="dailyCountTitle2">06월 06일</th>
+                                <th scope="row" id="dailyCountTitle2" style="border-bottom: solid 1px #bbb">06월 06일</th>
                                 <td id="dailyCountOrderPrice2" class="dailyCountOrderPrice">
                                     <span class="dailyCountOrderPrice2">0</span>원<br>(<span class="dailyCountOrderCount2">0</span>건)</td>
                                 <td id="dailyCountPayedPrice2">
@@ -225,7 +221,7 @@
                                     <span class="dailyCountRefundPrice2">0</span>원<br>(<span class="dailyCountRefundCount2">0</span>건)</td>
                             </tr>
                             <tr class="">
-                                <th scope="row" id="dailyCountTitle3">06월 07일</th>
+                                <th scope="row" id="dailyCountTitle3" style="border-bottom: solid 1px #bbb">06월 07일</th>
                                 <td id="dailyCountOrderPrice3" class="dailyCountOrderPrice">
                                     <span class="dailyCountOrderPrice3">0</span>원<br>(<span class="dailyCountOrderCount3">0</span>건)</td>
                                 <td id="dailyCountPayedPrice3">
@@ -234,7 +230,7 @@
                                     <span class="dailyCountRefundPrice3">0</span>원<br>(<span class="dailyCountRefundCount3">0</span>건)</td>
                             </tr>
                             <tr class="em">
-                                <th scope="row" id="dailyCountTitleToday"><span class="dailyCountTitleToday">0</span> (오늘)</th>
+                                <th scope="row" id="dailyCountTitleToday" style="border-bottom: solid 1px #bbb"><span class="dailyCountTitleToday">0</span><br> (오늘)</th>
                                 <td id="dailyCountOrderPriceToday">
                                     <span class="dailyCountOrderPrice4">0</span>원<br>(<span class="dailyCountOrderCount4">0</span>건)</td>
                                 <td id="dailyCountPayedPriceToday">
@@ -243,7 +239,7 @@
                                     <span class="dailyCountRefundPrice4">0</span>원<br>(<span class="dailyCountRefundCount4">0</span>건)</td>
                             </tr>
                             <tr class="total">
-                                <th scope="row" id="weeklyCountOrderAvgTitle">최근 7일 평균</th>
+                                <th scope="row" id="weeklyCountOrderAvgTitle" style="border-bottom: solid 1px #bbb">최근 7일 평균</th>
                                 <td id="weeklyCountOrderPriceAvg">
                                     <span class="weeklyCountOrderPriceAvg">0</span>원<br>(<span class="weeklyCountOrderCountAvg">0</span>건)</td>
                                 <td id="weeklyCountPayedPriceAvg">
@@ -252,7 +248,7 @@
                                     <span class="weeklyCountRefundPriceAvg">0</span>원<br>(<span class="weeklyCountRefundCountAvg">0</span>건)</td>
                             </tr>
                             <tr>
-                                <th scope="row" id="weeklyCountOrderTotalTitle">최근 7일 합계</th>
+                                <th scope="row" id="weeklyCountOrderTotalTitle" style="border-bottom: solid 1px #bbb">최근 7일 합계</th>
                                 <td id="weeklyCountOrderPriceTotal">
                                     <span class="weeklyCountOrderPriceTotal">0</span>원<br>(<span class="weeklyCountOrderCountTotal">0</span>건)</td>
                                 <td id="weeklyCountPayedPriceTotal">
@@ -261,7 +257,7 @@
                                     <span class="weeklyCountRefundPriceTotal">0</span>원<br>(<span class="weeklyCountRefundCountTotal">0</span>건)</td>
                             </tr>
                             <tr>
-                                <th scope="row" id="monthlyCountOrderAvgTitle">최근 30일 평균</th>
+                                <th scope="row" id="monthlyCountOrderAvgTitle" style="border-bottom: solid 1px #bbb">최근 30일 평균</th>
                                 <td id="monthlyCountOrderPriceAvg">
                                     <span class="monthlyCountOrderPriceAvg">0</span>원<br>(<span class="monthlyCountOrderCountAvg">0</span>건)</td>
                                 <td id="monthlyCountPayedPriceAvg">
@@ -270,7 +266,7 @@
                                     <span class="monthlyCountRefundPriceAvg">0</span>원<br>(<span class="monthlyCountRefundCountAvg">0</span>건)</td>
                             </tr>
                             <tr class="total">
-                                <th scope="row" id="monthlyCountOrderTotalTitle">최근 30일 합계</th>
+                                <th scope="row" id="monthlyCountOrderTotalTitle" style="border-bottom: solid 1px #bbb">최근 30일 합계</th>
                                 <td id="monthlyCountOrderPriceTotal">
                                     <span class="monthlyCountOrderPriceTotal">0</span>원<br>(<span class="monthlyCountOrderCountTotal">0</span>건)</td>
                                 <td id="monthlyCountPayedPriceTotal">

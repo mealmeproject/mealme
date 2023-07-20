@@ -23,8 +23,8 @@ function userList(map){
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userId}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userPhoneNumber}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userGender}</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userBirth}</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userAdress1}</th>
+                  
+                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userAddress1}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userEmail}</th>
                
 		`;

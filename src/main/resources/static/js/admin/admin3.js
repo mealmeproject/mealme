@@ -30,8 +30,8 @@ function companyList(map){
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyId}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyCallNumber}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyCeoName}</th>
-                  <th scope="col" style="font-size: 11px; font-weight: 10;">${u.companyAddress1}</th>
-                  <th scope="col" style="font-size: 11px; font-weight: 10;">${u.companyEmail}</th>
+                  <th scope="col" style="font-size: 13px; font-weight: 10; overflow: hidden;">${u.companyAddress1}</th>
+                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyEmail}</th>
                   <input type="hidden" name="status" value="${u.companyStatus}">
                   
                   
