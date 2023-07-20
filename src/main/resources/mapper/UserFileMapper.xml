@@ -39,8 +39,9 @@
         values (#{fileNumber}, #{fileName}, #{fileUploadPath}, #{fileUuid}, #{userNumber})
     </insert>
 
-    <select id="userSelect">
-        SELECT FROM TBL_USER_FILE
+    <select id="userSelect" resultType="userFileDto">
+        SELECT FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, USER_NUMBER
+        FROM TBL_USER_FILE
         WHERE USER_NUMBER = #{userNumber}
     </select>
 
@@ -63,8 +64,8 @@
         values (#{fileNumber}, #{fileName}, #{fileUploadPath}, #{fileUuid}, #{companyNumber})
     </insert>
 
-    <select id="companySelect">
-        SELECT FROM TBL_COMPANY_FILE
+    <select id="companySelect" resultType="companyFileDto">
+        SELECT FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, COMPANY_NUMBER FROM TBL_COMPANY_FILE
         WHERE COMPANY_NUMBER = #{companyNumber}
     </select>
 

@@ -34,17 +34,14 @@ public class ShopService {
         }
 
     public List<ProductVo> selectAllPrice() {
-
         return productMapper.selectAllPrice();
     }
 
     public List<ProductVo> selectLowPrice() {
-
         return productMapper.selectLowPrice();
     }
 
     public List<ProductVo> selectReviewPrice() {
-
         return productMapper.selectReviewPrice();
     }
 
@@ -55,13 +52,11 @@ public class ShopService {
 
 
     public List<ProductReviewVo> findReviewList(Long productNumber) {
-
         return productMapper.selectReviewList(productNumber);
     }
 
 
     public List<CartVo> selectCart(CartVo cartVo) {
-
         return productMapper.selectCart(cartVo);
     }
 
@@ -72,7 +67,6 @@ public class ShopService {
 
     //추가
     public CartVo registerCart(CartVo cartVo) {
-
         if(cartVo == null){
             throw new IllegalArgumentException("장바구니에 상품이 없습니다");
         }
@@ -140,10 +134,19 @@ public class ShopService {
             cartMapper.delete(orderDto.getUserNumber(), orderDto.getProductNumber());
         });
 
-//        결제 완료 후 final페이지에 뿌려줄 데이터 반환
+//        결제 완료 후 final페이지에 사용할 데이터 반환
         return shippingVo.getOrderDtoList();
     }
 
+//    구매 final 페이지에 뿌릴 정보 조회
+    public List<OrderVo> findOrderListByOrderNumbers(List<Long> productNumberList){
+        return orderMapper.selectOrderListByOrderNumbers(productNumberList);
+    }
+
+//    즉시 구매
+    public List<CartVo> findProductInfoByProductNumber(Long productNumber){
+        return productMapper.selectProductInfoByProductNumber(productNumber);
+    }
 
 
 //
@@ -184,17 +187,14 @@ public class ShopService {
         return productMapper.selectProductFileList(productNumber);
     }
 
-
-    //     쇼핑몰 상품 리스트 카테고리2로 검색 ( 사진까지 )
-    public List<ProductListVo> findProductListForCategory(Long categoryNumber2){
-        return productMapper.selectProductList();
+    //     쇼핑몰 상품 리스트 카테고리2로 리스트 뽑기 ( 사진까지 )
+    public List<ProductListVo> findProductList(Long categoryNumber2){
+        return productMapper.selectProductListForCategory(categoryNumber2);
     }
 
-    // getTOtal 상품리스트 카테고리2 검색
-    public int getTotalForCategory(Long categoryNumber2){
-        return productMapper.selectTotal();
+    public int getTotal(Long categoryCode2){
+        return productMapper.selectTotalForCategory(categoryCode2);
     }
-
 
 
 }

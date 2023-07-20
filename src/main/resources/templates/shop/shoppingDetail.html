@@ -63,7 +63,7 @@
                 </nav>
                 <div class="total">
                   <h4 class="product-count">1 개</h4>
-                  <span th:text="${productDetail.productPrice}"></span>
+                  <span th:text="${#numbers.formatInteger(productDetail.productPrice,3,'COMMA')}"></span>
                   <em>상품금액</em>
                 </div>
                 <p class="addToCart">
@@ -72,8 +72,8 @@
                     <input type="hidden" name="productNumber" th:value="${productDetail.productNumber}" />
                     <button id="addToCartBtn" class="cart" type="submit">장바구니 담기</button>
                   </form>
-                  <form action="/shop/shoppingPay" method="get">
-                    <input type="hidden" name="userNumber" th:value="${userNumber}" />
+                  <form action="/shop/shoppingPayment" method="get">
+                    <input type="hidden" name="productNumber" th:value="${productDetail.productNumber}" />
                     <button class="order" type="submit">바로구매</button>
                   </form>
                 </div>

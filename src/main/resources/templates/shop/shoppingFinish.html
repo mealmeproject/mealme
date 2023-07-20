@@ -32,7 +32,7 @@
           <div class="finish-list-container">
             <div class="finish-list-title">
               <div class="finish-list-title2">
-                주문상품 <span>2</span>개
+                주문상품 <span th:text="${orderInfoList.size}"></span>개
               </div>
             </div>
             <div class="free">
@@ -46,36 +46,30 @@
             </div>
             <div>
               <table>
-                <tr>
+                <tr th:each="order : ${orderInfoList}">
                   <td class="imgEx1-title">
-                    <img src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652Vjg147858177_100_100.jpg" class="imgEx1">
+                    <th:block th:unless="${order.fileName != null}">
+                      <img src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652Vjg147858177_100_100.jpg" class="imgEx1">
+                    </th:block>
+                    <th:block th:if="${order.fileName != null}">
+                      <img th:src="${'/upload/' + order.fileUploadPath + '/' + order.fileUuid + '_' + order.fileName}">
+                    </th:block>
                   </td>
                   <td>
                     <div>
-                      <div class="shopping-title">맛있닭 닭가슴살 스테이크 갈릭 맛 100g</div>
+                      <div class="shopping-title" th:text="${order.productName}"></div>
                     </div>
                     <div class="shopping-price">
-                                  <span>
-                                    16,500원  <span class="price-span">1개</span>
+                                  <span th:text="${#numbers.formatInteger(order.productPrice, 3, 'COMMA') + '원'}">
+                                    </span> <span class="price-span" th:text="${order.orderCount + '개'}">
                                   </span>
                     </div>
                   </td>
-                  <td class="priceEx1" ><span class="price">16,500원</span></td>
+                  <td class="priceEx1" ><span class="price" th:text="${#numbers.formatInteger(order.productPrice * order.orderCount, 3, 'COMMA') + '원'}"></span>
+                    <input type="hidden" th:value="${order.productPrice * order.orderCount}" class="product-price__hidden">
+                  </td>
                 </tr>
-                <td class="imgEx1-title">
-                  <img src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220701/IMG1656zmR642704343_100_100.jpg" class="imgEx1">
-                </td>
-                <td>
-                  <div>
-                    <div class="shopping-title">맛있닭 닭가슴살 스테이크 갈릭 맛 100g</div>
-                  </div>
-                  <div class="shopping-price">
-                                <span>
-                                55,200원 <span class="price-span">1개</span>
-                              </span></div>
-                </td>
-                <td class="priceEx1" ><span class="price">55,200원</span></td>
-                </tr>
+
               </table>
             </div>
           </div>
@@ -85,12 +79,12 @@
                 <div class="finish-price-container1">
                   <div class="finish-price-title"> <span class="finish-price-title2">총 결제 금액</span></div>
                 </div>
-                <td class="price-result">77,100원</td>
+                <td class="price-result"> <span id="total-price">  </span>원</td>
               </tr>
             </table>
           </div>
-          <button class="finish-shopping">쇼핑 계속하기</button>
-          <button class="purchase-history">구매내역 확인</button>
+          <button class="finish-shopping" type="button">쇼핑 계속하기</button>
+          <button class="purchase-history" type="button">구매내역 확인</button>
         </div>
       </h1>
       </p>
@@ -110,8 +104,10 @@
 <!-- 퀵 메뉴 추가 공간 -->
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:src="@{/js/fragment/aside.js}"></script>
 <script th:src="@{/js/meal/myPage.js}"></script>
+<script th:src="@{/js/shop/shoppingFinish.js}"></script>
 <script>
   var images = [];
   var currentImageIndex = 0;
