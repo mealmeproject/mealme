@@ -271,10 +271,14 @@ tbody tr{
 }
 
 tbody a{
-    height: 50px;
     color: #afafaf;
     padding-top: 16px;
     text-align: center;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
 }
 
 /* th의 바텀 선 */
