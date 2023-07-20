@@ -25,6 +25,7 @@ function showList(page) {
     data : {"page": page},
     dataType: 'json',
     success: function (result) {
+      console.log(result);
       makeListHtml(result);
     },
     error: function (xhr, status, error) {
@@ -48,11 +49,10 @@ function makeListHtml(result){
                     <div class="review-sub">
                     `;
 
-                        //  <div class="company-file">
-                        //     <img src="${reviewList[i].fileUploadPath}" alt="기업이미지">
-                        // </div>
+    text +=            `<div class="company-file">
+                        <img src="${reviewList[i].fileUploadPath}" alt="기업이미지">
+                        </div>`;
     text += `
-                        <!-- 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 -->
                         <div class="ranking-wrap">
                             <div class="review-date">${reviewList[i].consultingRequestDate}</div>
                             <div class="consulting-comment-wrap">
@@ -91,38 +91,30 @@ function makeListHtml(result){
     `;
   }
   $('.list-wrap').html(text);
+  // 별점 보여주는 함수
   starValueShow();
-  // showPage();
+
   // 리뷰 비동기 페이징처리하기
   let pageNum = '';
   let pageList = result.pageVo;
 
-
   console.log('페이지 리스트');
   console.log(pageList);
 
-  pageNum += `<a class="arrow pprev" data-value="1"></a>`;
-
+    pageNum += `<a class="arrow pprev" data-value="1"></a>`;
   if (pageList.prev == true){
-    pageNum += `
-<!--      <a class="arrow pprev" data-value="1">1</a>-->
-      <a class="arrow prev" value="${pageList.startPage - 1}"></a>`;
-  }
+    pageNum += `<a class="arrow prev" value="${pageList.startPage - 1}"></a>`;}
 
-      for (let i = pageList.startPage; i <= pageList.endPage; i++) {
+  for (let i = pageList.startPage; i <= pageList.endPage; i++) {
    if (pageList.criteriaCompany.page == i) {
       pageNum += `<a><div class="page-num active1">${i}</div></a>`;
     }
-    else {
+   else {
      pageNum += `<a><div class="page-num">${i}</div></a>`;
     }
-
   }
 
-if(pageList.next == true){
-    pageNum += `
-    <a class="arrow next" value="${pageList.endPage + 1}"></a>`;}
-
+  if(pageList.next == true){pageNum += `<a class="arrow next" value="${pageList.endPage + 1}"></a>`;}
     pageNum += `<a class="arrow nnext" data-value="${pageList.realEnd}"></a>`;
 
 $('.page_nation').html(pageNum);
@@ -131,7 +123,6 @@ $('.page_nation').html(pageNum);
 // 페이지 버튼 클릭시 이동처리
 $('.page_nation').on("click", ".page-num", function (){
   page = $(this).text();
-  console.log(page);
   showList(page);
 });
 
@@ -157,7 +148,7 @@ $('.page_nation').on("click", ".nnext", function (){
   showList(page);
 });
 
-// 평가 값 채우기
+// 리뷰평가 별 채우기
 function starValueShow() {
   let $span = $('.star-span');
   for(let i=0; i<$span.length; i++){
