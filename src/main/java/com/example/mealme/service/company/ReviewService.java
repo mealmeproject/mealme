@@ -4,6 +4,7 @@ import com.example.mealme.mapper.ReviewMapper;
 import com.example.mealme.vo.ConsultingPayVo;
 import com.example.mealme.vo.ConsultingReviewVo;
 import com.example.mealme.vo.Criteria;
+import com.example.mealme.vo.CriteriaCompany;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,8 @@ public class ReviewService {
         reviewMapper.insertConsultingReview(consultingReviewVo);
     }
 
-    public List<ConsultingReviewVo> findConsultingList(Long userNumber){
-        List<ConsultingReviewVo> consultingList = reviewMapper.selectConsultingList(userNumber);
+    public List<ConsultingReviewVo> findConsultingList(Long userNumber,CriteriaCompany criteriaCompany){
+        List<ConsultingReviewVo> consultingList = reviewMapper.selectConsultingList(userNumber, criteriaCompany);
         System.out.println("consultingList");
         return consultingList;
     }
@@ -63,5 +64,9 @@ public class ReviewService {
 
     public void updateConsultingCondition(Long consultingRequestNumber){
         reviewMapper.updateConsultingCondition(consultingRequestNumber);
+    }
+//    리뷰 리스트 전체 갯수
+    public int findConsultingReviewCount(Long userNumber){
+        return reviewMapper.selectConsultingReviewCount(userNumber);
     }
 }

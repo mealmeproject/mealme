@@ -127,11 +127,11 @@
                     <a class="arrow prev" th:href="@{/company/ConsultingList(page=${pageInfo.startPage - 1})}" th:if="${pageInfo.prev}"></a>
                     <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
                         <a th:href="@{/company/ConsultingList(page=${i})}">
-                            <div class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
+                            <div class="page-num active1" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>
                             <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>
                         </a>
                     </th:block>
-                    <a class="arrow next" th:href="@{/company/ConsultingList(page=${pageInfo.endPage - 1})}" th:if="${pageInfo.next}"></a>
+                    <a class="arrow next" th:href="@{/company/ConsultingList(page=${pageInfo.endPage + 1})}" th:if="${pageInfo.next}"></a>
                     <a class="arrow nnext" th:href="@{/company/ConsultingList(page=${pageInfo.endPage})}"></a>
 
                 </div>
@@ -139,44 +139,6 @@
 </div>
 </div>
 </div>
-
-
-
-
-
-<!--       이 div문제임  </div>-->
-<!--    </div>-->
-
-
-
-
-
-
-
-
-
-
-    <!--            <div class="page_wrap">-->
-<!--                <div class="page_nation">-->
-
-<!--                                <a th:href="@{/company/ConsultingList(page=${pageInfo.criteria.page - 1})}" class="arrow prev" th:if="${pageInfo.criteria.page > 1}"></a>-->
-<!--                                <a th:href="@{/company/ConsultingList(page=${pageInfo.startPage - 1})}" class="page_nation a" th:if="${pageInfo.prev}">-->
-<!--                                  <li class="arrow prev">&lt</li>-->
-<!--                                </a>-->
-
-<!--                    <th:block th:each="i : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">-->
-<!--                        <a th:href="@{/company/ConsultingList(page=${i})}">-->
-<!--                            <div class="page-num active" th:text="${i}" th:if="${i == pageInfo.criteria.page}"></div>-->
-<!--                            <div class="page-num" th:text="${i}" th:unless="${i == pageInfo.criteria.page}"></div>-->
-<!--                        </a>-->
-<!--                    </th:block>-->
-
-
-<!--                    <a class="arrow next" th:href="@{/company/ConsultingList(page=${pageInfo.endPage - 1})}" th:if="${pageInfo.next}"></a>-->
-<!--                    <a th:href="@{/company/ConsultingList(page=${pageInfo.criteria.page + 1})}" class="arrow next"></a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
 
 
@@ -196,8 +158,8 @@
         <!-- 작업공간 -->
         <!--                </div>-->
         <!-- 푸터 추가 공간 -->
-        <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
-    </div>
+<footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
+</div>
 </div>
 <aside class="aside2" th:replace="fragment/aside2 :: aside2">
     <div class="menu-container"></div>
@@ -208,10 +170,10 @@
 
 
 
-    <script th:src="@{/js/fragment/aside.js}"></script>
+<script th:src="@{/js/fragment/aside.js}"></script>
 <!--<script th:src="@{/js/meal/myPage.js}"></script>-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script th:src="@{/js/company/ConsultingList.js}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/company/ConsultingList.js}"></script>
 <script>
     var images = [];
     var currentImageIndex = 0;

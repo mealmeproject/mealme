@@ -91,6 +91,14 @@ public interface ProductMapper {
 //    상품 파일 리스트로 가져오기
     List<ProductFileDto> selectProductFileList(Long productNumber);
 
+//    카테고리 선택시 상품 리스트
+    List<ProductListVo> selectProductListForCategory(Long categoryCode2);
+
+//    카테고리 선택시 전체 갯수
+    int selectTotalForCategory(Long categoryCode2);
+
+//    즉시 구매
+    List<CartVo> selectProductInfoByProductNumber(Long productNumber);
 }
 
 

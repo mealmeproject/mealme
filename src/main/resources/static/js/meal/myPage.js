@@ -36,10 +36,16 @@ function showMeal(map){
 
                                     </ul>
                                     <div class="bullets">
-                                        <label for="slide1">&nbsp;</label>
-                                        <label for="slide2">&nbsp;</label>
-                                        <label for="slide3">&nbsp;</label>
-                                        <label for="slide4">&nbsp;</label>
+                                  `;
+                      let count = 1;
+                    
+                      map.files.forEach(f => {
+                        text += `
+                        <label for="slide${count}"> </label>
+                      `;
+                        count++;
+                      });
+                                    text += `
                                     </div>
                                 </div>
                                 <!-- 이미지 끝-->
@@ -69,7 +75,6 @@ function showMeal(map){
                                     <div class="day-detail2">
                                         <div class="board-content">
                                             ${map.boardContent}
-                                        
                                         </div>
                 `;
         if (Array.isArray(map.foodList)) {

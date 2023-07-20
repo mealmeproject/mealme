@@ -245,7 +245,10 @@ public class UserController {
         Long userNumber = (Long) req.getSession().getAttribute("userNumber");
         redirectAttributes.addFlashAttribute("userNumber", userNumber);
         // 해야하는 것 userProfile file 이 있을때 삭제 처리하고 넣어야 한다.
-        if (userFileService.userProfileFileCheck(userNumber)){
+        System.out.println("있는 파일 체크==============================");
+        int check = userFileService.userProfileFileCheck(userNumber);
+        System.out.println(check);
+        if (check > 0){
             userFileService.userRemove(userNumber);
         }
         if (file != null) {

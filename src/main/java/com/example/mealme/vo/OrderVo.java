@@ -7,12 +7,19 @@ import org.springframework.stereotype.Component;
 @Data
 public class OrderVo {
     private String orderDate;
-    private long orderNumber;
+    private Long orderNumber;
     private String userName;
     private String productSeller;
     private String productName;
-    private long productPrice;
-    private long orderCount;
+    private Long productPrice;
+    private int orderCount;
     private String conditionCodeName;
-    private long orderConditionCode;
+    private Long orderConditionCode;
+
+    private Long userNumber;
+    private Long productNumber;
+    private Long fileNumber;
+    private String fileName;
+    private String fileUploadPath;
+    private String fileUuid;
 }
