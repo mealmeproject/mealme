@@ -509,7 +509,10 @@ function showMeal(map){
   //
   text += `
                             <div class="modal-header">
-                                <h2>${map.mealTime}</h2>
+                                <div class="modal-header-text">
+                                    <h2>${map.mealTime}</h2>
+                                    <h2>${map.boardTitle}</h2>    
+                                </div>
                                 <hr class="service-name-hr" />
                             </div>
                             <div class="modal-main">
@@ -520,16 +523,27 @@ function showMeal(map){
                                     <input type="radio" name="slide" id="slide3">
                                     <input type="radio" name="slide" id="slide4">
                                     <ul id="imgholder" class="imgs">
-                                        <li><img src="/img/sample1.jpg"></li>
-                                        <li><img src="/img/sample2.jpg"></li>
-                                        <li><img src="/img/sample3.jpg"></li>
-                                        <li><img src="/img/sample4.jpg"></li>
+                         `;
+                map.files.forEach(f => {
+                    text += `
+                                    <li><img src="/upload/${f.fileUploadPath}/${f.fileUuid}_${f.fileName}"></li>
+              `;
+                });
+
+              
+                    text += `
                                     </ul>
                                     <div class="bullets">
-                                        <label for="slide1">&nbsp;</label>
-                                        <label for="slide2">&nbsp;</label>
-                                        <label for="slide3">&nbsp;</label>
-                                        <label for="slide4">&nbsp;</label>
+               `;
+  let count = 1;
+
+  map.files.forEach(f => {
+    text += `
+    <label for="slide${count}"> </label>
+  `;
+    count++;
+  });
+                text += `
                                     </div>
                                 </div>
                                 <!-- 이미지 끝-->
@@ -557,6 +571,9 @@ function showMeal(map){
   text += `
                                     </div>
                                     <div class="day-detail2">
+                                        <div class="board-content">
+                                            ${map.boardContent}
+                                        </div>
                 `;
   if (Array.isArray(map.foodList)) {
     map.foodList.forEach(f => {
@@ -577,13 +594,16 @@ function showMeal(map){
                                     </div>
                                     <div class="day-detail4">
                                         <div class="modify-btn">수정</div>
-                                        <div class="delete-btn">삭제</div>
+                                        <a href="/meal/mealDelete?boardNumber=${map.boardNumber}">
+                                            <div class="delete-btn">삭제</div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
         `;
 
   $('.modal-container').html(text);
+
 }
 
 $('.meal-img-list').on('click', '.meal-img-box' , function (){
@@ -596,19 +616,20 @@ $('.meal-img-list').on('click', '.meal-img-box' , function (){
 
 function todayMealList(userInfo){
   // 날짜를 바꾸면 값이 쌓이므로 todayPhoto = '';을 통해 쌓이는 값을 초기화 시킴
+  console.log(userInfo)
   todayPhoto = '';
   userInfo.mealList.forEach(m => {
     todayPhoto += `<li class="meal-img-box" data-boardnumber="${m.boardNumber}" >
                             <div class="meal-img">
                                 <div class="imgbox" >
-                                    <img src="/img/sample1.jpg"  alt="" />
+                                    <img src="/upload/${m.fileUploadPath}/${m.fileUuid}_${m.fileName}"  alt="" />
                                 </div>
                                 <div class="meal-info">
                                     <div class="meal-eat-time">
                                         <h2>${m.mealTime}</h2>
                                     </div>
                                     <div class="meal-eat-kcal">
-                                        <h2>${m.mealTotalKcal}</h2>
+                                        <h2>${m.mealTotalKcal}kcal</h2>
                                     </div>
                                 </div>
                             </div>
