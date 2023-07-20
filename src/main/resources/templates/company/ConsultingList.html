@@ -93,7 +93,7 @@
                             <th class="name" th:text="${consultingRequest.userNickname}"></th>
                             <th class="title">
                                 <a th:href="@{/company/SendConsulting(consultingRequestNumber=${consultingRequest.consultingRequestNumber})}"
-                                   th:text="${consultingRequest.consultingRequestComment}">
+                                   th:utext="${consultingRequest.consultingRequestComment}">
                                     누르면 SendConsulting으로 넘어가는 a태그임
                                 </a>
                             </th>

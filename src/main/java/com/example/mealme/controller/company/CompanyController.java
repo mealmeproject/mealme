@@ -71,13 +71,15 @@ public class CompanyController {
         Long companyNumber = 0L;
 
         // 다음 코드를 추가합니다.
+
         ConsultingRequestDto consultingRequestDto = new ConsultingRequestDto();
         consultingRequestDto.setConsultingRequestNumber(sendConsultingVo.getConsultingRequestNumber());
+        consultingRequestDto.setConsultingCondition("0"); // consultingCondition 값을 0으로 설정
+
         if ("0".equals(consultingRequestDto.getConsultingCondition())) {
             consultingRequestDto.setConsultingCondition("1"); // 변경된 속성 이름 사용
             consultingService.modifyCondition(consultingRequestDto);
         }
-
 
         if (req.getSession().getAttribute("userNumber") != null) {
             userNumber = (Long) req.getSession().getAttribute("userNumber");
@@ -94,6 +96,10 @@ public class CompanyController {
         System.out.println(path);
         return new RedirectView(path);
     }
+
+
+
+
 
     @GetMapping("ConsultingList2")
     public String consultingList2(Criteria criteria,ConsultingRequestDto consultingRequestDto, Model model, HttpServletRequest req) {

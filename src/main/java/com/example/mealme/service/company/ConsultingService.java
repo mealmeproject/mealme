@@ -77,7 +77,6 @@ public class ConsultingService {
 
 
 
-
     //    삭제
     public void remove(Long consultingNumber) {
         if (consultingNumber == null) {
