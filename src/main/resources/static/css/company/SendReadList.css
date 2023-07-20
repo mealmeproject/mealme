@@ -220,17 +220,9 @@ col.date{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100px; /* 이 값을 원하는 너비로 설정하십시오. */
+    max-width: 180px; /* 이 값을 원하는 너비로 설정하십시오. */
 }
 
-.ModalInContent #modal-contents {
-    display: inline-block;
-    white-space: normal; /* normal은 자동 줄바꿈을 허용합니다 */
-    /* overflow: hidden; */ /* 이 줄을 제거하거나 주석 처리 */
-    /* text-overflow: ellipsis; */ /* 이 줄을 제거하거나 주석 처리 */
-    max-width: 90%;
-    word-wrap: break-word; /* 단어를 강제로 줄바꿈할 수 있게 해줍니다 */
-}
 
 
 

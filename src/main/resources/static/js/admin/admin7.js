@@ -264,8 +264,6 @@ $uploadBox.on('click', function () {
 $(".submit-btn").on("click", () => {
 
    alert("상품 등록이 완료되었습니다.");
-  window.location.href = "/admin/productList";
-
 });
 
 // 취소버튼

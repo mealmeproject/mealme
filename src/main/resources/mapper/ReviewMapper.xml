@@ -180,26 +180,33 @@
 
 <!--  리뷰 리스트 뽑기  -->
     <select id="selectProductReviewList" resultType="ProductReviewVo">
-        select O.ORDER_NUMBER, O.USER_NUMBER, O.PRODUCT_NUMBER, ORV.REVIEW_NUMBER ,
-               O.ORDER_DATE, P.PRODUCT_NAME, ORV.REVIEW_DATE, ORV.REVIEW_CONTENT, ORV.REVIEW_GRADE,
-               F.FILE_NAME, F.FILE_UPLOAD_PATH
-        from TBL_ORDER_REVIEW ORV
-        JOIN TBL_ORDER O
-        ON ORV.ORDER_NUMBER = O.ORDER_NUMBER
-        JOIN TBL_PRODUCT P
-        ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
-        LEFT JOIN
-        (SELECT FILE_NAME, FILE_UPLOAD_PATH, PRODUCT_NUMBER
-        FROM (
-        SELECT FILE_NAME,FILE_UPLOAD_PATH,PRODUCT_NUMBER,
-        RANK() OVER (PARTITION BY PRODUCT_NUMBER ORDER BY FILE_NUMBER) RK
-        FROM TBL_PRODUCT_FILE
-        )
-        WHERE RK = 1
-        ) F
-        ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
-        WHERE O.USER_NUMBER = #{userNumber}
-        ORDER BY O.ORDER_DATE DESC
+        SELECT ORDER_NUMBER, USER_NUMBER, PRODUCT_NUMBER, REVIEW_NUMBER ,
+               ORDER_DATE, PRODUCT_NAME, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE,
+               FILE_NAME, FILE_UPLOAD_PATH
+        FROM(
+                SELECT ROWNUM AS RNUM,ORDER_NUMBER, USER_NUMBER, PRODUCT_NUMBER, REVIEW_NUMBER ,
+                       ORDER_DATE, PRODUCT_NAME, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE,
+                       FILE_NAME, FILE_UPLOAD_PATH
+                FROM(SELECT O.ORDER_NUMBER, O.USER_NUMBER, O.PRODUCT_NUMBER, ORV.REVIEW_NUMBER ,
+                            O.ORDER_DATE, P.PRODUCT_NAME, ORV.REVIEW_DATE, ORV.REVIEW_CONTENT, ORV.REVIEW_GRADE,
+                            F.FILE_NAME, F.FILE_UPLOAD_PATH
+                     FROM TBL_ORDER_REVIEW ORV
+                              JOIN TBL_ORDER O ON ORV.ORDER_NUMBER = O.ORDER_NUMBER
+                              JOIN TBL_PRODUCT P ON O.PRODUCT_NUMBER = P.PRODUCT_NUMBER
+                              LEFT JOIN
+                          (SELECT FILE_NAME, FILE_UPLOAD_PATH, PRODUCT_NUMBER
+                           FROM (SELECT FILE_NAME,FILE_UPLOAD_PATH,PRODUCT_NUMBER,
+                                        RANK() OVER (PARTITION BY PRODUCT_NUMBER ORDER BY FILE_NUMBER) RK
+                                 FROM TBL_PRODUCT_FILE)
+                           WHERE RK = 1) F
+                          ON P.PRODUCT_NUMBER = F.PRODUCT_NUMBER
+                     WHERE O.USER_NUMBER = #{userNumber}
+                     ORDER BY O.ORDER_DATE DESC) S1
+<![CDATA[
+                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+]]>
+) S2
+        WHERE RNUM >(#{criteria.page} - 1) * #{criteria.amount}
     </select>
 
 
@@ -244,8 +251,12 @@
         WHERE USER_NUMBER = #{userNumber}
     </select>
 
-
-
+<!-- 상품 리뷰 리스트 갯수-->
+    <select id="selectOrderReviewCount" resultType="_int">
+        SELECT COUNT(REVIEW_NUMBER)
+        FROM TBL_ORDER_REVIEW
+        WHERE USER_NUMBER = #{userNumber}
+    </select>
 
 
 </mapper>

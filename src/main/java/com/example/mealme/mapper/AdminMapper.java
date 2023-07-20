@@ -103,7 +103,7 @@ void companyStatus(@Param("companyNumber") String companyNumber, @Param("company
     List<OrderDto> statusCount();
     UserTotalVo userTotalCount();
 
-
+    Long selectAdminNumber(String id, String adminPw);
 
 
 }

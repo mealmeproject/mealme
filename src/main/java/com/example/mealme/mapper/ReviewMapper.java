@@ -27,11 +27,12 @@ public interface ReviewMapper {
     public ProductReviewVo selectProductInfo(Long orderNumber);
     public void insertProductReview(ProductReviewVo productReviewVo);
     public void updateOrderCondition(Long orderNumber);
-    public List<ProductReviewVo> selectProductReviewList(Long userNumber);
+    public List<ProductReviewVo> selectProductReviewList(@Param("userNumber")Long userNumber, @Param("criteria") CriteriaCompany criteriaCompany);
     public ProductReviewVo selectProductReviewInfo(Long reviewNumber);
     public void updateProductReview(ProductReviewVo productReviewVo);
     public void deleteProductReview(Long reviewNumber);
 //    리뷰 리스트 전체 갯수
     public int selectConsultingReviewCount(Long userNumber);
+    public int selectOrderReviewCount(Long userNumber);
 
 }

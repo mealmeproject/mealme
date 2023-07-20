@@ -1,4 +1,8 @@
-
+$(function(){
+  console.log('마이페이지 리뷰 페이지진입');
+  let page = 1;
+  showList(page);
+})
 
 $(".all-wrap").on('click', '.review-sub', function(){
   let $currentReviewWrap = $(this).siblings('.review-wrap');
@@ -9,19 +13,21 @@ $(".all-wrap").on('click', '.review-sub', function(){
   }
 });
 
-showList();
-function showList() {
+
+function showList(page) {
 
   console.log("hello!!");
 
   $.ajax({
-    url: '/shop/productReviewListData',
+    url: '/shops/productReviewListData',
     method: 'GET',
+    data : {"page": page},
     dataType: 'json',
     success: function (result) {
       console.log(result);
       console.log(result.productReviewList);
-      makeListHtml(result)
+      console.log(result.pageVo);
+      makeListHtml(result);
     },
     error: function (xhr, status, error) {
       console.log('에러 발생:', error);
@@ -44,11 +50,10 @@ function makeListHtml(result){
                     <div class="review-sub">
                     `;
 
-                        //  <div class="company-file">
-                        //     <img src="${reviewList[i].fileUploadPath}" alt="기업이미지">
-                        // </div>
+    text +=             `<div class="company-file">
+                        <img src="${reviewList[i].fileUploadPath}" alt="상품이미지">
+                        </div>`;
     text += `
-                        <!-- 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 -->
                         <div class="ranking-wrap">
                             <div class="review-date">${reviewList[i].orderDate}</div>
                             <div class="product-name-wrap">
@@ -86,10 +91,64 @@ function makeListHtml(result){
                 </div>
     `;
   }
-  $('.all-wrap').append(text);
+  $('.list-wrap').html(text);
   starValueShow();
+
+  // 리뷰 비동기 페이징처리하기
+  let pageNum = '';
+  let pageList = result.pageVo;
+
+  console.log('페이지 리스트');
+  console.log(pageList);
+
+  pageNum += `<a class="arrow pprev" data-value="1"></a>`;
+  if (pageList.prev == true){
+    pageNum += `<a class="arrow prev" value="${pageList.startPage - 1}"></a>`;}
+
+  for (let i = pageList.startPage; i <= pageList.endPage; i++) {
+    if (pageList.criteriaCompany.page == i) {
+      pageNum += `<a><div class="page-num active1">${i}</div></a>`;
+    }
+    else {
+      pageNum += `<a><div class="page-num">${i}</div></a>`;
+    }
+  }
+
+  if(pageList.next == true){pageNum += `<a class="arrow next" value="${pageList.endPage + 1}"></a>`;}
+  pageNum += `<a class="arrow nnext" data-value="${pageList.realEnd}"></a>`;
+
+  $('.page_nation').html(pageNum);
+
 }
 
+
+// 페이지 버튼 클릭시 이동처리
+$('.page_nation').on("click", ".page-num", function (){
+  page = $(this).text();
+  showList(page);
+});
+
+$('.page_nation').on("click", ".prev", function (){
+  page = $(this).val();
+  showList(page);
+});
+
+$('.page_nation').on("click", ".pprev", function (){
+  page = $(this).data('value');
+  console.log(page);
+  showList(page);
+});
+
+$('.page_nation').on("click", ".next", function (){
+  page = $(this).val();
+  showList(page);
+});
+
+$('.page_nation').on("click", ".nnext", function (){
+  page = $(this).data('value');
+  console.log(page);
+  showList(page);
+});
 
 // 평가 값 채우기
 function starValueShow() {

@@ -71,13 +71,15 @@ public class CompanyController {
         Long companyNumber = 0L;
 
         // 다음 코드를 추가합니다.
+
         ConsultingRequestDto consultingRequestDto = new ConsultingRequestDto();
         consultingRequestDto.setConsultingRequestNumber(sendConsultingVo.getConsultingRequestNumber());
+        consultingRequestDto.setConsultingCondition("0"); // consultingCondition 값을 0으로 설정
+
         if ("0".equals(consultingRequestDto.getConsultingCondition())) {
             consultingRequestDto.setConsultingCondition("1"); // 변경된 속성 이름 사용
             consultingService.modifyCondition(consultingRequestDto);
         }
-
 
         if (req.getSession().getAttribute("userNumber") != null) {
             userNumber = (Long) req.getSession().getAttribute("userNumber");
@@ -94,6 +96,10 @@ public class CompanyController {
         System.out.println(path);
         return new RedirectView(path);
     }
+
+
+
+
 
     @GetMapping("ConsultingList2")
     public String consultingList2(Criteria criteria,ConsultingRequestDto consultingRequestDto, Model model, HttpServletRequest req) {
@@ -341,37 +347,13 @@ public class CompanyController {
     }
 
     @GetMapping("/consultingReviewList")
-    public void consultingReviewList(){ }
-
-//    @ResponseBody
-//    @GetMapping("/consultingReviewListData")
-//    public Map<String, Object> consultingReviewListData(HttpServletRequest req, CriteriaCompany criteriaCompany) {
-////      Long userNumber = (long)req.getSession().getAttribute("userNumber");
-//        Long userNumber = 1L;
-//
-//        List<ConsultingReviewVo> consultingReviewList = reviewService.findConsultingList(userNumber, criteriaCompany);
-//
-////        Criteria 자체의 amount를 5로 변경해서 다시 해보기...  안되네...ㅠ page를 받는게 안 돼
-////        Criteria criteria = new Criteria(page, 5);
-////        PageVo pageVo = new PageVo(criteria, reviewService.findConsultingReviewCount(userNumber));
-//
-//        PageListVo pageVo = new PageListVo(criteriaCompany,reviewService.findConsultingReviewCount(userNumber));
-//
-//        System.out.println("##########");
-//        System.out.println(consultingReviewList);
-//        Map<String, Object> reviewList = new HashMap<>();
-//        reviewList.put("consultingReviewList", consultingReviewList);
-//        reviewList.put("pageVo", pageVo);
-//        System.out.println(new PageListVo(criteriaCompany,reviewService.findConsultingReviewCount(userNumber)));
-//        System.out.println(pageVo);
-//        return reviewList;
-//    }
+    public void consultingReviewList(){}
 
 //    컨설팅 결제 내역 페이지
     @GetMapping("/consultingPayInfo")
     public String consultingPayInfo(HttpServletRequest req, Model model, Criteria criteria){
-        //      Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber = 1L;
+              Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber = 1L;
         List<ConsultingPayVo> consultingPayVo = reviewService.findConsultingOrderList(userNumber, criteria);
         System.out.println("%%%컨설팅 구매내역 리스트%%%");
         System.out.println(consultingPayVo);

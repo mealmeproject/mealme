@@ -198,6 +198,11 @@
                     <!-- 수정버튼 클릭 전에는 숨겨야할 인풋 칸 -->
                     <input type="text" name="consultingComment" th:value="${consulting.consultingComment}" style="display:none;" placeholder="수정을 원하시면 수정해주세요" />
                     <script th:inline="javascript">
+                      resetReplyInput();
+                      function resetReplyInput(){
+                        let summernote = '';
+                        $('#summernote').val(summernote);
+                      }
                       var consultingComment = /*[[${consulting.consultingComment}]]*/ '';
                       document.getElementsByName('consultingComment')[0].value = consultingComment;
                     </script>

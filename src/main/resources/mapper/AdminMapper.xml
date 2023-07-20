@@ -660,6 +660,12 @@
 
     </select>
 
+
+    <select id="selectAdminNumber" resultType="Long">
+        SELECT ADMIN_NUMBER FROM TBL_ADMIN
+        WHERE ADMIN_ID = #{id} AND ADMIN_PASSWORD = #{adminPw}
+    </select>
+
 </mapper>
 
 

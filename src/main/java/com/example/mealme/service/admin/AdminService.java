@@ -2,6 +2,7 @@ package com.example.mealme.service.admin;
 
 import com.example.mealme.dto.*;
 import com.example.mealme.mapper.AdminMapper;
+import com.example.mealme.util.Util;
 import com.example.mealme.vo.SearchProductVo;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
@@ -215,6 +216,18 @@ public List<CompanyDto> searchCompanyList(SearchCompanyVo searchCompanyVo, Crite
     public UserTotalVo getUserTotal(){
        return adminMapper.userTotalCount();
 
+    }
+
+    public Long findAdminNumber(String id, String password){
+        if (id == null || password == null){
+            throw new IllegalArgumentException("관리자 id , password 누락 !" );
+        }
+        String adminPw = Util.pwSha256(password);
+
+        return Optional.ofNullable(adminMapper.selectAdminNumber(id, adminPw))
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException("관리자 정보 없음 !");
+                });
     }
 
 

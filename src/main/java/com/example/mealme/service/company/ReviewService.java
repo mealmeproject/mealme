@@ -30,7 +30,11 @@ public class ReviewService {
     }
 
     public List<ConsultingReviewVo> findConsultingList(Long userNumber,CriteriaCompany criteriaCompany){
+        if(userNumber == null){
+            throw new IllegalArgumentException("회원 정보가 없습니다.");
+        }
         List<ConsultingReviewVo> consultingList = reviewMapper.selectConsultingList(userNumber, criteriaCompany);
+        System.out.println("@@@@@리뷰내역 리스트@@@@@");
         System.out.println("consultingList");
         return consultingList;
     }
@@ -53,7 +57,11 @@ public class ReviewService {
         }
         reviewMapper.deleteConsultingReview(reviewNumber);
     }
+
     public List<ConsultingPayVo> findConsultingOrderList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("회원 정보가 없습니다.");
+        }
         List<ConsultingPayVo> consultingOrderList = reviewMapper.selectOrderConsultingList(userNumber, criteria);
         System.out.println("@@@@@구매내역 리스트@@@@@");
         System.out.println(consultingOrderList);
