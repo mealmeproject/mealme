@@ -31,6 +31,8 @@
     content: "\f02e";
 }
 
+
+
 .quick-menu li:nth-child(3) a::before {
     content: "\e8d6";
 }

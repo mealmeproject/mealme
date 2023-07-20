@@ -20,56 +20,44 @@
                             <span class="nav_name">메인화면</span>
                         </a>
 
-                        <div href="#" class="nav__link collapsed">
-                            <ion-icon name="person-outline" class="nav__icon"></ion-icon>
-                            <span class="nav_name">마이페이지</span>
+                        <div  class="nav__link collapsed">
+                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
+                            <a th:href="@{/admin/adminMain}" class="nav_name" style="color: white">
+                                관리자 메인</a>
 
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
-                            <ul class="collapse__menu">
-                                <li><a th:href="@{/meal/myPage}" class="collapse__sublink">식단리스트</a></li>
-                                <li><a th:href="@{/meal/mealWrite}" class="collapse__sublink">식단작성</a></li>
-                                <li><a th:href="@{/company/consultingPayInfo}" class="collapse__sublink">주문내역</a></li>
-                                <li><a th:href="@{/company/consultingReviewList}" class="collapse__sublink">리뷰내역</a></li>
-                            </ul>
                         </div>
 
                         <div href="#" class="nav__link collapsed">
-                            <ion-icon name="pie-chart-outline" class="nav__icon"></ion-icon>
-                            <span class="nav_name">통계</span>
+                            <ion-icon name="person-outline" class="nav__icon"></ion-icon>
+                            <span class="nav_name">회원 관리</span>
 
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <li><a th:href="@{/chart/today}" class="collapse__sublink">오늘하루</a></li>
-                                <li><a th:href="@{/chart/chartDaily}" class="collapse__sublink">통계</a></li>
+                                <li><a th:href="@{/admin/userList}" class="collapse__sublink">일반 회원</a></li>
+                                <li><a th:href="@{/admin/companyList}" class="collapse__sublink">기업 회원</a></li>
                             </ul>
                         </div>
 
 
                         <div href="#" class="nav__link collapsed">
                             <ion-icon name="bag-handle-outline" class="nav__icon"></ion-icon>
-                            <span class="nav_name">쇼핑</span>
+                            <span class="nav_name">상품 관리</span>
 
                             <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
                             <ul class="collapse__menu">
-                                <li><a th:href="@{/shop/shoppingList}" class="collapse__sublink">쇼핑몰</a></li>
-                                <li><a th:href="@{/shop/shoppingList}" class="collapse__sublink">찜목록</a></li>
-                                <li><a th:href="@{/shop/shoppingBasket}" class="collapse__sublink">장바구니</a></li>
+                                <li><a th:href="@{/admin/registProduct}" class="collapse__sublink">상품 등록</a></li>
+                                <li><a th:href="@{/admin/productList}" class="collapse__sublink">상품 목록</a></li>
                             </ul>
                         </div>
 
                         <div href="#" class="nav__link collapsed">
                             <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
-                            <span class="nav_name">컨설팅</span>
+                            <a th:href="@{/admin/orderList}" class="nav_name" style="color: white">주문 관리</a>
 
-                            <ion-icon name="chevron-down-outline" class="collapse__link"></ion-icon>
 
-                            <ul class="collapse__menu">
-                                <li><a th:href="@{/company/largeCategory}" class="collapse__sublink">컨설팅신청</a></li>
-                                <li><a th:href="@{/company/SendReadList}" class="collapse__sublink">컨설팅목록</a></li>
-                            </ul>
                         </div>
 
                         <a th:href="@{/user/userOrCompanyUpdate}" class="nav__link">
