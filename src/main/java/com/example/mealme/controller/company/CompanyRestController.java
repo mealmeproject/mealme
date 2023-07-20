@@ -38,12 +38,6 @@ public class CompanyRestController {
         CriteriaCompany criteriaCompany = new CriteriaCompany(page, 5);
         List<ConsultingReviewVo> consultingReviewList = reviewService.findConsultingList(userNumber, criteriaCompany);
 
-
-
-//        Criteria 자체의 amount를 5로 변경해서 다시 해보기...  안되네...ㅠ page를 받는게 안 돼
-//        Criteria criteria = new Criteria(page, 5);
-//        PageVo pageVo = new PageVo(criteria, reviewService.findConsultingReviewCount(userNumber));
-
         PageListVo pageVo = new PageListVo(criteriaCompany, reviewService.findConsultingReviewCount(userNumber));
 
         System.out.println("##########");
@@ -51,9 +45,7 @@ public class CompanyRestController {
         Map<String, Object> reviewList = new HashMap<>();
         reviewList.put("consultingReviewList", consultingReviewList);
         reviewList.put("pageVo", pageVo);
-        System.out.println(new PageListVo(criteriaCompany,reviewService.findConsultingReviewCount(userNumber)));
         System.out.println(pageVo);
-
         return reviewList;
     }
 
