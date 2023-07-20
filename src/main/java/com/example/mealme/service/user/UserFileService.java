@@ -125,6 +125,7 @@ public class UserFileService {
     }
 
     public void userRemove(Long userNumber){
+        System.out.println(" 유저 프로필 사진 삭제중 !!");
         if (userNumber == null) {
             throw new IllegalArgumentException("유저 번호 누락(file)");
         }
@@ -196,11 +197,11 @@ public class UserFileService {
     }
 
     // 파일 체크
-    public boolean userProfileFileCheck(Long userNumber){
+    public int userProfileFileCheck(Long userNumber){
         if (userNumber == null) {
             throw new IllegalArgumentException("유저 번호 누락(file)");
         }
-        return userFileMapper.userCheck(userNumber) > 0;
+        return userFileMapper.userCheck(userNumber);
     }
 
 

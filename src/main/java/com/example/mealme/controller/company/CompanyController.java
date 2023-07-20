@@ -341,21 +341,31 @@ public class CompanyController {
     }
 
     @GetMapping("/consultingReviewList")
-    public void consultingReviewList(){}
+    public void consultingReviewList(){ }
 
-    @ResponseBody
-    @GetMapping("/consultingReviewListData")
-    public Map<String, Object> consultingReviewListData(HttpServletRequest req) {
-//      Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber = 1L;
-        List<ConsultingReviewVo> consultingReviewList = reviewService.findConsultingList(userNumber);
-
-        System.out.println("##########");
-        System.out.println(consultingReviewList);
-        Map<String, Object> reviewList = new HashMap<>();
-        reviewList.put("consultingReviewList", consultingReviewList);
-        return reviewList;
-    }
+//    @ResponseBody
+//    @GetMapping("/consultingReviewListData")
+//    public Map<String, Object> consultingReviewListData(HttpServletRequest req, CriteriaCompany criteriaCompany) {
+////      Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber = 1L;
+//
+//        List<ConsultingReviewVo> consultingReviewList = reviewService.findConsultingList(userNumber, criteriaCompany);
+//
+////        Criteria 자체의 amount를 5로 변경해서 다시 해보기...  안되네...ㅠ page를 받는게 안 돼
+////        Criteria criteria = new Criteria(page, 5);
+////        PageVo pageVo = new PageVo(criteria, reviewService.findConsultingReviewCount(userNumber));
+//
+//        PageListVo pageVo = new PageListVo(criteriaCompany,reviewService.findConsultingReviewCount(userNumber));
+//
+//        System.out.println("##########");
+//        System.out.println(consultingReviewList);
+//        Map<String, Object> reviewList = new HashMap<>();
+//        reviewList.put("consultingReviewList", consultingReviewList);
+//        reviewList.put("pageVo", pageVo);
+//        System.out.println(new PageListVo(criteriaCompany,reviewService.findConsultingReviewCount(userNumber)));
+//        System.out.println(pageVo);
+//        return reviewList;
+//    }
 
 //    컨설팅 결제 내역 페이지
     @GetMapping("/consultingPayInfo")

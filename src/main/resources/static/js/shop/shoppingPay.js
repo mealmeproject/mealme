@@ -30,7 +30,7 @@ $(".cart__bigorderbtn").on("click", function() {
     if($(".orderName").length == 1){
         orderName = $(".orderName").text();
     }else if($(".orderName").length > 1){
-        orderName = $(".orderName").eq(0).text() + ' 외 ' + $(".orderName").length + '개';
+        orderName = $(".orderName").eq(0).text() + ' 외 ' + ($(".orderName").length - 1) + '개';
     }
 
 
