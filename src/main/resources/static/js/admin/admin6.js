@@ -63,12 +63,12 @@ function productList(map){
                   <th scope="col">
                     <input type="checkbox" name="chk" id="chk"  value="${u.productNumber}">
                   </th>
-                  <th scope="col" style="font-size:15px">${u.productRegisterDate}</th>
-                  <th scope="col" style="font-size:15px">${u.productNumber}</th>
+                  <th scope="col" style="font-size:13px; font-weight: 10;">${u.productRegisterDate}</th>
+                  <th scope="col" style="font-size:13px; font-weight: 10;">${u.productNumber}</th>
 
-                  <th scope="col" style="font-size:15px">${u.productSeller}</th>
-                  <th scope="col" style="font-size:15px">${u.categoryName}</th>
-                  <th scope="col" style="font-size:15px; padding: 8px; " >
+                  <th scope="col" style="font-size:13px;font-weight: 10;">${u.productSeller}</th>
+                  <th scope="col" style="font-size:13px;font-weight: 10;">${u.categoryName}</th>
+                  <th scope="col" style="font-size:13px; padding: 8px;font-weight: 10; " >
                     <div class="gGoods gMedium" style="z-index: 0;">
                       <div class="mOpen">
                           <span class="frame eOpenOver" find="gGoods">
@@ -82,12 +82,12 @@ function productList(map){
 <!--                              </div>-->
 <!--                          </div>-->
                       </div>
-                      <p style="text-align: left; margin-left: 55px;"><a href="/admin/registChange" onclick="handleClick(event)" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" data-product-number="${u.productNumber}" product_no="10">${u.productName}</a>
+                      <p style="text-align: left; overflow: hidden; margin-left: 55px; font-weight: 10;"><a href="/admin/registChange" onclick="handleClick(event)" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" data-product-number="${u.productNumber}" product_no="10">${u.productName}</a>
                       </p>
                       
                                                       </div>
                   </th>
-                  <th scope="col" style="font-size:15px">${u.productPrice}</th>
+                  <th scope="col" style="font-size:13px; font-weight: 10;">${u.productPrice}</th>
                
 		`;
 
