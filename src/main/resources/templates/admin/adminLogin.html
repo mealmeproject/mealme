@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>login</title>
+        <link rel="stylesheet" th:href="@{/css/fragment/footer1.css}" />
+        <link rel="stylesheet" th:href="@{/css/user/login.css}" />
+    </head>
+    <body>
+    <div class="login-wrapper">
+            <div class="logo-container">
+                <div class="logo-box">
+                    <!-- 메인페이지로 이동처리 -->
+                    <a th:href="@{/user/index}">
+                        <!-- 로고 img -->
+                        <img src="../img/mealMeLogo.png" alt="" />
+                    </a>
+                </div>
+            </div>
+            <form method="post" action="/admin/adminLogin" id="login-form">
+                <div class="radio-group">
+                    <input type="radio" id="admin" name="userType" value="admin" checked />
+                    <label for="admin">관리자</label>
+                </div>
+                <!-- id/password 입력 -->
+                <input type="text" name="id" placeholder="Id" required/>
+                <input type="password" name="password" placeholder="Password" required/>
+                <input type="submit" value="로그인" class="submit-btn" />
+            </form>
+        </div>
+    <footer class="footer1" th:replace="fragment/footer1 :: footer1"></footer>
+    </body>
+</html>

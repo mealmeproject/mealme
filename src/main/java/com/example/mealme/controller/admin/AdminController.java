@@ -2,20 +2,18 @@ package com.example.mealme.controller.admin;
 
 import com.example.mealme.dto.ProductDto;
 import com.example.mealme.dto.ProductFileDto;
-import com.example.mealme.dto.UserDto;
 import com.example.mealme.service.admin.AdminService;
 import com.example.mealme.service.admin.ProductFileService;
-import com.example.mealme.service.meal.MealService;
-import com.example.mealme.vo.Criteria;
-import com.example.mealme.vo.PageVo;
+import com.example.mealme.util.AdminUtil;
 import com.example.mealme.vo.ProductVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,10 +30,25 @@ public class AdminController {
 
 
     @GetMapping("/adminMain")
-    public void adminMain(){}
+    public String adminMain(HttpServletRequest req){
+//        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+            return "/admin/adminLogin";
+        } else {
+            adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/adminMain";
+    }
 
     @GetMapping("/userList")
-    public void userList(){
+    public String userList(HttpServletRequest req){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+            return "/admin/adminLogin";
+        } else {
+            adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/userList";
     }
 
 //    @GetMapping("/list")
@@ -50,22 +63,62 @@ public class AdminController {
 
 
     @GetMapping("/companyList")
-    public void companyList(){}
+    public String companyList(HttpServletRequest req){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+            return "/admin/adminLogin";
+        } else {
+            adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/companyList";
+    }
 
     @GetMapping("/orderList")
-    public void orderList(){}
+    public String orderList(HttpServletRequest req){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+        return "/admin/adminLogin";
+        } else {
+        adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/orderList";
+        }
 
     @GetMapping("/productList")
-    public void productList(){}
+    public String productList(HttpServletRequest req){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+        return "/admin/adminLogin";
+        } else {
+        adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/productList";
+        }
 
     @GetMapping("/refundList")
-    public void refundList(){}
+    public String refundList(HttpServletRequest req){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+        return "/admin/adminLogin";
+        } else {
+        adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/refundList";
+        }
 
     @GetMapping("/registProduct")
-    public void registProduct(){}
+    public String registProduct(HttpServletRequest req){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+        return "/admin/adminLogin";
+        } else {
+        adminNumber = AdminUtil.sessionCheck(req);
+        }return "/admin/registProduct";
+        }
 
     @PostMapping("/registProduct")
-    public void registProduct(ProductDto productDto, @RequestParam("productFile") List<MultipartFile> files, Model model){
+    public String registProduct(ProductDto productDto, @RequestParam("productFile") List<MultipartFile> files, Model model){
 
         System.out.println("=======================");
         System.out.println(productDto);
@@ -84,21 +137,29 @@ public class AdminController {
                 e.printStackTrace();
             }
         }
-
+        return "/admin/productList";
 
     }
 
     @GetMapping("/registChange")
-    public void registChange(@RequestParam("productNumber") Long productNumber, Model model){
+    public String registChange(@RequestParam("productNumber") Long productNumber, HttpServletRequest req, Model model){
+        //        세션체크
+        Long adminNumber = 0L;
+        if (AdminUtil.sessionCheck(req)==0L) {
+            return "/admin/adminLogin";
+        } else {
+            adminNumber = AdminUtil.sessionCheck(req);
+        }
         ProductVo productVo = adminService.modifyProduct(productNumber);
         List<ProductFileDto> files = productFileService.findList(productNumber);
         model.addAttribute("productNumber", productNumber);
         model.addAttribute("productVo", productVo);
         model.addAttribute("files", files);
+        return "/admin/registChange";
     }
 
     @PostMapping("/registChange")
-    public void registChange(ProductDto productDto, ProductVo productVo,@RequestParam("productFile") List<MultipartFile> files){
+    public String registChange(ProductDto productDto, ProductVo productVo,@RequestParam("productFile") List<MultipartFile> files){
 
         System.out.println("=======================");
         System.out.println(productDto);
@@ -120,8 +181,22 @@ public class AdminController {
                 e.printStackTrace();
             }
         }
+        return "/admin/productList";
+    }
 
+    @GetMapping("/adminLogin")
+    public void adminLogin(){}
 
+    @PostMapping("/adminLogin")
+    public RedirectView adminLogin(String id, String password, HttpServletRequest req){
+        try {
+        Long adminNumber = adminService.findAdminNumber(id, password);
+        req.getSession().setAttribute("adminNumber", adminNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new RedirectView("/admin/adminLogin");
+        }
+        return new RedirectView("/admin/adminMain");
     }
 
 }
