@@ -51,6 +51,8 @@
                  JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
                  JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
         WHERE R.COMPANY_NUMBER = ${companyNumber}
+        ORDER BY R.CONSULTING_REQUEST_DATE DESC
+
     </select>
 
 
@@ -62,6 +64,7 @@
     JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
     JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
     WHERE R.COMPANY_NUMBER = #{companyNumber} AND (R.CONSULTING_CONDITION = 1 OR R.CONSULTING_CONDITION = 2)
+    ORDER BY R.CONSULTING_REQUEST_DATE DESC
     </select>
 
 
@@ -84,11 +87,12 @@
                                    JOIN TBL_USER U ON R.USER_NUMBER = U.USER_NUMBER
                                    JOIN TBL_COMPANY CO ON R.COMPANY_NUMBER = CO.COMPANY_NUMBER
                           WHERE R.USER_NUMBER = #{userNumber}
+                          ORDER BY R.CONSULTING_REQUEST_DATE DESC
                       )
-        <![CDATA[
+                  <![CDATA[
                  WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
-        ]]>
-    )
+    ]]>
+)
         WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
     </select>
 

@@ -228,6 +228,11 @@ body {
     text-align: left;
     /* border-top: 3px solid  #ff9326; */
     padding: 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    overflow: auto;
 }
 
 
