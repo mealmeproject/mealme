@@ -11,7 +11,7 @@
         <div class="header-container">
             <!-- 로그인/회원가입/로그아웃 -->
             <div class="login-container">
-                <div class="login-box" th:if="${session.userNumber == null}">
+                <div class="login-box" th:if="${session.userNumber == null and session.companyNumber == null}">
                     <ul>
                         <li>
                             <a th:href="@{/user/login}">로그인</a>
@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="login-box" th:unless="${session.userNumber == null}">
+                <div class="login-box" th:unless="${session.userNumber == null and session.companyNumber == null}">
                     <ul>
                         <li>
                             <a th:href="@{/user/logout}">로그아웃</a>

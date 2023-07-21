@@ -228,6 +228,11 @@ body {
     text-align: left;
     /* border-top: 3px solid  #ff9326; */
     padding: 15px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    overflow: auto;
 }
 
 
@@ -632,4 +637,14 @@ ul.imgs li {
 input[type="text"]{
     width: 500px;
     padding: 10px;
+}
+
+.board-content{
+    width: 100%;
+    padding: 20px;
+}
+
+.modal-header-text{
+    display: flex;
+    justify-content: space-around;
 }

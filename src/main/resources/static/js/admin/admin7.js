@@ -49,10 +49,15 @@ $("._category_1").on('click', '._next',function (){
      $(this).addClass('selected');
 
   $("._product_category_checked").html(`
-    <input type="hidden" name="category_product[group1][${cateNum}]" class="_selected_category_no" value="${cateNum}">
+    <input type="hidden" name="category_product1" class="_selected_category_no" value="${cateNum}">
     <span class="txtLight txtLess" id="topCate" style="font-size: 12px;">${categoryName}</span>
     <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
   `);
+
+  $(".category-select").html(`
+    <input type="hidden" name="category_product1" class="_selected_category_no" value="${cateNum}">
+  `);
+
 
   $(this).addClass('selected');
 
@@ -61,6 +66,7 @@ $("._category_1").on('click', '._next',function (){
 
 $("._category_2").on('click', '._next',function (){
   let cateNum = $(this).find('._category_no').val();
+  console.log(cateNum)
   let categoryName = $(this).text().trim();
   console.log(cateNum);
   let existingText = $("._product_category_checked").find('#topCate').text().trim();
@@ -72,7 +78,7 @@ $("._category_2").on('click', '._next',function (){
   $(this).addClass('selected');
 
   $("._product_category_checked").html(`
-    <input type="hidden" name="category_product[group1][${cateNum}]" class="_selected_category_no" value="${cateNum}">
+    <input type="hidden" name="category_product2" class="_selected_category_no" value="${cateNum}">
     <span class="txtLight txtLess" id="middleCate" style="font-size: 12px;">${newText}</span>
     <a href="#none" class="btnNormal _remove_selected_category"><span><em class="icoDel"></em> 삭제</span></a>
   `);

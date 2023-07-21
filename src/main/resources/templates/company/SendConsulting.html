@@ -61,6 +61,7 @@
                   <span class="date">식단 신청 기간</span>
                   <!-- 임시 작성일 -->
                   <div class="content-date" id="REQUEST_FIRST_DATE" th:text="${consultingRequest.consultingRequestFirstDate}">2023-6-12</div>
+                  <span>~</span>
                   <div class="content-date" id="REQUEST_LAST_DATE" th:text="${consultingRequest.consultingRequestLastDate}">2023-6-12</div>
                 </div>
               </div>
@@ -87,14 +88,14 @@
                     <li class="meal-img-box" th:each="meal : ${day.value[0].dayMealList}" th:data-board-number="${meal.boardNumber}">
                       <div class="meal-img">
                         <div class="imgbox" >
-                          <img th:src="@{/img/sample1.jpg}"  alt="" />
+                          <img th:src="@{'/upload/' + ${meal.fileUploadPath} + '/th_' + ${meal.fileUuid} + '_' + ${meal.fileName}}"  alt="" />
                         </div>
                         <div class="meal-info">
                           <div class="meal-eat-time">
                             <h2 th:text="${meal.mealTime}">08:00</h2>
                           </div>
                           <div class="meal-eat-kcal">
-                            <h2 th:text="${meal.mealTotalKcal}">380kcal</h2>
+                            <h2 th:text="${meal.mealTotalKcal} + ' Kcal'">380kcal</h2>
                           </div>
                         </div>
                       </div>
@@ -153,7 +154,6 @@
 
           <br>
 
-
           <!-- 답변(댓글) 보내기 -->
           <div class="comment-form">
             <form id="comment-form" th:action="@{/company/SendConsulting}" method="post">
@@ -195,16 +195,20 @@
                 <div class="comment-content-wrap">
                   <div class="comment-content">
                     <p th:utext="${consulting.consultingComment}"></p>
-                    <!-- 수정버튼 클릭 전에는 숨겨야할 인풋 칸 -->
-                    <input type="text" name="consultingComment" th:value="${consulting.consultingComment}" style="display:none;" placeholder="수정을 원하시면 수정해주세요" />
+                    <!-- 수정버튼 클릭 전에는 숨겨져야 하는 인풋 칸 -->
+                    <input id="consultingCommentInput" type="text" name="consultingComment" th:value="${consulting.consultingComment}" style="display:none;" placeholder="수정을 원하시면 수정해주세요"/>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script th:inline="javascript">
                       resetReplyInput();
-                      function resetReplyInput(){
+                      function resetReplyInput() {
                         let summernote = '';
                         $('#summernote').val(summernote);
                       }
-                      var consultingComment = /*[[${consulting.consultingComment}]]*/ '';
-                      document.getElementsByName('consultingComment')[0].value = consultingComment;
+                      $(document).ready(function () {
+                        let consultingComment = $("#consultingCommentInput").val();
+                        let consultingCommentText = consultingComment.replace(/<p.*?>/g, '').replace(/<\/p>/g, '');
+                        $("#consultingCommentInput").val(consultingCommentText);
+                      });
                     </script>
                   </div>
                   <div class="comment-btn-group" >

@@ -50,7 +50,7 @@ function makeListHtml(result){
                     `;
 
     text +=            `<div class="company-file">
-                        <img src="${reviewList[i].fileUploadPath}" alt="기업이미지">
+                        <img src="${'/upload/' + reviewList[i].fileUploadPath + '/' + reviewList[i].fileUuid+ '_' + reviewList[i].fileName}" alt="기업이미지">
                         </div>`;
     text += `
                         <div class="ranking-wrap">

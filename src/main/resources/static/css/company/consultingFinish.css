@@ -171,7 +171,8 @@ table{
 
 .finish-price-container{
     width: 800px;
-    margin-top: 20px;
+    margin-top: 60px;
+    margin-bottom: 30px;
     border: 1px solid;
     height: 160px;
 
@@ -218,12 +219,22 @@ button{
     padding: 10px 20px;
     font-size: 20px;
     font-weight: bold;
-    color:#ff9326;
-    background-color: #ffffff;
-    border: 1px solid #b9b4b4;
+    color:#ffffff;
+    background-color: #ff9326;
+    /*border: 1px solid #b9b4b4;*/
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 25px;
     width: 250px;
-    height: 70px;
+    height: 50px;
+    /*    width: 15%;
+    height: 50px;
+    background-color: #ff9326;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer*/
 }
 

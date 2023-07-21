@@ -62,9 +62,11 @@
           <tbody>
           <tr th:each="consultingList : ${consultingPayVo}" class="consulting-list">
             <input class="consulting-requestNumber" type="hidden" th:value="${consultingList.consultingRequestNumber}">
-            <td><img th:src="${consultingList.fileUploadPath}" alt="기업이미지" class="product-image"> </td>
+<!--            <td><img th:src="${consultingList.fileUploadPath}" alt="기업이미지" class="product-image"> </td>-->
+            <td><img th:src="${'/upload/' + consultingList.fileUploadPath +  '/' + consultingList.fileUuid+ '_' + consultingList.fileName}" alt="기업이미지" class="product-image"></td>
             <td th:text="${consultingList.companyName}"></td>
-            <td th:text="${consultingList.consultingRequestComment}"></td>
+            <td class="consultingRequestText" th:utext="${consultingList.consultingRequestComment}">
+            </td>
             <td th:text="${consultingList.companyCeoName}"></td>
             <td>3000원</td>
             <td th:text="${consultingList.consultingRequestDate}"></td>
