@@ -638,3 +638,13 @@ input[type="text"]{
     width: 500px;
     padding: 10px;
 }
+
+.board-content{
+    width: 100%;
+    padding: 20px;
+}
+
+.modal-header-text{
+    display: flex;
+    justify-content: space-around;
+}

@@ -118,12 +118,15 @@ public class AdminController {
         }
 
     @PostMapping("/registProduct")
-    public String registProduct(ProductDto productDto, @RequestParam("productFile") List<MultipartFile> files, Model model){
-
+    public String registProduct(ProductDto productDto, @RequestParam("productFile") List<MultipartFile> files, Model model
+    ,@RequestParam("category_product1") Long categoryProduct1, @RequestParam("category_product2") Long categoryProduct2){
+        System.out.println("categoryProduct2" + categoryProduct2);
         System.out.println("=======================");
         System.out.println(productDto);
         System.out.println("============================");
-        model.addAttribute("productNumber", productDto.getProductNumber());
+
+        productDto.setCategoryCode1(categoryProduct1);
+        productDto.setCategoryCode2(categoryProduct2);
         adminService.registerProduct(productDto);
 
         System.out.println("=======================");

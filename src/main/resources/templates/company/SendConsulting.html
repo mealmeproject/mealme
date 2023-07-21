@@ -61,6 +61,7 @@
                   <span class="date">식단 신청 기간</span>
                   <!-- 임시 작성일 -->
                   <div class="content-date" id="REQUEST_FIRST_DATE" th:text="${consultingRequest.consultingRequestFirstDate}">2023-6-12</div>
+                  <span>~</span>
                   <div class="content-date" id="REQUEST_LAST_DATE" th:text="${consultingRequest.consultingRequestLastDate}">2023-6-12</div>
                 </div>
               </div>
@@ -87,14 +88,14 @@
                     <li class="meal-img-box" th:each="meal : ${day.value[0].dayMealList}" th:data-board-number="${meal.boardNumber}">
                       <div class="meal-img">
                         <div class="imgbox" >
-                          <img th:src="@{/img/sample1.jpg}"  alt="" />
+                          <img th:src="@{'/upload/' + ${meal.fileUploadPath} + '/th_' + ${meal.fileUuid} + '_' + ${meal.fileName}}"  alt="" />
                         </div>
                         <div class="meal-info">
                           <div class="meal-eat-time">
                             <h2 th:text="${meal.mealTime}">08:00</h2>
                           </div>
                           <div class="meal-eat-kcal">
-                            <h2 th:text="${meal.mealTotalKcal}">380kcal</h2>
+                            <h2 th:text="${meal.mealTotalKcal} + ' Kcal'">380kcal</h2>
                           </div>
                         </div>
                       </div>
@@ -152,7 +153,6 @@
           <div class="OnlyThisH1">답변 보내기</div>
 
           <br>
-
 
           <!-- 답변(댓글) 보내기 -->
           <div class="comment-form">
