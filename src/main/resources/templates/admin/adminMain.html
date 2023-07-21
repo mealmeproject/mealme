@@ -30,7 +30,7 @@
           <!-- 고객관리 -->
           <div class="headingArea">
             <div class="admin-title">
-              <div style="font-size: 18px; font-weight: bold">고객관리</div>
+              <a th:href="@{/admin/userList}" style="font-size: 18px; font-weight: bold ; color: rgba(50, 50, 50, 0.9);">고객관리</a>
             </div>
           </div>
           <!-- 메인 시작 -->
@@ -57,10 +57,11 @@
 <!--                    </tr>-->
                     <tr>
                       <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3); ">
-                        일반회원
+                        <a th:href="@{/admin/userList}" style="color: rgba(50, 50, 50, 0.9);">일반회원</a>
                       </th>
                       <th scope="col" style="border-right: solid 1px #bbb; background-color: rgba(210, 210, 210,0.3); ">
-                        기업회원
+                          <a th:href="@{/admin/companyList}" style="color: rgba(50, 50, 50, 0.9);">기업회원</a>
+
                       </th>
                       <th scope="col" style="background-color: rgba(210, 210, 210,0.3);">
                         TOTAL
@@ -73,7 +74,6 @@
                         <strong class="underline txtEm" id="n-user" style=" color: #3971FF">
                           <a>0</a>
                         </strong>
-                        명
                       </td>
                       <td style="border-right: solid 1px #bbb ">
                         <strong class="underline txtEm" id="c-user" style=" color: #3971FF">
@@ -97,7 +97,7 @@
             <!-- 오늘의 할 일 -->
             <div class="dashBoard">
               <div class="title">
-                <div style="font-size: 18px; font-weight: bold">오늘의 할 일</div>
+                <a th:href="@{/admin/orderList}" style="font-size: 18px; font-weight: bold; color: rgba(50, 50, 50, 0.9); ">오늘의 할 일</a>
                 <p class="today">
                 <strong class="todayDayIs">06월 08일</strong>
                 <span id="weekDay"></span>
@@ -290,9 +290,7 @@
       </div>
     </div>
     <!-- 퀵 메뉴 추가 공간 -->
-    <aside class="aside2" th:replace="fragment/aside2 :: aside2">
-        <div class="menu-container"></div>
-    </aside>
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
