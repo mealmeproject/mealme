@@ -259,6 +259,8 @@ public class CompanyController {
 
     @GetMapping("/consultingFinish")
     public void consultingFinish(){}
+
+
 //    @GetMapping("/ConsultingList")
 //    public String consultingList(ConsultingRequestDto consultingRequestDto, Model model, HttpServletRequest req) {
 //
