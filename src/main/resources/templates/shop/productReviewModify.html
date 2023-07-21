@@ -45,7 +45,7 @@
         <div class="review-text">리뷰작성 하기</div>
         <div class="review-sub">
         <div class="company-file">
-          <img th:src="${productReviewVo.fileUploadPath}" alt="상품이미지">
+          <img th:src="${'/upload/' + productReviewVo.fileUploadPath +  '/' + productReviewVo.fileUuid+ '_' + productReviewVo.fileName}" alt="상품이미지">
         </div>
         <!-- 상품일 경우 상품사진, 컨설팅일 경우 회사 대표 사진 -->
         <div class="ranking-wrap">
