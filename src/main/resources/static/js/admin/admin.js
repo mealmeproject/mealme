@@ -197,12 +197,34 @@ daily.getDailyRefund(chartDate,dailyRefund,showError);
 // 상태에 따른 개수 뽑기
 function statusCount(status){
 console.log(status)
-  $('#preparing').text(status[0].orderCount);
-  $('#shipping').text(status[1].orderCount);
-  $('#cancel-count').text(status[2].orderCount);
-  $('#change-count').text(status[3].orderCount);
-  $('#refund-count').text(status[4].orderCount);
+  // for (let i = 0; i < status.length; i++) {
+  //   let value = [];
+  //   let inputValue = $('.status input').val();
+  //   value.push(inputValue);
+  //   console.log(inputValue);
+  //   console.log(status[i].orderConditionCode);
+  //   console.log(value[i]);
+  //   if (status[i].orderConditionCode == value[i]) {
+  //     $('.status').text(status[i].orderCount);
+  //
+  //   }
+  // }
+  // let inputValue = $('.status input').val();
+  // if (status.orderConditionCode == inputValue) {
+  //   $('.status').text(status.orderCount);
+  // }
+  // $('#preparing').text(status[0].orderCount);
+  // $('#shipping').text(status[1].orderCount);
+  // $('#cancel-count').text(status[2].orderCount);
+  // $('#change-count').text(status[3].orderCount);
+  // $('#refund-count').text(status[4].orderCount);
+  status.forEach((item) => {
+    const orderConditionCode = item.orderConditionCode;
+    const orderCount = item.orderCount;
+    const spanElement = $(`.status input[value="${orderConditionCode}"]`).parent();
+    spanElement.text(orderCount);
 
+  })
 }
 
 daily.getStatusCount(statusCount,showError);

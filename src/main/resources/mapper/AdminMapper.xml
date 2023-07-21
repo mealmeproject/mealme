@@ -647,7 +647,7 @@
     <select id="statusCount" resultType="orderDto">
         SELECT ORDER_CONDITION_CODE, COUNT(ORDER_NUMBER) AS ORDER_COUNT
         FROM TBL_ORDER
-        WHERE ORDER_CONDITION_CODE IN (2, 5, 3, 8, 7)
+        WHERE ORDER_CONDITION_CODE IN (2, 5, 3, 8, 7) AND TRUNC(ORDER_DATE) = TRUNC(sysdate)
         GROUP BY ORDER_CONDITION_CODE
     </select>
 
