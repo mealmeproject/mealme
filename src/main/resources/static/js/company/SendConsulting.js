@@ -291,5 +291,6 @@ function showError(a, b, c){
 // function resetReplyInput(){
 //     let summernote = '';
 //     $('#summernote').val(summernote);
+//     console.log($('#summernote').val())
 // }
-
+//
