@@ -1,3 +1,5 @@
+var datepicker = document.getElementById('datepicker');
+var dateValue = datepicker.value;
 
 $(function () {
     //input을 datepicker로 선언
@@ -21,7 +23,7 @@ $(function () {
     });
 
     //초기값을 오늘 날짜로 설정해줘야 합니다.
-    $("#datepicker").datepicker("setDate", "today"); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    $("#datepicker").datepicker("setDate", dateValue); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 });
 
 function sample6_execDaumPostcode() {
@@ -74,6 +76,7 @@ function sample6_execDaumPostcode() {
 }
 
 // 서머노트
+
 $(document).ready(function() {
     $('#summernote').summernote({
         height: 500,
