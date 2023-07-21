@@ -712,7 +712,10 @@ page_wrap {
 
 .filter{
     filter: opacity(0.4) drop-shadow(0 0 0 rgb(80, 80, 80));
+}
 
+.filter2{
+    filter: opacity(1.4) drop-shadow(0 0 0 rgb(80, 80, 80));
 }
 
 .product{
