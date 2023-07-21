@@ -3,7 +3,7 @@ let page = 1;
 let startDate = $('#datepicker1').val();
 let endDate = $('#datepicker2').val();
 let productType = $('#productType').val();
-product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: startDate, endDate:endDate }, productList, paging, showError);
+product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: startDate, endDate:endDate }, productList, paging,productTotal, showError);
 
 $(function() {
   //input을 datepicker로 선언
@@ -63,12 +63,12 @@ function productList(map){
                   <th scope="col">
                     <input type="checkbox" name="chk" id="chk"  value="${u.productNumber}">
                   </th>
-                  <th scope="col" style="font-size:15px">${u.productRegisterDate}</th>
-                  <th scope="col" style="font-size:15px">${u.productNumber}</th>
+                  <th scope="col" style="font-size:13px; font-weight: 10;">${u.productRegisterDate}</th>
+                  <th scope="col" style="font-size:13px; font-weight: 10;">${u.productNumber}</th>
 
-                  <th scope="col" style="font-size:15px">${u.productSeller}</th>
-                  <th scope="col" style="font-size:15px">${u.categoryName}</th>
-                  <th scope="col" style="font-size:15px; padding: 8px; " >
+                  <th scope="col" style="font-size:13px;font-weight: 10;">${u.productSeller}</th>
+                  <th scope="col" style="font-size:13px;font-weight: 10;">${u.categoryName}</th>
+                  <th scope="col" style="font-size:13px; padding: 8px;font-weight: 10; " >
                     <div class="gGoods gMedium" style="z-index: 0;">
                       <div class="mOpen">
                           <span class="frame eOpenOver" find="gGoods">
@@ -82,12 +82,12 @@ function productList(map){
 <!--                              </div>-->
 <!--                          </div>-->
                       </div>
-                      <p style="text-align: left; margin-left: 55px;"><a href="/admin/registChange" onclick="handleClick(event)" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" data-product-number="${u.productNumber}" product_no="10">${u.productName}</a>
+                      <p style="text-align: left; overflow: hidden; margin-left: 55px; font-weight: 10;"><a href="/admin/registChange" onclick="handleClick(event)" target="_blank" title="새창 열림" class="txtLink eProductDetail" id="modify" value="${u.productNumber}" data-product-number="${u.productNumber}" product_no="10">${u.productName}</a>
                       </p>
                       
                                                       </div>
                   </th>
-                  <th scope="col" style="font-size:15px">${u.productPrice}</th>
+                  <th scope="col" style="font-size:13px; font-weight: 10;">${u.productPrice}</th>
                
 		`;
 
@@ -154,6 +154,13 @@ function paging(pageInfo){
     $(".page_nation").html(page);
 }
 
+//상품 수
+function productTotal(total){
+    console.log(total);
+    $('.productTotal').text(total.productTotal);
+    $('.searchTotal').text(total.searchTotal);
+}
+
 //페이징 클릭 이벤트
 $('.page_nation').on('click','a', function (e){
     e.preventDefault();
@@ -164,7 +171,7 @@ $('.page_nation').on('click','a', function (e){
     let startDate = $('#datepicker1').val();
     let endDate = $('#datepicker2').val();
     console.log(page)
-    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, productTotal,showError);
 });
 
 // 검색 조건에 따른 회원 조회
@@ -176,7 +183,7 @@ $('.search_user').on('click', function (){
 
     let startDate = $('#datepicker1').val();
     let endDate = $('#datepicker2').val();
-    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+    product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page, productType:productType, startDate:startDate, endDate:endDate }, productList, paging,productTotal, showError);
 
     // $('#keyword').val('');
 
@@ -196,7 +203,7 @@ $('#keyword').on('keydown', function (e){
 
         let startDate = $('#datepicker1').val();
         let endDate = $('#datepicker2').val();
-        product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page,productType:productType, startDate:startDate, endDate:endDate }, productList, paging, showError);
+        product.searchProductList({searchType:searchType, keyword:searchKeyword, page : page,productType:productType, startDate:startDate, endDate:endDate }, productList, paging,productTotal, showError);
     }
 });
 

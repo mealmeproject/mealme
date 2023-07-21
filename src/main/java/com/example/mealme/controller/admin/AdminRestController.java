@@ -59,12 +59,15 @@ public class AdminRestController {
 
         PageVo pageVo = new PageVo(criteria, adminService.getTotal(searchVo));
         List<UserDto> searchUser = adminService.searchUserList(searchVo, criteria);
+        int userTotal = adminService.userTotal();
+        int searchTotal = adminService.getTotal(searchVo);
 
 
         Map<String, Object> findUser = new HashMap<>();
         findUser.put("pageVo", pageVo);
-
         findUser.put("userList", searchUser);
+        findUser.put("userTotal", userTotal);
+        findUser.put("searchTotal", searchTotal);
         return findUser;
     }
 
@@ -92,17 +95,21 @@ public class AdminRestController {
 
         PageVo pageVo = new PageVo(criteria, adminService.getCompanyTotal(searchCompanyVo));
         List<CompanyDto> searchCompany = adminService.searchCompanyList(searchCompanyVo, criteria);
+        int companyTotal = adminService.companyCountTotal();
+        int searchTotal = adminService.getCompanyTotal(searchCompanyVo);
 
 
         Map<String, Object> findCompany = new HashMap<>();
         findCompany.put("pageVo", pageVo);
 
         findCompany.put("companyList", searchCompany);
+        findCompany.put("companyTotal", companyTotal);
+        findCompany.put("searchTotal",searchTotal);
         return findCompany;
     }
 
     @GetMapping("/searchProductList/{page}")
-    public Map<String, Object> findProductList(@PathVariable("page") int page, SearchProductVo searchProductVo, Long productNumber) {
+    public Map<String, Object> findProductList(@PathVariable("page") int page, SearchProductVo searchProductVo) {
         Criteria criteria = new Criteria(page, 10);
 
         System.out.println("====================================================================================");
@@ -111,11 +118,15 @@ public class AdminRestController {
 
         PageVo pageVo = new PageVo(criteria, adminService.getProductTotal(searchProductVo));
         List<ProductVo> searchProduct = adminService.searchProductList(searchProductVo, criteria);
+        int searchTotal = adminService.getProductTotal(searchProductVo);
+        int productTotal = adminService.productCountTotal();
 
 
         Map<String, Object> findProduct = new HashMap<>();
         findProduct.put("pageVo", pageVo);
         findProduct.put("productList", searchProduct);
+        findProduct.put("searchTotal", searchTotal);
+        findProduct.put("productTotal", productTotal);
 
         return findProduct;
     }
@@ -142,12 +153,15 @@ public class AdminRestController {
 
         PageVo pageVo = new PageVo(criteria, adminService.findOrderTotal(searchProductVo));
         List<OrderVo> searchOrder = adminService.findOrderList(searchProductVo, criteria);
+        int orderTotal = adminService.orderCountTotal();
+        int searchTotal = adminService.findOrderTotal(searchProductVo);
 
 
         Map<String, Object> findOrder = new HashMap<>();
         findOrder.put("pageVo", pageVo);
         findOrder.put("orderList", searchOrder);
-
+        findOrder.put("orderTotal", orderTotal);
+        findOrder.put("searchTotal", searchTotal);
         return findOrder;
     }
 
@@ -159,6 +173,29 @@ public class AdminRestController {
 
         adminService.modifyStatus(orderConditionCode,numberList);
     }
+
+//    @GetMapping("/modifyStatus/{page}")
+//            public Map<String,Object> viewModify(@PathVariable("page") int page, SearchCompanyVo searchCompanyVo) {
+//        Criteria criteria = new Criteria(page, 10);
+//
+//        System.out.println("====================================================================================");
+//        System.out.println(searchCompanyVo);
+//        System.out.println("====================================================================================");
+//
+//        PageVo pageVo = new PageVo(criteria, adminService.getCompanyTotal(searchCompanyVo));
+//        List<CompanyDto> searchCompany = adminService.searchCompanyList(searchCompanyVo, criteria);
+//        int companyTotal = adminService.companyCountTotal();
+//        int searchTotal = adminService.getCompanyTotal(searchCompanyVo);
+//
+//
+//        Map<String, Object> findCompany = new HashMap<>();
+//        findCompany.put("pageVo", pageVo);
+//
+//        findCompany.put("companyList", searchCompany);
+//        findCompany.put("companyTotal", companyTotal);
+//        findCompany.put("searchTotal", searchTotal);
+//        return findCompany;
+//    }
 
     @PostMapping("/modifyStatus")
     public void statusModify(@RequestBody Map<String, Object> companyNumber){

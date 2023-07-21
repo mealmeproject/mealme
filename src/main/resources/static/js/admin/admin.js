@@ -247,19 +247,19 @@ function weeklyChart(order) {
       {
         label: '주문',
         data: [order.weeklyOrder[0].totalPrice, order.weeklyOrder[1].totalPrice, order.weeklyOrder[2].totalPrice, order.weeklyOrder[3].totalPrice, order.weeklyOrder[4].totalPrice, order.weeklyOrder[5].totalPrice, order.weeklyOrder[6].totalPrice],
-        borderColor: 'red',
+        borderColor: 'rgba(32, 178, 170, 0.7)',
         backgroundColor: 'transparent',
       },
       {
         label: '결제',
         data: [order.weeklyPayment[0].totalPrice, order.weeklyPayment[1].totalPrice, order.weeklyPayment[2].totalPrice, order.weeklyPayment[3].totalPrice, order.weeklyPayment[4].totalPrice, order.weeklyPayment[5].totalPrice, order.weeklyPayment[6].totalPrice],
-        borderColor: 'blue',
+        borderColor: 'rgba(255, 26, 104, 0.7)',
         backgroundColor: 'transparent',
       },
       {
         label: '환불',
         data: [order.weeklyRefund[0].totalPrice, order.weeklyRefund[1].totalPrice, order.weeklyRefund[2].totalPrice, order.weeklyRefund[3].totalPrice, order.weeklyRefund[4].totalPrice, order.weeklyRefund[5].totalPrice, order.weeklyRefund[6].totalPrice],
-        borderColor: 'yellow',
+        borderColor: 'rgba(255, 206, 86, 0.7)',
         backgroundColor: 'transparent',
       }
       // Add more datasets if needed
@@ -280,7 +280,17 @@ function weeklyChart(order) {
 
         },
       },
+      scales:{
+        x:{
+          ticks:{
+            font:{
+              size: 10,
+            }
+          }
+        }
+      }
     },
+
   });
 }
 

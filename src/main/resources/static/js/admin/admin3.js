@@ -3,9 +3,9 @@ import * as company from '../module/companyList.js'
 
 let productType = $('#productType').val();
 console.log(productType);
-
 let page = 1;
-company.searchCompanyList({searchType:'', keyword:'', productType: productType, page : page}, companyList, paging, buttonChange, showError);
+company.searchCompanyList({searchType:'', keyword:'', productType: productType, page : page}, companyList, paging, buttonChange,companyCount,showError);
+
 
 
 
@@ -30,7 +30,7 @@ function companyList(map){
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyId}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyCallNumber}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyCeoName}</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyAddress1}</th>
+                  <th scope="col" style="font-size: 13px; font-weight: 10; overflow: hidden;">${u.companyAddress1}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.companyEmail}</th>
                   <input type="hidden" name="status" value="${u.companyStatus}">
                   
@@ -88,10 +88,17 @@ $('.page_nation').on('click','a', function (e){
 	console.log(productType);
 	let page = $(this).data('page');
 	console.log(page)
-	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList, paging,buttonChange, showError);
+	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList,paging,buttonChange,companyCount,showError);
+
 });
 
 
+// 기업 수
+function companyCount(count){
+	console.log(count);
+	$('.companyTotal').text(count.companyTotal);
+	$('.searchTotal').text(count.searchTotal);
+}
 
 // 검색 조건에 따른 회원 조회
 $('.btn-image').on('click', function (){
@@ -99,7 +106,7 @@ $('.btn-image').on('click', function (){
 	let searchType = $('.fSelect').val();
 	let productType = $('#productType').val();
 	let page = 1;
-	company.searchCompanyList({keyword : searchKeyword, searchType : searchType,productType: productType, page: page}, companyList,buttonChange,paging, showError);
+	company.searchCompanyList({keyword : searchKeyword, searchType : searchType,productType: productType, page: page}, companyList,paging,buttonChange,companyCount,showError);
 
 	// $('#keyword').val('');
 
@@ -116,7 +123,7 @@ $('#keyword').on('keydown', function (e){
 		let searchType = $('.fSelect').val();
 		let productType = $('#productType').val();
 		let page = 1;
-		company.searchCompanyList({keyword : searchKeyword, searchType : searchType,productType: productType, page: page}, companyList,buttonChange,paging, showError);
+		company.searchCompanyList({keyword : searchKeyword, searchType : searchType,productType: productType, page: page}, companyList,paging,buttonChange, companyCount,showError);
 	}
 });
 
@@ -153,9 +160,11 @@ $('.leftSide').on('click','.btnNormal', function() {
 	let page = 1;
 
 
-	company.searchCompanyList({searchType:searchType, keyword:searchKeyword, productType: productType, page : page}, companyList, buttonChange,paging, showError);
 
-	company.orderStatusAjax({companyNumber: companyNumber, companyStatus: companyStatus},showError)
+	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList,paging, buttonChange,companyCount,showError);
+
+	company.orderStatusAjax({companyNumber: companyNumber, companyStatus: companyStatus},showError);
+	company.searchCompanyList({searchType:searchType, keyword:searchKeyword, productType: productType, page : page}, companyList,paging, buttonChange,companyCount,showError);
 
 });
 
@@ -178,25 +187,27 @@ function buttonChange(){
 
 
 }
-
-$('#btnCancel').on('click', function() {
-	let companyStatus = '0';
-	let companyNumber = productDeleteBtn();
-	// let conditionName = $(".status-select").text();
-	// let orderNumber2 = $(this).closest('tr').find('input[type="checkbox"]').val();
-	// let orderStatus = $(".orderStatus").text();
-	console.log(companyNumber);
-	let searchKeyword = $('#keyword').val();
-	let searchType = $('.fSelect').val();
-	let productType = $('#productType').val();
-	let page = 1;
-
-
-	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList, paging, showError);
-
-	company.changeStatusAjax({companyNumber: companyNumber, companyStatus: companyStatus},showError)
-
-});
+//
+// $('#btnCancel').on('click', function() {
+// 	let companyStatus = '0';
+// 	let companyNumber = productDeleteBtn();
+// 	// let conditionName = $(".status-select").text();
+// 	// let orderNumber2 = $(this).closest('tr').find('input[type="checkbox"]').val();
+// 	// let orderStatus = $(".orderStatus").text();
+// 	console.log(companyNumber);
+// 	let searchKeyword = $('#keyword').val();
+// 	let searchType = $('.fSelect').val();
+// 	let productType = $('#productType').val();
+// 	let page = 1;
+//
+//
+//
+// 	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList,paging, buttonChange,companyCount,showError);
+//
+// 	company.changeStatusAjax({companyNumber: companyNumber, companyStatus: companyStatus},showError);
+// 	company.searchCompanyList({searchType:searchType, keyword:searchKeyword,productType: productType, page : page}, companyList, paging,buttonChange,companyCount,showError);
+//
+// });
 
 function productDeleteBtn() {
 	var companyNumber = [];
@@ -211,7 +222,7 @@ function productDeleteBtn() {
 	console.log(companyNumber)
 
 	if (companyNumber == "") {
-		alert("수정할 상품을 선택해주세요.");
+		alert("수정할 기업을 선택해주세요.");
 		return false;
 	}
 

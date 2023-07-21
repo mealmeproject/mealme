@@ -3,7 +3,7 @@ import * as user from '../module/userList.js';
 // user.showUserList(userList, showError);
 // const searchKeyword = $('#keyword').val();
 let page = 1;
-user.searchUserList({searchType:'', keyword:'', page : page}, userList, paging, showError);
+user.searchUserList({searchType:'', keyword:'', page : page}, userList, paging, userTotal, showError);
 
 
 // 전체 회원 리스트
@@ -23,8 +23,8 @@ function userList(map){
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userId}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userPhoneNumber}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userGender}</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userBirth}</th>
-                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userAdress1}</th>
+                  
+                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userAddress1}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userEmail}</th>
                
 		`;
@@ -74,17 +74,23 @@ $('.page_nation').on('click','a', function (e){
 	console.log(page)
 	user.searchUserList({searchType:searchType, keyword:searchKeyword, page : page}, userList, paging, showError);
 });
-			
-				
+
+function userTotal(total) {
+	console.log(total);
+	$('.userTotal').text(total.userTotal);
+	$('.searchTotal').text(total.searchTotal);
+
+}
 
 // 검색 조건에 따른 회원 조회
 $('.btn-image').on('click', function (){
 	let searchKeyword = $('#keyword').val();
 	let searchType = $('.fSelect').val();
-	$()
-	let page = 1;
-	user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging, showError);
 
+
+	let page = 1;
+	user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging,userTotal,showError);
+	user.userTotal({keyword : searchKeyword, searchType : searchType},userTotal,showError);
 	// $('#keyword').val('');
 
 })
@@ -99,7 +105,8 @@ $('#keyword').on('keydown', function (e){
 		let searchKeyword = $('#keyword').val();
 		let searchType = $('.fSelect').val();
 		let page = 1;
-		user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging, showError);
+		user.searchUserList({keyword : searchKeyword, searchType : searchType, page: page}, userList,paging,userTotal, showError);
+
 	}
 });
 

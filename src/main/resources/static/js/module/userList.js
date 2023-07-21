@@ -1,10 +1,11 @@
 
 
 
-export function showUserList(callback, error){
+export function userTotal(obj,callback,error){
     $.ajax({
-        url: '/admins/v1/user',
+        url: '/admins/v1/userTotal',
         type: 'get',
+        data: {keyword : obj.keyword, searchType : obj.searchType},
         dataType: 'json',
         success: function (map){
             if(callback){
@@ -15,7 +16,7 @@ export function showUserList(callback, error){
     });
 }
 
-export function searchUserList(obj, callback, pageCallback, error){
+export function searchUserList(obj, callback, pageCallback,userTotal, error){
     // let searchKeyword = $('#keyword').val()
     $.ajax({
         url: `/admins/v1/searchUserList/${obj.page}`,
@@ -26,6 +27,7 @@ export function searchUserList(obj, callback, pageCallback, error){
             if(callback){
                 callback(map.userList);
                 pageCallback(map.pageVo);
+                userTotal(map);
             }
 
         },

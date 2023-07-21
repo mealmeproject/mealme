@@ -18,6 +18,23 @@ body {
   width: 1200px;
 }
 
+table{
+  table-layout: fixed;
+}
+
+th{
+  overflow:hidden;
+
+  white-space : nowrap;
+
+  text-overflow: ellipsis;
+
+  border-right:solid 1px #bbb ;
+  padding: 3px;
+  text-align: center;
+  border-bottom: solid 1px #bbb;
+}
+
 .main-container {
   width: 1100px;
   padding: 0 20px 20px 20px;
@@ -617,4 +634,8 @@ gSmall .date-picker {
   background-color:#ff9326;
   color:#fff;
   border:1px solid #e2e4e9;
+}
+
+.check th{
+  height: 33px;
 }
