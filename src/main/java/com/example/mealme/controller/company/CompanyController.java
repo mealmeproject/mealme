@@ -214,7 +214,6 @@ public class CompanyController {
         System.out.println(companyNumber + "==========================================");
         CompanyListVo detailedList = companyService.showDetail(companyNumber);
         List<CompanyReviewVo> selectReviewList = companyService.showReview(companyNumber, criteriaCompany);
-
         System.out.println(new PageListVo(criteriaCompany, companyService.getReview(companyNumber)));
         model.addAttribute("pageInfo", new PageListVo(criteriaCompany, companyService.getReview(companyNumber)));
         model.addAttribute("companyNumber", companyNumber);
@@ -252,6 +251,8 @@ public class CompanyController {
         return new RedirectView(path);
     }
 
+    @GetMapping("/consultingFinish")
+    public void consultingFinish(){}
 //    @GetMapping("/ConsultingList")
 //    public String consultingList(ConsultingRequestDto consultingRequestDto, Model model, HttpServletRequest req) {
 //
