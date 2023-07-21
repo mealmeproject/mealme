@@ -21,6 +21,7 @@ public class ProductReviewVo {
         private String productSeller;
         private String fileName;
         private String fileUploadPath;
+        private String fileUuid;
         private Long orderConditionCode;
 
         private String userNickname;
