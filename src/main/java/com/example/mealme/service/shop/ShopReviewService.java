@@ -40,8 +40,8 @@ public class ShopReviewService {
         reviewMapper.updateOrderCondition(orderNumber);
     }
 
-    public List<ProductReviewVo> findProductReviewList(Long userNumber){
-        List<ProductReviewVo> productReviewList = reviewMapper.selectProductReviewList(userNumber);
+    public List<ProductReviewVo> findProductReviewList(Long userNumber,CriteriaCompany criteriaCompany){
+        List<ProductReviewVo> productReviewList = reviewMapper.selectProductReviewList(userNumber, criteriaCompany);
         System.out.println("productReviewList");
         return productReviewList;
     }
@@ -63,6 +63,10 @@ public class ShopReviewService {
             throw new IllegalArgumentException("존재하지 않는 상품 리뷰입니다.");
         }
         reviewMapper.deleteProductReview(reviewNumber);
+    }
+
+    public int findOrderReviewCount(Long userNumber){
+        return reviewMapper.selectOrderReviewCount(userNumber);
     }
 
 

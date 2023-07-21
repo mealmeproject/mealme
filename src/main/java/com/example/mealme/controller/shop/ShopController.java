@@ -37,7 +37,16 @@ public class ShopController {
         return "shop/shoppingList";
     }
 
+    @GetMapping("/selectCategory")
+    public String selectCategory(@RequestParam("categoryCode2") Long categoryCode2, Model model){
+        List<ProductListVo> productList = shopService.findProductList(categoryCode2);
+        int listCount = shopService.getTotal(categoryCode2);
 
+        model.addAttribute("productList", productList);
+        model.addAttribute("getTotal", listCount);
+
+        return "shop/shoppingList";
+    }
 
     @GetMapping("/shoppingDetail")
     public String shoppingDetail(Model model, @RequestParam("productNumber") Long productNumber) {
@@ -57,11 +66,7 @@ public class ShopController {
         return "shop/shoppingDetail";
     }
 
-//    @GetMapping("/selectCategory")
-//    public RedirectView selectCategory(@RequestParam("categoryCode2") Long categoryCode2){
-//        List<ProductListVo> productList = shopService.findProductListForCategory(categoryCode2);
-//        int listCount = shopService.getTotal();
-//    }
+
 
 
 
@@ -187,8 +192,8 @@ public String shoppingPayment(HttpSession session, Model model, Long productNumb
 //    상품 구매내역 리스트 & 리뷰
     @GetMapping("/shoppingPayInfo")
     public String shoppingPayInfo(Criteria criteria, HttpServletRequest req, Model model){
-        //      Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber = 1L;
+              Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//        Long userNumber = 1L;
         List<ProductPayListVo> productPayListVo = shopReviewService.findProductOrderList(userNumber,criteria);
         System.out.println("%%%상품 구매내역 리스트%%%");
         System.out.println(productPayListVo);
@@ -200,8 +205,7 @@ public String shoppingPayment(HttpSession session, Model model, Long productNumb
 
     @GetMapping("/productReview")
     public String productReview(HttpServletRequest req,@RequestParam("orderNumber") Long orderNumber,Model model){
-//        Long userNumber = (long)req.getSession().getAttribute("userNumber");
-//        Long orderNumber = 9L;
+        Long userNumber = (long)req.getSession().getAttribute("userNumber");
         System.out.println("@@orderNumber@@@");
         System.out.println(orderNumber);
     ProductReviewVo productReviewVo = shopReviewService.findProductInfo(orderNumber);
@@ -222,20 +226,6 @@ public String shoppingPayment(HttpSession session, Model model, Long productNumb
 
     @GetMapping("/productReviewList")
     public void productReviewList(){}
-
-    @ResponseBody
-    @GetMapping("/productReviewListData")
-    public Map<String, Object> productReviewListData(HttpServletRequest req) {
-//      Long userNumber = (long)req.getSession().getAttribute("userNumber");
-        Long userNumber = 1L;
-        List<ProductReviewVo> productReviewList = shopReviewService.findProductReviewList(userNumber);
-
-        System.out.println("##########");
-        System.out.println(productReviewList);
-        Map<String, Object> reviewList = new HashMap<>();
-        reviewList.put("productReviewList", productReviewList);
-        return reviewList;
-    }
 
     @GetMapping("/productReviewModify")
     public String productReviewModify(long reviewNumber, Model model){

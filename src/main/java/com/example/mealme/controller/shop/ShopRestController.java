@@ -3,6 +3,7 @@ package com.example.mealme.controller.shop;
 import com.example.mealme.dto.OrderDto;
 import com.example.mealme.dto.ProductDto;
 import com.example.mealme.dto.UserDto;
+import com.example.mealme.service.shop.ShopReviewService;
 import com.example.mealme.service.shop.ShopService;
 import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ShopRestController {
     private final ShopService shopService;
+    private final ShopReviewService shopReviewService;
 
 //    @GetMapping("/protein")
 //    public List<ProductVo> protein(){
@@ -155,5 +157,26 @@ public class ShopRestController {
         Long userNumber = (Long)req.getSession().getAttribute("userNumber");
         return shopService.findUser(userNumber);
     }
+
+//    새로 추가한 부분
+
+    @GetMapping("/productReviewListData")
+    public Map<String, Object> productReviewListData(HttpServletRequest req, int page) {
+      Long userNumber = (long)req.getSession().getAttribute("userNumber");
+//    Long userNumber = 1L;
+    CriteriaCompany criteriaCompany = new CriteriaCompany(page, 5);
+    List<ProductReviewVo> productReviewList = shopReviewService.findProductReviewList(userNumber,criteriaCompany);
+
+    PageListVo pageVo = new PageListVo(criteriaCompany, shopReviewService.findOrderReviewCount(userNumber));
+
+    System.out.println("##########");
+    System.out.println(productReviewList);
+    Map<String, Object> reviewList = new HashMap<>();
+    reviewList.put("productReviewList", productReviewList);
+    reviewList.put("pageVo", pageVo);
+    System.out.println(pageVo);
+    return reviewList;
+}
+
 
 }

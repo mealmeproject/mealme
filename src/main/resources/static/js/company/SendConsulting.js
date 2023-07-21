@@ -19,6 +19,8 @@ $(document).ready(function() {
 
 
 
+
+
 //     function ModifyButton() {
 //         var inputElement = document.getElementsByName('consultingComment')[0];
 //         if (inputElement.style.display === 'none') {
@@ -267,3 +269,10 @@ function mealRead(boardNumber, callback, error){
 function showError(a, b, c){
     console.error(c);
 }
+
+// resetReplyInput();
+// function resetReplyInput(){
+//     let summernote = '';
+//     $('#summernote').val(summernote);
+// }
+

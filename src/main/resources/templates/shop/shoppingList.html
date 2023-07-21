@@ -56,7 +56,7 @@
             <div class="product-category">
                 <ul class="category-ul">
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=1)}">
                             <div class="category-box">
                                 <div class="category-img-box">
                                     <img th:src="@{/img/01닭가슴살.png}" alt="다이어트" class="on-img">
@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=2)}">
                             <div class="category-box">
                                 <div class="category-img-box">
                                     <img th:src="@{/img/02도시락.png}" alt="다이어트" class="on-img">
@@ -80,7 +80,7 @@
                         </a>
                     </li>
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=3)}">
                             <div class="category-box">
                                 <div class="category-img-box">
                                     <img th:src="@{/img/03야채과일.png}" alt="다이어트" class="on-img">
@@ -92,7 +92,7 @@
                         </a>
                     </li>
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=4)}">
                             <div class="category-box">
                                 <div class="category-img-box">
                                     <img th:src="@{/img/04건강식품.png}" alt="다이어트" class="on-img">
@@ -104,7 +104,7 @@
                         </a>
                     </li>
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=5)}">
                             <div class="category-box">
                                 <div class="category-img-box">
                                     <img th:src="@{/img/05프로틴.png}" alt="다이어트" class="on-img">
@@ -116,7 +116,7 @@
                         </a>
                     </li>
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=6)}">
                             <div class="category-box">
                                 <div class="category-img-box">
                                     <img th:src="@{/img/06프로틴바.png}" alt="다이어트" class="on-img">
@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <li class="category-li">
-                        <a href="">
+                        <a th:href="@{/shop/selectCategory(categoryCode2=7)}">
                             <div class="category-box">
                                 <div class="category-img-box filter">
                                     <img th:src="@{/img/07영양제.png}" alt="다이어트" class="on-img">
@@ -151,13 +151,13 @@
                     <a class="ShoppingNumber">
                         <span th:text="${getTotal} + '개 상품이 있습니다'"></span>
                     </a>
-                    <div class="select-wrap">
-                        <select id="selectItem" class="select">
-                            <option value="allList">전체</option>
-                            <option value="lowPriceList">낮은 가격순</option>
-                            <option value="reviewPriceList">별점 높은 순</option>
-                        </select>
-                    </div>
+<!--                    <div class="select-wrap">-->
+<!--                        <select id="selectItem" class="select">-->
+<!--                            <option value="allList">전체</option>-->
+<!--                            <option value="lowPriceList">낮은 가격순</option>-->
+<!--                            <option value="reviewPriceList">별점 높은 순</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                 </div>
             </div>
             <div id="productList">

@@ -331,6 +331,32 @@
         WHERE PRODUCT_NUMBER = #{productNumber}
     </select>
 
+    <select id="selectTotalForCategory" resultType="int">
+        SELECT COUNT(PRODUCT_NUMBER) FROM TBL_PRODUCT
+        WHERE CATEGORY_CODE2 = #{categoryCode2}
+    </select>
+
+    <select id="selectProductListForCategory" resultType="productListVo">
+        SELECT P.PRODUCT_NUMBER, P.CATEGORY_CODE1, P.CATEGORY_CODE2, P.PRODUCT_NAME, P.PRODUCT_SELLER,
+               P.PRODUCT_PRICE, P.PRODUCT_EXPLANATION, P.PRODUCT_REGISTER_DATE,
+               PF.FILE_NUMBER, PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID, AVG_GRADE
+        FROM TBL_PRODUCT P
+                 LEFT JOIN (
+            select PRODUCT_NUMBER, FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, rn
+            from (
+                     SELECT PF.PRODUCT_NUMBER, PF.FILE_NUMBER, PF.FILE_NAME, PF.FILE_UPLOAD_PATH, PF.FILE_UUID,
+                            RANK() OVER (PARTITION BY PF.PRODUCT_NUMBER ORDER BY PF.FILE_NUMBER) AS rn
+                     FROM TBL_PRODUCT_FILE PF
+                 ) s1
+            WHERE s1.rn = 1
+        ) PF ON P.PRODUCT_NUMBER = PF.PRODUCT_NUMBER
+                 LEFT JOIN (
+            SELECT PRODUCT_NUMBER, AVG(REVIEW_GRADE) AS AVG_GRADE
+            FROM TBL_ORDER_REVIEW
+            GROUP BY PRODUCT_NUMBER
+        ) AVG ON P.PRODUCT_NUMBER = AVG.PRODUCT_NUMBER
+        WHERE P.CATEGORY_CODE2 = #{categoryCode2}
+    </select>
 
     <select id="selectProductInfoByProductNumber" resultType="cartVo">
         SELECT P.PRODUCT_NUMBER,  PRODUCT_NAME, PRODUCT_SELLER, PRODUCT_PRICE, PRODUCT_EXPLANATION,

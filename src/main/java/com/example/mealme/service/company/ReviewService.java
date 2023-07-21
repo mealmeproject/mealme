@@ -4,6 +4,7 @@ import com.example.mealme.mapper.ReviewMapper;
 import com.example.mealme.vo.ConsultingPayVo;
 import com.example.mealme.vo.ConsultingReviewVo;
 import com.example.mealme.vo.Criteria;
+import com.example.mealme.vo.CriteriaCompany;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,12 @@ public class ReviewService {
         reviewMapper.insertConsultingReview(consultingReviewVo);
     }
 
-    public List<ConsultingReviewVo> findConsultingList(Long userNumber){
-        List<ConsultingReviewVo> consultingList = reviewMapper.selectConsultingList(userNumber);
+    public List<ConsultingReviewVo> findConsultingList(Long userNumber,CriteriaCompany criteriaCompany){
+        if(userNumber == null){
+            throw new IllegalArgumentException("회원 정보가 없습니다.");
+        }
+        List<ConsultingReviewVo> consultingList = reviewMapper.selectConsultingList(userNumber, criteriaCompany);
+        System.out.println("@@@@@리뷰내역 리스트@@@@@");
         System.out.println("consultingList");
         return consultingList;
     }
@@ -52,7 +57,11 @@ public class ReviewService {
         }
         reviewMapper.deleteConsultingReview(reviewNumber);
     }
+
     public List<ConsultingPayVo> findConsultingOrderList(Long userNumber, Criteria criteria){
+        if(userNumber == null){
+            throw new IllegalArgumentException("회원 정보가 없습니다.");
+        }
         List<ConsultingPayVo> consultingOrderList = reviewMapper.selectOrderConsultingList(userNumber, criteria);
         System.out.println("@@@@@구매내역 리스트@@@@@");
         System.out.println(consultingOrderList);
@@ -63,5 +72,9 @@ public class ReviewService {
 
     public void updateConsultingCondition(Long consultingRequestNumber){
         reviewMapper.updateConsultingCondition(consultingRequestNumber);
+    }
+//    리뷰 리스트 전체 갯수
+    public int findConsultingReviewCount(Long userNumber){
+        return reviewMapper.selectConsultingReviewCount(userNumber);
     }
 }

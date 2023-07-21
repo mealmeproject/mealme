@@ -109,7 +109,7 @@
               <div class="carbohydrate-gram">
                 <div class="taken-carbohydrate-gram"></div>
                 <div>/</div>
-                <div th:text="${recommendVo.recommendCarbohydrate}"></div>
+                <div class="recommendCarbohydrate" th:text="${recommendVo.recommendCarbohydrate}"></div>
                 <div>g</div>
               </div>
               <input type="hidden" class="recommendCarbohydrate-num" th:value="${recommendVo.recommendCarbohydrate}">
@@ -125,7 +125,7 @@
               <div class="protein-gram">
                 <div class="taken-protein-gram"></div>
                 <div>/</div>
-                <div th:text="${recommendVo.recommendProtein}"></div>
+                <div class="recommendProtein" th:text="${recommendVo.recommendProtein}"></div>
                 <div>g</div>
               </div>
               <input type="hidden" class="recommendProtein-num" th:value="${recommendVo.recommendProtein}">
@@ -140,7 +140,7 @@
               <div class="fat-gram">
                 <div class="taken-fat-gram"></div>
                 <div>/</div>
-                <div th:text="${recommendVo.recommendFat}"></div>
+                <div class="recommendFat" th:text="${recommendVo.recommendFat}"></div>
                 <div>g</div>
               </div>
               <input type="hidden" class="recommendFat-num" th:value="${recommendVo.recommendFat}">
