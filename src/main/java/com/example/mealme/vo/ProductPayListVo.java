@@ -22,4 +22,5 @@ public class ProductPayListVo {
         private long productPrice;
         private String fileName;
         private String fileUploadPath;
+        private String fileUuid;
 }

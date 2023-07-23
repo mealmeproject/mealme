@@ -18,4 +18,5 @@ public class ConsultingPayVo {
         private String consultingRequestDate;
         private String companyCeoName;
         private String consultingCondition;
+        private String fileUuid;
 }

@@ -34,7 +34,7 @@
                SUM(FOOD_TRANS_FAT) AS TOTAL_FOOD_TRANS_FAT
         FROM TBL_FOOD TF JOIN TBL_BOARD TB
                               ON TF.BOARD_NUMBER = TB.BOARD_NUMBER
-        WHERE USER_NUMBER = #{userNumber} AND TB.MEAL_TIME BETWEEN sysdate - 6 AND sysdate
+        WHERE USER_NUMBER = #{userNumber} AND TB.MEAL_TIME BETWEEN TRUNC(sysdate) - 6 AND sysdate
         GROUP BY TO_CHAR(TB.MEAL_TIME, 'YYYY-MM-DD')
         ORDER BY TO_CHAR(TB.MEAL_TIME, 'YYYY-MM-DD') DESC
     </select>
