@@ -293,7 +293,9 @@ form {
 .btn-address{
     width: 120px;
     height: 35px;
-    background-color: #ffffff;
+    background-color: #ff9326;
+    border-radius: 8px;
+    color: white;
 }
 
 .form-group {
@@ -582,3 +584,34 @@ td {
 .cart_info p{
     margin-bottom: 5px;
 }
+
+/* 주소 */
+
+.address-btn-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.address-box input {
+    margin-bottom: 10px;
+}
+
+.address-btn {
+    background-color: #ff9326;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    width: 100px;
+    line-height: 24px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+}
+
+#addressNumber {
+    width: 50%;
+}
+

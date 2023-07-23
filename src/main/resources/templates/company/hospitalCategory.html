@@ -24,26 +24,21 @@
     <header class="header2" th:replace="fragment/header2 :: header2"></header>
     <!-- 헤더 추가 공간 -->
     <div class="work-container">
+        <div class="service-name-container">
+            <div class="service-name-box">
+                <h1 th:text="${companyCodeName}">마이페이지</h1>
+            </div>
+        </div>
+        <hr class="service-name-hr" />
 
-      <!-- 작업공간 -->
+        <!-- 작업공간 -->
       <!-- 가장 큰 테두리 -->
       <div class="main-window">
         <!-- 리스트 이름 -->
-        <div class="list-name-section">
-          <div class="list-name">
-            <div class="list-name1"th:text="${companyCodeName}">병원</div>
-          </div>
-        </div>
         <!-- 리스트 이름 끝 -->
         <!-- 리스트의 가장 큰 테두리 -->
         <div class="list-section">
-          <!-- 리스트 멘트 -->
-          <div class="list-info-section">
-            <div class="list-info">
-              <div class="info1">당신의 건강을 책임질께요!</div>
-            </div>
-          </div>
-          <!-- 리스트 멘트 끝 -->
+
           <!-- 리스트 메인 부분 -->
           <div class="list-main-section">
             <!-- 첫 번째 예시 리스트 -->
@@ -55,29 +50,32 @@
               </div>
               <div class="list-comment-section">
                 <div class="list-comment">
-                  <a th:href="@{/company/detailedHospital(companyNumber=${company.companyNumber})}" class="list-detailed">
-                    <span class="detailed">더보기</span>
-                  </a>
-                  <div class="list-comment-name">
-                    <div class="name-list" th:text="${company.companyName} + '에 오신 것을 환영합니다.'">서울나우병원에 오신 것을 환영합니다.</div>
-                  </div>
-                  <div class="star-wrap">
-<!--                    <div class="star">★★★★★</div>-->
-                    <div class="star-ratings">
-                      <div class="star-ratings-fill space-x-2 text-lg" th:attr="style='width: ' + ${company.averageGrade * 20} + '%'">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                      </div>
-                      <div class="star-ratings-base space-x-2 text-lg">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                      </div>
+
+                  <div class="company-information">
+                    <div class="list-comment-name">
+                      <h2 class="name-list" th:text="${company.companyName}">서울나우병원에 오신 것을 환영합니다.</h2>
                     </div>
-                    <div class="star-num" th:text="${company.averageGrade} + '/' + '5'">( 4.2 / 5 )</div>
+                    <div class="star-wrap">
+<!--                      <div class="star">★★★★★</div>-->
+                      <div class="star-ratings">
+                        <div class="star-ratings-fill space-x-2 text-lg" th:attr="style='width: ' + ${company.averageGrade * 20} + '%'">
+                          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                      </div>
+                      <div class="star-num" th:text="' ' + ${company.averageGrade} + ' /' + ' 5'">( 4.2 / 5 )</div>
+                    </div>
+                    <div class="minutely-information">
+                      <div class="information1" th:text="'대표자 : ' + ${company.companyCeoName}">대표자 : 이동재</div>
+                      <div class="information2" th:text="'대표전화 : ' + ${company.companyCallNumber}">대표전화 : 1234-1234</div>
+                      <div class="information3" th:text="'위치 : ' + ${company.companyAddress1}">위치 : 서울시 강남대로 123번길</div>
+                    </div>
                   </div>
-                  <div class="minutely-information">
-                    <div class="information1" th:text="'대표자 : ' + ${company.companyCeoName}">대표자 : 이동재</div>
-                    <div class="information2" th:text="'대표전화 : ' + ${company.companyCallNumber}">대표전화 : 1234-1234</div>
-                    <div class="information3" th:text="'위치 : ' + ${company.companyAddress1}">위치 : 서울시 강남대로 123번길</div>
-                  </div>
+                    <a th:href="@{/company/detailedHospital(companyNumber=${company.companyNumber})}" class="list-detailed">
+                        <span class="detailed">더보기</span>
+                    </a>
                 </div>
               </div>
             </div>

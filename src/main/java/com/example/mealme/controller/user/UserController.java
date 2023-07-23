@@ -17,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,35 +38,61 @@ public class UserController {
 
     // 로그인 페이지 경로 처리
     @GetMapping("/login")
-    public void login() {
-    }
+    public void login(HttpServletRequest req, Model model) {
+        Cookie[] cookies = req.getCookies();
 
-    // 로그인 페이지 입력받은 값에 따라 개인 / 기업 확인 후 마이페이지 / 받은 컨설팅 리스트 페이지로 경로처리
-    @PostMapping("/login")
-    public RedirectView login(String userType, String id, String password, HttpServletRequest req) {
-        // 유저가 개인회원인지 기업회원인지 체크
-        if (userType.equals("user")) {                          // 개인회원
-            try {
-                Long userNumber = userService.findUserNumber(id, password);
-                req.getSession().setAttribute("userNumber", userNumber);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new RedirectView("user/login");
+        if(cookies != null) {
+            for(Cookie cookie : cookies) {
+                String name = cookie.getName(); // 쿠키 이름 가져오기
+                String value = cookie.getValue(); // 쿠키 값 가져오기
+                if (name.equals("id")) {
+                    System.out.println("value = " +value);
+                    model.addAttribute("id", value);
+                }
             }
-            return new RedirectView("/meal/myPage");
-        } else if (userType.equals("company")) {                // 기업회원
-            try {
-                Long companyNumber = userService.findCompanyNumber(id, password);
-                req.getSession().setAttribute("companyNumber", companyNumber);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new RedirectView("user/login");
-            }
-            return new RedirectView("/company/ConsultingList");
-        } else {
-            return new RedirectView("user/login");
         }
     }
+
+//    // 로그인 페이지 입력받은 값에 따라 개인 / 기업 확인 후 마이페이지 / 받은 컨설팅 리스트 페이지로 경로처리
+@PostMapping("/login")
+public RedirectView login(String userType, String id, String password, String rememberCheck,
+                          HttpServletRequest req, HttpServletResponse res) {
+    if (userType.equals("user")) { // 개인
+        try {
+            Long userNumber = userService.findUserNumber(id, password);
+            req.getSession().setAttribute("userNumber", userNumber);
+
+            if (rememberCheck != null && rememberCheck.equals("Y")) {
+                Cookie idCookie = new Cookie("id", id);
+                idCookie.setMaxAge(86400); // 24시간
+                idCookie.setPath("/");
+                res.addCookie(idCookie);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new RedirectView("/user/login?login=failed");
+        }
+        return new RedirectView("/meal/myPage");
+    } else if (userType.equals("company")) { // 기업
+        try {
+            Long companyNumber = userService.findCompanyNumber(id, password);
+            req.getSession().setAttribute("companyNumber", companyNumber);
+            if (rememberCheck != null && rememberCheck.equals("Y")) {
+                Cookie idCookie = new Cookie("id", id);
+                idCookie.setMaxAge(86400);
+                idCookie.setPath("/");
+                res.addCookie(idCookie);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new RedirectView("/user/login?login=failed");
+        }
+        return new RedirectView("/company/ConsultingList");
+    } else {
+        return new RedirectView("/user/login?login=invalidUserType");
+    }
+}
+
 
     // 회원 가입 시 개인 / 기업 선택 페이지
     @GetMapping("/userOrCompany")
@@ -178,11 +206,10 @@ public class UserController {
     }
 
     @PostMapping("/findPassword")
-    public void findPassword(UserDto userDto){
+    public String findPassword(UserDto userDto) throws Exception {
+        System.out.println("비밀번호 찾기 페이지 !");
+        return userService.findPassword(userDto);
 
-        if(userService.findPassword(userDto)){
-
-        };
     }
 
     // 비밀번호 찾기 완료 페이지 (메일로 전송 했다는 메세지 출력)

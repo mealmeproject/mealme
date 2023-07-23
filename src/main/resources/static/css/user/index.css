@@ -193,3 +193,22 @@ a {
 .ride-container img {
     width: 100%;
 }
+
+.chart-info-text1{
+    font-weight: 500;
+    font-size: 28px;
+    color: #787E8B;
+    text-align: left;
+    line-height: 1;
+    margin-bottom: -20px;
+}
+
+.chart-info-text2{
+    color: #ff7e00 ;
+}
+.chart-info h2{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    text-align: left;
+}

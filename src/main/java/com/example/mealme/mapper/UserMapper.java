@@ -67,4 +67,7 @@ public interface UserMapper {
     // 유저 비밀번호 찾기
     public int findUserPassword(UserDto userDto);
 
+    // 유저 비밀번호 랜덤코드로 변경
+    public void updatePassword(String encryptionPw, String userId);
+
 }
