@@ -126,13 +126,6 @@ function showMeal(map){
                                     <div class="day-detail3">
                                         총 칼로리 : &nbsp<div class="detail3-kcal">${map.mealTotalKcal}kcal</div>
                                     </div>
-                                    <div class="day-detail4">
-                                    
-                                        <div class="modify-btn">수정</div>
-                                        <a href="/meal/mealDelete?boardNumber=${map.boardNumber}">
-                                            <div class="delete-btn">삭제</div>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
         `;

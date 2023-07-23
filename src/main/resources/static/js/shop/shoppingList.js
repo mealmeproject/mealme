@@ -134,34 +134,36 @@ function makeList(result){
 
 
 
-$('.rating').each(function() {
-    fillStars(this);
-});
+
+ratingForEach();
+
+function ratingForEach(){
+    let  starRatings = document.querySelectorAll('.star_rating');
+
+    starRatings.forEach(function (s){
+            fillStars(s);
+        }
+    );
+}
 
 function fillStars(stars) {
-    let rating = $(stars).data('grade');
+    let reviewGrade =stars.getAttribute('data-grade');
+
     let star = $(stars).find('.star');
 
-    const filledStars = Math.floor(rating);
-    const decimalPart = rating % 1;
+    const filledStars = Math.floor(reviewGrade);
+    const decimalPart = reviewGrade % 1;
 
-    star.each(function(index) {
+    star.each(function (index) {
         const star = $(this);
 
         if (index < filledStars) {
             star.addClass('filled');
             star.text('★');
-        }  else if (index === filledStars && decimalPart > 0) {
-            const percentage = decimalPart * 100;
-            const gradient = `linear-gradient(to right, gold ${percentage}%, transparent ${percentage}%)`;
-            star.css('background-image', gradient);
-            star.css('background-clip', 'text');
-            star.css('-webkit-background-clip', 'text');
-            star.css('color', 'transparent');
-            star.text('★');
+        } else if (index === filledStars && decimalPart > 0) {
+            star.css('background-image', `linear-gradient(to right, gold ${decimalPart * 100}%, rgba(0, 0, 0, 0) ${decimalPart * 100}%)`);
         } else {
             star.removeClass('filled');
-            star.text('☆');
         }
     });
 }

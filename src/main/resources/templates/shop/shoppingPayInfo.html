@@ -50,7 +50,7 @@
           <thead>
           <tr>
             <th class="img">상품</th>
-            <th class="seller">판매자</th>
+            <th class="seller">요약소개</th>
             <th class="name">상품명</th>
             <th class="price">가격</th>
             <th class="number">수량</th>
@@ -62,7 +62,7 @@
           <tbody>
           <tr th:each="productList : ${productPayListVo}" class="product-list">
             <input class="order-number" type="hidden" th:value="${productList.orderNumber}">
-            <td><img th:src="${productList.fileUploadPath}" alt="상품 이미지" class="product-image"> </td>
+            <td><img th:src="${'/upload/' + productList.fileUploadPath +  '/' + productList.fileUuid+ '_' + productList.fileName}" alt="상품 이미지" class="product-image"> </td>
             <td th:text="${productList.productSeller}"></td>
             <td th:text="${productList.productName}"></td>
             <td th:text="${productList.productPrice}"></td>

@@ -16,7 +16,7 @@ function categoryView(cate){
                                                    
        <li class="_next">
          (대분류) ${c.categoryName} &gt;
-        <input type="hidden" name="categoryCode1" class="_category_no" value="${c.categoryCode1}">
+         <input type="hidden" name="categoryCode1" class="_category_no" value="${c.categoryCode1}">
        </li>
     `;
   });
@@ -30,7 +30,7 @@ function showCategoryList(list){
   list.forEach(c => {
     text+= `
         <li class=" _next">(중분류) ${c.categoryName} &gt;
-        <input type="hidden" name="categoryCode2" class="_category_no" value="${c.categoryCode2}" ></li>
+         <input type="hidden" name="categoryCode2" class="_category_no" value="${c.categoryCode2}" ></li>
     `;
   });
   $("._category_2").html(text);
@@ -68,6 +68,7 @@ $("._category_2").on('click', '._next',function (){
   let cateNum = $(this).find('._category_no').val();
   console.log(cateNum)
   let categoryName = $(this).text().trim();
+  console.log(cateNum);
   let existingText = $("._product_category_checked").find('#topCate').text().trim();
 
   // 중분류 이름을 추가한 새로운 텍스트 생성

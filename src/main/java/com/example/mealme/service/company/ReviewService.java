@@ -68,7 +68,7 @@ public class ReviewService {
         return consultingOrderList;
     }
 
-    public int orderConsultingListCount(){ return reviewMapper.orderConsultingListCount(); };
+    public int orderConsultingListCount(Long userNumber){ return reviewMapper.orderConsultingListCount(userNumber); };
 
     public void updateConsultingCondition(Long consultingRequestNumber){
         reviewMapper.updateConsultingCondition(consultingRequestNumber);

@@ -311,5 +311,13 @@ td{
 }
 
 .human-name{
-    width: 46px;
+    min-width: 48px;
+}
+
+.consultingRequestText{
+    /*display: inline-block;*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
 }

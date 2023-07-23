@@ -362,8 +362,8 @@ public class CompanyController {
         System.out.println(consultingPayVo);
 
         model.addAttribute("consultingPayVo", consultingPayVo);
-        model.addAttribute("pageInfo", new PageVo(criteria, reviewService.orderConsultingListCount()));
-        System.out.println(new PageVo(criteria, reviewService.orderConsultingListCount()));
+        model.addAttribute("pageInfo", new PageVo(criteria, reviewService.orderConsultingListCount(userNumber)));
+        System.out.println(new PageVo(criteria, reviewService.orderConsultingListCount(userNumber)));
         return "company/consultingPayInfo";
     }
 

@@ -9,14 +9,15 @@ import com.example.mealme.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/shop/*")
@@ -193,13 +194,12 @@ public String shoppingPayment(HttpSession session, Model model, Long productNumb
     @GetMapping("/shoppingPayInfo")
     public String shoppingPayInfo(Criteria criteria, HttpServletRequest req, Model model){
               Long userNumber = (long)req.getSession().getAttribute("userNumber");
-//        Long userNumber = 1L;
         List<ProductPayListVo> productPayListVo = shopReviewService.findProductOrderList(userNumber,criteria);
         System.out.println("%%%상품 구매내역 리스트%%%");
         System.out.println(productPayListVo);
         model.addAttribute("productPayListVo", productPayListVo);
-        model.addAttribute("pageInfo", new PageVo(criteria, shopReviewService.orderProductListCount()));
-        System.out.println(new PageVo(criteria, shopReviewService.orderProductListCount()));
+        model.addAttribute("pageInfo", new PageVo(criteria, shopReviewService.orderProductListCount(userNumber)));
+        System.out.println(new PageVo(criteria, shopReviewService.orderProductListCount(userNumber)));
         return "shop/shoppingPayInfo";
     }
 
