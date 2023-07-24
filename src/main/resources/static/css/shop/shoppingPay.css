@@ -46,9 +46,6 @@ p{
     font-weight: bold;
 }
 
-span{
-    font-weight: bold;
-}
 
 h1{
     font-size: 28px;
@@ -203,19 +200,6 @@ li{
 
 
 
-ul{
-    display:flex;
-    flex-flow: row nowrap;
-    color:#8F9795;
-    font-size: 4px;
-    padding-left: 0px;
-    width:100px;
-}
-
-a{
-    font-size: 13px;
-    font-weight: 700;
-}
 
 .modify-info{
     color:#FF6F01;
@@ -231,9 +215,7 @@ div>ul>li:last-child::after{
     content: "";
 }
 
-div>ul>li>a{
-    padding: 3px;
-}
+
 
 
 .hr2{
@@ -298,7 +280,6 @@ th{
 }
 
 td{
-    text-align: left;
     height: 40px;
 }
 
@@ -312,7 +293,9 @@ form {
 .btn-address{
     width: 120px;
     height: 35px;
-    background-color: #ffffff;
+    background-color: #ff9326;
+    border-radius: 8px;
+    color: white;
 }
 
 .form-group {
@@ -447,7 +430,7 @@ td {
 }
 
 .cart__list__detail :nth-child(3) {
-    vertical-align: top;
+    vertical-align: center;
 }
 
 .cart__list__detail :nth-child(3) a {
@@ -581,5 +564,54 @@ td {
 
 .cart__mainbtns{
     margin-top: 100px;
+}
+
+.img-box{
+    width: 200px;
+    height: 200px;
+}
+
+.img-box img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.s{
+    margin-top: 45px;
+}
+
+.cart_info p{
+    margin-bottom: 5px;
+}
+
+/* 주소 */
+
+.address-btn-box {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.address-box input {
+    margin-bottom: 10px;
+}
+
+.address-btn {
+    background-color: #ff9326;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    width: 100px;
+    line-height: 24px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+}
+
+#addressNumber {
+    width: 50%;
 }
 

@@ -26,4 +26,5 @@ public class CompanyListVo {
    private String fileName;
    private String fileUploadPath;
    private String fileUuid;
+   private String companyInformation;
 }

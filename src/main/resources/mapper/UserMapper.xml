@@ -137,9 +137,14 @@
 
     <select id="findUserPassword">
         select count(user_number) from TBL_USER
-        WHERE USER_ID = #{userid} AND USER_NAME = #{userName} AND USER_PHONE_NUMBER = #{userPhoneNumber}
+        WHERE USER_ID = #{userId} AND USER_NAME = #{userName} AND USER_EMAIL = #{userEmail}
     </select>
 
+    <update id="updatePassword">
+        update TBL_USER
+        set USER_PASSWORD = #{encryptionPw}
+        where USER_ID = #{userId}
+    </update>
 
 
 </mapper>
