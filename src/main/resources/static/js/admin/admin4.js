@@ -1,8 +1,13 @@
 import * as order from '../module/orderList.js';
 let page = 1;
 let startDate = $('#datepicker1').val();
+console.log(startDate);
 let endDate = $('#datepicker2').val();
-order.searchOrderList({searchType:'', keyword:'', page : page, startDate: startDate, endDate:endDate }, orderList, paging,orderTotal, showError);
+console.log(endDate);
+let sysdate = new Date();
+let date = '1900-01-01';
+
+order.searchOrderList({searchType:'', keyword:'', page : page, startDate: date, endDate: sysdate}, orderList, paging,orderTotal, showError);
 
 $(function() {
     //input을 datepicker로 선언
@@ -262,19 +267,19 @@ function productDeleteBtn(){
     return orderNumber;
 }
 
-function productModify(){
-    let productNumber = $("input:checkbox[name=chk]:checked").val();
-    if(productNumber==""){
-        alert("수정할 상품을 선택해주세요.");
-        return false;
-    }
-    console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
-
-    console.log(productNumber);
-    console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
-
-    return productNumber;
-}
+// function productModify(){
+//     let productNumber = $("input:checkbox[name=chk]:checked").val();
+//     if(productNumber==""){
+//         alert("수정할 상품을 선택해주세요.");
+//         return false;
+//     }
+//     console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
+//
+//     console.log(productNumber);
+//     console.log("!@#@!#@!#@!#@!#@!#@!#@!#@!#@!#!@#@!#@!");
+//
+//     return productNumber;
+// }
 
 
 
