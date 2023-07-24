@@ -1,12 +1,17 @@
 export function searchOrderList(obj, callback, pageCallback,orderTotal, error){
+    console.log("실행됏다!!!!!!!!!!!!!!!!!!!")
+    console.log(obj.startDate);
+    console.log(obj.endDate);
     $.ajax({
         url: `/admins/v1/searchOrderList/${obj.page}`,
         type: 'get',
         data: {keyword : obj.keyword, searchType : obj.searchType, startDate:obj.startDate, endDate:obj.endDate},
         dataType: 'json',
         success: function (map){
+            console.log("실행!!!!!!!!!!!!!!1")
             console.log(map)
             if(callback){
+
                 callback(map.orderList);
                 pageCallback(map.pageVo);
                 orderTotal(map);
