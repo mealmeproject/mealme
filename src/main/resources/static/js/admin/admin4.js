@@ -65,7 +65,6 @@ function orderList(map){
                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.orderDate}</th>
              <th scope="col" style="font-size: 13px; font-weight: 10;">${u.orderNumber}</th>
                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.userName}</th>
-                 <th scope="col" style="font-size: 13px; font-weight: 10;">${u.productSeller}</th>
                  <th scope="col" style="font-size: 13px; font-weight: 10;">${u.productName}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.productPrice * u.orderCount}</th>
                   <th scope="col" style="font-size: 13px; font-weight: 10;">${u.orderCount}</th>
