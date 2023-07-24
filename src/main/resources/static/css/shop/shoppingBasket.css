@@ -62,15 +62,6 @@ a {
     color: black;
 }
 
-img {
-    display: block;
-    width: 70%;
-    height: 60%;
-    margin: auto;
-    cursor: pointer;
-    border-radius: 80px;
-}
-
 .cart {
     width: 880px;
     margin: auto;
@@ -88,7 +79,7 @@ img {
 }
 
 .cart ul :first-child {
-    color: limegreen;
+    color:  #ff9326;
 }
 
 table {
@@ -171,7 +162,7 @@ td {
 }
 
 .cart__list__detail :nth-child(5) button {
-    background-color: limegreen;
+    background-color:  #ff9326;
     color: white;
     border: none;
     border-radius: 5px;
@@ -267,6 +258,17 @@ td {
     width: 200px;
     height: 200px;
     object-fit: cover;
+}
+
+.product-count-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.page-title h1{
+    margin-bottom: 20px;
 }
 
 

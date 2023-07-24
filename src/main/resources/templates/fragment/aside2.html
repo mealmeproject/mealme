@@ -8,7 +8,7 @@
     </head>
     <body>
     <aside class="aside2" th:fragment="aside2">
-        <div class="quick-menu">
+        <div class="quick-menu"th:unless="${session.userNumber == null}">
             <label for="expand-menu"><div>메뉴</div></label>
             <input type="checkbox" id="expand-menu" name="expand-menu" />
             <ul>

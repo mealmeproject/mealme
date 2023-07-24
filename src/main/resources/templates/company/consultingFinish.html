@@ -25,84 +25,32 @@
     <!-- 헤더 추가 공간 -->
     <div class="work-container">
 
-      <!-- 작업공간 -->
-      <p>
-      <h1>
-        <div class="finish-title"><span class="finish-title-title">컨설팅 신청이 완료되었습니다.</span>
-<!--          <div class="finish-list-container">-->
-<!--            <div class="finish-list-title">-->
-<!--              <div class="finish-list-title2">-->
-<!--                주문상품 <span>2</span>개-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="free">-->
-<!--              <div class="free-title">-->
-<!--                무료배송-->
-<!--              </div>-->
-<!--              <span class="img-title" >-->
-<!--                              <img src="../img/box.png" class="img-title2">-->
-<!--                              <span class="img-title3">무료배송</span>-->
-<!--                            </span>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--              <table>-->
-<!--                <tr>-->
-<!--                  <td class="imgEx1-title">-->
-<!--                    <img src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220510/IMG1652Vjg147858177_100_100.jpg" class="imgEx1">-->
-<!--                  </td>-->
-<!--                  <td>-->
-<!--                    <div>-->
-<!--                      <div class="shopping-title">맛있닭 닭가슴살 스테이크 갈릭 맛 100g</div>-->
-<!--                    </div>-->
-<!--                    <div class="shopping-price">-->
-<!--                                  <span>-->
-<!--                                    16,500원  <span class="price-span">1개</span>-->
-<!--                                  </span>-->
-<!--                    </div>-->
-<!--                  </td>-->
-<!--                  <td class="priceEx1" ><span class="price">16,500원</span></td>-->
-<!--                </tr>-->
-<!--                <td class="imgEx1-title">-->
-<!--                  <img src="https://file.rankingdak.com/image/RANK/PRODUCT/PRD001/20220701/IMG1656zmR642704343_100_100.jpg" class="imgEx1">-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                  <div>-->
-<!--                    <div class="shopping-title">맛있닭 닭가슴살 스테이크 갈릭 맛 100g</div>-->
-<!--                  </div>-->
-<!--                  <div class="shopping-price">-->
-<!--                                <span>-->
-<!--                                55,200원 <span class="price-span">1개</span>-->
-<!--                              </span></div>-->
-<!--                </td>-->
-<!--                <td class="priceEx1" ><span class="price">55,200원</span></td>-->
-<!--                </tr>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="finish-price-container">
-            <table>
-              <tr class="finish-price-container">
-                <div class="finish-price-container1">
-                  <div class="finish-price-title"> <span class="finish-price-title2">총 결제 금액</span></div>
-                </div>
-                <td class="price-result">3000원</td>
-              </tr>
-            </table>
+      <div class="join-ok-container">
+        <div class="join-ok-box">
+          <div class="ok-box">
+            <span class="material-symbols-outlined"> task_alt </span>
           </div>
-          <a class="finish-shopping" onclick="location.href='http://localhost:10000/company/consultingPayInfo'">주문 내역</a>
-<!--          <button class="purchase-history">구매내역 확인</button>-->
+          <div class="welcome-text1">
+            <h1>컨설팅 신청이 완료되었습니다.</h1>
+          </div>
+<!--          <div class="welcom-text2">-->
+<!--            <p>회원님의 메일 주소로 임시 비밀번호를 발송하였습니다.</p>-->
+<!--            <p>-->
+<!--              &nbsp&nbsp&nbsp&nbsp&nbsp로그인 후 정보 수정에서 비밀번호를-->
+<!--              수정하시길 바랍니다.-->
+<!--            </p>-->
+<!--          </div>-->
+          <div class="btn-box">
+            <a th:href="@{/company/consultingPayInfo}" class="login-btn">결제내역</a>
+            <a th:href="@{/user/index}" class="main-btn">메인으로</a>
+          </div>
         </div>
-      </h1>
-      </p>
+      </div>
     </div>
-  </div>
-</div>
-
 <!-- 작업공간 -->
-<!--                </div>-->
 <!-- 푸터 추가 공간 -->
-<footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
-</div>
+      <footer class="footer2" th:replace="fragment/footer2 :: footer2"></footer>
+
 </div>
 <aside class="aside2" th:replace="fragment/aside2 :: aside2">
   <div class="menu-container"></div>

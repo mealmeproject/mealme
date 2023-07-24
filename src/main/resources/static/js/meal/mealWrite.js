@@ -139,7 +139,7 @@ function searchFood(foodName, callback, error){
     console.log("음식 검색중 !" + foodName + " 검색중~!");
     $.ajax({
         type : "get",
-        url : `http://openapi.foodsafetykorea.go.kr/api/ce2cef45c4b245de8356/I2790/json/1/5/DESC_KOR=${foodName}`,
+        url : `http://openapi.foodsafetykorea.go.kr/api/ce2cef45c4b245de8356/I2790/json/1/20/DESC_KOR=${foodName}`,
         dataType : 'json',
         success : function (result){
             if (callback){
@@ -165,36 +165,12 @@ function showSearchFoodList(map){
               <li>
                   <div class="search-food-box">
                       <div class="food-number" style="display: none">${r.FOOD_CD}</div>
-                      <h2 class="search-food-name">${r.DESC_KOR}</h2>
+                      <h3 class="search-food-name">${r.DESC_KOR}</h3>
                       <div class="search-food-weight">
                           <span class="category-name">음식량:</span><span class="food-data">${r.SERVING_SIZE}</span>g
                       </div>
                       <div class="search-food-kcal">
                           <span class="category-name">칼로리:</span><span class="food-data">${r.NUTR_CONT1}</span>kcal
-                      </div>
-                      <div class="search-food-carbohydrate">
-                          <span class="category-name">탄수화물:</span><span class="food-data">${r.NUTR_CONT2}</span>g
-                      </div>
-                      <div class="search-food-protein">
-                          <span class="category-name">단백질:</span><span class="food-data">${r.NUTR_CONT3}</span>g
-                      </div>
-                      <div class="search-food-fat">
-                          <span class="category-name">지방:</span><span class="food-data">${r.NUTR_CONT4}</span>g
-                      </div>
-                      <div class="search-food-sugars">
-                          <span class="category-name">당류:</span><span class="food-data">${r.NUTR_CONT5}</span>g
-                      </div>
-                      <div class="search-food-sodium">
-                          <span class="category-name">나트륨:</span><span class="food-data">${r.NUTR_CONT6}</span>mg
-                      </div>
-                      <div class="search-food-cholesterol">
-                          <span class="category-name">콜레스테롤:</span><span class="food-data">${r.NUTR_CONT7}</span>mg
-                      </div>
-                      <div class="search-food-fatty-acid">
-                          <span class="category-name">포화지방산:</span><span class="food-data">${r.NUTR_CONT8}</span>g
-                      </div>
-                      <div class="search-food-trans-fat">
-                          <span class="category-name">트랜스지방:</span><span class="food-data">${r.NUTR_CONT9}</span>g
                       </div>
                       <div id="${r.NUM}" class="select-box" onclick="selectData(${r.NUM})"> <!--data-food-data="${r}" -->
                           이 음식이 맞아요 !

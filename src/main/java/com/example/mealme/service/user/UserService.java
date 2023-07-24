@@ -3,10 +3,12 @@ package com.example.mealme.service.user;
 import com.example.mealme.dto.CompanyDto;
 import com.example.mealme.dto.UserDto;
 import com.example.mealme.mapper.UserMapper;
+import com.example.mealme.util.MailUtil;
 import com.example.mealme.util.Util;
 import com.example.mealme.vo.CompanyModifyVo;
 import com.example.mealme.vo.UserModifyVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,13 @@ import java.util.Optional;
 @Transactional
 public class UserService {
     private final UserMapper userMapper;
+
+    // 구글 이메일
+    @Value("${google.id}")
+    private String myEmail;
+    // 구글 비번
+    @Value("${google.pw}")
+    private String myPw;
 
     // 회원 등록
     public void registerUser(UserDto userDto) {
@@ -228,14 +237,25 @@ public class UserService {
         userMapper.updateCompany(companyDto);
     }
 
-    public boolean findPassword(UserDto userDto){
+    public String findPassword(UserDto userDto) throws Exception{
         if (userDto == null){
             throw new IllegalArgumentException("입력받은 user정보가 없습니다.");
         }
         if (userMapper.findUserPassword(userDto)>0) {
-            return true;
+            // 비밀번호 입력이 잘 되었을 시 !
+            // 랜덤한 문자열의 코드 생성 !
+            String randomCode = Util.generateRandomString();
+            System.out.println(randomCode);
+            // 메일 전송 !
+            MailUtil.Send(userDto.getUserEmail(), randomCode, myEmail, myPw);
+            System.out.println("메일 발송 완료 !");
+            // 랜덤 코드로 비밀번호 변경 !
+            String encryptionPw = Util.pwSha256(randomCode);
+            userMapper.updatePassword(encryptionPw, userDto.getUserId());
+            System.out.println("비밀번호 변경 완료 !");
+            return "user/findPasswordOk";
         } else {
-            return false;
+            return "user/findPassword";
         }
     }
 }

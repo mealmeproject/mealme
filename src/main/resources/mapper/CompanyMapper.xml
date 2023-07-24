@@ -27,16 +27,44 @@
     </select>
 
     <select id="selectDetail" resultType="companyListVo">
-        SELECT c.COMPANY_NAME, c.COMPANY_NUMBER, c.COMPANY_CEO_NAME, c.COMPANY_REGISTRATION_NUMBER, r.COMPANY_NUMBER, c.COMPANY_CALL_NUMBER,
-               c.COMPANY_URL, c.COMPANY_ADDRESS1, c.COMPANY_COMMENT, c.COMPANY_EMAIL, TRUNC(AVG(NVL(r.REVIEW_GRADE,0)), 1) AS AVERAGE_GRADE,
-               f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
-        FROM TBL_COMPANY c
-                 LEFT JOIN TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
-                 LEFT JOIN TBL_COMPANY_FILE f ON c.COMPANY_NUMBER = f.COMPANY_NUMBER
-        WHERE c.COMPANY_NUMBER = #{companyNumber}
-        GROUP BY c.COMPANY_NAME, c.COMPANY_NUMBER, c.COMPANY_CEO_NAME, c.COMPANY_REGISTRATION_NUMBER, r.COMPANY_NUMBER,
-                 c.COMPANY_CALL_NUMBER, c.COMPANY_URL, c.COMPANY_ADDRESS1, c.COMPANY_COMMENT, c.COMPANY_EMAIL,
-                 f.FILE_NUMBER, f.FILE_NAME, f.FILE_UPLOAD_PATH, f.FILE_UUID
+        SELECT
+            c.COMPANY_NAME,
+            c.COMPANY_NUMBER,
+            c.COMPANY_CEO_NAME,
+            c.COMPANY_REGISTRATION_NUMBER,
+            c.COMPANY_CALL_NUMBER,
+            c.COMPANY_URL,
+            c.COMPANY_ADDRESS1,
+            c.COMPANY_COMMENT,
+            c.COMPANY_EMAIL,
+            TRUNC(AVG(NVL(r.REVIEW_GRADE, 0)), 1) AS AVERAGE_GRADE,
+            f.FILE_NUMBER,
+            f.FILE_NAME,
+            f.FILE_UPLOAD_PATH,
+            f.FILE_UUID,
+            MAX(DBMS_LOB.SUBSTR(c.COMPANY_INFORMATION, 4000, 1)) AS COMPANY_INFORMATION
+        FROM
+            TBL_COMPANY c
+                LEFT JOIN
+            TBL_CONSULTING_REVIEW r ON c.COMPANY_NUMBER = r.COMPANY_NUMBER
+                LEFT JOIN
+            TBL_COMPANY_FILE f ON c.COMPANY_NUMBER = f.COMPANY_NUMBER
+        WHERE
+            c.COMPANY_NUMBER = #{companyNumber}
+        GROUP BY
+            c.COMPANY_NAME,
+            c.COMPANY_NUMBER,
+            c.COMPANY_CEO_NAME,
+            c.COMPANY_REGISTRATION_NUMBER,
+            c.COMPANY_CALL_NUMBER,
+            c.COMPANY_URL,
+            c.COMPANY_ADDRESS1,
+            c.COMPANY_COMMENT,
+            c.COMPANY_EMAIL,
+            f.FILE_NUMBER,
+            f.FILE_NAME,
+            f.FILE_UPLOAD_PATH,
+            f.FILE_UUID
     </select>
 
 <!--    이 쿼리 변경-->

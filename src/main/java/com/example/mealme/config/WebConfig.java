@@ -10,7 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${file.dir}")
     private String fileDir;
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         // addResourceHandlers() 리소스 경로와 연결될 URL 경로를 작성한다.

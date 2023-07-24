@@ -93,8 +93,6 @@ function showMeal(map){
                                         총 칼로리 : &nbsp<div class="detail3-kcal">${map.mealTotalKcal}kcal</div>
                                     </div>
                                     <div class="day-detail4">
-                                    
-                                        <div class="modify-btn">수정</div>
                                         <a href="/meal/mealDelete?boardNumber=${map.boardNumber}">
                                             <div class="delete-btn">삭제</div>
                                         </a>
@@ -235,7 +233,7 @@ function mealRead(boardNumber, callback, error){
 //                                         총 칼로리 : &nbsp<div class="detail3-kcal">3000kcal</div>
 //                                     </div>
 //                                     <div class="day-detail4">
-//                                         <div class="modify-btn">수정</div>
+//                                         <div class="modify-btn">'수정</div>
 //                                         <div class="delete-btn">삭제</div>
 //                                     </div>
 //                                 </div>

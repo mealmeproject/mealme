@@ -138,19 +138,19 @@ h5{
 
 .photo-call {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: rgba(210, 210, 210, 0.3);
     filter: opacity(0.5) drop-shadow(0 0 0 rgb(80, 80, 80));
 }
 
 .photo-call img{
-    width: 20px;
-    height: 20px;
-    padding: 2px;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
     object-fit: cover;
 }
 
@@ -163,10 +163,10 @@ input[type="file"] {
 
 .photo-done-img-box {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: solid 1px grey;
     background-color: rgba(210, 210, 210, 0.3);
@@ -174,8 +174,8 @@ input[type="file"] {
 }
 
 .photo-done-img-box img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     object-fit: cover;
 }

@@ -58,17 +58,11 @@
                 </td>
                 <td class="product-price"><span class="price1" th:text="${#numbers.formatInteger(cart.productPrice * cart.cartCount,3,'COMMA')} + '원'" th:data-price="${cart.productPrice}">116,620원</span><br></td>
                 <td>
-                  <div>
+                  <div class="product-count-box">
                     <button class="quantity_btn plus_btn" type="button">+</button>
                     <span class="quantity" th:text="${cart.cartCount}+'개'">1개</span>
                     <button class="quantity_btn minus_btn" type="button">-</button>
                   </div>
-                  <!-- 수량 조정 form -->
-<!--                  <form action="/shops/updateCart" method="post" class="quantity_update_form">-->
-<!--                    <input type="hidden" name="cartId" class="update_cartId">-->
-<!--                    <input type="hidden" name="bookCount" class="update_bookCount">-->
-<!--                    <input type="hidden" name="memberId" th:value="${cart.cartNumber}">-->
-<!--                  </form>-->
                 </td>
               </tr>
               </tbody>
