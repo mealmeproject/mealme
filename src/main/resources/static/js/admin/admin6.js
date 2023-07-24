@@ -3,7 +3,9 @@ let page = 1;
 let startDate = $('#datepicker1').val();
 let endDate = $('#datepicker2').val();
 let productType = $('#productType').val();
-product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: startDate, endDate:endDate }, productList, paging,productTotal, showError);
+let sysdate = new Date();
+let date = '1900-01-01';
+product.searchProductList({searchType:'', keyword:'', page : page, productType: productType, startDate: date, endDate:sysdate }, productList, paging,productTotal, showError);
 
 $(function() {
   //input을 datepicker로 선언

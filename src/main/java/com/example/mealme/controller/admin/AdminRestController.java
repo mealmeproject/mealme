@@ -19,10 +19,10 @@ public class AdminRestController {
     private final ProductFileService productFileService;
     private final OrderService orderService;
 
-    @GetMapping("/user")
-    public List<UserDto> showUserList() {
-        return adminService.findAll();
-    }
+//    @GetMapping("/user")
+//    public List<UserDto> showUserList() {
+//        return adminService.findAll();
+//    }
 
 //    @GetMapping("/searchUserList")
 //    public List<UserDto> searchUserList(String keyword, String searchType){
