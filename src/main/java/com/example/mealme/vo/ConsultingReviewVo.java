@@ -11,6 +11,7 @@ public class ConsultingReviewVo {
     private long consultingRequestNumber;
     private long companyNumber;
     private long userNumber;
+    private String companyName;
     private String consultingComment;
     private String consultingRequestComment;
     private String fileName;

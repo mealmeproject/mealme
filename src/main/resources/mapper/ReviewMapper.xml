@@ -24,21 +24,23 @@
     <select id="selectConsultingList" resultType="ConsultingReviewVo">
         SELECT CONSULTING_REQUEST_NUMBER, USER_NUMBER, COMPANY_NUMBER,REVIEW_NUMBER,
                CONSULTING_REQUEST_DATE ,CONSULTING_COMMENT, CONSULTING_REQUEST_COMMENT,
-               FILE_NAME, FILE_UUID,FILE_UPLOAD_PATH, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE
+               FILE_NAME, FILE_UUID,FILE_UPLOAD_PATH, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE,COMPANY_NAME
         FROM
             (SELECT ROWNUM AS RNUM,CONSULTING_REQUEST_NUMBER, USER_NUMBER, COMPANY_NUMBER,REVIEW_NUMBER,
                     CONSULTING_REQUEST_DATE ,CONSULTING_COMMENT, CONSULTING_REQUEST_COMMENT,
-                    FILE_NAME, FILE_UUID,FILE_UPLOAD_PATH, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE
+                    FILE_NAME, FILE_UUID,FILE_UPLOAD_PATH, REVIEW_DATE, REVIEW_CONTENT, REVIEW_GRADE,COMPANY_NAME
              FROM
                  (SELECT CQ.CONSULTING_REQUEST_NUMBER, CQ.USER_NUMBER, CQ.COMPANY_NUMBER,CR.REVIEW_NUMBER,
                          CQ.CONSULTING_REQUEST_DATE ,C.CONSULTING_COMMENT, CQ.CONSULTING_REQUEST_COMMENT,
-                         CF.FILE_NAME,CF.FILE_UUID,CF.FILE_UPLOAD_PATH, CR.REVIEW_DATE, CR.REVIEW_CONTENT, CR.REVIEW_GRADE
+                         CF.FILE_NAME,CF.FILE_UUID,CF.FILE_UPLOAD_PATH, CR.REVIEW_DATE, CR.REVIEW_CONTENT, CR.REVIEW_GRADE, CO.COMPANY_NAME
                   FROM TBL_CONSULTING_REQUEST CQ JOIN TBL_CONSULTING C
                                                       ON CQ.CONSULTING_REQUEST_NUMBER = C.CONSULTING_REQUEST_NUMBER
                                                  LEFT JOIN TBL_COMPANY_FILE CF
                                                            ON CQ.COMPANY_NUMBER = CF.COMPANY_NUMBER
                                                  JOIN TBL_CONSULTING_REVIEW CR
                                                       ON CQ.CONSULTING_REQUEST_NUMBER = CR.CONSULTING_REQUEST_NUMBER
+                                                JOIN TBL_COMPANY CO
+                                                    ON CO.COMPANY_NUMBER = CF.COMPANY_NUMBER
                   WHERE CQ.USER_NUMBER = #{userNumber}
                   ORDER BY CQ.CONSULTING_REQUEST_DATE DESC) S1
          <![CDATA[
@@ -46,6 +48,7 @@
          ]]>
     ) S2
         WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+        ORDER BY CONSULTING_REQUEST_NUMBER DESC
     </select>
 
     <select id="selectConsultingReviewInfo" resultType="ConsultingReviewVo">
