@@ -108,6 +108,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
+  margin-left: 30px;
 }
 
 .star-wrap{
@@ -189,9 +190,8 @@
 
 .review-date{
   text-align: right;
-  width: 600px;
   padding: 10px 0;
-  margin-left: 25px;
+  margin-left: 195px;
 }
 
 .review-wrap{
@@ -338,4 +338,19 @@
 .active1 {
   background:none;
   color:rgb(255, 139, 38);
+}
+
+.company-review-top{
+  width: 550px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.company-name{
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 800;
+
 }

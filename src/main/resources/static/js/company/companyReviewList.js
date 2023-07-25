@@ -54,7 +54,10 @@ function makeListHtml(result){
                         </div>`;
     text += `
                         <div class="ranking-wrap">
+                           <div class="company-review-top">
+                            <div class="company-name">${reviewList[i].companyName}</div>
                             <div class="review-date">${reviewList[i].consultingRequestDate}</div>
+                            </div>
                             <div class="consulting-comment-wrap">
                             <div class="consulting-comment">${reviewList[i].consultingRequestComment}
                             </div>

@@ -590,7 +590,8 @@ page_wrap {
 
 
 .star {
-    color: gray;
+    color: rgb(160, 160, 160);
+    font-size: 18px
 }
 
 .filled {

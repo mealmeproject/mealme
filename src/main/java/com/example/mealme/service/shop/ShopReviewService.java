@@ -22,7 +22,7 @@ public class ShopReviewService {
     return productOrderList;
     }
 
-    public int orderProductListCount(){ return reviewMapper.orderProductListCount(); }
+    public int orderProductListCount(Long userNumber){ return reviewMapper.orderProductListCount(userNumber); }
 
     public ProductReviewVo findProductInfo(Long orderNumber){
     ProductReviewVo productReviewVo = reviewMapper.selectProductInfo(orderNumber);

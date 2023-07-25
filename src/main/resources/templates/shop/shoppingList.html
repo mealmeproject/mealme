@@ -180,10 +180,14 @@
                                                 </div>
                                                 <div id="starRating">
                                                     <div class="product-item">
-                                                        <div class="rating" th:data-rating="${productList.avgGrade}">
-                                                            <span class="star filled" th:each="i: ${#numbers.sequence(1, 5)}" th:classappend="${i <= productList.avgGrade ? 'filled' : ''}">★</span>
+                                                        <div class="star_rating" th:data-grade="${productList.avgGrade}">
+<!--                                                            <span class="star filled" th:each="i: ${#numbers.sequence(1, 5)}" th:classappend="${i <= productList.avgGrade ? 'filled' : ''}">★</span>-->
+                                                            <span class="star">&#9734;</span>
+                                                            <span class="star">&#9734;</span>
+                                                            <span class="star">&#9734;</span>
+                                                            <span class="star">&#9734;</span>
+                                                            <span class="star">&#9734;</span>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>

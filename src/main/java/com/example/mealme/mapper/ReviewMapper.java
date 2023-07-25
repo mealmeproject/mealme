@@ -22,8 +22,8 @@ public interface ReviewMapper {
 //    상품 구매 리스트
     public List<ProductPayListVo> selectOrderProductList(@Param("userNumber") Long userNumber, @Param("criteria") Criteria criteria);
 //    구매 내역 리스트 개수
-    public int orderProductListCount();
-    public int orderConsultingListCount();
+    public int orderProductListCount(Long userNumber);
+    public int orderConsultingListCount(Long userNumber);
     public ProductReviewVo selectProductInfo(Long orderNumber);
     public void insertProductReview(ProductReviewVo productReviewVo);
     public void updateOrderCondition(Long orderNumber);
