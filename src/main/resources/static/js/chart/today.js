@@ -75,7 +75,7 @@ let myChartDonut = new Chart(
 
 // 영양소 표
 let dataNutri = {
-  labels: ['탄수화물(g)', '단백질(g)', '지방(g)', '당류(g)', '나트륨(mg)', '콜레스테롤(mg)', '포화지방산(g)', '트랜스지방(g)'],
+  labels: ['탄수화물(g)', '단백질(g)', '지방(g)', '당류(g)', '나트륨(g)', '콜레스테롤(g)', '포화지방산(g)', '트랜스지방(g)'],
   datasets: [{
     label: '섭취 영양성분',
     data: [18, 12, 6, 9, 12, 3, 9,10],
@@ -473,12 +473,15 @@ function showUser(userInfo){
   }
   myChartNutri.update();
 
+  let sodiumSumGram = (userInfo.calcNutrientUtil.sodiumSum/1000).toFixed(2);
+  let cholesterolSumGram = (userInfo.calcNutrientUtil.cholesterolSum/1000).toFixed(2);
+  console.log(cholesterolSumGram);
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.carbohydrateSum);
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.proteinSum);
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.fatSum);
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.sugarsSum);
-  myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.sodiumSum);
-  myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.cholesterolSum);
+  myChartNutri.data.datasets[0].data.push(sodiumSumGram);
+  myChartNutri.data.datasets[0].data.push(cholesterolSumGram);
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.fattyAcidSum);
   myChartNutri.data.datasets[0].data.push(userInfo.calcNutrientUtil.transFatSum);
 
