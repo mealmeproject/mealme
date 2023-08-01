@@ -46,7 +46,6 @@
 ![흐름도](./image/flowMap.png)
 
 ## ERD
-![ERD](./image/ERD.png)
 
 
 
