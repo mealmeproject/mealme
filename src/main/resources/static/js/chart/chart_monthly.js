@@ -335,11 +335,11 @@ function showMonthly(monthlyList){
 // ***** 전체 영양소
 // setup
   const dataNutri = {
-    labels: ['탄수화물(g)', '단백질(g)', '지방(g)', '당류(g)', '나트륨(mg)', '콜레스테롤(mg)', '포화지방산(g)', '트랜스지방(g)'],
+    labels: ['탄수화물(g)', '단백질(g)', '지방(g)', '당류(g)', '나트륨(g)', '콜레스테롤(g)', '포화지방산(g)', '트랜스지방(g)'],
     datasets: [{
       label: '섭취 영양성분',
       data: [Math.round(carbohydrateTotal/countMealTimeTotal), Math.round(proteinTotal/countMealTimeTotal), Math.round(fatTotal/countMealTimeTotal),
-        Math.round(sugarsTotal/countMealTimeTotal), Math.round(sodiumTotal/countMealTimeTotal), Math.round(cholesterolTotal/countMealTimeTotal),
+        Math.round(sugarsTotal/countMealTimeTotal), Math.round((sodiumTotal/1000)/countMealTimeTotal), Math.round((cholesterolTotal/1000)/countMealTimeTotal),
         Math.round(fattyAcidTotal/countMealTimeTotal),Math.round(transFatTotal/countMealTimeTotal)],
       backgroundColor: [
         'rgba(255, 139, 38, 0.2)',
