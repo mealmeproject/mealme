@@ -374,11 +374,11 @@ function showDaily(dailyList){
 //  일주일 평균값
 // setup
   const dataNutri = {
-    labels: ['탄수화물(g)', '단백질(g)', '지방(g)', '당류(g)', '나트륨(mg)', '콜레스테롤(mg)', '포화지방산(g)', '트랜스지방(g)'],
+    labels: ['탄수화물(g)', '단백질(g)', '지방(g)', '당류(g)', '나트륨(g)', '콜레스테롤(g)', '포화지방산(g)', '트랜스지방(g)'],
     datasets: [{
       label: '섭취 영양성분',
       data: [Math.round(carbohydrateTotal/registeredDateNum), Math.round(proteinTotal/registeredDateNum), Math.round(fatTotal/registeredDateNum),
-        Math.round(sugarsTotal/registeredDateNum), Math.round(sodiumTotal/registeredDateNum), Math.round(cholesterolTotal/registeredDateNum), Math.round(fattyAcidTotal/registeredDateNum),Math.round(transFatTotal/registeredDateNum)],
+        Math.round(sugarsTotal/registeredDateNum), Math.round((sodiumTotal/1000)/registeredDateNum), Math.round((cholesterolTotal/1000)/registeredDateNum), Math.round(fattyAcidTotal/registeredDateNum),Math.round(transFatTotal/registeredDateNum)],
       backgroundColor: [
         'rgba(255, 139, 38, 0.2)',
         'rgba(255, 139, 38, 0.2)',
