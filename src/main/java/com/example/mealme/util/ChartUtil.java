@@ -17,24 +17,24 @@ public class ChartUtil {
         System.out.println(userBirth);
         UserDto userDto = new UserDto();
 
-// Get the current date
+// 현재 날짜 받기
         LocalDate currentDate = LocalDate.now();
 
-// Replace the following line with the birth date retrieved from the database
+// 회원 생일 받은 거 저장하기
         String birthDateString = userBirth;
 
-// Parse the birth date string into a LocalDate object
+// 회원 생일 문자열을 LocalDate 객체로 변환
         LocalDate birthDate = LocalDate.parse(birthDateString, DateTimeFormatter.ISO_DATE);
 
-// Calculate the difference between the birth date and current date
+// 생년월일과 현재 날짜 사이 계산
         Period age = Period.between(birthDate, currentDate);
 
-// Extract the years, months, and days from the age
+// 계산한 년,월,일 객체에 담기
         int years = age.getYears();
         int months = age.getMonths();
         int days = age.getDays();
 
-// Print the age
+// 나이 날짜 출력해보기
         System.out.println("Your age is " + years + " years, " + months + " months, and " + days + " days.");
 
 
@@ -45,18 +45,21 @@ public class ChartUtil {
         }else if(userGender.equals("F")){
             recommendKcal = (int) ((655.1+(9.56*userWeight)+(1.85*userHeight)-(4.68*(double)years))*1.2);
         }
-        recommendVo.setRecommendKcal(recommendKcal);
-//        int recommendCarbohydrateValue = (int) Math.round(recommendKcal * 0.5 / 4);
-//        System.out.println(recommendCarbohydrateValue);
-        recommendVo.setRecommendCarbohydrate((int)Math.round(recommendKcal * 0.5/4));
-        recommendVo.setRecommendProtein((int)Math.round(recommendKcal * 0.3/4));
-        recommendVo.setRecommendFat((int)Math.round(recommendKcal * 0.2/9));
-        recommendVo.setUserComment(userComment);
-//        recommendVo.setUserComment(userDto.getUserComment());  이거 아님 이걸 넣으면 null값이 뜸
-//        userDto는
 
-//        나의 목표 넣기
-//        recommendVo.setRecommendUserComment
+        if (userWeight == 0 || userHeight == 0){
+            recommendVo.setRecommendKcal(0);
+            recommendVo.setRecommendCarbohydrate(0);
+            recommendVo.setRecommendProtein(0);
+            recommendVo.setRecommendFat(0);
+            recommendVo.setUserComment(userComment);
+        }else{
+            recommendVo.setRecommendKcal(recommendKcal);
+            recommendVo.setRecommendCarbohydrate((int)Math.round(recommendKcal * 0.5/4));
+            recommendVo.setRecommendProtein((int)Math.round(recommendKcal * 0.3/4));
+            recommendVo.setRecommendFat((int)Math.round(recommendKcal * 0.2/9));
+            recommendVo.setUserComment(userComment);
+        }
+
         return recommendVo;
     }
 }
